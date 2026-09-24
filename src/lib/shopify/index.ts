@@ -340,7 +340,7 @@ export async function removeFromCart(
 /**
  * Fetches the first N products from the Shopify Storefront API.
  */
-export async function getProducts(first: number = 8): Promise<ShopifyProduct[]> {
+export async function getProducts(first: number = 50): Promise<ShopifyProduct[]> {
   const query = `
     query getProducts($first: Int!) {
       products(first: $first) {

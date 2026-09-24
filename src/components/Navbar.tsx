@@ -18,10 +18,12 @@ import {
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Collections", href: "/#collections" },
-  { label: "New Arrivals", href: "/collections/new-arrivals" },
-  { label: "About", href: "/#editorial-story" },
-  { label: "Contact", href: "/#contact" },
+  { label: "All Categories", href: "/collections" },
+  { label: "Necklaces", href: "/collections/necklaces" },
+  { label: "Earrings", href: "/collections/earrings" },
+  { label: "Rings", href: "/collections/rings" },
+  { label: "Bracelets", href: "/collections/bracelets" },
+  { label: "Jewellery Sets", href: "/collections/jewellery-sets" },
 ];
 
 export default function Navbar() {

@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { ChevronRight, ArrowLeft, Sparkles, Gem } from "lucide-react";
+import { ChevronRight, ArrowLeft } from "lucide-react";
 import { getCollectionByHandle, getCollections } from "@/lib/shopify";
-import ProductGrid from "@/components/ProductGrid";
+import CategoryView from "@/components/CategoryView";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -43,7 +42,7 @@ export async function generateMetadata({
     title: `${collection.title} | NAKSHATRA COLLECTIONS - Artificial Jewellery Store`,
     description:
       collection.description ||
-      `Shop the ${collection.title} artificial jewellery collection from Nakshatra Collections.`,
+      `Shop the ${collection.title} artificial jewellery collection from Nakshatra Collections. Fast delivery across Kerala and India.`,
     openGraph: {
       title: collection.title,
       description: collection.description || `Shop ${collection.title}`,
@@ -68,7 +67,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <div
-      className="min-h-screen py-8 md:py-14 transition-colors"
+      className="min-h-screen py-6 sm:py-10 md:py-14 transition-colors"
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -87,11 +86,11 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
           </Link>
           <ChevronRight className="h-3.5 w-3.5 opacity-60 shrink-0" />
           <Link
-            href="/#collections"
+            href="/collections"
             className="transition-colors hover:underline"
             style={{ color: "var(--text-secondary)" }}
           >
-            Collections
+            All Categories
           </Link>
           <ChevronRight className="h-3.5 w-3.5 opacity-60 shrink-0" />
           <span className="font-semibold line-clamp-1" style={{ color: "var(--text-primary)" }}>
@@ -100,130 +99,23 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         </nav>
 
         {/* Back Link */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-4 sm:mb-6">
           <Link
-            href="/#collections"
+            href="/collections"
             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest hover:underline"
             style={{ color: "var(--accent-cta)" }}
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            <span>Back to All Collections</span>
+            <span>All Categories</span>
           </Link>
         </div>
 
-        {/* Collection Hero Header */}
-        <div
-          className="relative mb-8 sm:mb-12 overflow-hidden rounded-3xl border p-6 sm:p-10 md:p-14 shadow-sm transition-colors"
-          style={{
-            backgroundColor: "var(--bg-surface)",
-            borderColor: "var(--border-medium)",
-          }}
-        >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
-            <div className="max-w-2xl">
-              <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-widest liquid-glass"
-                style={{
-                  color: "var(--accent-gold)",
-                }}
-              >
-                <Gem className="h-3.5 w-3.5" />
-                Nakshatra Atelier
-              </span>
-
-              <h1
-                className="font-serif-luxury mt-3 sm:mt-4 text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
-                style={{ color: "var(--text-primary)" }}
-              >
-                {collection.title}
-              </h1>
-
-              {collection.description && (
-                <p
-                  className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed font-light"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {collection.description}
-                </p>
-              )}
-
-              <div
-                className="mt-4 sm:mt-6 flex items-center gap-3 text-xs uppercase tracking-wider font-semibold flex-wrap"
-                style={{ color: "var(--text-muted)" }}
-              >
-                <span
-                  className="px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold"
-                  style={{
-                    backgroundColor: "var(--bg-secondary)",
-                    color: "var(--text-primary)",
-                  }}
-                >
-                  {products.length} {products.length === 1 ? "Creation" : "Creations"}
-                </span>
-                <span className="text-[11px]">Handcrafted Atelier Selection</span>
-              </div>
-            </div>
-
-            {collection.image && (
-              <div
-                className="relative h-48 w-full md:h-56 md:w-56 shrink-0 overflow-hidden rounded-2xl border shadow-inner"
-                style={{ borderColor: "var(--border-medium)" }}
-              >
-                <Image
-                  src={collection.image.url}
-                  alt={collection.image.altText || collection.title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 224px"
-                  className="object-cover object-center"
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Quick Collection Category Switcher Chips */}
-          {allCollections.length > 0 && (
-            <div
-              className="mt-10 border-t pt-6"
-              style={{ borderColor: "var(--border-subtle)" }}
-            >
-              <div
-                className="flex items-center gap-2 mb-3 text-[11px] font-bold uppercase tracking-widest"
-                style={{ color: "var(--text-muted)" }}
-              >
-                <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                <span>Switch Collection</span>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {allCollections.map((col) => {
-                  const isActive = col.handle === handle;
-                  return (
-                    <Link
-                      key={col.id}
-                      href={`/collections/${col.handle}`}
-                      className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                        isActive ? "shadow-xs ring-2" : "border liquid-glass"
-                      }`}
-                      style={{
-                        backgroundColor: isActive ? "var(--accent-cta)" : "var(--bg-primary)",
-                        color: isActive ? "var(--accent-cta-text)" : "var(--text-secondary)",
-                        borderColor: "var(--border-medium)",
-                      }}
-                    >
-                      {col.title}
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Product Grid Section */}
-        <section id="collection-products">
-          <ProductGrid products={products} />
-        </section>
+        {/* Amazon/Flipkart-Style Interactive Category View */}
+        <CategoryView
+          collection={collection}
+          allCollections={allCollections}
+          initialProducts={products}
+        />
       </div>
     </div>
   );

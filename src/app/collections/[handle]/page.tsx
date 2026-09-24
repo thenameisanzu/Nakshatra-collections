@@ -35,15 +35,15 @@ export async function generateMetadata({
 
   if (!collection) {
     return {
-      title: "Collection Not Found | NAKSHATRA Fine Jewellery",
+      title: "Collection Not Found | NAKSHATRA COLLECTIONS",
     };
   }
 
   return {
-    title: `${collection.title} &bull; Curated Collection | NAKSHATRA`,
+    title: `${collection.title} | NAKSHATRA COLLECTIONS - Artificial Jewellery Store`,
     description:
       collection.description ||
-      `Shop the ${collection.title} jewellery collection from Nakshatra.`,
+      `Shop the ${collection.title} artificial jewellery collection from Nakshatra Collections.`,
     openGraph: {
       title: collection.title,
       description: collection.description || `Shop ${collection.title}`,

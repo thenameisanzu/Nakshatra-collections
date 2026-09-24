@@ -147,16 +147,16 @@ export default function ProductGallery({
           </div>
 
           <span
-            className="font-serif-luxury text-2xl sm:text-3xl font-normal tracking-[0.25em] uppercase"
+            className="font-serif-luxury text-2xl sm:text-3xl font-normal tracking-[0.22em] uppercase"
             style={{ color: "var(--text-primary)" }}
           >
             NAKSHATRA
           </span>
           <span
-            className="text-[11px] font-medium tracking-[0.35em] uppercase mt-2"
+            className="text-[11px] font-medium tracking-[0.3em] uppercase mt-2"
             style={{ color: "var(--accent-gold)" }}
           >
-            Haute Joaillerie
+            COLLECTIONS
           </span>
 
           <p

@@ -21,9 +21,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "NAKSHATRA | Fancy Jewellery, Cosmetics, Gifts & Toys",
+  title: "NAKSHATRA COLLECTIONS | Artificial Jewellery Store",
   description:
-    "Discover Nakshatra - exquisite fancy jewellery, curated gifts, cosmetics, and timeless heirlooms crafted with elegance.",
+    "Discover Nakshatra Collections - exquisite anti-tarnish artificial jewellery, 18K gold plated everyday essentials, luminous solitaires, and festive jewellery sets.",
 };
 
 const themeInitializerScript = `

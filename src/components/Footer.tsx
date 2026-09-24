@@ -69,7 +69,7 @@ export default function Footer() {
               <div className="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0">
                 <Image
                   src="/nakshatra-logo.png"
-                  alt="NAKSHATRA Fine Jewellery"
+                  alt="NAKSHATRA Collections"
                   fill
                   sizes="56px"
                   className="object-contain"
@@ -77,16 +77,16 @@ export default function Footer() {
               </div>
               <div className="flex flex-col">
                 <span
-                  className="font-serif-luxury text-xl sm:text-2xl font-normal tracking-[0.22em] uppercase leading-none"
+                  className="font-serif-luxury text-xl sm:text-2xl font-normal tracking-[0.2em] uppercase leading-none"
                   style={{ color: "var(--text-primary)" }}
                 >
                   NAKSHATRA
                 </span>
                 <span
-                  className="text-[8px] sm:text-[9px] font-semibold tracking-[0.32em] uppercase leading-none mt-1"
+                  className="text-[8px] sm:text-[9px] font-semibold tracking-[0.28em] uppercase leading-none mt-1"
                   style={{ color: "var(--accent-gold)" }}
                 >
-                  Haute Joaillerie
+                  COLLECTIONS
                 </span>
               </div>
             </Link>
@@ -95,7 +95,7 @@ export default function Footer() {
               className="mt-4 text-xs sm:text-sm leading-relaxed max-w-sm font-light"
               style={{ color: "var(--text-secondary)" }}
             >
-              Curating refined fancy jewellery, luminous solitaires, and modern heirlooms designed for everyday grace and memorable milestones.
+              Curating premium anti-tarnish artificial jewellery, 18K gold-plated daily essentials, bridal sets, and luminous solitaires designed for everyday wear.
             </p>
 
             <div className="mt-6 flex items-center gap-3">
@@ -217,7 +217,7 @@ export default function Footer() {
           }}
         >
           <p>
-            &copy; {new Date().getFullYear()} NAKSHATRA Fine Jewellery. All rights reserved.
+            &copy; {new Date().getFullYear()} NAKSHATRA COLLECTIONS &bull; Artificial Jewellery Store. All rights reserved.
           </p>
 
           <div className="flex items-center gap-6">

@@ -18,7 +18,7 @@ export default function CampaignStatement() {
       <div className="absolute inset-0 opacity-40">
         <Image
           src="/images/hero/pearl-heirlooms.jpg"
-          alt="Nakshatra Haute Joaillerie Campaign"
+          alt="Nakshatra Collections Artificial Jewellery Campaign"
           fill
           sizes="100vw"
           className="object-cover object-center"

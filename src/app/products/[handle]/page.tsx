@@ -35,14 +35,14 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: "Product Not Found | NAKSHATRA Fine Jewellery",
+      title: "Product Not Found | NAKSHATRA COLLECTIONS",
     };
   }
 
-  const title = `${product.title} | NAKSHATRA Fine Jewellery`;
+  const title = `${product.title} | NAKSHATRA COLLECTIONS`;
   const description =
     product.description ||
-    `Discover ${product.title}, handcrafted with exquisite artistry at Nakshatra Fine Jewellery.`;
+    `Discover ${product.title}, premium anti-tarnish artificial jewellery from Nakshatra Collections.`;
 
   return {
     title,

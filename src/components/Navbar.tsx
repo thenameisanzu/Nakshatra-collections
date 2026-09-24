@@ -108,12 +108,12 @@ export default function Navbar() {
             <Link
               href="/"
               className="group flex items-center gap-2.5 sm:gap-3 transition-transform hover:scale-[1.01]"
-              aria-label="NAKSHATRA Fine Jewellery Home"
+              aria-label="NAKSHATRA Collections - Artificial Jewellery Store"
             >
               <div className="relative h-9 w-9 sm:h-11 sm:w-11 md:h-12 md:w-12 shrink-0">
                 <Image
                   src="/nakshatra-logo.png"
-                  alt="NAKSHATRA"
+                  alt="NAKSHATRA Collections"
                   fill
                   sizes="(max-width: 640px) 36px, 48px"
                   className="object-contain"
@@ -123,16 +123,16 @@ export default function Navbar() {
 
               <div className="flex flex-col text-left">
                 <span
-                  className="font-serif-luxury text-lg sm:text-2xl md:text-[23px] font-normal tracking-[0.22em] uppercase leading-none"
+                  className="font-serif-luxury text-lg sm:text-2xl md:text-[22px] font-normal tracking-[0.2em] uppercase leading-none"
                   style={{ color: "var(--text-primary)" }}
                 >
                   NAKSHATRA
                 </span>
                 <span
-                  className="text-[7.5px] sm:text-[8.5px] font-semibold tracking-[0.32em] uppercase leading-none mt-1"
+                  className="text-[7.5px] sm:text-[8.5px] font-semibold tracking-[0.28em] uppercase leading-none mt-1"
                   style={{ color: "var(--accent-gold)" }}
                 >
-                  Haute Joaillerie
+                  COLLECTIONS
                 </span>
               </div>
             </Link>
@@ -312,10 +312,10 @@ export default function Navbar() {
             {/* Mobile Footer Inside Drawer */}
             <div className="pt-6 border-t mt-8 flex flex-col gap-3" style={{ borderColor: "var(--border-subtle)" }}>
               <p className="text-[11px] font-semibold uppercase tracking-widest text-center" style={{ color: "var(--accent-gold)" }}>
-                NAKSHATRA &bull; HAUTE JOAILLERIE
+                NAKSHATRA COLLECTIONS &bull; ARTIFICIAL JEWELLERY STORE
               </p>
               <p className="text-[10px] text-center" style={{ color: "var(--text-muted)" }}>
-                Handcrafted Bespoke Jewellery &bull; Insured Express Transit
+                Premium Anti-Tarnish Jewellery &bull; Insured All-India Express Transit
               </p>
             </div>
           </div>

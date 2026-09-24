@@ -53,7 +53,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               }}
             >
               <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-              {product.productType || "Haute Joaillerie"}
+              {product.productType || "Artificial Jewellery"}
             </span>
 
             <span

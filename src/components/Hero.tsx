@@ -188,7 +188,7 @@ export default function Hero() {
       onTouchEnd={handleTouchEnd}
       className="relative min-h-[82vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden transition-colors select-none"
       aria-roledescription="carousel"
-      aria-label="Nakshatra Haute Joaillerie Hero Showcase"
+      aria-label="Nakshatra Collections Artificial Jewellery Store Showcase"
     >
       {/* ---------------------------------------------------------------------- */}
       {/* AUTOMATICALLY CHANGING FULL-BLEED BACKGROUND IMAGES WITH CROSSFADE      */}

@@ -575,14 +575,14 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
                     Category
                   </dt>
                   <dd style={{ color: "var(--text-primary)" }}>
-                    {product.productType || "Fine Jewellery"}
+                    {product.productType || "Artificial Jewellery"}
                   </dd>
                 </div>
                 <div>
                   <dt className="font-semibold" style={{ color: "var(--text-muted)" }}>
                     Brand / Atelier
                   </dt>
-                  <dd style={{ color: "var(--text-primary)" }}>NAKSHATRA</dd>
+                  <dd style={{ color: "var(--text-primary)" }}>NAKSHATRA COLLECTIONS</dd>
                 </div>
                 <div>
                   <dt className="font-semibold" style={{ color: "var(--text-muted)" }}>

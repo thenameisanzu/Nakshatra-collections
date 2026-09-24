@@ -56,19 +56,19 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
               }}
             >
               <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-              03 &bull; Featured Creations
+              Best Sellers
             </span>
             <h2
               className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
-              Atelier Masterpieces
+              Customer Favorites
             </h2>
             <p
               className="mt-2 text-sm sm:text-base leading-relaxed"
               style={{ color: "var(--text-secondary)" }}
             >
-              Exemplary craftsmanship, rare aesthetics, and luminous stones curated for discerning connoisseurs.
+              Our most popular anti-tarnish and gold-plated designs loved for their real gold shine and durability.
             </p>
           </div>
 
@@ -77,7 +77,7 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:underline transition-colors shrink-0"
             style={{ color: "var(--accent-cta)" }}
           >
-            <span>Explore All Creations</span>
+            <span>View All Jewellery</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>

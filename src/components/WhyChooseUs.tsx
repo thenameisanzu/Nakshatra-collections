@@ -1,25 +1,25 @@
-import { Sparkles, Gem, ShoppingBag, ShieldCheck } from "lucide-react";
+import { Sparkles, Gem, Droplets, ShieldCheck, Truck } from "lucide-react";
 
 const perks = [
   {
     icon: Sparkles,
-    title: "Thoughtfully Curated",
-    description: "Hand-selected collections tailored to suit every individual style and occasion.",
+    title: "18K Real Gold Look",
+    description: "Premium gold micro-polish that matches the exact shine and warm color of real gold.",
   },
   {
-    icon: Gem,
-    title: "Elegant Designs",
-    description: "Graceful silhouettes and timeless aesthetics that stand out with quiet confidence.",
-  },
-  {
-    icon: ShoppingBag,
-    title: "Easy Shopping",
-    description: "Seamless navigation, detailed product views, and quick checkout at your fingertips.",
+    icon: Droplets,
+    title: "Waterproof & Anti-Tarnish",
+    description: "High-grade 316L stainless steel base. Wear it daily in the shower, gym, and rain without fading.",
   },
   {
     icon: ShieldCheck,
-    title: "Secure Checkout",
-    description: "Safe, encrypted order processing powered by trusted Shopify payment infrastructure.",
+    title: "Gentle On Skin",
+    description: "100% nickel-free and hypoallergenic. Safe for sensitive skin with zero itching or turning green.",
+  },
+  {
+    icon: Truck,
+    title: "Fast Delivery Across Kerala",
+    description: "Carefully packed in our signature gift box with fast, tracked delivery across Kerala and India.",
   },
 ];
 
@@ -36,16 +36,16 @@ export default function WhyChooseUs() {
             }}
           >
             <Sparkles className="h-3.5 w-3.5" />
-            The Experience
+            The Nakshatra Promise
           </span>
           <h2
             className="font-serif-luxury mt-3 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
             style={{ color: "var(--text-primary)" }}
           >
-            Why Nakshatra
+            Why You’ll Love Nakshatra
           </h2>
           <p className="mt-2 text-sm sm:text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            Our commitment to refined design, effortless discovery, and a dependable shopping experience.
+            High quality artificial jewellery designed for everyday wear, college, office, and family weddings.
           </p>
         </div>
 

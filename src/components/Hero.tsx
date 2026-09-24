@@ -3,123 +3,89 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowRight,
-  Sparkles,
-  ChevronLeft,
-  ChevronRight,
-  Droplets,
-  Tag,
-  CheckCircle2,
-  Percent,
-} from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Droplets } from "lucide-react";
 
 interface HeroSlide {
   id: string;
-  tag: string;
-  tagIcon: "sparkles" | "droplets" | "gem";
-  offerBadge: string;
+  badge: string;
+  icon: "sparkles" | "droplets";
   headlinePart1: string;
   headlinePart2: string;
   subtext: string;
-  promoCode?: string;
-  primaryCtaText: string;
-  primaryCtaLink: string;
-  secondaryCtaText: string;
-  secondaryCtaLink: string;
+  ctaText: string;
+  ctaLink: string;
+  secondaryText?: string;
+  secondaryLink?: string;
   bgImage: string;
   imageAlt: string;
-  badgePill: string;
 }
 
 const heroSlides: HeroSlide[] = [
   {
-    id: "festive-royal",
-    tag: "Royal Festive Edition • 22K Micro-Polish",
-    tagIcon: "sparkles",
-    offerBadge: "FLAT 20% OFF",
-    headlinePart1: "Timeless Elegance,",
-    headlinePart2: "Crafted For Eternity",
+    id: "anti-tarnish-daily",
+    badge: "Anti-Tarnish & Daily Wear",
+    icon: "sparkles",
+    headlinePart1: "Daily Wear Jewellery,",
+    headlinePart2: "That Never Fades",
     subtext:
-      "Handcrafted royal chokers, temple motifs & luminous emerald necklaces designed for grand celebrations and life's memorable milestones.",
-    promoCode: "USE CODE: NAKSHATRA20",
-    primaryCtaText: "Shop Festive Edit",
-    primaryCtaLink: "/collections/necklaces",
-    secondaryCtaText: "Explore New Arrivals",
-    secondaryCtaLink: "/collections/new-arrivals",
-    bgImage: "/images/hero/festive-necklace.jpg",
-    imageAlt: "Nakshatra 22K Gold and Emerald Royal Choker Necklace",
-    badgePill: "👑 Royal Heritage Collection • 22K Gold Finish",
+      "Premium 18K gold-plated artificial jewellery designed for everyday wear. Waterproof, sweatproof, and gentle on sensitive skin.",
+    ctaText: "Shop All Jewellery",
+    ctaLink: "/#products",
+    secondaryText: "New Arrivals",
+    secondaryLink: "/collections/new-arrivals",
+    bgImage: "/images/hero/model-lifestyle.jpg",
+    imageAlt: "Modern everyday gold plated artificial jewellery",
   },
   {
-    id: "everyday-lifestyle",
-    tag: "18K Gold Plated • Waterproof Anti-Tarnish",
-    tagIcon: "droplets",
-    offerBadge: "BESTSELLER EDIT",
-    headlinePart1: "Everyday Luxury,",
-    headlinePart2: "Never Takes A Day Off",
+    id: "festive-traditional",
+    badge: "Traditional & Festive Edit",
+    icon: "sparkles",
+    headlinePart1: "Traditional Designs,",
+    headlinePart2: "For Special Celebrations",
     subtext:
-      "Dainty layered chains, stackable anti-tarnish rings & timeless bracelets designed for showers, workouts & daily glam without fading.",
-    promoCode: "USE CODE: DAILYGLAM",
-    primaryCtaText: "Shop Everyday Gold",
-    primaryCtaLink: "/collections/new-arrivals",
-    secondaryCtaText: "View Bestsellers",
-    secondaryCtaLink: "/#products",
-    bgImage: "/images/hero/model-lifestyle.jpg",
-    imageAlt: "Modern woman wearing layered 18K gold plated anti-tarnish jewellery",
-    badgePill: "💧 Shower & Sweat Safe • 100% Skin Friendly",
+      "Royal chokers, temple motifs, and bridal necklace sets crafted for weddings, temple visits, and family celebrations.",
+    ctaText: "Explore Necklaces & Sets",
+    ctaLink: "/collections/necklaces",
+    secondaryText: "View Sets",
+    secondaryLink: "/collections/jewellery-sets",
+    bgImage: "/images/hero/festive-necklace.jpg",
+    imageAlt: "Traditional gold and emerald choker set",
   },
   {
     id: "waterproof-clover",
-    tag: "316L Stainless Steel • Daily Wear Ready",
-    tagIcon: "droplets",
-    offerBadge: "WATERPROOF • ANTI-TARNISH",
+    badge: "100% Waterproof & Sweatproof",
+    icon: "droplets",
     headlinePart1: "Wear It In The Shower,",
     headlinePart2: "Never Take It Off",
     subtext:
-      "Modern anti-fade jewellery crafted from high-grade stainless steel and micro-coated 18K gold that resists perfume, moisture, and daily wear.",
-    promoCode: "USE CODE: WATERPROOF",
-    primaryCtaText: "Shop Waterproof Edit",
-    primaryCtaLink: "/collections/bracelets",
-    secondaryCtaText: "View Rings & Studs",
-    secondaryCtaLink: "/collections/rings",
+      "Anti-fade stainless steel bracelets and rings that resist water, moisture, and daily wear without turning black.",
+    ctaText: "Shop Waterproof Edit",
+    ctaLink: "/collections/bracelets",
+    secondaryText: "View Rings",
+    secondaryLink: "/collections/rings",
     bgImage: "/images/hero/anti-tarnish-waterproof.jpg",
-    imageAlt: "Waterproof gold clover bracelets and rings on stone with water droplets",
-    badgePill: "✨ 316L Stainless Steel • AAA+ Lab Zirconia",
+    imageAlt: "Waterproof gold plated bracelets and rings",
   },
   {
-    id: "solitaire-glamour",
-    tag: "VVS Diamond Simulants • Everlasting Radiance",
-    tagIcon: "sparkles",
-    offerBadge: "COMPLIMENTARY PENDANT",
-    headlinePart1: "Solitaire Brilliance,",
-    headlinePart2: "Without The Diamond Price",
+    id: "solitaire-sparkle",
+    badge: "Sparkling American Diamond",
+    icon: "sparkles",
+    headlinePart1: "Real Diamond Sparkle,",
+    headlinePart2: "At An Honest Price",
     subtext:
-      "Ultra-brilliant cut American Diamond and cubic zirconia rings capturing pure optical fire and timeless luxury elegance at honest prices.",
-    promoCode: "USE CODE: SOLITAIRE",
-    primaryCtaText: "Shop Solitaires & Rings",
-    primaryCtaLink: "/collections/rings",
-    secondaryCtaText: "Explore Collections",
-    secondaryCtaLink: "/#collections",
+      "Brilliant American Diamond and cubic zirconia rings with pure sparkle that pairs effortlessly with sarees, churidars, and western wear.",
+    ctaText: "Shop Solitaires & Rings",
+    ctaLink: "/collections/rings",
+    secondaryText: "View Earrings",
+    secondaryLink: "/collections/earrings",
     bgImage: "/images/hero/solitaire-rings.jpg",
-    imageAlt: "Solitaire Diamond Engagement and Wedding Rings on champagne silk",
-    badgePill: "💎 VVS Precision Cut • Rhodium & Gold Band",
+    imageAlt: "Sparkling solitaire rings and earrings",
   },
-];
-
-const categoryChips = [
-  { name: "✨ All Pieces", href: "/#products" },
-  { name: "📿 Layered Necklaces", href: "/collections/necklaces" },
-  { name: "💎 Studs & Earrings", href: "/collections/earrings" },
-  { name: "💍 Anti-Tarnish Rings", href: "/collections/rings" },
-  { name: "🌟 Charm Bracelets", href: "/collections/bracelets" },
-  { name: "👑 Festive Sets", href: "/collections/jewellery-sets" },
 ];
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [copied, setCopied] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -167,16 +133,6 @@ export default function Hero() {
     touchEndX.current = null;
   };
 
-  const handleCopyCode = (code?: string) => {
-    if (!code) return;
-    const actualCode = code.replace(/USE CODE:\s*/i, "").trim();
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(actualCode);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
   const slide = heroSlides[currentSlide];
 
   return (
@@ -186,9 +142,9 @@ export default function Hero() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative min-h-[82vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden transition-colors select-none"
+      className="relative min-h-[75vh] sm:min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center overflow-hidden transition-colors select-none"
       aria-roledescription="carousel"
-      aria-label="Nakshatra Collections Artificial Jewellery Store Showcase"
+      aria-label="Nakshatra Collections Artificial Jewellery Showcase"
     >
       {/* ---------------------------------------------------------------------- */}
       {/* AUTOMATICALLY CHANGING FULL-BLEED BACKGROUND IMAGES WITH CROSSFADE      */}
@@ -220,26 +176,23 @@ export default function Hero() {
           );
         })}
 
-        {/* Luminous Light Theme & Ambient Gradient Overlays for High Legibility */}
-        {/* Desktop: Gentle radial & linear scrim matching theme background */}
+        {/* Minimal Light Theme Gradient Scrims (Ensures ultra-clear text readability) */}
         <div
           className="absolute inset-0 pointer-events-none transition-colors duration-500"
           style={{
             background:
-              "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 32%, rgba(255,255,255,0.78) 58%, rgba(255,255,255,0.25) 85%, transparent 100%)",
+              "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 35%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0.2) 85%, transparent 100%)",
           }}
         />
-        {/* Mobile / Vertical blend: Ensures maximum text clarity on smaller screens */}
         <div
           className="absolute inset-0 pointer-events-none sm:hidden transition-colors duration-500"
           style={{
             background:
-              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.88) 45%, rgba(255,255,255,0.4) 100%)",
+              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.45) 100%)",
           }}
         />
-        {/* Soft bottom edge blend to seamlessly transition into next section */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none transition-colors duration-500"
+          className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none transition-colors duration-500"
           style={{
             background: "linear-gradient(to top, var(--bg-primary), transparent)",
           }}
@@ -247,162 +200,93 @@ export default function Hero() {
       </div>
 
       {/* ---------------------------------------------------------------------- */}
-      {/* FOREGROUND HERO CONTENT (LIGHT & THEME MATCHED)                        */}
+      {/* MINIMAL & CLEAN FOREGROUND CONTENT                                     */}
       {/* ---------------------------------------------------------------------- */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 w-full">
-        <div className="max-w-3xl">
-          {/* Top Badges & Promo Code Button */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass"
-              style={{
-                color: "var(--accent-cta)",
-                borderColor: "var(--border-subtle)",
-              }}
-            >
-              {slide.tagIcon === "droplets" ? (
-                <Droplets className="h-3.5 w-3.5 text-sky-600" />
-              ) : (
-                <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-              )}
-              <span>{slide.tag}</span>
-            </span>
-
-            <span
-              className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-xs"
-              style={{ backgroundColor: "var(--badge-sale-bg)" }}
-            >
-              <Percent className="h-3 w-3" />
-              {slide.offerBadge}
-            </span>
-
-            {slide.promoCode && (
-              <button
-                type="button"
-                onClick={() => handleCopyCode(slide.promoCode)}
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider border liquid-glass transition hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
-                style={{
-                  color: "var(--text-primary)",
-                  borderColor: "var(--accent-gold)",
-                }}
-                title="Click to copy promo code"
-              >
-                <Tag className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-                <span>{copied ? "Code Copied!" : slide.promoCode}</span>
-                {copied && <CheckCircle2 className="h-3 w-3 text-emerald-600" />}
-              </button>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 w-full">
+        <div className="max-w-2xl">
+          {/* Minimal Feature Badge */}
+          <div className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass">
+            {slide.icon === "droplets" ? (
+              <Droplets className="h-3.5 w-3.5 text-sky-600" />
+            ) : (
+              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
             )}
+            <span style={{ color: "var(--accent-cta)" }}>{slide.badge}</span>
           </div>
 
-          {/* Cinematic Headline with Theme Color */}
+          {/* Minimal & Elegant Headline */}
           <h1
             key={`headline-${slide.id}`}
-            className="font-serif-luxury mt-4 sm:mt-6 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-4 duration-700"
+            className="font-serif-luxury mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.12] animate-in fade-in slide-in-from-bottom-3 duration-500"
             style={{ color: "var(--text-primary)" }}
           >
             {slide.headlinePart1} <br className="hidden sm:inline" />
             <span
-              className="italic font-normal transition-colors duration-300"
+              className="italic font-normal"
               style={{ color: "var(--accent-gold)" }}
             >
               {slide.headlinePart2}
             </span>
           </h1>
 
-          {/* Subtext Description */}
+          {/* Simple English Subtext */}
           <p
             key={`subtext-${slide.id}`}
-            className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-light animate-in fade-in slide-in-from-bottom-3 duration-700"
+            className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal animate-in fade-in slide-in-from-bottom-2 duration-500"
             style={{ color: "var(--text-secondary)" }}
           >
             {slide.subtext}
           </p>
 
-          {/* CTA Action Buttons */}
-          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto">
+          {/* Clean Action Buttons */}
+          <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <Link
-              href={slide.primaryCtaLink}
-              className="inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-4 text-xs font-bold uppercase tracking-widest shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
+              href={slide.ctaLink}
+              className="inline-flex items-center justify-center gap-2 rounded-full px-7 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-widest shadow-md transition-all duration-200 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: "var(--accent-cta)",
                 color: "var(--accent-cta-text)",
               }}
             >
-              <span>{slide.primaryCtaText}</span>
+              <span>{slide.ctaText}</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
 
-            <Link
-              href={slide.secondaryCtaLink}
-              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase border liquid-glass transition-all hover:scale-105 active:scale-95"
-              style={{
-                color: "var(--text-primary)",
-                borderColor: "var(--border-medium)",
-              }}
-            >
-              <span>{slide.secondaryCtaText}</span>
-            </Link>
-          </div>
-
-          {/* Quick Category Chips */}
-          <div
-            className="mt-6 sm:mt-8 pt-6 border-t"
-            style={{ borderColor: "var(--border-subtle)" }}
-          >
-            <p
-              className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2.5"
-              style={{ color: "var(--text-muted)" }}
-            >
-              Quick Explore:
-            </p>
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {categoryChips.map((chip) => (
-                <Link
-                  key={chip.name}
-                  href={chip.href}
-                  className="rounded-full px-3 py-1 text-[10px] sm:text-[11px] font-medium transition-all hover:scale-105 active:scale-95 border liquid-glass"
-                  style={{
-                    color: "var(--text-secondary)",
-                    borderColor: "var(--border-subtle)",
-                  }}
-                >
-                  {chip.name}
-                </Link>
-              ))}
-            </div>
+            {slide.secondaryText && slide.secondaryLink && (
+              <Link
+                href={slide.secondaryLink}
+                className="inline-flex items-center justify-center rounded-full px-6 py-3.5 text-xs font-semibold uppercase tracking-widest border liquid-glass transition-all hover:scale-105 active:scale-95"
+                style={{
+                  color: "var(--text-primary)",
+                  borderColor: "var(--border-medium)",
+                }}
+              >
+                <span>{slide.secondaryText}</span>
+              </Link>
+            )}
           </div>
         </div>
 
         {/* -------------------------------------------------------------------- */}
-        {/* CAROUSEL CONTROLS & SLIDE INDICATORS (LIGHT THEME MATCHED)           */}
+        {/* MINIMAL CAROUSEL INDICATORS & CONTROLS                               */}
         {/* -------------------------------------------------------------------- */}
-        <div
-          className="mt-8 sm:mt-12 flex items-center justify-between gap-4 pt-4 border-t"
-          style={{ borderColor: "var(--border-subtle)" }}
-        >
-          {/* Slide Pill Tag */}
-          <div className="hidden sm:inline-flex items-center gap-2">
-            <span
-              className="h-2 w-2 rounded-full animate-ping"
-              style={{ backgroundColor: "var(--accent-gold)" }}
-            />
-            <span
-              className="text-[11px] font-semibold tracking-wider"
-              style={{ color: "var(--text-muted)" }}
-            >
-              {slide.badgePill}
-            </span>
+        <div className="mt-10 sm:mt-14 flex items-center justify-between gap-4 pt-4 border-t" style={{ borderColor: "var(--border-subtle)" }}>
+          {/* Trust Assurance Pill */}
+          <div className="hidden sm:flex items-center gap-2 text-xs font-medium" style={{ color: "var(--text-muted)" }}>
+            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--accent-gold)" }} />
+            <span>Fast Express Delivery All Over Kerala &bull; 100% Anti-Tarnish Guarantee</span>
           </div>
 
-          {/* Switcher Dots & Slide Numbers */}
-          <div className="flex items-center gap-3 sm:gap-4 ml-auto">
+          {/* Minimal Dots & Controls */}
+          <div className="flex items-center gap-3 ml-auto">
             <span
-              className="text-[11px] font-mono tracking-widest uppercase font-semibold"
+              className="text-xs font-mono font-medium"
               style={{ color: "var(--text-primary)" }}
             >
               0{currentSlide + 1} / 0{heroSlides.length}
             </span>
 
+            {/* Slide Dots */}
             <div className="flex items-center gap-1.5">
               {heroSlides.map((s, idx) => {
                 const isActive = idx === currentSlide;
@@ -411,26 +295,26 @@ export default function Hero() {
                     key={s.id}
                     type="button"
                     onClick={() => setCurrentSlide(idx)}
-                    className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
-                      isActive ? "w-8 sm:w-10 shadow-xs" : "w-2 hover:opacity-80"
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      isActive ? "w-6 sm:w-8" : "w-1.5 hover:opacity-80"
                     }`}
                     style={{
                       backgroundColor: isActive
                         ? "var(--accent-cta)"
                         : "var(--border-medium)",
                     }}
-                    aria-label={`Go to slide ${idx + 1}: ${s.headlinePart1}`}
+                    aria-label={`Go to slide ${idx + 1}`}
                   />
                 );
               })}
             </div>
 
             {/* Prev / Next Arrows */}
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 ml-2">
               <button
                 type="button"
                 onClick={prevSlide}
-                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-110 active:scale-95 cursor-pointer shadow-xs"
+                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
                 style={{
                   color: "var(--text-primary)",
                   borderColor: "var(--border-subtle)",
@@ -442,7 +326,7 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={nextSlide}
-                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-110 active:scale-95 cursor-pointer shadow-xs"
+                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
                 style={{
                   color: "var(--text-primary)",
                   borderColor: "var(--border-subtle)",

@@ -37,21 +37,21 @@ export default function Newsletter() {
             }}
           >
             <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-            08 &bull; Privileged Circle
+            Offers &amp; Updates
           </span>
 
           <h2
             className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
             style={{ color: "var(--text-primary)" }}
           >
-            Stay Close To The Stars
+            Get Special Offers &amp; New Arrivals
           </h2>
 
           <p
-            className="mt-3.5 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-light"
+            className="mt-3.5 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-normal"
             style={{ color: "var(--text-secondary)" }}
           >
-            Be the first to discover new arrivals, special collections and exclusive offers.
+            Subscribe to get early updates on new collections, festival discounts, and special launch offers.
           </p>
 
           {isSubmitted ? (

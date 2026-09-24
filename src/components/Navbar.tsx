@@ -68,7 +68,7 @@ export default function Navbar() {
       >
         <span className="inline-flex items-center gap-2">
           <Sparkles className="h-3 w-3 animate-pulse text-amber-300" />
-          <span>Complimentary Insured All-India Express Delivery &bull; Special Launch Privilege</span>
+          <span>Free Express Delivery Across Kerala &amp; India &bull; 100% Anti-Tarnish Jewellery</span>
           <Sparkles className="h-3 w-3 animate-pulse text-amber-300" />
         </span>
       </div>

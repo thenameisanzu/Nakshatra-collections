@@ -31,19 +31,19 @@ export default function CampaignStatement() {
       {/* Centered Campaign Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center text-white">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] liquid-glass-dark mb-6"
+          className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.25em] liquid-glass-dark mb-6"
           style={{ color: "#E0BE75" }}
         >
           <Sparkles className="h-3 w-3" />
-          06 &bull; Campaign Statement
+          Everyday &amp; Wedding Jewellery
         </span>
 
         <h2 className="font-serif-luxury text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight leading-[1.1] text-white">
-          Made To Be Remembered
+          Jewellery That Shines With You
         </h2>
 
-        <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-neutral-300 max-w-xl mx-auto font-light leading-relaxed">
-          Pieces created for the moments you&apos;ll never forget. Handcrafted with reverence for heritage and designed for eternal brilliance.
+        <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-neutral-200 max-w-xl mx-auto font-normal leading-relaxed">
+          Crafted with care to give you the real gold look for college, office, festivals, and weddings across Kerala.
         </p>
 
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">

@@ -83,19 +83,19 @@ export default function CuratedCollections() {
               }}
             >
               <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-              02 &bull; Curated Collections
+              Categories
             </span>
             <h2
               className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
-              Curated Masterpieces
+              Shop By Category
             </h2>
             <p
               className="mt-2 text-sm sm:text-base leading-relaxed"
               style={{ color: "var(--text-secondary)" }}
             >
-              Discover pieces created for unforgettable moments, each handcrafted to reflect timeless Indian artistry and contemporary finesse.
+              Explore our wide range of daily wear chains, earrings, rings, bracelets, and bridal sets.
             </p>
           </div>
 
@@ -104,7 +104,7 @@ export default function CuratedCollections() {
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:underline transition-colors shrink-0"
             style={{ color: "var(--accent-cta)" }}
           >
-            <span>View Full Directory</span>
+            <span>View All Jewellery</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>

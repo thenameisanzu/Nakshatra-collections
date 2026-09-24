@@ -462,10 +462,10 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         <div className="flex flex-col items-center gap-1.5 p-1">
           <Truck className="h-4 w-4" style={{ color: "var(--accent-cta)" }} />
           <span className="text-[10px] sm:text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>
-            Insured Transit
+            Kerala &amp; India Express
           </span>
           <span className="text-[9px] sm:text-[10px] hidden sm:block" style={{ color: "var(--text-muted)" }}>
-            Signature Box
+            Tracked Delivery
           </span>
         </div>
 
@@ -475,20 +475,20 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         >
           <ShieldCheck className="h-4 w-4" style={{ color: "var(--accent-cta)" }} />
           <span className="text-[10px] sm:text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>
-            Secure Checkout
+            100% Anti-Tarnish
           </span>
           <span className="text-[9px] sm:text-[10px] hidden sm:block" style={{ color: "var(--text-muted)" }}>
-            256-Bit SSL
+            Skin Friendly
           </span>
         </div>
 
         <div className="flex flex-col items-center gap-1.5 p-1">
           <RotateCcw className="h-4 w-4" style={{ color: "var(--accent-cta)" }} />
           <span className="text-[10px] sm:text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>
-            Easy Returns
+            Easy Exchange
           </span>
           <span className="text-[9px] sm:text-[10px] hidden sm:block" style={{ color: "var(--text-muted)" }}>
-            30-Day Window
+            Hassle Free
           </span>
         </div>
       </div>

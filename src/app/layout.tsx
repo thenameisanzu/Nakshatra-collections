@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,22 +8,24 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const outfit = Outfit({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "NAKSHATRA COLLECTIONS | Artificial Jewellery Store",
   description:
-    "Discover Nakshatra Collections - exquisite anti-tarnish artificial jewellery, 18K gold plated everyday essentials, luminous solitaires, and festive jewellery sets.",
+    "Discover Nakshatra Collections - anti-tarnish artificial jewellery, 18K gold plated daily wear, wedding jewellery sets, and solitaire rings with fast delivery in Kerala & India.",
 };
 
 const themeInitializerScript = `
@@ -51,7 +53,7 @@ export default function RootLayout({
       lang="en"
       data-theme="champagne-luxury"
       suppressHydrationWarning
-      className={`${playfair.variable} ${jakarta.variable} h-full scroll-smooth antialiased`}
+      className={`${cormorant.variable} ${outfit.variable} h-full scroll-smooth antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitializerScript }} />

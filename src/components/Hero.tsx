@@ -8,85 +8,118 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
-  Gem,
+  Droplets,
+  Tag,
+  CheckCircle2,
+  Percent,
 } from "lucide-react";
 
 interface HeroSlide {
   id: string;
-  headline: string;
-  text: string;
-  ctaText: string;
-  ctaLink: string;
+  tag: string;
+  tagIcon: "sparkles" | "droplets" | "gem";
+  offerBadge: string;
+  headlinePart1: string;
+  headlinePart2: string;
+  subtext: string;
+  promoCode?: string;
+  primaryCtaText: string;
+  primaryCtaLink: string;
   secondaryCtaText: string;
   secondaryCtaLink: string;
-  productName: string;
-  categoryTag: string;
-  imageSrc: string;
+  bgImage: string;
   imageAlt: string;
+  badgePill: string;
 }
 
 const heroSlides: HeroSlide[] = [
   {
-    id: "aurelia-necklace",
-    headline: "Timeless Elegance",
-    text: "Jewellery designed to become part of your story.",
-    ctaText: "Explore Collection",
-    ctaLink: "/collections/necklaces",
-    secondaryCtaText: "Discover New Arrivals",
+    id: "festive-royal",
+    tag: "Royal Festive Edition • 22K Micro-Polish",
+    tagIcon: "sparkles",
+    offerBadge: "FLAT 20% OFF",
+    headlinePart1: "Timeless Elegance,",
+    headlinePart2: "Crafted For Eternity",
+    subtext:
+      "Handcrafted royal chokers, temple motifs & luminous emerald necklaces designed for grand celebrations and life's memorable milestones.",
+    promoCode: "USE CODE: NAKSHATRA20",
+    primaryCtaText: "Shop Festive Edit",
+    primaryCtaLink: "/collections/necklaces",
+    secondaryCtaText: "Explore New Arrivals",
     secondaryCtaLink: "/collections/new-arrivals",
-    productName: "Aurelia Gold Plated Necklace",
-    categoryTag: "Atelier Necklaces",
-    imageSrc:
-      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
-    imageAlt: "Aurelia Gold Plated Necklace handcrafted by Nakshatra",
+    bgImage: "/images/hero/festive-necklace.jpg",
+    imageAlt: "Nakshatra 22K Gold and Emerald Royal Choker Necklace",
+    badgePill: "👑 Royal Heritage Collection • 22K Gold Finish",
   },
   {
-    id: "celeste-earrings",
-    headline: "Elegance In Every Detail",
-    text: "Discover pieces created for unforgettable moments.",
-    ctaText: "Shop Earrings",
-    ctaLink: "/collections/earrings",
-    secondaryCtaText: "View Full Catalogue",
+    id: "everyday-lifestyle",
+    tag: "18K Gold Plated • Waterproof Anti-Tarnish",
+    tagIcon: "droplets",
+    offerBadge: "BESTSELLER EDIT",
+    headlinePart1: "Everyday Luxury,",
+    headlinePart2: "Never Takes A Day Off",
+    subtext:
+      "Dainty layered chains, stackable anti-tarnish rings & timeless bracelets designed for showers, workouts & daily glam without fading.",
+    promoCode: "USE CODE: DAILYGLAM",
+    primaryCtaText: "Shop Everyday Gold",
+    primaryCtaLink: "/collections/new-arrivals",
+    secondaryCtaText: "View Bestsellers",
     secondaryCtaLink: "/#products",
-    productName: "Celeste Pearl Drop Earrings",
-    categoryTag: "Haute Joaillerie",
-    imageSrc:
-      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/cfcff7f80632b30fda8cc118d5faf3ba65f6ee80182e57bea5943f7b85484728.png?v=1790240218",
-    imageAlt: "Celeste Pearl Drop Earrings with luminous finish",
+    bgImage: "/images/hero/model-lifestyle.jpg",
+    imageAlt: "Modern woman wearing layered 18K gold plated anti-tarnish jewellery",
+    badgePill: "💧 Shower & Sweat Safe • 100% Skin Friendly",
   },
   {
-    id: "elara-ring",
-    headline: "Make Your Moment Shine",
-    text: "Statement jewellery for moments worth remembering.",
-    ctaText: "Shop Rings",
-    ctaLink: "/collections/rings",
+    id: "waterproof-clover",
+    tag: "316L Stainless Steel • Daily Wear Ready",
+    tagIcon: "droplets",
+    offerBadge: "WATERPROOF • ANTI-TARNISH",
+    headlinePart1: "Wear It In The Shower,",
+    headlinePart2: "Never Take It Off",
+    subtext:
+      "Modern anti-fade jewellery crafted from high-grade stainless steel and micro-coated 18K gold that resists perfume, moisture, and daily wear.",
+    promoCode: "USE CODE: WATERPROOF",
+    primaryCtaText: "Shop Waterproof Edit",
+    primaryCtaLink: "/collections/bracelets",
+    secondaryCtaText: "View Rings & Studs",
+    secondaryCtaLink: "/collections/rings",
+    bgImage: "/images/hero/anti-tarnish-waterproof.jpg",
+    imageAlt: "Waterproof gold clover bracelets and rings on stone with water droplets",
+    badgePill: "✨ 316L Stainless Steel • AAA+ Lab Zirconia",
+  },
+  {
+    id: "solitaire-glamour",
+    tag: "VVS Diamond Simulants • Everlasting Radiance",
+    tagIcon: "sparkles",
+    offerBadge: "COMPLIMENTARY PENDANT",
+    headlinePart1: "Solitaire Brilliance,",
+    headlinePart2: "Without The Diamond Price",
+    subtext:
+      "Ultra-brilliant cut American Diamond and cubic zirconia rings capturing pure optical fire and timeless luxury elegance at honest prices.",
+    promoCode: "USE CODE: SOLITAIRE",
+    primaryCtaText: "Shop Solitaires & Rings",
+    primaryCtaLink: "/collections/rings",
     secondaryCtaText: "Explore Collections",
     secondaryCtaLink: "/#collections",
-    productName: "Elara American Diamond Ring",
-    categoryTag: "Solitaire Edit",
-    imageSrc:
-      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
-    imageAlt: "Elara American Diamond Ring with brilliant clarity",
+    bgImage: "/images/hero/solitaire-rings.jpg",
+    imageAlt: "Solitaire Diamond Engagement and Wedding Rings on champagne silk",
+    badgePill: "💎 VVS Precision Cut • Rhodium & Gold Band",
   },
-  {
-    id: "amara-choker",
-    headline: "Designed To Dazzle",
-    text: "Celebrate every occasion with Nakshatra.",
-    ctaText: "Explore Jewellery",
-    ctaLink: "/#products",
-    secondaryCtaText: "Curated Sets",
-    secondaryCtaLink: "/collections/jewellery-sets",
-    productName: "Amara Gold Plated Choker Set",
-    categoryTag: "Signature Sets",
-    imageSrc:
-      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    imageAlt: "Amara Gold Plated Choker Set festive collection",
-  },
+];
+
+const categoryChips = [
+  { name: "✨ All Pieces", href: "/#products" },
+  { name: "📿 Layered Necklaces", href: "/collections/necklaces" },
+  { name: "💎 Studs & Earrings", href: "/collections/earrings" },
+  { name: "💍 Anti-Tarnish Rings", href: "/collections/rings" },
+  { name: "🌟 Charm Bracelets", href: "/collections/bracelets" },
+  { name: "👑 Festive Sets", href: "/collections/jewellery-sets" },
 ];
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [copied, setCopied] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
@@ -98,7 +131,7 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   }, []);
 
-  // Autoplay functionality: 5.5 seconds per slide (paused on hover/touch)
+  // Automatic Background Change Every 5.5 Seconds (pauses on hover or touch)
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
@@ -110,11 +143,8 @@ export default function Hero() {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        prevSlide();
-      } else if (e.key === "ArrowRight") {
-        nextSlide();
-      }
+      if (e.key === "ArrowLeft") prevSlide();
+      if (e.key === "ArrowRight") nextSlide();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -131,13 +161,20 @@ export default function Hero() {
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return;
     const diff = touchStartX.current - touchEndX.current;
-    if (diff > 45) {
-      nextSlide();
-    } else if (diff < -45) {
-      prevSlide();
-    }
+    if (diff > 45) nextSlide();
+    else if (diff < -45) prevSlide();
     touchStartX.current = null;
     touchEndX.current = null;
+  };
+
+  const handleCopyCode = (code?: string) => {
+    if (!code) return;
+    const actualCode = code.replace(/USE CODE:\s*/i, "").trim();
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(actualCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   const slide = heroSlides[currentSlide];
@@ -149,196 +186,197 @@ export default function Hero() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative min-h-[75vh] lg:min-h-[85vh] flex items-center justify-center overflow-hidden transition-colors select-none py-6 sm:py-10 md:py-14"
-      style={{
-        background: "var(--hero-gradient)",
-      }}
+      className="relative min-h-[82vh] lg:min-h-[88vh] flex items-center justify-center overflow-hidden transition-colors select-none"
       aria-roledescription="carousel"
-      aria-label="Cinematic Jewellery Showcase"
+      aria-label="Nakshatra Haute Joaillerie Hero Showcase"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Editorial Headline & Narrative */}
-          <div className="flex flex-col items-start lg:col-span-6 z-10">
-            {/* Tag Badge */}
-            <div className="flex items-center gap-2">
-              <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] shadow-2xs"
-                style={{
-                  backgroundColor: "var(--tag-bg)",
-                  color: "var(--tag-text)",
-                }}
-              >
-                <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-                <span>{slide.categoryTag}</span>
-              </span>
-            </div>
-
-            {/* Cinematic Headline */}
-            <h1
-              key={`headline-${slide.id}`}
-              className="font-serif-luxury mt-4 sm:mt-6 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-normal tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-3 duration-700"
-              style={{ color: "var(--text-primary)" }}
-            >
-              {slide.headline}
-            </h1>
-
-            {/* Editorial Subtext */}
-            <p
-              key={`text-${slide.id}`}
-              className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg leading-relaxed max-w-lg font-light animate-in fade-in slide-in-from-bottom-2 duration-700"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              {slide.text}
-            </p>
-
-            {/* CTAs */}
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto">
-              <Link
-                href={slide.ctaLink}
-                className="inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  backgroundColor: "var(--accent-cta)",
-                  color: "var(--accent-cta-text)",
-                }}
-              >
-                <span>{slide.ctaText}</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-
-              <Link
-                href={slide.secondaryCtaLink}
-                className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase border transition-all duration-300 liquid-glass liquid-glass-hover active:scale-[0.98]"
-                style={{
-                  color: "var(--text-primary)",
-                }}
-              >
-                <span>{slide.secondaryCtaText}</span>
-              </Link>
-            </div>
-
-            {/* Carousel Interactive Controls (Liquid Glass) */}
-            <div className="mt-8 sm:mt-12 flex items-center gap-4">
-              {/* Slide Counter */}
-              <span className="text-[11px] font-mono tracking-widest uppercase font-semibold" style={{ color: "var(--text-muted)" }}>
-                0{currentSlide + 1} / 0{heroSlides.length}
-              </span>
-
-              {/* Progress Bar / Dots */}
-              <div className="flex items-center gap-1.5">
-                {heroSlides.map((s, idx) => {
-                  const isActive = idx === currentSlide;
-                  return (
-                    <button
-                      key={s.id}
-                      type="button"
-                      onClick={() => setCurrentSlide(idx)}
-                      className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
-                        isActive ? "w-8 sm:w-10 shadow-xs" : "w-2 opacity-40 hover:opacity-80"
-                      }`}
-                      style={{
-                        backgroundColor: isActive ? "var(--accent-cta)" : "var(--border-medium)",
-                      }}
-                      aria-label={`Go to slide ${idx + 1}: ${s.headline}`}
-                    />
-                  );
-                })}
-              </div>
-
-              {/* Prev / Next Arrows */}
-              <div className="flex items-center gap-1.5 ml-2">
-                <button
-                  type="button"
-                  onClick={prevSlide}
-                  className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
-                  style={{ color: "var(--text-primary)" }}
-                  aria-label="Previous Slide"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={nextSlide}
-                  className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
-                  style={{ color: "var(--text-primary)" }}
-                  aria-label="Next Slide"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Cinematic Product Photography Card */}
-          <div className="lg:col-span-6 z-10">
+      {/* ---------------------------------------------------------------------- */}
+      {/* AUTOMATICALLY CHANGING FULL-BLEED BACKGROUND IMAGES WITH CROSSFADE      */}
+      {/* ---------------------------------------------------------------------- */}
+      <div className="absolute inset-0 z-0">
+        {heroSlides.map((s, index) => {
+          const isCurrent = index === currentSlide;
+          return (
             <div
-              className="relative aspect-square sm:aspect-[4/3.5] lg:aspect-[4/3.8] w-full rounded-3xl overflow-hidden border shadow-xl transition-all duration-700"
+              key={s.id}
+              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                isCurrent
+                  ? "opacity-100 scale-100 pointer-events-auto"
+                  : "opacity-0 scale-105 pointer-events-none"
+              }`}
               style={{
-                backgroundColor: "var(--bg-surface)",
-                borderColor: "var(--border-medium)",
-                boxShadow: "var(--card-shadow)",
+                transitionProperty: "opacity, transform",
               }}
             >
-              {/* Product Visual */}
-              <div className="relative h-full w-full">
-                {heroSlides.map((s, index) => {
-                  const isCurrent = index === currentSlide;
-                  return (
-                    <div
-                      key={s.id}
-                      className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                        isCurrent ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-                      }`}
-                      style={{
-                        transitionProperty: "opacity, transform",
-                      }}
-                    >
-                      <Image
-                        src={s.imageSrc}
-                        alt={s.imageAlt}
-                        fill
-                        priority={index === 0}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 580px"
-                        className="object-cover object-center p-4 sm:p-8"
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+              <Image
+                src={s.bgImage}
+                alt={s.imageAlt}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </div>
+          );
+        })}
 
-              {/* Floating Glassmorphic Product Title Pill */}
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-20">
-                <div className="liquid-glass rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 shadow-lg">
-                  <div className="min-w-0">
-                    <span className="text-[10px] font-bold uppercase tracking-widest block" style={{ color: "var(--accent-gold)" }}>
-                      Featured Creation
-                    </span>
-                    <h3 className="font-serif-luxury text-sm sm:text-base font-semibold tracking-wide truncate" style={{ color: "var(--text-primary)" }}>
-                      {slide.productName}
-                    </h3>
-                  </div>
+        {/* Ambient Dark & Cinematic Vignette Overlays for High Legibility */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-black/60 pointer-events-none" />
+      </div>
 
-                  <Link
-                    href={slide.ctaLink}
-                    className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[11px] font-bold uppercase tracking-wider shrink-0 transition-all hover:scale-105 active:scale-95 shadow-xs"
-                    style={{
-                      backgroundColor: "var(--accent-cta)",
-                      color: "var(--accent-cta-text)",
-                    }}
-                  >
-                    <span>View</span>
-                    <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-              </div>
+      {/* ---------------------------------------------------------------------- */}
+      {/* FOREGROUND HERO CONTENT                                                */}
+      {/* ---------------------------------------------------------------------- */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 w-full text-white">
+        <div className="max-w-3xl">
+          {/* Top Badges & Promo Code Button */}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            <span
+              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] shadow-lg liquid-glass-dark"
+              style={{ color: "#F0D597" }}
+            >
+              {slide.tagIcon === "droplets" ? (
+                <Droplets className="h-3.5 w-3.5 text-sky-400" />
+              ) : (
+                <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+              )}
+              <span>{slide.tag}</span>
+            </span>
 
-              {/* Floating Atelier Seal */}
-              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20">
-                <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider liquid-glass shadow-xs">
-                  <Gem className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-                  <span>Nakshatra Atelier</span>
-                </span>
-              </div>
+            <span
+              className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-md"
+              style={{ backgroundColor: "var(--badge-sale-bg)" }}
+            >
+              <Percent className="h-3 w-3" />
+              {slide.offerBadge}
+            </span>
+
+            {slide.promoCode && (
+              <button
+                type="button"
+                onClick={() => handleCopyCode(slide.promoCode)}
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider border border-amber-300/40 liquid-glass-dark text-amber-200 transition hover:bg-white/10 active:scale-95 cursor-pointer shadow-sm"
+                title="Click to copy promo code"
+              >
+                <Tag className="h-3 w-3 text-amber-300" />
+                <span>{copied ? "Code Copied!" : slide.promoCode}</span>
+                {copied && <CheckCircle2 className="h-3 w-3 text-emerald-400" />}
+              </button>
+            )}
+          </div>
+
+          {/* Cinematic Headline with Animated Entrance */}
+          <h1
+            key={`headline-${slide.id}`}
+            className="font-serif-luxury mt-4 sm:mt-6 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight leading-[1.1] text-white animate-in fade-in slide-in-from-bottom-4 duration-700"
+          >
+            {slide.headlinePart1} <br className="hidden sm:inline" />
+            <span className="italic font-normal text-amber-100">{slide.headlinePart2}</span>
+          </h1>
+
+          {/* Subtext Description */}
+          <p
+            key={`subtext-${slide.id}`}
+            className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-neutral-200 leading-relaxed max-w-2xl font-light animate-in fade-in slide-in-from-bottom-3 duration-700"
+          >
+            {slide.subtext}
+          </p>
+
+          {/* CTA Action Buttons */}
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto">
+            <Link
+              href={slide.primaryCtaLink}
+              className="inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-4 text-xs font-bold uppercase tracking-widest shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95"
+              style={{
+                backgroundColor: "var(--accent-gold)",
+                color: "#1a1612",
+              }}
+            >
+              <span>{slide.primaryCtaText}</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+
+            <Link
+              href={slide.secondaryCtaLink}
+              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase text-white border border-white/30 liquid-glass-dark hover:bg-white/10 transition-all active:scale-95"
+            >
+              <span>{slide.secondaryCtaText}</span>
+            </Link>
+          </div>
+
+          {/* Quick Category Chips */}
+          <div className="mt-6 sm:mt-8 pt-6 border-t border-white/15">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2.5 text-amber-200/80">
+              Quick Explore:
+            </p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {categoryChips.map((chip) => (
+                <Link
+                  key={chip.name}
+                  href={chip.href}
+                  className="rounded-full px-3 py-1 text-[10px] sm:text-[11px] font-medium transition-all hover:scale-105 active:scale-95 border border-white/20 liquid-glass-dark text-white hover:bg-white/15"
+                >
+                  {chip.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* -------------------------------------------------------------------- */}
+        {/* CAROUSEL CONTROLS & SLIDE INDICATORS (LIQUID GLASS)                  */}
+        {/* -------------------------------------------------------------------- */}
+        <div className="mt-8 sm:mt-12 flex items-center justify-between gap-4 pt-4 border-t border-white/15">
+          {/* Slide Pill Tag */}
+          <div className="hidden sm:inline-flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="text-[11px] font-semibold text-neutral-300 tracking-wider">
+              {slide.badgePill}
+            </span>
+          </div>
+
+          {/* Switcher Dots & Slide Numbers */}
+          <div className="flex items-center gap-3 sm:gap-4 ml-auto">
+            <span className="text-[11px] font-mono tracking-widest uppercase font-semibold text-amber-200">
+              0{currentSlide + 1} / 0{heroSlides.length}
+            </span>
+
+            <div className="flex items-center gap-1.5">
+              {heroSlides.map((s, idx) => {
+                const isActive = idx === currentSlide;
+                return (
+                  <button
+                    key={s.id}
+                    type="button"
+                    onClick={() => setCurrentSlide(idx)}
+                    className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
+                      isActive ? "w-8 sm:w-10 bg-amber-300 shadow-md" : "w-2 bg-white/40 hover:bg-white/70"
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}: ${s.headlinePart1}`}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Prev / Next Arrows */}
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={prevSlide}
+                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass-dark border border-white/25 text-white transition hover:scale-110 active:scale-95 cursor-pointer"
+                aria-label="Previous Slide"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={nextSlide}
+                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass-dark border border-white/25 text-white transition hover:scale-110 active:scale-95 cursor-pointer"
+                aria-label="Next Slide"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>

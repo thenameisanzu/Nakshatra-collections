@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTheme, THEMES } from "@/context/ThemeContext";
-import { Check, ChevronDown, Palette } from "lucide-react";
+import { Check, ChevronDown, Palette, Sparkles } from "lucide-react";
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
@@ -28,20 +28,20 @@ export default function ThemeSwitcher() {
 
   if (!mounted) {
     return (
-      <div className="h-9 w-28 rounded-full border opacity-50" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-surface)" }} />
+      <div className="h-9 w-9 sm:w-28 rounded-full border opacity-50" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-surface)" }} />
     );
   }
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Liquid Glass Floating Trigger Button */}
+      {/* Liquid Glass Floating Theme Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="group flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-300 liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
+        className="group flex items-center gap-1.5 sm:gap-2 rounded-full px-2.5 sm:px-3 py-1.5 text-xs font-medium transition-all duration-300 liquid-glass liquid-glass-hover active:scale-95 cursor-pointer shadow-xs"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        aria-label={`Current visual theme: ${current.name}. Click to change theme.`}
+        title={`Current Theme: ${current.name}. Click to switch theme.`}
       >
         {/* Swatch Trio */}
         <div className="flex items-center">
@@ -72,30 +72,30 @@ export default function ThemeSwitcher() {
         />
       </button>
 
-      {/* Floating Liquid Glass Selector Menu */}
+      {/* Floating 3-Theme Selector Menu */}
       {isOpen && (
         <div
           role="listbox"
-          className="absolute right-0 mt-2 w-72 rounded-3xl p-2.5 shadow-2xl border z-50 animate-in fade-in zoom-in-95 duration-200 liquid-glass"
+          className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-3xl p-3 shadow-2xl border z-50 animate-in fade-in zoom-in-95 duration-200 liquid-glass"
           style={{
             backgroundColor: "var(--bg-surface-elevated)",
             borderColor: "var(--border-medium)",
           }}
         >
           {/* Header */}
-          <div className="px-3 py-2 border-b mb-1 flex items-center justify-between" style={{ borderColor: "var(--border-subtle)" }}>
+          <div className="px-3 py-2 border-b mb-1.5 flex items-center justify-between" style={{ borderColor: "var(--border-subtle)" }}>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent-gold)" }}>
-                Aesthetic Atmosphere
+                3 Visual Themes
               </p>
               <p className="text-xs font-serif-luxury mt-0.5" style={{ color: "var(--text-secondary)" }}>
-                Choose Your Storefront Mood
+                Select Storefront Atmosphere
               </p>
             </div>
-            <Palette className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
+            <Sparkles className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
           </div>
 
-          {/* Theme Option Cards */}
+          {/* Theme Options */}
           <div className="flex flex-col gap-1.5">
             {THEMES.map((opt) => {
               const isSelected = opt.id === theme;
@@ -116,20 +116,20 @@ export default function ThemeSwitcher() {
                   }}
                 >
                   <div className="flex items-center gap-3">
-                    {/* Visual Color Preview Tablet */}
+                    {/* Visual Color Swatch Capsule */}
                     <div
                       className="flex items-center p-1 rounded-full border shadow-2xs"
                       style={{
                         backgroundColor: opt.colors.bg,
-                        borderColor: "rgba(0,0,0,0.1)",
+                        borderColor: "rgba(0,0,0,0.12)",
                       }}
                     >
                       <span
-                        className="h-3 w-3 rounded-full shadow-xs"
+                        className="h-3.5 w-3.5 rounded-full shadow-xs"
                         style={{ backgroundColor: opt.colors.accent }}
                       />
                       <span
-                        className="h-3 w-3 rounded-full -ml-1 shadow-xs"
+                        className="h-3.5 w-3.5 rounded-full -ml-1.5 shadow-xs"
                         style={{ backgroundColor: opt.colors.cta }}
                       />
                     </div>

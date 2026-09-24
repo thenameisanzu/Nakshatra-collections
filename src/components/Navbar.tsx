@@ -222,7 +222,7 @@ export default function Navbar() {
             </button>
 
             {/* Visual Theme Switcher */}
-            <div className="hidden xs:block pl-1">
+            <div className="block pl-0.5 sm:pl-1">
               <ThemeSwitcher />
             </div>
           </div>

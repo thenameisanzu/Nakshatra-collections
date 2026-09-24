@@ -90,7 +90,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div
-      className="min-h-screen py-6 sm:py-10 md:py-14 transition-colors duration-300"
+      className="min-h-screen pt-6 sm:pt-10 md:pt-14 pb-28 lg:pb-14 transition-colors duration-300"
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -671,10 +671,76 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
                 <strong>Jewellery Care:</strong> Store each piece separately in your Nakshatra velvet box. Avoid contact with perfumes, sanitizers, and chlorine. Gently wipe with a soft lint-free cloth after wearing.
               </p>
               <p>
-                <strong>Concierge Assistance:</strong> Have questions about sizing or custom inquiries? Our dedicated atelier specialists are ready to assist you.
+                <strong>Customer Support:</strong> Have questions about sizing or delivery in Kerala? Our team is ready to assist you on WhatsApp and call.
               </p>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Sticky Mobile Add To Bag Floating Footer */}
+      <div
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 p-3 liquid-glass border-t shadow-2xl animate-in slide-in-from-bottom duration-300"
+        style={{
+          borderColor: "var(--border-medium)",
+        }}
+      >
+        <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
+          <div className="flex flex-col min-w-0">
+            <span className="text-[10px] uppercase font-bold tracking-wider truncate" style={{ color: "var(--accent-gold)" }}>
+              {product.title}
+            </span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-base font-bold" style={{ color: "var(--text-primary)" }}>
+                {formattedPrice}
+              </span>
+              {formattedComparePrice && (
+                <span className="text-xs line-through opacity-60" style={{ color: "var(--text-muted)" }}>
+                  {formattedComparePrice}
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 shrink-0">
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              disabled={isAdding || isBuyingNow}
+              className="flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all cursor-pointer"
+              style={{
+                backgroundColor: isAdded ? "#2D6A4F" : "var(--accent-cta)",
+                color: "var(--accent-cta-text)",
+              }}
+            >
+              {isAdding ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : isAdded ? (
+                <>
+                  <Check className="h-4 w-4" />
+                  <span>Added</span>
+                </>
+              ) : (
+                <>
+                  <ShoppingBag className="h-4 w-4" />
+                  <span>Add to Bag</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={handleBuyNow}
+              disabled={isAdding || isBuyingNow}
+              className="flex items-center justify-center rounded-full px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider border liquid-glass active:scale-95 transition-all cursor-pointer"
+              style={{
+                color: "var(--text-primary)",
+                borderColor: "var(--accent-gold)",
+              }}
+            >
+              <span>Buy</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

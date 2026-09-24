@@ -23,37 +23,37 @@ export default function Footer() {
             <div className="flex flex-col items-center">
               <Sparkles className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
               <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
-                Authentic Craft
+                18K Gold Polish
               </h4>
               <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
-                100% Quality Assured
+                Real Gold Radiance
               </p>
             </div>
             <div className="flex flex-col items-center">
               <ShieldCheck className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
               <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
-                Insured Transit
+                Waterproof &amp; Anti-Fade
               </h4>
               <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
-                Tamper-Proof Packaging
+                Shower &amp; Sweat Safe
               </p>
             </div>
             <div className="flex flex-col items-center">
               <Gem className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
               <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
-                Bespoke Atelier
+                Skin Friendly
               </h4>
               <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
-                Signature Designs
+                Zero Skin Irritation
               </p>
             </div>
             <div className="flex flex-col items-center">
               <HeartHandshake className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
               <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
-                Concierge Care
+                Fast Kerala Delivery
               </h4>
               <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
-                Dedicated Support
+                Tracked Express Shipping
               </p>
             </div>
           </div>

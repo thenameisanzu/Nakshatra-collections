@@ -188,15 +188,10 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
               className="text-sm sm:text-base font-bold tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
-              {formattedPrice}
+              {isPriceRange ? `From ${formattedPrice}` : formattedPrice}
             </span>
-            {isPriceRange && formattedMaxPrice && (
-              <span className="text-[10px] sm:text-xs" style={{ color: "var(--text-muted)" }}>
-                - {formattedMaxPrice}
-              </span>
-            )}
             {formattedComparePrice && (
-              <span className="text-[10px] sm:text-xs line-through opacity-60" style={{ color: "var(--text-muted)" }}>
+              <span className="text-xs line-through opacity-60" style={{ color: "var(--text-muted)" }}>
                 {formattedComparePrice}
               </span>
             )}

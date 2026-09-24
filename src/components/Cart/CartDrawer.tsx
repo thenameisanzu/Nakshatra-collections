@@ -106,6 +106,28 @@ export default function CartDrawer() {
             </button>
           </div>
 
+          {/* Free Express Delivery Progress Strip */}
+          <div className="px-4 py-2.5 border-b" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-secondary)" }}>
+            <div className="flex items-center justify-between text-xs mb-1.5">
+              <span className="font-semibold flex items-center gap-1.5" style={{ color: "var(--text-primary)" }}>
+                <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+                <span>🎉 Free Insured Express Delivery Unlocked!</span>
+              </span>
+              <span className="font-bold text-[10px] uppercase" style={{ color: "var(--accent-cta)" }}>
+                Kerala &amp; India
+              </span>
+            </div>
+            <div className="h-1.5 w-full bg-black/10 rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-500"
+                style={{
+                  width: lines.length > 0 ? "100%" : "0%",
+                  backgroundColor: "var(--accent-gold)",
+                }}
+              />
+            </div>
+          </div>
+
           {/* Error Message */}
           {error && (
             <div

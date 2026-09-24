@@ -193,7 +193,7 @@ export default function Hero() {
       {/* ---------------------------------------------------------------------- */}
       {/* AUTOMATICALLY CHANGING FULL-BLEED BACKGROUND IMAGES WITH CROSSFADE      */}
       {/* ---------------------------------------------------------------------- */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {heroSlides.map((s, index) => {
           const isCurrent = index === currentSlide;
           return (
@@ -214,38 +214,62 @@ export default function Hero() {
                 fill
                 priority={index === 0}
                 sizes="100vw"
-                className="object-cover object-center"
+                className="object-cover object-center sm:object-[right_center]"
               />
             </div>
           );
         })}
 
-        {/* Ambient Dark & Cinematic Vignette Overlays for High Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-black/60 pointer-events-none" />
+        {/* Luminous Light Theme & Ambient Gradient Overlays for High Legibility */}
+        {/* Desktop: Gentle radial & linear scrim matching theme background */}
+        <div
+          className="absolute inset-0 pointer-events-none transition-colors duration-500"
+          style={{
+            background:
+              "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 32%, rgba(255,255,255,0.78) 58%, rgba(255,255,255,0.25) 85%, transparent 100%)",
+          }}
+        />
+        {/* Mobile / Vertical blend: Ensures maximum text clarity on smaller screens */}
+        <div
+          className="absolute inset-0 pointer-events-none sm:hidden transition-colors duration-500"
+          style={{
+            background:
+              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.88) 45%, rgba(255,255,255,0.4) 100%)",
+          }}
+        />
+        {/* Soft bottom edge blend to seamlessly transition into next section */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none transition-colors duration-500"
+          style={{
+            background: "linear-gradient(to top, var(--bg-primary), transparent)",
+          }}
+        />
       </div>
 
       {/* ---------------------------------------------------------------------- */}
-      {/* FOREGROUND HERO CONTENT                                                */}
+      {/* FOREGROUND HERO CONTENT (LIGHT & THEME MATCHED)                        */}
       {/* ---------------------------------------------------------------------- */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 w-full text-white">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 md:py-20 w-full">
         <div className="max-w-3xl">
           {/* Top Badges & Promo Code Button */}
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] shadow-lg liquid-glass-dark"
-              style={{ color: "#F0D597" }}
+              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass"
+              style={{
+                color: "var(--accent-cta)",
+                borderColor: "var(--border-subtle)",
+              }}
             >
               {slide.tagIcon === "droplets" ? (
-                <Droplets className="h-3.5 w-3.5 text-sky-400" />
+                <Droplets className="h-3.5 w-3.5 text-sky-600" />
               ) : (
-                <Sparkles className="h-3.5 w-3.5 text-amber-300" />
+                <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
               )}
               <span>{slide.tag}</span>
             </span>
 
             <span
-              className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-md"
+              className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-white shadow-xs"
               style={{ backgroundColor: "var(--badge-sale-bg)" }}
             >
               <Percent className="h-3 w-3" />
@@ -256,29 +280,40 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={() => handleCopyCode(slide.promoCode)}
-                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider border border-amber-300/40 liquid-glass-dark text-amber-200 transition hover:bg-white/10 active:scale-95 cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider border liquid-glass transition hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
+                style={{
+                  color: "var(--text-primary)",
+                  borderColor: "var(--accent-gold)",
+                }}
                 title="Click to copy promo code"
               >
-                <Tag className="h-3 w-3 text-amber-300" />
+                <Tag className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
                 <span>{copied ? "Code Copied!" : slide.promoCode}</span>
-                {copied && <CheckCircle2 className="h-3 w-3 text-emerald-400" />}
+                {copied && <CheckCircle2 className="h-3 w-3 text-emerald-600" />}
               </button>
             )}
           </div>
 
-          {/* Cinematic Headline with Animated Entrance */}
+          {/* Cinematic Headline with Theme Color */}
           <h1
             key={`headline-${slide.id}`}
-            className="font-serif-luxury mt-4 sm:mt-6 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight leading-[1.1] text-white animate-in fade-in slide-in-from-bottom-4 duration-700"
+            className="font-serif-luxury mt-4 sm:mt-6 text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-4 duration-700"
+            style={{ color: "var(--text-primary)" }}
           >
             {slide.headlinePart1} <br className="hidden sm:inline" />
-            <span className="italic font-normal text-amber-100">{slide.headlinePart2}</span>
+            <span
+              className="italic font-normal transition-colors duration-300"
+              style={{ color: "var(--accent-gold)" }}
+            >
+              {slide.headlinePart2}
+            </span>
           </h1>
 
           {/* Subtext Description */}
           <p
             key={`subtext-${slide.id}`}
-            className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-neutral-200 leading-relaxed max-w-2xl font-light animate-in fade-in slide-in-from-bottom-3 duration-700"
+            className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-light animate-in fade-in slide-in-from-bottom-3 duration-700"
+            style={{ color: "var(--text-secondary)" }}
           >
             {slide.subtext}
           </p>
@@ -287,10 +322,10 @@ export default function Hero() {
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto">
             <Link
               href={slide.primaryCtaLink}
-              className="inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-4 text-xs font-bold uppercase tracking-widest shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-4 text-xs font-bold uppercase tracking-widest shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: "var(--accent-gold)",
-                color: "#1a1612",
+                backgroundColor: "var(--accent-cta)",
+                color: "var(--accent-cta-text)",
               }}
             >
               <span>{slide.primaryCtaText}</span>
@@ -299,15 +334,25 @@ export default function Hero() {
 
             <Link
               href={slide.secondaryCtaLink}
-              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase text-white border border-white/30 liquid-glass-dark hover:bg-white/10 transition-all active:scale-95"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase border liquid-glass transition-all hover:scale-105 active:scale-95"
+              style={{
+                color: "var(--text-primary)",
+                borderColor: "var(--border-medium)",
+              }}
             >
               <span>{slide.secondaryCtaText}</span>
             </Link>
           </div>
 
           {/* Quick Category Chips */}
-          <div className="mt-6 sm:mt-8 pt-6 border-t border-white/15">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2.5 text-amber-200/80">
+          <div
+            className="mt-6 sm:mt-8 pt-6 border-t"
+            style={{ borderColor: "var(--border-subtle)" }}
+          >
+            <p
+              className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2.5"
+              style={{ color: "var(--text-muted)" }}
+            >
               Quick Explore:
             </p>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
@@ -315,7 +360,11 @@ export default function Hero() {
                 <Link
                   key={chip.name}
                   href={chip.href}
-                  className="rounded-full px-3 py-1 text-[10px] sm:text-[11px] font-medium transition-all hover:scale-105 active:scale-95 border border-white/20 liquid-glass-dark text-white hover:bg-white/15"
+                  className="rounded-full px-3 py-1 text-[10px] sm:text-[11px] font-medium transition-all hover:scale-105 active:scale-95 border liquid-glass"
+                  style={{
+                    color: "var(--text-secondary)",
+                    borderColor: "var(--border-subtle)",
+                  }}
                 >
                   {chip.name}
                 </Link>
@@ -325,20 +374,32 @@ export default function Hero() {
         </div>
 
         {/* -------------------------------------------------------------------- */}
-        {/* CAROUSEL CONTROLS & SLIDE INDICATORS (LIQUID GLASS)                  */}
+        {/* CAROUSEL CONTROLS & SLIDE INDICATORS (LIGHT THEME MATCHED)           */}
         {/* -------------------------------------------------------------------- */}
-        <div className="mt-8 sm:mt-12 flex items-center justify-between gap-4 pt-4 border-t border-white/15">
+        <div
+          className="mt-8 sm:mt-12 flex items-center justify-between gap-4 pt-4 border-t"
+          style={{ borderColor: "var(--border-subtle)" }}
+        >
           {/* Slide Pill Tag */}
           <div className="hidden sm:inline-flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="text-[11px] font-semibold text-neutral-300 tracking-wider">
+            <span
+              className="h-2 w-2 rounded-full animate-ping"
+              style={{ backgroundColor: "var(--accent-gold)" }}
+            />
+            <span
+              className="text-[11px] font-semibold tracking-wider"
+              style={{ color: "var(--text-muted)" }}
+            >
               {slide.badgePill}
             </span>
           </div>
 
           {/* Switcher Dots & Slide Numbers */}
           <div className="flex items-center gap-3 sm:gap-4 ml-auto">
-            <span className="text-[11px] font-mono tracking-widest uppercase font-semibold text-amber-200">
+            <span
+              className="text-[11px] font-mono tracking-widest uppercase font-semibold"
+              style={{ color: "var(--text-primary)" }}
+            >
               0{currentSlide + 1} / 0{heroSlides.length}
             </span>
 
@@ -351,8 +412,13 @@ export default function Hero() {
                     type="button"
                     onClick={() => setCurrentSlide(idx)}
                     className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
-                      isActive ? "w-8 sm:w-10 bg-amber-300 shadow-md" : "w-2 bg-white/40 hover:bg-white/70"
+                      isActive ? "w-8 sm:w-10 shadow-xs" : "w-2 hover:opacity-80"
                     }`}
+                    style={{
+                      backgroundColor: isActive
+                        ? "var(--accent-cta)"
+                        : "var(--border-medium)",
+                    }}
                     aria-label={`Go to slide ${idx + 1}: ${s.headlinePart1}`}
                   />
                 );
@@ -364,7 +430,11 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={prevSlide}
-                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass-dark border border-white/25 text-white transition hover:scale-110 active:scale-95 cursor-pointer"
+                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-110 active:scale-95 cursor-pointer shadow-xs"
+                style={{
+                  color: "var(--text-primary)",
+                  borderColor: "var(--border-subtle)",
+                }}
                 aria-label="Previous Slide"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -372,7 +442,11 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={nextSlide}
-                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass-dark border border-white/25 text-white transition hover:scale-110 active:scale-95 cursor-pointer"
+                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-110 active:scale-95 cursor-pointer shadow-xs"
+                style={{
+                  color: "var(--text-primary)",
+                  borderColor: "var(--border-subtle)",
+                }}
                 aria-label="Next Slide"
               >
                 <ChevronRight className="h-4 w-4" />

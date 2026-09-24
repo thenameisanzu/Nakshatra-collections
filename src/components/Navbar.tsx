@@ -85,55 +85,26 @@ export default function Navbar() {
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Mobile Hamburger & Search */}
-          <div className="flex lg:hidden items-center gap-1">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
-              style={{
-                color: "var(--text-primary)",
-                backgroundColor: isScrolled ? "transparent" : "var(--glass-bg)",
-              }}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={isOpen}
-            >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="flex h-11 w-11 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
-              style={{ color: "var(--text-secondary)" }}
-              aria-label="Search collections"
-            >
-              <Search className="h-4.5 w-4.5" />
-            </button>
-          </div>
-
-          {/* Left: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
-            {navLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="group relative text-xs font-semibold tracking-[0.18em] uppercase transition-colors"
-                style={{ color: "var(--text-secondary)" }}
+          {/* Left: Official Brand Logo & Name */}
+          <div className="flex items-center gap-3">
+            {/* Mobile Hamburger Toggle */}
+            <div className="flex lg:hidden items-center gap-1">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                type="button"
+                className="flex h-10 w-10 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
+                style={{
+                  color: "var(--text-primary)",
+                  backgroundColor: isScrolled ? "transparent" : "var(--glass-bg)",
+                }}
+                aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={isOpen}
               >
-                <span className="transition-colors group-hover:text-[color:var(--accent-cta)]">
-                  {item.label}
-                </span>
-                <span
-                  className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
-                  style={{ backgroundColor: "var(--accent-gold)" }}
-                />
-              </Link>
-            ))}
-          </nav>
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </button>
+            </div>
 
-          {/* Center: Official Brand Logo - Nakshatra */}
-          <div className="flex items-center">
+            {/* Logo Mark */}
             <Link
               href="/"
               className="group flex items-center gap-2.5 sm:gap-3 transition-transform hover:scale-[1.01]"
@@ -167,13 +138,33 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Right Action Icons & Theme Switcher */}
+          {/* Center: Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
+            {navLinks.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="group relative text-xs font-semibold tracking-[0.18em] uppercase transition-colors"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                <span className="transition-colors group-hover:text-[color:var(--accent-cta)]">
+                  {item.label}
+                </span>
+                <span
+                  className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
+                  style={{ backgroundColor: "var(--accent-gold)" }}
+                />
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right: Action Icons & Theme Switcher */}
           <div className="flex items-center gap-1.5 sm:gap-2.5">
-            {/* Search (Desktop) */}
+            {/* Search (Desktop & Mobile) */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="hidden lg:flex h-10 w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
               style={{ color: "var(--text-secondary)" }}
               aria-label="Search Catalogue"
             >
@@ -183,12 +174,12 @@ export default function Navbar() {
             {/* Wishlist Button */}
             <Link
               href="/wishlist"
-              className="relative flex h-10 w-10 sm:h-10.5 sm:w-10.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95"
+              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Wishlist with ${totalWishlistItems} saved items`}
             >
               <Heart
-                className={`h-4.5 w-4.5 sm:h-5 sm:w-5 transition-colors ${
+                className={`h-4.5 w-4.5 transition-colors ${
                   totalWishlistItems > 0 ? "fill-rose-600 text-rose-600" : ""
                 }`}
               />
@@ -206,11 +197,11 @@ export default function Navbar() {
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-10 w-10 sm:h-10.5 sm:w-10.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
+              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Shopping bag with ${totalQuantity} items`}
             >
-              <ShoppingBag className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
+              <ShoppingBag className="h-4.5 w-4.5" />
               {totalQuantity > 0 && (
                 <span
                   className="absolute -top-1 -right-1 flex h-4.5 w-4.5 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
@@ -221,7 +212,7 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Visual Theme Switcher */}
+            {/* Visual 3-Theme Switcher */}
             <div className="block pl-0.5 sm:pl-1">
               <ThemeSwitcher />
             </div>

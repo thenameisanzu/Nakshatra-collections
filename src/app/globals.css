@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+:root,
+[data-theme="champagne-luxury"] {
+  --bg-primary: #FFF9EF;
+  --bg-secondary: #F8EFE0;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --text-primary: #261C14;
+  --text-secondary: #5C4E43;
+  --text-muted: #8C7C6F;
+  --accent-gold: #C9A45C;
+  --accent-gold-hover: #B5914A;
+  --accent-cta: #6B1E2E;
+  --accent-cta-hover: #541523;
+  --accent-cta-text: #FFFFFF;
+  --border-subtle: #F1E3D3;
+  --border-medium: #DEC9B5;
+  --card-shadow: 0 10px 30px -10px rgba(107, 30, 46, 0.08);
+  --badge-sale-bg: #6B1E2E;
+  --badge-sale-text: #FFFFFF;
+  --badge-soldout-bg: #ECE3D7;
+  --badge-soldout-text: #6E6258;
+  --tag-bg: #FAF2E4;
+  --tag-text: #8C6C2D;
+}
+
+[data-theme="soft-blush"] {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #FFF7F8;
+  --bg-surface: #F4DDE2;
+  --bg-surface-elevated: #FFFFFF;
+  --text-primary: #291D21;
+  --text-secondary: #664F56;
+  --text-muted: #9B8088;
+  --accent-gold: #C8A45D;
+  --accent-gold-hover: #B6924D;
+  --accent-cta: #8A3D52;
+  --accent-cta-hover: #732F42;
+  --accent-cta-text: #FFFFFF;
+  --border-subtle: #F5E5E9;
+  --border-medium: #E8CCD3;
+  --card-shadow: 0 10px 30px -10px rgba(138, 61, 82, 0.09);
+  --badge-sale-bg: #8A3D52;
+  --badge-sale-text: #FFFFFF;
+  --badge-soldout-bg: #F5E6E9;
+  --badge-soldout-text: #7A5B64;
+  --tag-bg: #FDF2F4;
+  --tag-text: #94465B;
+}
+
+[data-theme="sage-contemporary"] {
+  --bg-primary: #FAF5EA;
+  --bg-secondary: #F0ECE1;
+  --bg-surface: #E8ECE4;
+  --bg-surface-elevated: #FFFFFF;
+  --text-primary: #222923;
+  --text-secondary: #4D5C50;
+  --text-muted: #78877B;
+  --accent-gold: #B8944D;
+  --accent-gold-hover: #A4823E;
+  --accent-cta: #2E4633;
+  --accent-cta-hover: #203324;
+  --accent-cta-text: #FFFFFF;
+  --border-subtle: #E2E8DE;
+  --border-medium: #C8D3C3;
+  --card-shadow: 0 10px 30px -10px rgba(46, 70, 51, 0.08);
+  --badge-sale-bg: #2E4633;
+  --badge-sale-text: #FFFFFF;
+  --badge-soldout-bg: #DFE5DC;
+  --badge-soldout-text: #505E53;
+  --tag-bg: #EFF4EC;
+  --tag-text: #3B5741;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.font-serif-luxury {
+  font-family: var(--font-serif), Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gold);
+}

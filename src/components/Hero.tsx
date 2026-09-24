@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Star, ShieldCheck, Droplets } from "lucide-react";
 
 interface HeroImage {
   id: string;
@@ -91,7 +91,7 @@ export default function Hero() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative min-h-[calc(100dvh-5.25rem)] sm:min-h-[calc(100vh-5.75rem)] flex flex-col justify-between overflow-hidden transition-colors select-none"
+      className="relative min-h-[calc(100dvh-5rem)] sm:min-h-[calc(100vh-5.5rem)] flex flex-col justify-between overflow-hidden transition-colors select-none"
       aria-label="Nakshatra Collections Artificial Jewellery Showcase"
     >
       {/* ---------------------------------------------------------------------- */}
@@ -118,29 +118,29 @@ export default function Hero() {
                 fill
                 priority={index === 0}
                 sizes="100vw"
-                className="object-cover object-center sm:object-[right_center]"
+                className="object-cover object-[center_top] sm:object-[right_center]"
               />
             </div>
           );
         })}
 
-        {/* Minimal Light Theme Gradient Scrims (Ensures ultra-clear text readability) */}
+        {/* Minimal Gradient Scrims (Preserves image beauty while making text 100% crisp) */}
         <div
           className="absolute inset-0 pointer-events-none transition-colors duration-500 hidden sm:block"
           style={{
             background:
-              "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 38%, rgba(255,255,255,0.82) 62%, rgba(255,255,255,0.25) 85%, transparent 100%)",
+              "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 40%, rgba(255,255,255,0.85) 65%, transparent 100%)",
           }}
         />
         <div
           className="absolute inset-0 pointer-events-none sm:hidden transition-colors duration-500"
           style={{
             background:
-              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.92) 60%, rgba(255,255,255,0.55) 100%)",
+              "linear-gradient(to top, var(--bg-primary) 0%, var(--bg-primary) 30%, rgba(255,255,255,0.88) 60%, rgba(255,255,255,0.25) 85%, transparent 100%)",
           }}
         />
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 pointer-events-none transition-colors duration-500"
+          className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none transition-colors duration-500"
           style={{
             background: "linear-gradient(to top, var(--bg-primary), transparent)",
           }}
@@ -150,17 +150,21 @@ export default function Hero() {
       {/* ---------------------------------------------------------------------- */}
       {/* STATIC MINIMAL FOREGROUND CONTENT (ONE CONSTANT TAGLINE)               */}
       {/* ---------------------------------------------------------------------- */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-10 md:py-14 w-full flex-1 flex flex-col justify-between">
-        <div className="my-auto max-w-2xl pt-2 sm:pt-4">
-          {/* Static Trust Feature Badge */}
-          <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 sm:px-3.5 sm:py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] shadow-xs liquid-glass">
-            <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" style={{ color: "var(--accent-gold)" }} />
-            <span style={{ color: "var(--accent-cta)" }}>100% Anti-Tarnish &bull; 18K Gold Plated</span>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-6 sm:pb-8 w-full flex-1 flex flex-col justify-between">
+        <div className="my-auto max-w-2xl py-4 sm:py-6">
+          {/* Top Pill: Rating & Guarantee */}
+          <div className="inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-[10px] sm:text-xs font-semibold tracking-wider shadow-xs liquid-glass">
+            <div className="flex items-center text-amber-500">
+              <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+            </div>
+            <span style={{ color: "var(--text-primary)" }}>
+              4.9/5 Rating &bull; <strong style={{ color: "var(--accent-cta)" }}>100% Anti-Tarnish &bull; 18K Gold Plated</strong>
+            </span>
           </div>
 
-          {/* Static Headline & Tagline */}
+          {/* Headline & Tagline */}
           <h1
-            className="font-serif-luxury mt-3 sm:mt-5 text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.14] sm:leading-[1.12]"
+            className="font-serif-luxury mt-3 sm:mt-5 text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-[1.15] sm:leading-[1.12]"
             style={{ color: "var(--text-primary)" }}
           >
             Daily Wear Jewellery, <br className="hidden sm:inline" />
@@ -172,13 +176,29 @@ export default function Hero() {
             </span>
           </h1>
 
-          {/* Static Simple English Description */}
+          {/* Simple English Description */}
           <p
             className="mt-3 sm:mt-4 text-xs xs:text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal"
             style={{ color: "var(--text-secondary)" }}
           >
             Waterproof, sweatproof, and skin-friendly artificial jewellery crafted for daily wear, college, office, and family celebrations in Kerala.
           </p>
+
+          {/* Value Proposition Micro-Pills */}
+          <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2 text-[11px] sm:text-xs" style={{ color: "var(--text-secondary)" }}>
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg liquid-glass border" style={{ borderColor: "var(--border-subtle)" }}>
+              <Droplets className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
+              <span>Waterproof &amp; Sweatproof</span>
+            </span>
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg liquid-glass border" style={{ borderColor: "var(--border-subtle)" }}>
+              <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
+              <span>Real Gold Shine</span>
+            </span>
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg liquid-glass border" style={{ borderColor: "var(--border-subtle)" }}>
+              <ShieldCheck className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
+              <span>Skin-Safe &bull; No Rust</span>
+            </span>
+          </div>
 
           {/* Action Buttons */}
           <div className="mt-6 sm:mt-8 flex flex-col xs:flex-row items-stretch xs:items-center gap-3 sm:gap-4 w-full xs:w-auto">
@@ -208,17 +228,17 @@ export default function Hero() {
         </div>
 
         {/* -------------------------------------------------------------------- */}
-        {/* BACKGROUND IMAGE CAROUSEL INDICATORS & CONTROLS                      */}
+        {/* BACKGROUND IMAGE CAROUSEL INDICATORS (NO ARROWS)                     */}
         {/* -------------------------------------------------------------------- */}
-        <div className="mt-6 sm:mt-10 flex items-center justify-between gap-3 pt-3 sm:pt-4 border-t" style={{ borderColor: "var(--border-subtle)" }}>
-          {/* Static Guarantee Tag */}
-          <div className="hidden sm:flex items-center gap-2 text-xs font-medium" style={{ color: "var(--text-muted)" }}>
+        <div className="mt-4 flex items-center justify-between gap-3 pt-3 border-t" style={{ borderColor: "var(--border-subtle)" }}>
+          {/* Guarantee Tag */}
+          <div className="flex items-center gap-2 text-[11px] sm:text-xs font-medium" style={{ color: "var(--text-muted)" }}>
             <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--accent-gold)" }} />
             <span>Fast Express Delivery All Over Kerala &bull; 100% Skin Safe Guarantee</span>
           </div>
 
-          {/* Subtle Background Slide Indicators */}
-          <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-3">
+          {/* Clean Slide Indicators (Dots + Counter, No Arrows) */}
+          <div className="flex items-center gap-3 ml-auto">
             <span
               className="text-xs font-mono font-medium"
               style={{ color: "var(--text-primary)" }}
@@ -247,34 +267,6 @@ export default function Hero() {
                   />
                 );
               })}
-            </div>
-
-            {/* Prev / Next Arrows */}
-            <div className="flex items-center gap-1 ml-1 sm:ml-2">
-              <button
-                type="button"
-                onClick={prevImage}
-                className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
-                style={{
-                  color: "var(--text-primary)",
-                  borderColor: "var(--border-subtle)",
-                }}
-                aria-label="Previous Image"
-              >
-                <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={nextImage}
-                className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
-                style={{
-                  color: "var(--text-primary)",
-                  borderColor: "var(--border-subtle)",
-                }}
-                aria-label="Next Image"
-              >
-                <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              </button>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { CartProvider } from "@/context/CartContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
 
 const playfair = Playfair_Display({
@@ -58,10 +59,12 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans selection:bg-[#C9A45C]/30 selection:text-[#261C14]">
         <ThemeProvider>
           <CartProvider>
-            <Navbar />
-            <div className="flex-1">{children}</div>
-            <Footer />
-            <CartDrawer />
+            <WishlistProvider>
+              <Navbar />
+              <div className="flex-1">{children}</div>
+              <Footer />
+              <CartDrawer />
+            </WishlistProvider>
           </CartProvider>
         </ThemeProvider>
       </body>

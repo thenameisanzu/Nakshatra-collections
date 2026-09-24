@@ -49,13 +49,13 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {perks.map((perk) => {
             const Icon = perk.icon;
             return (
               <div
                 key={perk.title}
-                className="flex flex-col items-center text-center p-8 rounded-3xl border transition-all duration-300 hover:shadow-lg"
+                className="flex flex-col items-center text-center p-6 sm:p-8 rounded-3xl border transition-all duration-300 hover:shadow-lg"
                 style={{
                   backgroundColor: "var(--bg-surface)",
                   borderColor: "var(--border-subtle)",

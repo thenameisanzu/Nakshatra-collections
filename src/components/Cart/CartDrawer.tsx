@@ -72,7 +72,7 @@ export default function CartDrawer() {
         aria-hidden="true"
       />
 
-      <div className="fixed inset-y-0 right-0 flex max-w-full pl-6 sm:pl-10">
+      <div className="fixed inset-y-0 right-0 flex max-w-full pl-0 sm:pl-10">
         <div
           ref={drawerRef}
           className="w-screen max-w-md shadow-2xl flex flex-col border-l animate-in slide-in-from-right duration-300 transition-colors"
@@ -83,7 +83,7 @@ export default function CartDrawer() {
         >
           {/* Header */}
           <div
-            className="flex items-center justify-between px-6 py-5 border-b"
+            className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b"
             style={{ borderColor: "var(--border-subtle)" }}
           >
             <div className="flex items-center gap-2">

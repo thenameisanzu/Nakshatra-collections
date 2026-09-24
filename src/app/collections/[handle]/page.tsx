@@ -74,7 +74,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <nav
-          className="mb-6 flex items-center gap-2 text-xs uppercase tracking-wider"
+          className="mb-4 sm:mb-6 flex items-center gap-2 text-xs uppercase tracking-wider overflow-x-auto whitespace-nowrap scrollbar-none py-1"
           style={{ color: "var(--text-muted)" }}
         >
           <Link
@@ -84,7 +84,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
           >
             Home
           </Link>
-          <ChevronRight className="h-3.5 w-3.5 opacity-60" />
+          <ChevronRight className="h-3.5 w-3.5 opacity-60 shrink-0" />
           <Link
             href="/#categories"
             className="transition-colors hover:underline"
@@ -92,8 +92,8 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
           >
             Collections
           </Link>
-          <ChevronRight className="h-3.5 w-3.5 opacity-60" />
-          <span className="font-semibold" style={{ color: "var(--text-primary)" }}>
+          <ChevronRight className="h-3.5 w-3.5 opacity-60 shrink-0" />
+          <span className="font-semibold line-clamp-1" style={{ color: "var(--text-primary)" }}>
             {collection.title}
           </span>
         </nav>
@@ -112,13 +112,13 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
         {/* Collection Hero Header */}
         <div
-          className="relative mb-12 overflow-hidden rounded-3xl border p-8 md:p-14 shadow-sm transition-colors"
+          className="relative mb-8 sm:mb-12 overflow-hidden rounded-3xl border p-6 sm:p-10 md:p-14 shadow-sm transition-colors"
           style={{
             backgroundColor: "var(--bg-surface)",
             borderColor: "var(--border-medium)",
           }}
         >
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
             <div className="max-w-2xl">
               <span
                 className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-widest"
@@ -132,7 +132,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
               </span>
 
               <h1
-                className="font-serif-luxury mt-4 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
+                className="font-serif-luxury mt-3 sm:mt-4 text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
                 style={{ color: "var(--text-primary)" }}
               >
                 {collection.title}
@@ -140,7 +140,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
               {collection.description && (
                 <p
-                  className="mt-4 text-sm sm:text-base leading-relaxed"
+                  className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed"
                   style={{ color: "var(--text-secondary)" }}
                 >
                   {collection.description}
@@ -148,11 +148,11 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
               )}
 
               <div
-                className="mt-6 flex items-center gap-3 text-xs uppercase tracking-wider font-semibold"
+                className="mt-4 sm:mt-6 flex items-center gap-3 text-xs uppercase tracking-wider font-semibold flex-wrap"
                 style={{ color: "var(--text-muted)" }}
               >
                 <span
-                  className="px-2.5 py-1 rounded-full text-[11px]"
+                  className="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px]"
                   style={{
                     backgroundColor: "var(--bg-secondary)",
                     color: "var(--text-primary)",
@@ -160,7 +160,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                 >
                   {products.length} {products.length === 1 ? "Creation" : "Creations"}
                 </span>
-                <span>Handcrafted with 100% certified gold & jewels</span>
+                <span className="text-[11px]">Signature Atelier Creations</span>
               </div>
             </div>
 

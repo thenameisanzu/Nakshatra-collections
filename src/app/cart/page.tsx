@@ -54,10 +54,10 @@ export default function CartPage() {
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-3">
           <div>
             <h1
-              className="font-serif-luxury text-3xl sm:text-4xl font-normal tracking-tight"
+              className="font-serif-luxury text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
               Your Shopping Bag
@@ -68,7 +68,7 @@ export default function CartPage() {
           </div>
           <Link
             href="/#products"
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest hover:underline"
+            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest hover:underline self-start sm:self-auto"
             style={{ color: "var(--accent-cta)" }}
           >
             <ArrowLeft className="h-3.5 w-3.5" />
@@ -92,7 +92,7 @@ export default function CartPage() {
 
         {lines.length === 0 ? (
           <div
-            className="flex flex-col items-center justify-center rounded-3xl border border-dashed py-20 text-center shadow-xs"
+            className="flex flex-col items-center justify-center rounded-3xl border border-dashed py-16 sm:py-20 text-center shadow-xs px-4"
             style={{
               backgroundColor: "var(--bg-surface)",
               borderColor: "var(--border-medium)",
@@ -105,7 +105,7 @@ export default function CartPage() {
               <ShoppingBag className="h-8 w-8" style={{ color: "var(--accent-gold)" }} />
             </div>
             <h2
-              className="font-serif-luxury text-2xl font-normal"
+              className="font-serif-luxury text-xl sm:text-2xl font-normal"
               style={{ color: "var(--text-primary)" }}
             >
               Your shopping bag is empty
@@ -129,7 +129,7 @@ export default function CartPage() {
             {/* Items List */}
             <div className="lg:col-span-8">
               <div
-                className="rounded-3xl border p-6 sm:p-8 shadow-sm divide-y"
+                className="rounded-3xl border p-4 sm:p-8 shadow-sm divide-y"
                 style={{
                   backgroundColor: "var(--bg-surface)",
                   borderColor: "var(--border-medium)",

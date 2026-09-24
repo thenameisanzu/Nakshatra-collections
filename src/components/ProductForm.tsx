@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import type { ShopifyProduct, ShopifyProductVariant, ShopifyImage } from "@/types/shopify";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import {
   ShoppingBag,
   Check,
@@ -16,6 +17,7 @@ import {
   ChevronDown,
   Sparkles,
   Headphones,
+  Heart,
 } from "lucide-react";
 
 interface ProductFormProps {
@@ -40,6 +42,8 @@ function formatPrice(amount: string, currencyCode: string): string {
 
 export default function ProductForm({ product, onVariantChange }: ProductFormProps) {
   const { addItem, cart } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
+  const isWishlisted = isInWishlist(product.id);
   const variants = useMemo(
     () => product.variants?.edges.map((e) => e.node) || [],
     [product.variants]
@@ -180,6 +184,29 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
     }
   };
 
+  // 3. WISHLIST TOGGLE
+  const handleWishlistToggle = () => {
+    toggleWishlist({
+      id: product.id,
+      handle: product.handle,
+      title: product.title,
+      price: {
+        amount: currentPrice.amount,
+        currencyCode: currentPrice.currencyCode,
+      },
+      compareAtPrice: compareAtPrice
+        ? {
+            amount: compareAtPrice.amount,
+            currencyCode: compareAtPrice.currencyCode,
+          }
+        : null,
+      imageUrl: product.featuredImage?.url || null,
+      imageAlt: product.featuredImage?.altText || product.title,
+      productType: product.productType,
+      availableForSale: product.availableForSale,
+    });
+  };
+
   // Check if options are meaningful (not just single Default Title)
   const hasRealOptions =
     options.length > 0 &&
@@ -312,10 +339,10 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         className="flex flex-col gap-3.5 border-t pt-5"
         style={{ borderColor: "var(--border-subtle)" }}
       >
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+        <div className="flex items-center gap-2.5 sm:gap-3.5">
           {/* Quantity Stepper */}
           <div
-            className="flex items-center justify-between sm:justify-center rounded-2xl border h-13 px-2"
+            className="flex items-center justify-between sm:justify-center rounded-2xl border h-13 px-2 shrink-0"
             style={{
               backgroundColor: "var(--bg-primary)",
               borderColor: "var(--border-medium)",
@@ -332,7 +359,7 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
               <Minus className="h-4 w-4" />
             </button>
             <span
-              className="w-10 text-center text-sm font-semibold select-none"
+              className="w-8 sm:w-10 text-center text-xs sm:text-sm font-semibold select-none"
               style={{ color: "var(--text-primary)" }}
             >
               {quantity}
@@ -354,7 +381,7 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
             type="button"
             onClick={handleAddToCart}
             disabled={isAdding || isBuyingNow}
-            className="flex-1 flex items-center justify-center gap-2.5 rounded-2xl h-13 px-6 text-xs font-bold uppercase tracking-[0.15em] shadow-md transition-all duration-200 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-2 rounded-2xl h-13 px-3 sm:px-6 text-[11px] sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] shadow-md transition-all duration-200 active:scale-[0.98] disabled:opacity-50 cursor-pointer min-w-0"
             style={{
               backgroundColor: isAdded ? "#2D6A4F" : "var(--accent-cta)",
               color: "var(--accent-cta-text)",
@@ -362,20 +389,39 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
           >
             {isAdding ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span>Adding to Bag...</span>
+                <Loader2 className="h-4 w-4 animate-spin shrink-0" />
+                <span className="truncate">Adding...</span>
               </>
             ) : isAdded ? (
               <>
-                <Check className="h-4 w-4" />
-                <span>Added to Bag</span>
+                <Check className="h-4 w-4 shrink-0" />
+                <span className="truncate">Added to Bag</span>
               </>
             ) : (
               <>
-                <ShoppingBag className="h-4 w-4" />
-                <span>Add to Shopping Bag</span>
+                <ShoppingBag className="h-4 w-4 shrink-0" />
+                <span className="truncate">Add to Shopping Bag</span>
               </>
             )}
+          </button>
+
+          {/* Wishlist Toggle Button */}
+          <button
+            type="button"
+            onClick={handleWishlistToggle}
+            className={`flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl border transition-all duration-200 hover:scale-105 active:scale-90 cursor-pointer ${
+              isWishlisted
+                ? "text-rose-600 border-rose-300 bg-rose-50/60"
+                : "border-[var(--border-medium)] bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:text-rose-600"
+            }`}
+            aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+            title={isWishlisted ? "In Wishlist" : "Save to Wishlist"}
+          >
+            <Heart
+              className={`h-5 w-5 transition-transform duration-200 ${
+                isWishlisted ? "fill-rose-600 stroke-rose-600 scale-110" : ""
+              }`}
+            />
           </button>
         </div>
 
@@ -384,7 +430,7 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
           type="button"
           onClick={handleBuyNow}
           disabled={isAdding || isBuyingNow}
-          className="w-full flex items-center justify-center gap-2.5 rounded-2xl h-12 px-6 text-xs font-bold uppercase tracking-[0.15em] border transition-all duration-200 hover:shadow-md active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+          className="w-full flex items-center justify-center gap-2.5 rounded-2xl h-12 px-4 sm:px-6 text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.15em] border transition-all duration-200 hover:shadow-md active:scale-[0.98] disabled:opacity-50 cursor-pointer"
           style={{
             backgroundColor: "var(--bg-primary)",
             borderColor: "var(--accent-gold)",
@@ -393,12 +439,12 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         >
           {isBuyingNow ? (
             <>
-              <Loader2 className="h-4 w-4 animate-spin" style={{ color: "var(--accent-gold)" }} />
+              <Loader2 className="h-4 w-4 animate-spin shrink-0" style={{ color: "var(--accent-gold)" }} />
               <span>Connecting to Secure Checkout...</span>
             </>
           ) : (
             <>
-              <Lock className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+              <Lock className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
               <span>Buy Now — Express Checkout</span>
             </>
           )}

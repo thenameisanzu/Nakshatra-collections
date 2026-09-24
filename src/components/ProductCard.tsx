@@ -8,6 +8,7 @@ import { Heart, Sparkles } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
+  priority?: boolean;
 }
 
 function formatPrice(amount: string, currencyCode: string): string {
@@ -25,7 +26,7 @@ function formatPrice(amount: string, currencyCode: string): string {
   }
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const { isInWishlist, toggleWishlist } = useWishlist();
 
   const isWishlisted = isInWishlist(product.id);
@@ -75,14 +76,14 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="group relative flex flex-col overflow-hidden rounded-3xl border transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl"
       style={{
         backgroundColor: "var(--card-bg)",
         borderColor: "var(--border-subtle)",
         boxShadow: "var(--card-shadow)",
       }}
     >
-      {/* Product Image Showcase */}
+      {/* Product Image Stage */}
       <Link
         href={`/products/${product.handle}`}
         className="relative aspect-square w-full overflow-hidden block"
@@ -94,8 +95,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             src={product.featuredImage.url}
             alt={product.featuredImage.altText || product.title}
             fill
+            priority={priority}
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+            className="object-cover object-center p-3 sm:p-5 transition-transform duration-700 ease-out group-hover:scale-104"
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center p-4 sm:p-6 text-center">
@@ -109,16 +111,16 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="text-[10px] sm:text-[11px] font-medium tracking-wider uppercase"
               style={{ color: "var(--text-muted)" }}
             >
-              Nakshatra Jewel
+              Nakshatra Creation
             </span>
           </div>
         )}
 
-        {/* Status / Sale Badges */}
-        <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
+        {/* Badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10 pointer-events-none">
           {!product.availableForSale ? (
             <span
-              className="rounded-full px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider shadow-xs"
+              className="rounded-full px-2.5 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider shadow-2xs"
               style={{
                 backgroundColor: "var(--badge-soldout-bg)",
                 color: "var(--badge-soldout-text)",
@@ -128,7 +130,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </span>
           ) : hasComparePrice ? (
             <span
-              className="rounded-full px-2 sm:px-2.5 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider shadow-xs"
+              className="rounded-full px-2.5 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider shadow-2xs"
               style={{
                 backgroundColor: "var(--badge-sale-bg)",
                 color: "var(--badge-sale-text)",
@@ -140,44 +142,47 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       </Link>
 
-      {/* Wishlist Button */}
+      {/* Liquid Glass Heart Wishlist Button */}
       <button
         type="button"
         onClick={handleWishlistClick}
-        className={`absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-10 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur-xs shadow-xs transition-all duration-200 hover:scale-110 active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2 ${
-          isWishlisted ? "text-rose-600 scale-105" : "text-neutral-500 hover:text-rose-600"
+        className={`absolute top-3 right-3 z-20 flex h-9 w-9 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full liquid-glass liquid-glass-hover active:scale-90 transition-all cursor-pointer ${
+          isWishlisted
+            ? "text-rose-600 scale-105 opacity-100"
+            : "text-neutral-600 opacity-90 sm:opacity-75 sm:group-hover:opacity-100 hover:text-rose-600"
         }`}
-        aria-label={isWishlisted ? `Remove ${product.title} from wishlist` : `Add ${product.title} to wishlist`}
+        aria-label={isWishlisted ? `Remove ${product.title} from wishlist` : `Save ${product.title} to wishlist`}
       >
         <Heart
           className={`h-4 w-4 sm:h-4.5 sm:w-4.5 transition-colors ${
-            isWishlisted ? "fill-current stroke-rose-600" : ""
+            isWishlisted ? "fill-rose-600 stroke-rose-600" : ""
           }`}
         />
       </button>
 
       {/* Details Container */}
-      <div className="flex flex-1 flex-col p-3.5 sm:p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        {/* Category Tag */}
+        {product.productType && (
+          <span
+            className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] mb-1 block"
+            style={{ color: "var(--accent-gold)" }}
+          >
+            {product.productType}
+          </span>
+        )}
+
         <Link href={`/products/${product.handle}`} className="group/title">
           <h3
-            className="font-serif-luxury text-sm sm:text-base font-semibold transition-colors line-clamp-1 group-hover/title:opacity-80"
+            className="font-serif-luxury text-sm sm:text-base font-normal tracking-wide transition-colors line-clamp-1 group-hover/title:opacity-80"
             style={{ color: "var(--text-primary)" }}
           >
             {product.title}
           </h3>
         </Link>
 
-        {product.description && (
-          <p
-            className="mt-1 line-clamp-2 text-[11px] sm:text-xs leading-relaxed hidden xs:block"
-            style={{ color: "var(--text-muted)" }}
-          >
-            {product.description}
-          </p>
-        )}
-
-        {/* Pricing */}
-        <div className="mt-auto pt-3 sm:pt-4 flex items-baseline justify-between border-t border-black/5 gap-1">
+        {/* Pricing & Link */}
+        <div className="mt-auto pt-3.5 flex items-baseline justify-between border-t border-black/5 gap-1">
           <div className="flex items-baseline gap-1.5 flex-wrap">
             <span
               className="text-sm sm:text-base font-bold tracking-tight"
@@ -191,7 +196,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               </span>
             )}
             {formattedComparePrice && (
-              <span className="text-[10px] sm:text-xs line-through" style={{ color: "var(--text-muted)" }}>
+              <span className="text-[10px] sm:text-xs line-through opacity-60" style={{ color: "var(--text-muted)" }}>
                 {formattedComparePrice}
               </span>
             )}
@@ -199,7 +204,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           <Link
             href={`/products/${product.handle}`}
-            className="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase transition hover:underline shrink-0"
+            className="text-[10px] sm:text-[11px] font-bold tracking-widest uppercase transition hover:underline shrink-0"
             style={{ color: "var(--accent-cta)" }}
           >
             View &rarr;

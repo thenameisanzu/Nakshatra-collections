@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* -------------------------------------------------------------------------- */
+/* 3 VISUAL THEMES & DESIGN SYSTEM TOKENS                                     */
+/* -------------------------------------------------------------------------- */
+
 :root,
 [data-theme="champagne-luxury"] {
   --bg-primary: #FFF9EF;
@@ -14,21 +18,30 @@
   --accent-cta: #6B1E2E;
   --accent-cta-hover: #541523;
   --accent-cta-text: #FFFFFF;
-  --border-subtle: #F1E3D3;
+  --border-subtle: rgba(201, 164, 92, 0.2);
   --border-medium: #DEC9B5;
-  --card-shadow: 0 10px 30px -10px rgba(107, 30, 46, 0.08);
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 12px 36px -12px rgba(107, 30, 46, 0.09);
   --badge-sale-bg: #6B1E2E;
   --badge-sale-text: #FFFFFF;
   --badge-soldout-bg: #ECE3D7;
   --badge-soldout-text: #6E6258;
   --tag-bg: #FAF2E4;
   --tag-text: #8C6C2D;
+
+  /* Liquid Glass Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-bg-hover: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(201, 164, 92, 0.28);
+  --glass-shadow: 0 8px 32px 0 rgba(107, 30, 46, 0.08);
+  --glass-blur: 16px;
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(201, 164, 92, 0.12) 0%, transparent 70%);
 }
 
 [data-theme="soft-blush"] {
   --bg-primary: #FFFFFF;
   --bg-secondary: #FFF7F8;
-  --bg-surface: #F4DDE2;
+  --bg-surface: #FDF4F6;
   --bg-surface-elevated: #FFFFFF;
   --text-primary: #291D21;
   --text-secondary: #664F56;
@@ -38,21 +51,31 @@
   --accent-cta: #8A3D52;
   --accent-cta-hover: #732F42;
   --accent-cta-text: #FFFFFF;
-  --border-subtle: #F5E5E9;
+  --border-subtle: rgba(232, 204, 211, 0.6);
   --border-medium: #E8CCD3;
-  --card-shadow: 0 10px 30px -10px rgba(138, 61, 82, 0.09);
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 12px 36px -12px rgba(138, 61, 82, 0.09);
   --badge-sale-bg: #8A3D52;
   --badge-sale-text: #FFFFFF;
   --badge-soldout-bg: #F5E6E9;
   --badge-soldout-text: #7A5B64;
   --tag-bg: #FDF2F4;
   --tag-text: #94465B;
+
+  /* Liquid Glass Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(200, 164, 93, 0.25);
+  --glass-shadow: 0 8px 32px 0 rgba(138, 61, 82, 0.08);
+  --glass-blur: 16px;
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(244, 221, 226, 0.35) 0%, transparent 70%);
 }
 
-[data-theme="sage-contemporary"] {
+[data-theme="sage-contemporary"],
+[data-theme="sage-and-gold"] {
   --bg-primary: #FAF5EA;
   --bg-secondary: #F0ECE1;
-  --bg-surface: #E8ECE4;
+  --bg-surface: #F6F8F4;
   --bg-surface-elevated: #FFFFFF;
   --text-primary: #222923;
   --text-secondary: #4D5C50;
@@ -62,21 +85,35 @@
   --accent-cta: #2E4633;
   --accent-cta-hover: #203324;
   --accent-cta-text: #FFFFFF;
-  --border-subtle: #E2E8DE;
+  --border-subtle: rgba(200, 211, 195, 0.6);
   --border-medium: #C8D3C3;
-  --card-shadow: 0 10px 30px -10px rgba(46, 70, 51, 0.08);
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 12px 36px -12px rgba(46, 70, 51, 0.08);
   --badge-sale-bg: #2E4633;
   --badge-sale-text: #FFFFFF;
   --badge-soldout-bg: #DFE5DC;
   --badge-soldout-text: #505E53;
   --tag-bg: #EFF4EC;
   --tag-text: #3B5741;
+
+  /* Liquid Glass Tokens */
+  --glass-bg: rgba(250, 245, 234, 0.82);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(184, 148, 77, 0.25);
+  --glass-shadow: 0 8px 32px 0 rgba(46, 70, 51, 0.08);
+  --glass-blur: 16px;
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(168, 181, 160, 0.2) 0%, transparent 70%);
 }
+
+/* -------------------------------------------------------------------------- */
+/* GLOBAL RESET & BASE STYLING                                                */
+/* -------------------------------------------------------------------------- */
 
 html {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.4s ease, color 0.4s ease;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -84,24 +121,87 @@ body {
   color: var(--text-primary);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .font-serif-luxury {
   font-family: var(--font-serif), Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
-/* Custom Luxury Scrollbar */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+/* -------------------------------------------------------------------------- */
+/* LIQUID GLASS UTILITY CLASSES                                              */
+/* -------------------------------------------------------------------------- */
+
+.liquid-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
+
+.liquid-glass-dark {
+  background: rgba(18, 14, 12, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.liquid-glass-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-hover:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.12);
+}
+
+/* -------------------------------------------------------------------------- */
+/* CUSTOM LUXURY SCROLLBAR                                                    */
+/* -------------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--border-medium);
   border-radius: 9999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-gold);
+}
+
+/* -------------------------------------------------------------------------- */
+/* ANIMATION & REDUCED MOTION PREFERENCES                                     */
+/* -------------------------------------------------------------------------- */
+
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-float-subtle {
+  animation: floatSubtle 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

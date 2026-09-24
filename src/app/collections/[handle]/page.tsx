@@ -35,15 +35,15 @@ export async function generateMetadata({
 
   if (!collection) {
     return {
-      title: "Collection Not Found | Nakshatra",
+      title: "Collection Not Found | NAKSHATRA Fine Jewellery",
     };
   }
 
   return {
-    title: `${collection.title} - Fancy Jewellery Collection | NAKSHATRA`,
+    title: `${collection.title} &bull; Curated Collection | NAKSHATRA`,
     description:
       collection.description ||
-      `Shop the ${collection.title} collection from Nakshatra.`,
+      `Shop the ${collection.title} jewellery collection from Nakshatra.`,
     openGraph: {
       title: collection.title,
       description: collection.description || `Shop ${collection.title}`,
@@ -68,7 +68,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <div
-      className="min-h-screen py-8 md:py-12 transition-colors"
+      className="min-h-screen py-8 md:py-14 transition-colors"
       style={{ backgroundColor: "var(--bg-primary)" }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -76,6 +76,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         <nav
           className="mb-4 sm:mb-6 flex items-center gap-2 text-xs uppercase tracking-wider overflow-x-auto whitespace-nowrap scrollbar-none py-1"
           style={{ color: "var(--text-muted)" }}
+          aria-label="Breadcrumb"
         >
           <Link
             href="/"
@@ -86,7 +87,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
           </Link>
           <ChevronRight className="h-3.5 w-3.5 opacity-60 shrink-0" />
           <Link
-            href="/#categories"
+            href="/#collections"
             className="transition-colors hover:underline"
             style={{ color: "var(--text-secondary)" }}
           >
@@ -99,9 +100,9 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         </nav>
 
         {/* Back Link */}
-        <div className="mb-6">
+        <div className="mb-6 sm:mb-8">
           <Link
-            href="/#products"
+            href="/#collections"
             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest hover:underline"
             style={{ color: "var(--accent-cta)" }}
           >
@@ -121,14 +122,13 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
             <div className="max-w-2xl">
               <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-widest"
+                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-widest liquid-glass"
                 style={{
-                  backgroundColor: "var(--tag-bg)",
-                  color: "var(--tag-text)",
+                  color: "var(--accent-gold)",
                 }}
               >
                 <Gem className="h-3.5 w-3.5" />
-                Nakshatra Collection
+                Nakshatra Atelier
               </span>
 
               <h1
@@ -140,7 +140,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
               {collection.description && (
                 <p
-                  className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed"
+                  className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base leading-relaxed font-light"
                   style={{ color: "var(--text-secondary)" }}
                 >
                   {collection.description}
@@ -152,7 +152,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                 style={{ color: "var(--text-muted)" }}
               >
                 <span
-                  className="px-2.5 py-1 rounded-full text-[10px] sm:text-[11px]"
+                  className="px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold"
                   style={{
                     backgroundColor: "var(--bg-secondary)",
                     color: "var(--text-primary)",
@@ -160,7 +160,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                 >
                   {products.length} {products.length === 1 ? "Creation" : "Creations"}
                 </span>
-                <span className="text-[11px]">Signature Atelier Creations</span>
+                <span className="text-[11px]">Handcrafted Atelier Selection</span>
               </div>
             </div>
 
@@ -181,7 +181,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             )}
           </div>
 
-          {/* Quick Collection Category Switcher */}
+          {/* Quick Collection Category Switcher Chips */}
           {allCollections.length > 0 && (
             <div
               className="mt-10 border-t pt-6"
@@ -203,7 +203,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                       key={col.id}
                       href={`/collections/${col.handle}`}
                       className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                        isActive ? "shadow-xs ring-2" : "border"
+                        isActive ? "shadow-xs ring-2" : "border liquid-glass"
                       }`}
                       style={{
                         backgroundColor: isActive ? "var(--accent-cta)" : "var(--bg-primary)",

@@ -1,150 +1,200 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import ThemeSwitcher from "./ThemeSwitcher";
-import { Menu, X, ShoppingBag, Search, Heart } from "lucide-react";
+import {
+  Menu,
+  X,
+  ShoppingBag,
+  Search,
+  Heart,
+  ChevronRight,
+  Sparkles,
+} from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Collections", href: "/collections/necklaces" },
+  { label: "Collections", href: "/#collections" },
   { label: "New Arrivals", href: "/collections/new-arrivals" },
-  { label: "Wishlist", href: "/wishlist" },
-  { label: "About", href: "/#about-story" },
+  { label: "About", href: "/#editorial-story" },
   { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
 
+  // Scroll detection for liquid glass transition
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   return (
     <>
-      {/* Announcement Bar */}
+      {/* Top Privilege Announcement Bar */}
       <div
-        className="w-full py-2 px-3 sm:px-4 text-center text-[10px] sm:text-[11px] font-medium tracking-widest uppercase transition-colors overflow-hidden"
+        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase transition-colors"
         style={{
           backgroundColor: "var(--accent-cta)",
           color: "var(--accent-cta-text)",
         }}
       >
-        <span className="line-clamp-1">Complimentary Insured Worldwide Shipping On All Orders Over ₹2,000</span>
+        <span className="inline-flex items-center gap-2">
+          <Sparkles className="h-3 w-3 animate-pulse text-amber-300" />
+          <span>Complimentary Insured All-India Express Delivery &bull; Special Launch Privilege</span>
+          <Sparkles className="h-3 w-3 animate-pulse text-amber-300" />
+        </span>
       </div>
 
-      {/* Main Navbar */}
+      {/* Main Liquid Glass Header */}
       <header
-        className="sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors"
+        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+          isScrolled
+            ? "liquid-glass shadow-sm py-2 sm:py-3 border-b"
+            : "bg-transparent py-3 sm:py-4 border-b border-transparent"
+        }`}
         style={{
-          backgroundColor: "var(--bg-primary)",
-          borderColor: "var(--border-subtle)",
-          opacity: 0.98,
+          borderColor: isScrolled ? "var(--glass-border)" : "transparent",
         }}
       >
-        <div className="mx-auto flex h-18 sm:h-22 md:h-24 max-w-7xl items-center justify-between px-3 sm:px-6 lg:px-8">
-          {/* Mobile Hamburger Toggle & Search */}
-          <div className="flex lg:hidden items-center gap-0.5 sm:gap-1">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          {/* Mobile Hamburger & Search */}
+          <div className="flex lg:hidden items-center gap-1">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="p-2 rounded-xl transition-colors active:scale-95"
-              style={{ color: "var(--text-primary)" }}
-              aria-label="Toggle mobile menu"
+              className="flex h-11 w-11 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
+              style={{
+                color: "var(--text-primary)",
+                backgroundColor: isScrolled ? "transparent" : "var(--glass-bg)",
+              }}
+              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isOpen}
             >
-              {isOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
+
             <button
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="p-2 rounded-xl transition-colors active:scale-95"
+              className="flex h-11 w-11 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
               style={{ color: "var(--text-secondary)" }}
-              aria-label="Search"
+              aria-label="Search collections"
             >
-              <Search className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
+              <Search className="h-4.5 w-4.5" />
             </button>
           </div>
 
-          {/* Official Brand Logo - Nakshatra */}
-          <div className="flex items-center">
-            <Link
-              href="/"
-              className="group flex items-center gap-2 sm:gap-3 transition-transform hover:scale-[1.01] py-1"
-              aria-label="NAKSHATRA Home"
-            >
-              <div className="relative h-9 w-9 sm:h-12 sm:w-12 md:h-13 md:w-13 shrink-0">
-                <Image
-                  src="/nakshatra-logo.png"
-                  alt="NAKSHATRA"
-                  fill
-                  sizes="(max-width: 640px) 36px, (max-width: 768px) 48px, 52px"
-                  className="object-contain drop-shadow-xs"
-                  priority
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <span
-                  className="font-serif-luxury text-lg sm:text-2xl md:text-[24px] font-bold tracking-[0.18em] sm:tracking-[0.2em] uppercase leading-none"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  NAKSHATRA
-                </span>
-                <span
-                  className="text-[7.5px] sm:text-[9px] font-medium tracking-[0.28em] uppercase leading-none mt-0.5 sm:mt-1"
-                  style={{ color: "var(--accent-gold)" }}
-                >
-                  Fine Jewellery
-                </span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation Links */}
+          {/* Left: Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
             {navLinks.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-xs font-medium tracking-widest uppercase transition-colors hover:opacity-100"
-                style={{
-                  color: "var(--text-secondary)",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-cta)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+                className="group relative text-xs font-semibold tracking-[0.18em] uppercase transition-colors"
+                style={{ color: "var(--text-secondary)" }}
               >
-                {item.label}
+                <span className="transition-colors group-hover:text-[color:var(--accent-cta)]">
+                  {item.label}
+                </span>
+                <span
+                  className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
+                  style={{ backgroundColor: "var(--accent-gold)" }}
+                />
               </Link>
             ))}
           </nav>
 
+          {/* Center: Official Brand Logo - Nakshatra */}
+          <div className="flex items-center">
+            <Link
+              href="/"
+              className="group flex items-center gap-2.5 sm:gap-3 transition-transform hover:scale-[1.01]"
+              aria-label="NAKSHATRA Fine Jewellery Home"
+            >
+              <div className="relative h-9 w-9 sm:h-11 sm:w-11 md:h-12 md:w-12 shrink-0">
+                <Image
+                  src="/nakshatra-logo.png"
+                  alt="NAKSHATRA"
+                  fill
+                  sizes="(max-width: 640px) 36px, 48px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              <div className="flex flex-col text-left">
+                <span
+                  className="font-serif-luxury text-lg sm:text-2xl md:text-[23px] font-normal tracking-[0.22em] uppercase leading-none"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  NAKSHATRA
+                </span>
+                <span
+                  className="text-[7.5px] sm:text-[8.5px] font-semibold tracking-[0.32em] uppercase leading-none mt-1"
+                  style={{ color: "var(--accent-gold)" }}
+                >
+                  Haute Joaillerie
+                </span>
+              </div>
+            </Link>
+          </div>
+
           {/* Right Action Icons & Theme Switcher */}
-          <div className="flex items-center gap-1.5 sm:gap-3">
-            {/* Search Button (Desktop) */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Search (Desktop) */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="hidden lg:flex items-center justify-center p-2 rounded-full transition-colors hover:opacity-80 active:scale-95"
+              className="hidden lg:flex h-10 w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
               style={{ color: "var(--text-secondary)" }}
-              aria-label="Search Collection"
+              aria-label="Search Catalogue"
             >
-              <Search className="h-4.5 w-4.5" />
+              <Search className="h-4 w-4" />
             </button>
 
-            {/* Wishlist Header Button */}
+            {/* Wishlist Button */}
             <Link
               href="/wishlist"
-              className="relative flex items-center justify-center p-2 rounded-full transition-all hover:scale-105 active:scale-95"
+              className="relative flex h-10 w-10 sm:h-10.5 sm:w-10.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95"
               style={{ color: "var(--text-primary)" }}
-              aria-label={`View Wishlist (${totalWishlistItems} items)`}
+              aria-label={`Wishlist with ${totalWishlistItems} saved items`}
             >
-              <Heart className={`h-5 w-5 ${totalWishlistItems > 0 ? "text-rose-600 fill-rose-600" : ""}`} />
+              <Heart
+                className={`h-4.5 w-4.5 sm:h-5 sm:w-5 transition-colors ${
+                  totalWishlistItems > 0 ? "fill-rose-600 text-rose-600" : ""
+                }`}
+              />
               {totalWishlistItems > 0 && (
                 <span
-                  className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
+                  className="absolute -top-1 -right-1 flex h-4.5 w-4.5 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalWishlistItems}
@@ -152,47 +202,46 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Visual Theme Switcher */}
-            <div className="hidden xs:block">
-              <ThemeSwitcher />
-            </div>
-
             {/* Shopping Bag / Cart */}
             <button
               type="button"
               onClick={openCart}
-              className="relative flex items-center justify-center p-2 rounded-full transition-all hover:scale-105 active:scale-95"
+              className="relative flex h-10 w-10 sm:h-10.5 sm:w-10.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
               style={{ color: "var(--text-primary)" }}
-              aria-label={`Open shopping bag (${totalQuantity} items)`}
+              aria-label={`Shopping bag with ${totalQuantity} items`}
             >
-              <ShoppingBag className="h-5 w-5" />
+              <ShoppingBag className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
               {totalQuantity > 0 && (
                 <span
-                  className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
+                  className="absolute -top-1 -right-1 flex h-4.5 w-4.5 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalQuantity}
                 </span>
               )}
             </button>
+
+            {/* Visual Theme Switcher */}
+            <div className="hidden xs:block pl-1">
+              <ThemeSwitcher />
+            </div>
           </div>
         </div>
 
-        {/* Quick Search Drawer Bar */}
+        {/* Liquid Glass Search Drawer */}
         {isSearchOpen && (
           <div
-            className="border-t py-3.5 px-4 sm:px-8 animate-in slide-in-from-top-2 duration-200"
+            className="border-t py-4 px-4 sm:px-8 animate-in slide-in-from-top-3 duration-200 liquid-glass"
             style={{
-              backgroundColor: "var(--bg-secondary)",
               borderColor: "var(--border-subtle)",
             }}
           >
             <div className="mx-auto max-w-2xl flex items-center gap-3">
-              <Search className="h-4 w-4 shrink-0" style={{ color: "var(--accent-gold)" }} />
+              <Search className="h-4.5 w-4.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
               <input
                 type="text"
-                placeholder="Search necklaces, earrings, rings, bracelets..."
-                className="w-full bg-transparent text-sm focus:outline-none placeholder:text-xs"
+                placeholder="Search by necklace, earrings, diamond solitaire, bracelet..."
+                className="w-full bg-transparent text-sm font-serif-luxury focus:outline-none placeholder:text-xs placeholder:font-sans"
                 style={{
                   color: "var(--text-primary)",
                 }}
@@ -201,53 +250,83 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(false)}
-                className="text-xs font-semibold px-2 py-1 rounded shrink-0 cursor-pointer"
-                style={{ color: "var(--text-muted)" }}
+                className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border cursor-pointer hover:opacity-80"
+                style={{
+                  color: "var(--text-muted)",
+                  borderColor: "var(--border-subtle)",
+                  backgroundColor: "var(--bg-surface)",
+                }}
               >
-                ESC
+                Close
               </button>
             </div>
           </div>
         )}
 
-        {/* Mobile Dropdown Navigation */}
+        {/* Mobile Full-Screen Liquid Glass Navigation Overlay */}
         {isOpen && (
           <div
-            className="lg:hidden border-b px-5 pt-3 pb-6 shadow-2xl animate-in slide-in-from-top-2 duration-200"
+            className="fixed inset-0 top-[calc(var(--spacing)*12)] z-50 lg:hidden flex flex-col justify-between p-6 sm:p-8 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200 overflow-y-auto"
             style={{
               backgroundColor: "var(--bg-primary)",
-              borderColor: "var(--border-medium)",
             }}
           >
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((item) => (
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between pb-4 border-b" style={{ borderColor: "var(--border-subtle)" }}>
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em]" style={{ color: "var(--accent-gold)" }}>
+                  Nakshatra Directory
+                </span>
+                <ThemeSwitcher />
+              </div>
+
+              <nav className="flex flex-col gap-2 mt-4">
+                {navLinks.map((item, index) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-between py-3.5 px-3 rounded-2xl text-base font-serif-luxury transition-all duration-200 active:scale-98"
+                    style={{
+                      color: "var(--text-primary)",
+                      animationDelay: `${index * 50}ms`,
+                    }}
+                  >
+                    <span className="tracking-wide text-lg">{item.label}</span>
+                    <ChevronRight className="h-4 w-4 opacity-50" style={{ color: "var(--accent-gold)" }} />
+                  </Link>
+                ))}
+
                 <Link
-                  key={item.label}
-                  href={item.href}
+                  href="/wishlist"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between text-xs font-semibold tracking-wider uppercase py-3 border-b transition-colors"
-                  style={{
-                    color: "var(--text-primary)",
-                    borderColor: "var(--border-subtle)",
-                  }}
+                  className="flex items-center justify-between py-3.5 px-3 rounded-2xl text-base font-serif-luxury transition-all duration-200 active:scale-98"
+                  style={{ color: "var(--text-primary)" }}
                 >
-                  <span>{item.label}</span>
-                  {item.label === "Wishlist" && totalWishlistItems > 0 && (
+                  <span className="tracking-wide text-lg flex items-center gap-2">
+                    <Heart className="h-4.5 w-4.5 text-rose-600" />
+                    <span>Wishlist</span>
+                  </span>
+                  {totalWishlistItems > 0 && (
                     <span
-                      className="flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                      className="px-2.5 py-0.5 rounded-full text-xs font-bold text-white"
                       style={{ backgroundColor: "var(--accent-cta)" }}
                     >
                       {totalWishlistItems}
                     </span>
                   )}
                 </Link>
-              ))}
+              </nav>
+            </div>
 
-              <div className="pt-4 flex items-center justify-between">
-                <span className="text-xs" style={{ color: "var(--text-muted)" }}>Visual Theme</span>
-                <ThemeSwitcher />
-              </div>
-            </nav>
+            {/* Mobile Footer Inside Drawer */}
+            <div className="pt-6 border-t mt-8 flex flex-col gap-3" style={{ borderColor: "var(--border-subtle)" }}>
+              <p className="text-[11px] font-semibold uppercase tracking-widest text-center" style={{ color: "var(--accent-gold)" }}>
+                NAKSHATRA &bull; HAUTE JOAILLERIE
+              </p>
+              <p className="text-[10px] text-center" style={{ color: "var(--text-muted)" }}>
+                Handcrafted Bespoke Jewellery &bull; Insured Express Transit
+              </p>
+            </div>
           </div>
         )}
       </header>

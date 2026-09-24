@@ -1,70 +1,115 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ShieldCheck, Gem, HeartHandshake } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer
       className="mt-auto border-t transition-colors"
       style={{
-        backgroundColor: "var(--bg-secondary)",
+        backgroundColor: "var(--bg-primary)",
         borderColor: "var(--border-subtle)",
       }}
     >
+      {/* Top Value Strip */}
+      <div
+        className="border-b py-8"
+        style={{ borderColor: "var(--border-subtle)" }}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <Sparkles className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
+              <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
+                Authentic Craft
+              </h4>
+              <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+                100% Quality Assured
+              </p>
+            </div>
+            <div className="flex flex-col items-center">
+              <ShieldCheck className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
+              <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
+                Insured Transit
+              </h4>
+              <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+                Tamper-Proof Packaging
+              </p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Gem className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
+              <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
+                Bespoke Atelier
+              </h4>
+              <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+                Signature Designs
+              </p>
+            </div>
+            <div className="flex flex-col items-center">
+              <HeartHandshake className="h-5 w-5 mb-2" style={{ color: "var(--accent-gold)" }} />
+              <h4 className="text-xs font-bold uppercase tracking-wider font-serif-luxury" style={{ color: "var(--text-primary)" }}>
+                Concierge Care
+              </h4>
+              <p className="text-[10px] mt-0.5" style={{ color: "var(--text-muted)" }}>
+                Dedicated Support
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer Links */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-          {/* Col 1 & 2: Brand & Description */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-3.5 group">
-              <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
+          {/* Brand Col (Span 5) */}
+          <div className="lg:col-span-5 flex flex-col items-start">
+            <Link href="/" className="inline-flex items-center gap-3 group">
+              <div className="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0">
                 <Image
                   src="/nakshatra-logo.png"
-                  alt="NAKSHATRA"
+                  alt="NAKSHATRA Fine Jewellery"
                   fill
-                  sizes="64px"
+                  sizes="56px"
                   className="object-contain"
                 />
               </div>
               <div className="flex flex-col">
                 <span
-                  className="font-serif-luxury text-xl sm:text-2xl font-bold tracking-[0.2em] uppercase leading-none"
+                  className="font-serif-luxury text-xl sm:text-2xl font-normal tracking-[0.22em] uppercase leading-none"
                   style={{ color: "var(--text-primary)" }}
                 >
                   NAKSHATRA
                 </span>
                 <span
-                  className="text-[9px] font-medium tracking-[0.3em] uppercase leading-none mt-1"
+                  className="text-[8px] sm:text-[9px] font-semibold tracking-[0.32em] uppercase leading-none mt-1"
                   style={{ color: "var(--accent-gold)" }}
                 >
-                  Fine Jewellery
+                  Haute Joaillerie
                 </span>
               </div>
             </Link>
 
             <p
-              className="mt-4 text-xs sm:text-sm leading-relaxed max-w-sm"
+              className="mt-4 text-xs sm:text-sm leading-relaxed max-w-sm font-light"
               style={{ color: "var(--text-secondary)" }}
             >
-              Curating elegant jewellery, bespoke gifts, and timeless designs for everyday grace and memorable moments.
+              Curating refined fancy jewellery, luminous solitaires, and modern heirlooms designed for everyday grace and memorable milestones.
             </p>
 
-            {/* Social Media Placeholders */}
-            <div className="mt-6 flex items-center gap-4 text-xs">
-              <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
-                Follow Along
+            <div className="mt-6 flex items-center gap-3">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
+                Follow
               </span>
               <div className="flex items-center gap-2">
                 <a
                   href="#"
                   aria-label="Instagram"
-                  className="p-2 rounded-full border transition-transform hover:scale-105"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-subtle)",
-                    color: "var(--text-primary)",
-                  }}
+                  className="p-2 rounded-full border liquid-glass transition-transform hover:scale-110 active:scale-95"
+                  style={{ color: "var(--text-primary)" }}
                 >
-                  <svg className="h-4 w-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <svg className="h-3.5 w-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                     <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
@@ -73,14 +118,10 @@ export default function Footer() {
                 <a
                   href="#"
                   aria-label="Facebook"
-                  className="p-2 rounded-full border transition-transform hover:scale-105"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-subtle)",
-                    color: "var(--text-primary)",
-                  }}
+                  className="p-2 rounded-full border liquid-glass transition-transform hover:scale-110 active:scale-95"
+                  style={{ color: "var(--text-primary)" }}
                 >
-                  <svg className="h-4 w-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <svg className="h-3.5 w-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                   </svg>
                 </a>
@@ -88,26 +129,26 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 3: Quick Links */}
-          <div>
+          {/* Quick Links (Span 2) */}
+          <div className="lg:col-span-2">
             <h4
-              className="text-xs font-bold uppercase tracking-widest mb-4"
+              className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4 font-serif-luxury"
               style={{ color: "var(--text-primary)" }}
             >
-              Quick Links
+              Navigation
             </h4>
-            <ul className="flex flex-col gap-2.5 text-xs" style={{ color: "var(--text-secondary)" }}>
+            <ul className="flex flex-col gap-2.5 text-xs font-light" style={{ color: "var(--text-secondary)" }}>
               <li>
                 <Link href="/" className="hover:underline">Home</Link>
               </li>
               <li>
-                <Link href="/collections/necklaces" className="hover:underline">Collections</Link>
+                <Link href="/#collections" className="hover:underline">Collections</Link>
               </li>
               <li>
                 <Link href="/collections/new-arrivals" className="hover:underline font-semibold" style={{ color: "var(--accent-cta)" }}>New Arrivals</Link>
               </li>
               <li>
-                <Link href="/#about-story" className="hover:underline">About</Link>
+                <Link href="/#editorial-story" className="hover:underline">About Story</Link>
               </li>
               <li>
                 <Link href="/#contact" className="hover:underline">Contact</Link>
@@ -115,26 +156,26 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4: Shop */}
-          <div>
+          {/* Collections (Span 3) */}
+          <div className="lg:col-span-3">
             <h4
-              className="text-xs font-bold uppercase tracking-widest mb-4"
+              className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4 font-serif-luxury"
               style={{ color: "var(--text-primary)" }}
             >
-              Shop
+              Collections
             </h4>
-            <ul className="flex flex-col gap-2.5 text-xs" style={{ color: "var(--text-secondary)" }}>
+            <ul className="flex flex-col gap-2.5 text-xs font-light" style={{ color: "var(--text-secondary)" }}>
               <li>
-                <Link href="/collections/necklaces" className="hover:underline">Necklaces</Link>
+                <Link href="/collections/necklaces" className="hover:underline">Necklaces &amp; Chokers</Link>
               </li>
               <li>
-                <Link href="/collections/earrings" className="hover:underline">Earrings</Link>
+                <Link href="/collections/earrings" className="hover:underline">Earrings &amp; Studs</Link>
               </li>
               <li>
-                <Link href="/collections/rings" className="hover:underline">Rings</Link>
+                <Link href="/collections/rings" className="hover:underline">Solitaires &amp; Rings</Link>
               </li>
               <li>
-                <Link href="/collections/bracelets" className="hover:underline">Bracelets</Link>
+                <Link href="/collections/bracelets" className="hover:underline">Bracelets &amp; Bangles</Link>
               </li>
               <li>
                 <Link href="/collections/jewellery-sets" className="hover:underline">Jewellery Sets</Link>
@@ -142,46 +183,47 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 5: Customer */}
-          <div>
+          {/* Customer Care (Span 2) */}
+          <div className="lg:col-span-2">
             <h4
-              className="text-xs font-bold uppercase tracking-widest mb-4"
+              className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4 font-serif-luxury"
               style={{ color: "var(--text-primary)" }}
             >
-              Customer
+              Client Care
             </h4>
-            <ul className="flex flex-col gap-2.5 text-xs" style={{ color: "var(--text-secondary)" }}>
+            <ul className="flex flex-col gap-2.5 text-xs font-light" style={{ color: "var(--text-secondary)" }}>
               <li>
-                <Link href="/cart" className="hover:underline">Cart</Link>
+                <Link href="/wishlist" className="hover:underline">Saved Wishlist</Link>
               </li>
               <li>
-                <Link href="/#about-story" className="hover:underline">Shipping</Link>
+                <Link href="/cart" className="hover:underline">Shopping Bag</Link>
               </li>
               <li>
-                <Link href="/#about-story" className="hover:underline">Returns</Link>
+                <Link href="/#editorial-story" className="hover:underline">Authenticity Guarantee</Link>
               </li>
               <li>
-                <Link href="/#privacy" className="hover:underline">Privacy Policy</Link>
+                <Link href="/#editorial-story" className="hover:underline">Care Guide</Link>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Copyright & Legal */}
         <div
-          className="mt-12 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
+          className="mt-14 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]"
           style={{
             borderColor: "var(--border-subtle)",
             color: "var(--text-muted)",
           }}
         >
           <p>
-            &copy; {new Date().getFullYear()} NAKSHATRA. All rights reserved.
+            &copy; {new Date().getFullYear()} NAKSHATRA Fine Jewellery. All rights reserved.
           </p>
 
           <div className="flex items-center gap-6">
             <span className="hover:underline cursor-pointer">Privacy Policy</span>
             <span className="hover:underline cursor-pointer">Terms of Service</span>
+            <span className="hover:underline cursor-pointer">Shipping &amp; Returns</span>
           </div>
         </div>
       </div>

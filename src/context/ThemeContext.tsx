@@ -29,7 +29,7 @@ export const THEMES: ThemeOption[] = [
   {
     id: "soft-blush",
     name: "Soft Blush",
-    tagline: "Feminine, Fresh & Radiant",
+    tagline: "Feminine, Fresh & Romantic",
     colors: {
       bg: "#FFFFFF",
       accent: "#C8A45D",
@@ -38,8 +38,8 @@ export const THEMES: ThemeOption[] = [
   },
   {
     id: "sage-contemporary",
-    name: "Sage Contemporary",
-    tagline: "Calm, Organic & Modern",
+    name: "Sage & Gold",
+    tagline: "Calm, Sophisticated & Natural",
     colors: {
       bg: "#FAF5EA",
       accent: "#B8944D",

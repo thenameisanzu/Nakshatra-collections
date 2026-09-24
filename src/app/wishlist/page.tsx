@@ -66,7 +66,10 @@ export default function WishlistPage() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header with Navigation & Title */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4 pb-6 border-b" style={{ borderColor: "var(--border-subtle)" }}>
+        <div
+          className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4 pb-6 border-b"
+          style={{ borderColor: "var(--border-subtle)" }}
+        >
           <div>
             <div className="mb-2">
               <Link
@@ -85,10 +88,10 @@ export default function WishlistPage() {
             >
               My Wishlist
             </h1>
-            <p className="mt-1 text-xs sm:text-sm" style={{ color: "var(--text-muted)" }}>
+            <p className="mt-1 text-xs sm:text-sm font-light" style={{ color: "var(--text-muted)" }}>
               {totalWishlistItems === 0
-                ? "Your saved jewellery treasures"
-                : `${totalWishlistItems} ${totalWishlistItems === 1 ? "creation" : "creations"} curated in your personal collection`}
+                ? "Your curated collection of beloved jewellery"
+                : `${totalWishlistItems} ${totalWishlistItems === 1 ? "creation" : "creations"} curated in your personal vault`}
             </p>
           </div>
 
@@ -114,8 +117,7 @@ export default function WishlistPage() {
             }}
           >
             <div
-              className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full mb-4 shadow-inner"
-              style={{ backgroundColor: "var(--tag-bg)" }}
+              className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full mb-4 shadow-inner liquid-glass"
             >
               <Heart className="h-8 w-8 sm:h-9 sm:w-9 text-rose-600" />
             </div>
@@ -124,11 +126,11 @@ export default function WishlistPage() {
               className="font-serif-luxury text-2xl sm:text-3xl font-normal"
               style={{ color: "var(--text-primary)" }}
             >
-              Your Wishlist is Empty
+              Your wishlist is waiting for something beautiful.
             </h2>
 
             <p
-              className="mt-2 text-xs sm:text-sm max-w-md leading-relaxed"
+              className="mt-2 text-xs sm:text-sm max-w-md leading-relaxed font-light"
               style={{ color: "var(--text-muted)" }}
             >
               Explore our handcrafted necklaces, earrings, and rings to begin curating your bespoke fine jewellery collection.
@@ -143,11 +145,11 @@ export default function WishlistPage() {
               }}
             >
               <Sparkles className="h-4 w-4" />
-              <span>Explore Creations</span>
+              <span>Explore Jewellery</span>
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3.5 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
             {items.map((item) => {
               const formattedPrice = formatPrice(item.price.amount, item.price.currencyCode);
               const formattedCompare = item.compareAtPrice
@@ -159,7 +161,7 @@ export default function WishlistPage() {
               return (
                 <div
                   key={item.id}
-                  className="group relative flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-lg"
+                  className="group relative flex flex-col overflow-hidden rounded-3xl border transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                   style={{
                     backgroundColor: "var(--card-bg)",
                     borderColor: "var(--border-subtle)",
@@ -178,7 +180,7 @@ export default function WishlistPage() {
                         alt={item.imageAlt || item.title}
                         fill
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover object-center p-3 sm:p-5 transition-transform duration-500 group-hover:scale-104"
                       />
                     ) : (
                       <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center">
@@ -198,11 +200,11 @@ export default function WishlistPage() {
                     )}
                   </Link>
 
-                  {/* Remove from Wishlist Button */}
+                  {/* Remove from Wishlist Button (Liquid Glass) */}
                   <button
                     type="button"
                     onClick={() => removeFromWishlist(item.id)}
-                    className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-10 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur-xs text-rose-600 shadow-xs transition-all hover:scale-110 active:scale-95 cursor-pointer"
+                    className="absolute top-3 right-3 z-10 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full liquid-glass liquid-glass-hover text-rose-600 shadow-xs active:scale-90 cursor-pointer"
                     aria-label={`Remove ${item.title} from wishlist`}
                     title="Remove from Wishlist"
                   >
@@ -210,10 +212,10 @@ export default function WishlistPage() {
                   </button>
 
                   {/* Details */}
-                  <div className="flex flex-1 flex-col p-3.5 sm:p-5">
+                  <div className="flex flex-1 flex-col p-4 sm:p-5">
                     {item.productType && (
                       <span
-                        className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider mb-1"
+                        className="text-[9px] sm:text-[10px] uppercase font-bold tracking-[0.2em] mb-1 block"
                         style={{ color: "var(--accent-gold)" }}
                       >
                         {item.productType}
@@ -222,7 +224,7 @@ export default function WishlistPage() {
 
                     <Link href={`/products/${item.handle}`} className="group/title">
                       <h3
-                        className="font-serif-luxury text-sm sm:text-base font-semibold line-clamp-1 group-hover/title:opacity-80 transition-colors"
+                        className="font-serif-luxury text-sm sm:text-base font-normal line-clamp-1 group-hover/title:opacity-80 transition-colors"
                         style={{ color: "var(--text-primary)" }}
                       >
                         {item.title}
@@ -238,7 +240,7 @@ export default function WishlistPage() {
                         {formattedPrice}
                       </span>
                       {formattedCompare && (
-                        <span className="text-[10px] sm:text-xs line-through" style={{ color: "var(--text-muted)" }}>
+                        <span className="text-[10px] sm:text-xs line-through opacity-60" style={{ color: "var(--text-muted)" }}>
                           {formattedCompare}
                         </span>
                       )}
@@ -250,7 +252,7 @@ export default function WishlistPage() {
                         type="button"
                         onClick={() => handleAddToCart(item)}
                         disabled={isAdding}
-                        className="w-full flex items-center justify-center gap-1.5 rounded-xl py-2.5 sm:py-3 px-3 text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-xs transition-all duration-200 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+                        className="w-full flex items-center justify-center gap-1.5 rounded-2xl py-2.5 sm:py-3 px-3 text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-xs transition-all duration-200 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
                         style={{
                           backgroundColor: isAdded ? "#2D6A4F" : "var(--accent-cta)",
                           color: "var(--accent-cta-text)",
@@ -264,7 +266,7 @@ export default function WishlistPage() {
                         ) : isAdded ? (
                           <>
                             <Check className="h-3.5 w-3.5" />
-                            <span>Added</span>
+                            <span>Added to Bag</span>
                           </>
                         ) : (
                           <>

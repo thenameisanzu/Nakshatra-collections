@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Check, Sparkles } from "lucide-react";
+import { Mail, Check, Sparkles, Send } from "lucide-react";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -14,35 +14,41 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="contact" className="py-20 border-t" style={{ borderColor: "var(--border-subtle)" }}>
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <section
+      id="contact"
+      className="py-16 sm:py-20 md:py-24 border-t transition-colors"
+      style={{
+        backgroundColor: "var(--bg-secondary)",
+        borderColor: "var(--border-subtle)",
+      }}
+    >
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div
-          className="rounded-3xl p-8 sm:p-14 text-center border shadow-xl relative overflow-hidden"
+          className="rounded-3xl p-8 sm:p-12 md:p-14 text-center border shadow-xl relative overflow-hidden liquid-glass"
           style={{
-            backgroundColor: "var(--bg-surface)",
             borderColor: "var(--border-medium)",
           }}
         >
-          <div
-            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-widest mb-4"
+          <span
+            className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] mb-4"
             style={{
               backgroundColor: "var(--tag-bg)",
               color: "var(--tag-text)",
             }}
           >
-            <Sparkles className="h-3 w-3" />
-            VIP Access
-          </div>
+            <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
+            08 &bull; Privileged Circle
+          </span>
 
           <h2
             className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
             style={{ color: "var(--text-primary)" }}
           >
-            Stay in the Nakshatra
+            Stay Close To The Stars
           </h2>
 
           <p
-            className="mt-4 text-sm sm:text-base leading-relaxed max-w-lg mx-auto"
+            className="mt-3.5 text-sm sm:text-base leading-relaxed max-w-lg mx-auto font-light"
             style={{ color: "var(--text-secondary)" }}
           >
             Be the first to discover new arrivals, special collections and exclusive offers.
@@ -50,14 +56,14 @@ export default function Newsletter() {
 
           {isSubmitted ? (
             <div
-              className="mt-8 inline-flex items-center gap-2 rounded-2xl p-4 text-sm font-semibold"
+              className="mt-8 inline-flex items-center gap-2 rounded-2xl p-4 text-sm font-semibold animate-in zoom-in"
               style={{
                 backgroundColor: "var(--tag-bg)",
                 color: "var(--accent-cta)",
               }}
             >
               <Check className="h-5 w-5" />
-              <span>Thank you for joining. Check your inbox for your welcome privilege.</span>
+              <span>Welcome to the Nakshatra circle. Look out for our privileged updates.</span>
             </div>
           ) : (
             <form
@@ -75,9 +81,9 @@ export default function Newsletter() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
                   required
-                  className="w-full rounded-full py-3.5 pl-11 pr-4 text-xs tracking-wider border focus:outline-none transition"
+                  className="w-full rounded-full py-3.5 pl-11 pr-4 text-xs tracking-wider border focus:outline-none transition shadow-inner"
                   style={{
-                    backgroundColor: "var(--bg-primary)",
+                    backgroundColor: "var(--bg-surface)",
                     borderColor: "var(--border-medium)",
                     color: "var(--text-primary)",
                   }}
@@ -86,19 +92,20 @@ export default function Newsletter() {
 
               <button
                 type="submit"
-                className="w-full sm:w-auto shrink-0 rounded-full px-8 py-3.5 text-xs font-bold uppercase tracking-widest shadow-md transition-all hover:scale-105 active:scale-95"
+                className="w-full sm:w-auto shrink-0 rounded-full px-8 py-3.5 text-xs font-bold uppercase tracking-widest shadow-md transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
                 style={{
                   backgroundColor: "var(--accent-cta)",
                   color: "var(--accent-cta-text)",
                 }}
               >
-                Subscribe
+                <span>Subscribe</span>
+                <Send className="h-3.5 w-3.5" />
               </button>
             </form>
           )}
 
-          <p className="mt-4 text-[10px]" style={{ color: "var(--text-muted)" }}>
-            We respect your privacy. You may unsubscribe from our salon letters at any time.
+          <p className="mt-4 text-[10px] tracking-wider" style={{ color: "var(--text-muted)" }}>
+            We respect your inbox. You may unsubscribe from our salon letters at any time.
           </p>
         </div>
       </div>

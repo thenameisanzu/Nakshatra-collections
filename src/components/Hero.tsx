@@ -3,118 +3,69 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Droplets } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
-interface HeroSlide {
+interface HeroImage {
   id: string;
-  badge: string;
-  icon: "sparkles" | "droplets";
-  headlinePart1: string;
-  headlinePart2: string;
-  subtext: string;
-  ctaText: string;
-  ctaLink: string;
-  secondaryText?: string;
-  secondaryLink?: string;
-  bgImage: string;
-  imageAlt: string;
+  src: string;
+  alt: string;
 }
 
-const heroSlides: HeroSlide[] = [
+const heroImages: HeroImage[] = [
   {
-    id: "anti-tarnish-daily",
-    badge: "Anti-Tarnish & Daily Wear",
-    icon: "sparkles",
-    headlinePart1: "Daily Wear Jewellery,",
-    headlinePart2: "That Never Fades",
-    subtext:
-      "Premium 18K gold-plated artificial jewellery designed for everyday wear. Waterproof, sweatproof, and gentle on sensitive skin.",
-    ctaText: "Shop All Jewellery",
-    ctaLink: "/#products",
-    secondaryText: "New Arrivals",
-    secondaryLink: "/collections/new-arrivals",
-    bgImage: "/images/hero/model-lifestyle.jpg",
-    imageAlt: "Modern everyday gold plated artificial jewellery",
+    id: "model-lifestyle",
+    src: "/images/hero/model-lifestyle.jpg",
+    alt: "Modern 18K gold plated anti-tarnish daily wear jewellery",
   },
   {
-    id: "festive-traditional",
-    badge: "Traditional & Festive Edit",
-    icon: "sparkles",
-    headlinePart1: "Traditional Designs,",
-    headlinePart2: "For Special Celebrations",
-    subtext:
-      "Royal chokers, temple motifs, and bridal necklace sets crafted for weddings, temple visits, and family celebrations.",
-    ctaText: "Explore Necklaces & Sets",
-    ctaLink: "/collections/necklaces",
-    secondaryText: "View Sets",
-    secondaryLink: "/collections/jewellery-sets",
-    bgImage: "/images/hero/festive-necklace.jpg",
-    imageAlt: "Traditional gold and emerald choker set",
+    id: "festive-necklace",
+    src: "/images/hero/festive-necklace.jpg",
+    alt: "Traditional gold and emerald choker necklace set",
   },
   {
-    id: "waterproof-clover",
-    badge: "100% Waterproof & Sweatproof",
-    icon: "droplets",
-    headlinePart1: "Wear It In The Shower,",
-    headlinePart2: "Never Take It Off",
-    subtext:
-      "Anti-fade stainless steel bracelets and rings that resist water, moisture, and daily wear without turning black.",
-    ctaText: "Shop Waterproof Edit",
-    ctaLink: "/collections/bracelets",
-    secondaryText: "View Rings",
-    secondaryLink: "/collections/rings",
-    bgImage: "/images/hero/anti-tarnish-waterproof.jpg",
-    imageAlt: "Waterproof gold plated bracelets and rings",
+    id: "anti-tarnish-waterproof",
+    src: "/images/hero/anti-tarnish-waterproof.jpg",
+    alt: "Waterproof anti-tarnish gold clover bracelets and rings",
   },
   {
-    id: "solitaire-sparkle",
-    badge: "Sparkling American Diamond",
-    icon: "sparkles",
-    headlinePart1: "Real Diamond Sparkle,",
-    headlinePart2: "At An Honest Price",
-    subtext:
-      "Brilliant American Diamond and cubic zirconia rings with pure sparkle that pairs effortlessly with sarees, churidars, and western wear.",
-    ctaText: "Shop Solitaires & Rings",
-    ctaLink: "/collections/rings",
-    secondaryText: "View Earrings",
-    secondaryLink: "/collections/earrings",
-    bgImage: "/images/hero/solitaire-rings.jpg",
-    imageAlt: "Sparkling solitaire rings and earrings",
+    id: "solitaire-rings",
+    src: "/images/hero/solitaire-rings.jpg",
+    alt: "Sparkling American Diamond solitaire rings and studs",
   },
 ];
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  const nextImage = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
   }, []);
 
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  const prevImage = useCallback(() => {
+    setCurrentImageIndex((prev) => (prev - 1 + heroImages.length) % heroImages.length);
   }, []);
 
-  // Automatic Background Change Every 5.5 Seconds (pauses on hover or touch)
+  // Automatic Background Image Change Every 5.5 Seconds (pauses on hover or touch)
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
-      nextSlide();
+      nextImage();
     }, 5500);
     return () => clearInterval(timer);
-  }, [isPaused, nextSlide]);
+  }, [isPaused, nextImage]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prevSlide();
-      if (e.key === "ArrowRight") nextSlide();
+      if (e.key === "ArrowLeft") prevImage();
+      if (e.key === "ArrowRight") nextImage();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [nextSlide, prevSlide]);
+  }, [nextImage, prevImage]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
@@ -127,13 +78,11 @@ export default function Hero() {
   const handleTouchEnd = () => {
     if (!touchStartX.current || !touchEndX.current) return;
     const diff = touchStartX.current - touchEndX.current;
-    if (diff > 45) nextSlide();
-    else if (diff < -45) prevSlide();
+    if (diff > 45) nextImage();
+    else if (diff < -45) prevImage();
     touchStartX.current = null;
     touchEndX.current = null;
   };
-
-  const slide = heroSlides[currentSlide];
 
   return (
     <section
@@ -143,18 +92,17 @@ export default function Hero() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       className="relative min-h-[75vh] sm:min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center overflow-hidden transition-colors select-none"
-      aria-roledescription="carousel"
       aria-label="Nakshatra Collections Artificial Jewellery Showcase"
     >
       {/* ---------------------------------------------------------------------- */}
       {/* AUTOMATICALLY CHANGING FULL-BLEED BACKGROUND IMAGES WITH CROSSFADE      */}
       {/* ---------------------------------------------------------------------- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        {heroSlides.map((s, index) => {
-          const isCurrent = index === currentSlide;
+        {heroImages.map((img, index) => {
+          const isCurrent = index === currentImageIndex;
           return (
             <div
-              key={s.id}
+              key={img.id}
               className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
                 isCurrent
                   ? "opacity-100 scale-100 pointer-events-auto"
@@ -165,8 +113,8 @@ export default function Hero() {
               }}
             >
               <Image
-                src={s.bgImage}
-                alt={s.imageAlt}
+                src={img.src}
+                alt={img.alt}
                 fill
                 priority={index === 0}
                 sizes="100vw"
@@ -181,14 +129,14 @@ export default function Hero() {
           className="absolute inset-0 pointer-events-none transition-colors duration-500"
           style={{
             background:
-              "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 35%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0.2) 85%, transparent 100%)",
+              "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 38%, rgba(255,255,255,0.82) 62%, rgba(255,255,255,0.25) 85%, transparent 100%)",
           }}
         />
         <div
           className="absolute inset-0 pointer-events-none sm:hidden transition-colors duration-500"
           style={{
             background:
-              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.45) 100%)",
+              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.92) 55%, rgba(255,255,255,0.45) 100%)",
           }}
         />
         <div
@@ -200,101 +148,93 @@ export default function Hero() {
       </div>
 
       {/* ---------------------------------------------------------------------- */}
-      {/* MINIMAL & CLEAN FOREGROUND CONTENT                                     */}
+      {/* STATIC MINIMAL FOREGROUND CONTENT (ONE CONSTANT TAGLINE)               */}
       {/* ---------------------------------------------------------------------- */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 w-full">
         <div className="max-w-2xl">
-          {/* Minimal Feature Badge */}
+          {/* Static Trust Feature Badge */}
           <div className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass">
-            {slide.icon === "droplets" ? (
-              <Droplets className="h-3.5 w-3.5 text-sky-600" />
-            ) : (
-              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-            )}
-            <span style={{ color: "var(--accent-cta)" }}>{slide.badge}</span>
+            <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+            <span style={{ color: "var(--accent-cta)" }}>100% Anti-Tarnish &bull; 18K Gold Plated</span>
           </div>
 
-          {/* Minimal & Elegant Headline */}
+          {/* Static Headline & Tagline */}
           <h1
-            key={`headline-${slide.id}`}
-            className="font-serif-luxury mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.12] animate-in fade-in slide-in-from-bottom-3 duration-500"
+            className="font-serif-luxury mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.12]"
             style={{ color: "var(--text-primary)" }}
           >
-            {slide.headlinePart1} <br className="hidden sm:inline" />
+            Daily Wear Jewellery, <br className="hidden sm:inline" />
             <span
               className="italic font-normal"
               style={{ color: "var(--accent-gold)" }}
             >
-              {slide.headlinePart2}
+              That Never Fades
             </span>
           </h1>
 
-          {/* Simple English Subtext */}
+          {/* Static Simple English Description */}
           <p
-            key={`subtext-${slide.id}`}
-            className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal animate-in fade-in slide-in-from-bottom-2 duration-500"
+            className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal"
             style={{ color: "var(--text-secondary)" }}
           >
-            {slide.subtext}
+            Waterproof, sweatproof, and skin-friendly artificial jewellery crafted for daily wear, college, office, and family celebrations in Kerala.
           </p>
 
-          {/* Clean Action Buttons */}
+          {/* Action Buttons */}
           <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
             <Link
-              href={slide.ctaLink}
+              href="/#products"
               className="inline-flex items-center justify-center gap-2 rounded-full px-7 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-widest shadow-md transition-all duration-200 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: "var(--accent-cta)",
                 color: "var(--accent-cta-text)",
               }}
             >
-              <span>{slide.ctaText}</span>
+              <span>Shop All Jewellery</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
 
-            {slide.secondaryText && slide.secondaryLink && (
-              <Link
-                href={slide.secondaryLink}
-                className="inline-flex items-center justify-center rounded-full px-6 py-3.5 text-xs font-semibold uppercase tracking-widest border liquid-glass transition-all hover:scale-105 active:scale-95"
-                style={{
-                  color: "var(--text-primary)",
-                  borderColor: "var(--border-medium)",
-                }}
-              >
-                <span>{slide.secondaryText}</span>
-              </Link>
-            )}
+            <Link
+              href="/#collections"
+              className="inline-flex items-center justify-center rounded-full px-6 py-3.5 text-xs font-semibold uppercase tracking-widest border liquid-glass transition-all hover:scale-105 active:scale-95"
+              style={{
+                color: "var(--text-primary)",
+                borderColor: "var(--border-medium)",
+              }}
+            >
+              <span>View Collections</span>
+            </Link>
           </div>
         </div>
 
         {/* -------------------------------------------------------------------- */}
-        {/* MINIMAL CAROUSEL INDICATORS & CONTROLS                               */}
+        {/* BACKGROUND IMAGE CAROUSEL INDICATORS & CONTROLS                      */}
         {/* -------------------------------------------------------------------- */}
         <div className="mt-10 sm:mt-14 flex items-center justify-between gap-4 pt-4 border-t" style={{ borderColor: "var(--border-subtle)" }}>
-          {/* Trust Assurance Pill */}
+          {/* Static Guarantee Tag */}
           <div className="hidden sm:flex items-center gap-2 text-xs font-medium" style={{ color: "var(--text-muted)" }}>
             <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--accent-gold)" }} />
-            <span>Fast Express Delivery All Over Kerala &bull; 100% Anti-Tarnish Guarantee</span>
+            <span>Fast Express Delivery All Over Kerala &bull; 100% Skin Safe Guarantee</span>
           </div>
 
-          {/* Minimal Dots & Controls */}
+          {/* Subtle Background Slide Indicators */}
           <div className="flex items-center gap-3 ml-auto">
             <span
               className="text-xs font-mono font-medium"
               style={{ color: "var(--text-primary)" }}
             >
-              0{currentSlide + 1} / 0{heroSlides.length}
+              0{currentImageIndex + 1} / 0{heroImages.length}
             </span>
 
             {/* Slide Dots */}
             <div className="flex items-center gap-1.5">
-              {heroSlides.map((s, idx) => {
-                const isActive = idx === currentSlide;
+              {heroImages.map((img, idx) => {
+                const isActive = idx === currentImageIndex;
                 return (
                   <button
-                    key={s.id}
+                    key={img.id}
                     type="button"
-                    onClick={() => setCurrentSlide(idx)}
+                    onClick={() => setCurrentImageIndex(idx)}
                     className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
                       isActive ? "w-6 sm:w-8" : "w-1.5 hover:opacity-80"
                     }`}
@@ -303,7 +243,7 @@ export default function Hero() {
                         ? "var(--accent-cta)"
                         : "var(--border-medium)",
                     }}
-                    aria-label={`Go to slide ${idx + 1}`}
+                    aria-label={`Show image ${idx + 1}`}
                   />
                 );
               })}
@@ -313,25 +253,25 @@ export default function Hero() {
             <div className="flex items-center gap-1 ml-2">
               <button
                 type="button"
-                onClick={prevSlide}
+                onClick={prevImage}
                 className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
                 style={{
                   color: "var(--text-primary)",
                   borderColor: "var(--border-subtle)",
                 }}
-                aria-label="Previous Slide"
+                aria-label="Previous Image"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 type="button"
-                onClick={nextSlide}
+                onClick={nextImage}
                 className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
                 style={{
                   color: "var(--text-primary)",
                   borderColor: "var(--border-subtle)",
                 }}
-                aria-label="Next Slide"
+                aria-label="Next Image"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>

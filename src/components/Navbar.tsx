@@ -98,13 +98,13 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Left: Brand Logo & Insignia */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             {/* Mobile Hamburger Toggle */}
             <div className="flex lg:hidden items-center">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="flex h-9 w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
+                className="flex h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
                 style={{
                   color: "var(--text-primary)",
                   backgroundColor: isScrolled ? "transparent" : "var(--glass-bg)",
@@ -119,15 +119,15 @@ export default function Navbar() {
             {/* Logo Link */}
             <Link
               href="/"
-              className="group flex items-center gap-2.5 sm:gap-3 transition-transform hover:scale-[1.01]"
+              className="group flex items-center gap-2 sm:gap-2.5 transition-transform hover:scale-[1.01]"
               aria-label="NAKSHATRA Collections - Artificial Jewellery Store"
             >
-              <div className="relative h-9 w-9 sm:h-11 sm:w-11 shrink-0">
+              <div className="relative h-8 w-8 sm:h-10 sm:w-10 shrink-0">
                 <Image
                   src="/nakshatra-logo.png"
                   alt="NAKSHATRA Collections"
                   fill
-                  sizes="(max-width: 640px) 36px, 44px"
+                  sizes="(max-width: 640px) 32px, 40px"
                   className="object-contain"
                   priority
                 />
@@ -135,13 +135,13 @@ export default function Navbar() {
 
               <div className="flex flex-col text-left">
                 <span
-                  className="font-serif-luxury text-lg sm:text-2xl font-normal tracking-[0.2em] uppercase leading-none"
+                  className="font-serif-luxury text-base sm:text-xl lg:text-2xl font-normal tracking-[0.18em] sm:tracking-[0.2em] uppercase leading-none"
                   style={{ color: "var(--text-primary)" }}
                 >
                   NAKSHATRA
                 </span>
                 <span
-                  className="text-[7.5px] sm:text-[8.5px] font-semibold tracking-[0.28em] uppercase leading-none mt-1"
+                  className="text-[6.5px] sm:text-[8px] font-semibold tracking-[0.25em] uppercase leading-none mt-0.5 sm:mt-1"
                   style={{ color: "var(--accent-gold)" }}
                 >
                   COLLECTIONS
@@ -151,7 +151,7 @@ export default function Navbar() {
           </div>
 
           {/* Center: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
             <Link
               href="/"
               className="group relative text-xs font-semibold tracking-[0.15em] uppercase transition-colors"
@@ -287,12 +287,12 @@ export default function Navbar() {
           </nav>
 
           {/* Right: Action Icons & Theme Switcher */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5">
+          <div className="flex items-center gap-1 sm:gap-2">
             {/* Search Button */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
+              className="flex h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-secondary)" }}
               aria-label="Search Catalogue"
             >
@@ -302,18 +302,18 @@ export default function Navbar() {
             {/* Wishlist Button */}
             <Link
               href="/wishlist"
-              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95"
+              className="relative flex h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Wishlist with ${totalWishlistItems} saved items`}
             >
               <Heart
-                className={`h-4.5 w-4.5 transition-colors ${
+                className={`h-4 w-4 sm:h-4.5 sm:w-4.5 transition-colors ${
                   totalWishlistItems > 0 ? "fill-rose-600 text-rose-600" : ""
                 }`}
               />
               {totalWishlistItems > 0 && (
                 <span
-                  className="absolute -top-1 -right-1 flex h-4.5 w-4.5 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
+                  className="absolute -top-1 -right-1 flex h-4 w-4 sm:h-4.5 sm:w-4.5 items-center justify-center rounded-full text-[8.5px] sm:text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalWishlistItems}
@@ -325,14 +325,14 @@ export default function Navbar() {
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer"
+              className="relative flex h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Shopping bag with ${totalQuantity} items`}
             >
-              <ShoppingBag className="h-4.5 w-4.5" />
+              <ShoppingBag className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
               {totalQuantity > 0 && (
                 <span
-                  className="absolute -top-1 -right-1 flex h-4.5 w-4.5 items-center justify-center rounded-full text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
+                  className="absolute -top-1 -right-1 flex h-4 w-4 sm:h-4.5 sm:w-4.5 items-center justify-center rounded-full text-[8.5px] sm:text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalQuantity}
@@ -340,8 +340,8 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Visual 3-Theme Switcher */}
-            <div className="block pl-0.5 sm:pl-1">
+            {/* Visual 3-Theme Switcher (Desktop & Tablets) */}
+            <div className="hidden sm:block pl-0.5">
               <ThemeSwitcher />
             </div>
           </div>

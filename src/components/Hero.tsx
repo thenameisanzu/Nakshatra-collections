@@ -91,7 +91,7 @@ export default function Hero() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="relative min-h-[75vh] sm:min-h-[80vh] lg:min-h-[85vh] flex items-center justify-center overflow-hidden transition-colors select-none"
+      className="relative min-h-[520px] xs:min-h-[580px] sm:min-h-[68vh] lg:min-h-[80vh] flex items-center justify-center overflow-hidden transition-colors select-none"
       aria-label="Nakshatra Collections Artificial Jewellery Showcase"
     >
       {/* ---------------------------------------------------------------------- */}
@@ -126,7 +126,7 @@ export default function Hero() {
 
         {/* Minimal Light Theme Gradient Scrims (Ensures ultra-clear text readability) */}
         <div
-          className="absolute inset-0 pointer-events-none transition-colors duration-500"
+          className="absolute inset-0 pointer-events-none transition-colors duration-500 hidden sm:block"
           style={{
             background:
               "linear-gradient(to right, var(--bg-primary) 0%, var(--bg-primary) 38%, rgba(255,255,255,0.82) 62%, rgba(255,255,255,0.25) 85%, transparent 100%)",
@@ -136,11 +136,11 @@ export default function Hero() {
           className="absolute inset-0 pointer-events-none sm:hidden transition-colors duration-500"
           style={{
             background:
-              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.92) 55%, rgba(255,255,255,0.45) 100%)",
+              "linear-gradient(to top, var(--bg-primary) 0%, rgba(255,255,255,0.92) 60%, rgba(255,255,255,0.55) 100%)",
           }}
         />
         <div
-          className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none transition-colors duration-500"
+          className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 pointer-events-none transition-colors duration-500"
           style={{
             background: "linear-gradient(to top, var(--bg-primary), transparent)",
           }}
@@ -150,17 +150,17 @@ export default function Hero() {
       {/* ---------------------------------------------------------------------- */}
       {/* STATIC MINIMAL FOREGROUND CONTENT (ONE CONSTANT TAGLINE)               */}
       {/* ---------------------------------------------------------------------- */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 w-full">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 w-full">
         <div className="max-w-2xl">
           {/* Static Trust Feature Badge */}
-          <div className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass">
-            <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+          <div className="inline-flex items-center gap-1.5 rounded-full px-3 py-0.5 sm:px-3.5 sm:py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] shadow-xs liquid-glass">
+            <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" style={{ color: "var(--accent-gold)" }} />
             <span style={{ color: "var(--accent-cta)" }}>100% Anti-Tarnish &bull; 18K Gold Plated</span>
           </div>
 
           {/* Static Headline & Tagline */}
           <h1
-            className="font-serif-luxury mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.12]"
+            className="font-serif-luxury mt-3 sm:mt-5 text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.16] sm:leading-[1.12]"
             style={{ color: "var(--text-primary)" }}
           >
             Daily Wear Jewellery, <br className="hidden sm:inline" />
@@ -174,17 +174,17 @@ export default function Hero() {
 
           {/* Static Simple English Description */}
           <p
-            className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal"
+            className="mt-2.5 sm:mt-4 text-xs xs:text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal"
             style={{ color: "var(--text-secondary)" }}
           >
             Waterproof, sweatproof, and skin-friendly artificial jewellery crafted for daily wear, college, office, and family celebrations in Kerala.
           </p>
 
           {/* Action Buttons */}
-          <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+          <div className="mt-5 sm:mt-8 flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-4 w-full xs:w-auto">
             <Link
               href="/#products"
-              className="inline-flex items-center justify-center gap-2 rounded-full px-7 sm:px-8 py-3.5 text-xs font-semibold uppercase tracking-widest shadow-md transition-all duration-200 hover:scale-105 active:scale-95"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-6 sm:px-8 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-widest shadow-md transition-all duration-200 hover:scale-105 active:scale-95 text-center"
               style={{
                 backgroundColor: "var(--accent-cta)",
                 color: "var(--accent-cta-text)",
@@ -196,7 +196,7 @@ export default function Hero() {
 
             <Link
               href="/#collections"
-              className="inline-flex items-center justify-center rounded-full px-6 py-3.5 text-xs font-semibold uppercase tracking-widest border liquid-glass transition-all hover:scale-105 active:scale-95"
+              className="inline-flex items-center justify-center rounded-full px-5 sm:px-6 py-3 sm:py-3.5 text-xs font-semibold uppercase tracking-widest border liquid-glass transition-all hover:scale-105 active:scale-95 text-center"
               style={{
                 color: "var(--text-primary)",
                 borderColor: "var(--border-medium)",
@@ -210,7 +210,7 @@ export default function Hero() {
         {/* -------------------------------------------------------------------- */}
         {/* BACKGROUND IMAGE CAROUSEL INDICATORS & CONTROLS                      */}
         {/* -------------------------------------------------------------------- */}
-        <div className="mt-10 sm:mt-14 flex items-center justify-between gap-4 pt-4 border-t" style={{ borderColor: "var(--border-subtle)" }}>
+        <div className="mt-6 sm:mt-10 md:mt-14 flex items-center justify-between gap-3 pt-3 sm:pt-4 border-t" style={{ borderColor: "var(--border-subtle)" }}>
           {/* Static Guarantee Tag */}
           <div className="hidden sm:flex items-center gap-2 text-xs font-medium" style={{ color: "var(--text-muted)" }}>
             <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: "var(--accent-gold)" }} />
@@ -218,7 +218,7 @@ export default function Hero() {
           </div>
 
           {/* Subtle Background Slide Indicators */}
-          <div className="flex items-center gap-3 ml-auto">
+          <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-3">
             <span
               className="text-xs font-mono font-medium"
               style={{ color: "var(--text-primary)" }}
@@ -250,30 +250,30 @@ export default function Hero() {
             </div>
 
             {/* Prev / Next Arrows */}
-            <div className="flex items-center gap-1 ml-2">
+            <div className="flex items-center gap-1 ml-1 sm:ml-2">
               <button
                 type="button"
                 onClick={prevImage}
-                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
+                className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
                 style={{
                   color: "var(--text-primary)",
                   borderColor: "var(--border-subtle)",
                 }}
                 aria-label="Previous Image"
               >
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </button>
               <button
                 type="button"
                 onClick={nextImage}
-                className="flex h-8 w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
+                className="flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full liquid-glass border transition hover:scale-105 active:scale-95 cursor-pointer"
                 style={{
                   color: "var(--text-primary)",
                   borderColor: "var(--border-subtle)",
                 }}
                 aria-label="Next Image"
               >
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </button>
             </div>
           </div>

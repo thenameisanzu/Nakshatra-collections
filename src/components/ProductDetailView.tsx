@@ -22,9 +22,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
       : [];
 
   return (
-    <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-14 xl:gap-16 items-start">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-12 items-start max-w-6xl mx-auto">
       {/* Left Column: Image Showcase Gallery (Sticky on Desktop) */}
-      <div className="lg:col-span-7 lg:sticky lg:top-28">
+      <div className="lg:col-span-5 xl:col-span-5 lg:sticky lg:top-24 w-full flex flex-col items-center">
         <ProductGallery
           images={images}
           title={product.title}
@@ -35,7 +35,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
 
       {/* Right Column: Information, Pricing, Variants & Purchase Actions */}
       <div
-        className="flex flex-col gap-6 lg:col-span-5 rounded-3xl p-6 sm:p-8 lg:p-9 border shadow-sm transition-all duration-300"
+        className="flex flex-col gap-6 lg:col-span-7 xl:col-span-7 rounded-3xl p-6 sm:p-8 border shadow-sm transition-all duration-300"
         style={{
           backgroundColor: "var(--bg-surface)",
           borderColor: "var(--border-medium)",

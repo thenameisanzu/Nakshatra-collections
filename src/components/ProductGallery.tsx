@@ -185,7 +185,7 @@ export default function ProductGallery({
   const selectedImage = images[selectedIndex] || images[0];
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3 w-full max-w-[420px] mx-auto">
       {/* Main Image Container */}
       <div
         ref={containerRef}
@@ -195,7 +195,7 @@ export default function ProductGallery({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="group relative aspect-square sm:aspect-[4/5] w-full overflow-hidden rounded-3xl border shadow-sm transition-colors select-none cursor-crosshair"
+        className="group relative aspect-square w-full overflow-hidden rounded-2xl border shadow-sm transition-colors select-none cursor-crosshair"
         style={{
           backgroundColor: "var(--bg-secondary)",
           borderColor: "var(--border-medium)",
@@ -207,7 +207,7 @@ export default function ProductGallery({
         <div
           className="relative h-full w-full transition-transform duration-150 ease-out"
           style={{
-            transform: isZoomed ? "scale(2.2)" : "scale(1)",
+            transform: isZoomed ? "scale(2)" : "scale(1)",
             transformOrigin: `${mousePos.x}% ${mousePos.y}%`,
           }}
         >
@@ -216,14 +216,14 @@ export default function ProductGallery({
             alt={selectedImage.altText || `${title} - View ${selectedIndex + 1}`}
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 55vw"
+            sizes="(max-width: 1024px) 100vw, 420px"
             className="object-cover object-center"
           />
         </div>
 
         {/* Zoom Hint (Desktop) */}
         <div
-          className={`pointer-events-none absolute bottom-4 right-4 hidden md:flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium backdrop-blur-md transition-opacity duration-300 ${
+          className={`pointer-events-none absolute bottom-3 right-3 hidden md:flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-medium backdrop-blur-md transition-opacity duration-300 ${
             isZoomed ? "opacity-0" : "opacity-90"
           }`}
           style={{
@@ -232,7 +232,7 @@ export default function ProductGallery({
             border: "1px solid var(--border-subtle)",
           }}
         >
-          <ZoomIn className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+          <ZoomIn className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
           <span>Hover to inspect</span>
         </div>
 
@@ -245,7 +245,7 @@ export default function ProductGallery({
                 e.stopPropagation();
                 prevImage();
               }}
-              className="absolute left-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full shadow-md backdrop-blur-md opacity-80 transition-all hover:opacity-100 hover:scale-105 active:scale-95"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full shadow-md backdrop-blur-md opacity-80 transition-all hover:opacity-100 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: "var(--bg-surface)",
                 color: "var(--text-primary)",
@@ -253,7 +253,7 @@ export default function ProductGallery({
               }}
               aria-label="Previous product image"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4" />
             </button>
 
             <button
@@ -262,7 +262,7 @@ export default function ProductGallery({
                 e.stopPropagation();
                 nextImage();
               }}
-              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full shadow-md backdrop-blur-md opacity-80 transition-all hover:opacity-100 hover:scale-105 active:scale-95"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full shadow-md backdrop-blur-md opacity-80 transition-all hover:opacity-100 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: "var(--bg-surface)",
                 color: "var(--text-primary)",
@@ -270,18 +270,18 @@ export default function ProductGallery({
               }}
               aria-label="Next product image"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4" />
             </button>
 
             {/* Mobile Pagination Dots */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex md:hidden items-center gap-1.5 rounded-full px-3 py-1.5 backdrop-blur-md bg-black/20">
+            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex md:hidden items-center gap-1.5 rounded-full px-2.5 py-1 backdrop-blur-md bg-black/20">
               {images.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setSelectedIndex(idx)}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    idx === selectedIndex ? "w-5" : "w-1.5 opacity-50"
+                    idx === selectedIndex ? "w-4" : "w-1.5 opacity-50"
                   }`}
                   style={{
                     backgroundColor: idx === selectedIndex ? "var(--accent-gold)" : "#FFFFFF",
@@ -296,7 +296,7 @@ export default function ProductGallery({
 
       {/* Thumbnails Row (if multiple images) */}
       {images.length > 1 && (
-        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-thin">
+        <div className="flex gap-2.5 overflow-x-auto pb-1 scrollbar-thin">
           {images.map((img, index) => {
             const isSelected = index === selectedIndex;
             return (
@@ -304,9 +304,9 @@ export default function ProductGallery({
                 key={img.url + index}
                 type="button"
                 onClick={() => setSelectedIndex(index)}
-                className={`group relative aspect-square h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 transition-all duration-200 ${
+                className={`group relative aspect-square h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 transition-all duration-200 ${
                   isSelected
-                    ? "ring-2 shadow-sm scale-[0.98]"
+                    ? "ring-2 shadow-xs scale-[0.98]"
                     : "opacity-70 hover:opacity-100"
                 }`}
                 style={{
@@ -319,7 +319,7 @@ export default function ProductGallery({
                   src={img.url}
                   alt={img.altText || `${title} thumbnail ${index + 1}`}
                   fill
-                  sizes="80px"
+                  sizes="64px"
                   className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
                 />
               </button>

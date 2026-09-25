@@ -81,11 +81,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ? `/collections/${primaryCollection.handle}`
     : "/#products";
 
-  // Fetch related products (up to 4)
+  // Fetch related products (up to 5)
   const relatedProducts = await getRelatedProducts(
     product.handle,
     primaryCollection?.handle,
-    4
+    5
   );
 
   return (
@@ -185,7 +185,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </Link>
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
               {relatedProducts.map((relProduct) => (
                 <ProductCard key={relProduct.id} product={relProduct} />
               ))}

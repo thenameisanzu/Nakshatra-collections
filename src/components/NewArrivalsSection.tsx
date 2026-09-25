@@ -59,9 +59,9 @@ export default function NewArrivalsSection({ products }: NewArrivalsSectionProps
           </Link>
         </div>
 
-        {/* 4-column responsive grid */}
-        <div className="grid grid-cols-2 gap-3.5 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {products.slice(0, 4).map((product) => (
+        {/* 5-column responsive compact grid */}
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
+          {products.slice(0, 5).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

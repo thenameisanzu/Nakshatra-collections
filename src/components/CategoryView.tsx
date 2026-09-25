@@ -495,12 +495,12 @@ export default function CategoryView({
           </div>
         ) : (
           <div
-            className={`grid grid-cols-2 gap-3 sm:gap-6 ${
+            className={`grid grid-cols-2 gap-2.5 sm:gap-4 ${
               gridCols === 2
                 ? "md:grid-cols-2 lg:grid-cols-2"
                 : gridCols === 3
-                ? "md:grid-cols-3 lg:grid-cols-3"
-                : "md:grid-cols-3 lg:grid-cols-4"
+                ? "sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3"
+                : "sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5"
             }`}
           >
             {filteredProducts.map((product) => (

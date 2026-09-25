@@ -314,7 +314,7 @@ export default function CartDrawer() {
                 </span>
               </div>
 
-              <p className="text-[10px] mb-4 text-center" style={{ color: "var(--text-muted)" }}>
+              <p className="text-[10px] mb-3 text-center" style={{ color: "var(--text-muted)" }}>
                 Complimentary insured delivery &amp; taxes calculated at checkout.
               </p>
 
@@ -341,14 +341,27 @@ export default function CartDrawer() {
                 ) : (
                   <>
                     <Lock className="h-3.5 w-3.5" />
-                    <span>Checkout &bull; {subtotal ? formatPrice(subtotal.amount, subtotal.currencyCode) : ""}</span>
+                    <span>Proceed to Checkout &bull; {subtotal ? formatPrice(subtotal.amount, subtotal.currencyCode) : ""}</span>
                   </>
                 )}
               </button>
 
-              <div className="mt-3 flex items-center justify-center gap-1.5 text-[10px]" style={{ color: "var(--text-muted)" }}>
+              {/* Supported Payment Options & India Trust */}
+              <div className="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 text-[9.5px] font-semibold" style={{ color: "var(--text-secondary)" }}>
+                <span className="px-2 py-0.5 rounded-md border" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-primary)" }}>
+                  UPI / GPay / PhonePe
+                </span>
+                <span className="px-2 py-0.5 rounded-md border" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-primary)" }}>
+                  Cards / NetBanking
+                </span>
+                <span className="px-2 py-0.5 rounded-md border text-emerald-700 bg-emerald-50/60" style={{ borderColor: "var(--border-subtle)" }}>
+                  Cash on Delivery (COD)
+                </span>
+              </div>
+
+              <div className="mt-2.5 flex items-center justify-center gap-1.5 text-[10px]" style={{ color: "var(--text-muted)" }}>
                 <ShieldCheck className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                <span>Shopify Secure 256-Bit SSL Checkout</span>
+                <span>Shopify Secure 256-Bit SSL Encrypted Checkout</span>
               </div>
             </div>
           )}

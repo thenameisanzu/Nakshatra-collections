@@ -451,44 +451,51 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         </button>
       </div>
 
-      {/* Trust & Shopping Information Badges */}
+      {/* Trust & Kerala Shopping Information Badges */}
       <div
-        className="grid grid-cols-3 gap-2 sm:gap-3 rounded-2xl border p-3.5 sm:p-4 text-center transition-colors"
+        className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 rounded-2xl border p-3.5 text-center transition-colors"
         style={{
           backgroundColor: "var(--bg-primary)",
           borderColor: "var(--border-subtle)",
         }}
       >
-        <div className="flex flex-col items-center gap-1.5 p-1">
+        <div className="flex flex-col items-center gap-1 p-1">
           <Truck className="h-4 w-4" style={{ color: "var(--accent-cta)" }} />
           <span className="text-[10px] sm:text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>
-            Kerala &amp; India Express
+            Kerala Express
           </span>
-          <span className="text-[9px] sm:text-[10px] hidden sm:block" style={{ color: "var(--text-muted)" }}>
-            Tracked Delivery
+          <span className="text-[9px] sm:text-[10px]" style={{ color: "var(--text-muted)" }}>
+            2-4 Days Delivery
           </span>
         </div>
 
-        <div
-          className="flex flex-col items-center gap-1.5 p-1 border-x"
-          style={{ borderColor: "var(--border-subtle)" }}
-        >
+        <div className="flex flex-col items-center gap-1 p-1">
+          <Sparkles className="h-4 w-4" style={{ color: "var(--accent-cta)" }} />
+          <span className="text-[10px] sm:text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>
+            COD Available
+          </span>
+          <span className="text-[9px] sm:text-[10px]" style={{ color: "var(--text-muted)" }}>
+            Cash On Delivery
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center gap-1 p-1">
           <ShieldCheck className="h-4 w-4" style={{ color: "var(--accent-cta)" }} />
           <span className="text-[10px] sm:text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>
             100% Anti-Tarnish
           </span>
-          <span className="text-[9px] sm:text-[10px] hidden sm:block" style={{ color: "var(--text-muted)" }}>
-            Skin Friendly
+          <span className="text-[9px] sm:text-[10px]" style={{ color: "var(--text-muted)" }}>
+            Skin-Safe &amp; Waterproof
           </span>
         </div>
 
-        <div className="flex flex-col items-center gap-1.5 p-1">
+        <div className="flex flex-col items-center gap-1 p-1">
           <RotateCcw className="h-4 w-4" style={{ color: "var(--accent-cta)" }} />
           <span className="text-[10px] sm:text-[11px] font-bold" style={{ color: "var(--text-primary)" }}>
             Easy Exchange
           </span>
-          <span className="text-[9px] sm:text-[10px] hidden sm:block" style={{ color: "var(--text-muted)" }}>
-            Hassle Free
+          <span className="text-[9px] sm:text-[10px]" style={{ color: "var(--text-muted)" }}>
+            7 Days Hassle-Free
           </span>
         </div>
       </div>

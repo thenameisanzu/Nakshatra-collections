@@ -355,25 +355,55 @@ export default function Navbar() {
               borderColor: "var(--border-subtle)",
             }}
           >
-            <div className="mx-auto max-w-2xl flex items-center gap-3">
-              <Search className="h-4.5 w-4.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
-              <input
-                type="text"
-                placeholder="Search necklace, earrings, diamond ring, bracelet..."
-                className="w-full bg-transparent text-sm font-sans focus:outline-none placeholder:text-xs"
-                style={{
-                  color: "var(--text-primary)",
-                }}
-                autoFocus
-              />
-              <button
-                type="button"
-                onClick={() => setIsSearchOpen(false)}
-                className="text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full border liquid-glass"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                Close
-              </button>
+            <div className="mx-auto max-w-2xl flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <Search className="h-4.5 w-4.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
+                <input
+                  type="text"
+                  placeholder="Search necklaces, emerald drops, solitaires, clover bracelets..."
+                  className="w-full bg-transparent text-sm font-sans focus:outline-none placeholder:text-xs"
+                  style={{
+                    color: "var(--text-primary)",
+                  }}
+                  autoFocus
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsSearchOpen(false)}
+                  className="text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full border liquid-glass cursor-pointer"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Close
+                </button>
+              </div>
+
+              {/* Popular Search Suggestion Chips */}
+              <div className="flex items-center gap-2 flex-wrap pt-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "var(--accent-gold)" }}>
+                  Popular:
+                </span>
+                {[
+                  { label: "Choker Necklaces", href: "/collections/necklaces" },
+                  { label: "Emerald Earrings", href: "/collections/earrings" },
+                  { label: "Solitaire Rings", href: "/collections/rings" },
+                  { label: "Clover Bracelets", href: "/collections/bracelets" },
+                  { label: "Bridal Sets", href: "/collections/jewellery-sets" },
+                  { label: "New Arrivals", href: "/collections/new-arrivals" },
+                ].map((chip) => (
+                  <Link
+                    key={chip.label}
+                    href={chip.href}
+                    onClick={() => setIsSearchOpen(false)}
+                    className="text-[11px] px-2.5 py-1 rounded-full border liquid-glass transition-all hover:scale-105"
+                    style={{
+                      color: "var(--text-primary)",
+                      borderColor: "var(--border-subtle)",
+                    }}
+                  >
+                    {chip.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         )}

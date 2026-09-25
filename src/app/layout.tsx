@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
+import WhatsAppSupportButton from "@/components/WhatsAppSupportButton";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-serif",
@@ -66,6 +67,7 @@ export default function RootLayout({
               <div className="flex-1">{children}</div>
               <Footer />
               <CartDrawer />
+              <WhatsAppSupportButton />
             </WishlistProvider>
           </CartProvider>
         </ThemeProvider>

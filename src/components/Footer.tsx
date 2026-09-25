@@ -148,7 +148,7 @@ export default function Footer() {
                 <Link href="/collections/new-arrivals" className="hover:underline font-semibold" style={{ color: "var(--accent-cta)" }}>New Arrivals</Link>
               </li>
               <li>
-                <Link href="/#editorial-story" className="hover:underline">About Story</Link>
+                <Link href="/our-story" className="hover:underline">About Story</Link>
               </li>
               <li>
                 <Link href="/#contact" className="hover:underline">Contact</Link>
@@ -199,10 +199,10 @@ export default function Footer() {
                 <Link href="/cart" className="hover:underline">Shopping Bag</Link>
               </li>
               <li>
-                <Link href="/#editorial-story" className="hover:underline">Authenticity Guarantee</Link>
+                <Link href="/our-story" className="hover:underline">Authenticity Guarantee</Link>
               </li>
               <li>
-                <Link href="/#editorial-story" className="hover:underline">Care Guide</Link>
+                <Link href="/our-story" className="hover:underline">Care Guide</Link>
               </li>
             </ul>
           </div>

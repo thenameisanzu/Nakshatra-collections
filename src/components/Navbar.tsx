@@ -258,7 +258,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/#editorial-story"
+              href="/our-story"
               className="group relative text-xs font-semibold tracking-[0.15em] uppercase transition-colors"
               style={{ color: "var(--text-secondary)" }}
             >
@@ -460,7 +460,7 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  href="/#editorial-story"
+                  href="/our-story"
                   onClick={() => setIsOpen(false)}
                   className="flex items-center justify-between py-2.5 px-3 rounded-xl text-base font-serif-luxury"
                   style={{ color: "var(--text-primary)" }}

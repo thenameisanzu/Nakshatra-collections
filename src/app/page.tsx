@@ -2,7 +2,6 @@ import Hero from "@/components/Hero";
 import CategoryQuickStrip from "@/components/CategoryQuickStrip";
 import CuratedCollections from "@/components/CuratedCollections";
 import FeaturedJewellery from "@/components/FeaturedJewellery";
-import EditorialStory from "@/components/EditorialStory";
 import NewArrivalsSection from "@/components/NewArrivalsSection";
 import CampaignStatement from "@/components/CampaignStatement";
 import WhyNakshatra from "@/components/WhyNakshatra";
@@ -53,10 +52,7 @@ export default async function Home() {
       {/* 03 — Featured Jewellery Spotlight */}
       <FeaturedJewellery products={featuredProducts} />
 
-      {/* 04 — Editorial Story */}
-      <EditorialStory />
-
-      {/* 05 — New Arrivals */}
+      {/* 04 — New Arrivals */}
       <NewArrivalsSection products={newArrivalsProducts} />
 
       {/* 06 — Campaign Statement */}

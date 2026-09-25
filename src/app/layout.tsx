@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,17 +9,17 @@ import { WishlistProvider } from "@/context/WishlistContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
 import WhatsAppSupportButton from "@/components/WhatsAppSupportButton";
 
-const cormorant = Cormorant_Garamond({
+const playfair = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const outfit = Outfit({
+const jakarta = Plus_Jakarta_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="en"
       data-theme="champagne-luxury"
       suppressHydrationWarning
-      className={`${cormorant.variable} ${outfit.variable} h-full scroll-smooth antialiased`}
+      className={`${playfair.variable} ${jakarta.variable} h-full scroll-smooth antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitializerScript }} />

@@ -144,179 +144,90 @@ export default function CategoryView({
   const faqs = categoryFaqs[collection.handle] || categoryFaqs.default;
 
   return (
-    <div className="flex flex-col gap-8 md:gap-12">
+    <div className="flex flex-col gap-5 sm:gap-6">
       {/* ---------------------------------------------------------------------- */}
-      {/* 1. HORIZONTAL FLIPKART/AMAZON-STYLE CATEGORY PILL STRIP                 */}
-      {/* ---------------------------------------------------------------------- */}
-      <div className="overflow-x-auto pb-2 scrollbar-none">
-        <div className="flex items-center gap-2 sm:gap-3 min-w-max">
-          <Link
-            href="/#products"
-            className="flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all border liquid-glass hover:scale-105"
-            style={{
-              color: "var(--text-secondary)",
-              borderColor: "var(--border-medium)",
-            }}
-          >
-            <span>✨</span>
-            <span>All Jewellery</span>
-          </Link>
-
-          {allCollections.map((col) => {
-            const isActive = col.handle === collection.handle;
-            const icon = categoryIcons[col.handle] || "💎";
-            return (
-              <Link
-                key={col.id}
-                href={`/collections/${col.handle}`}
-                className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                  isActive
-                    ? "shadow-md scale-105"
-                    : "border liquid-glass hover:scale-105"
-                }`}
-                style={{
-                  backgroundColor: isActive ? "var(--accent-cta)" : "var(--bg-surface)",
-                  color: isActive ? "var(--accent-cta-text)" : "var(--text-secondary)",
-                  borderColor: isActive ? "transparent" : "var(--border-medium)",
-                }}
-              >
-                <span>{icon}</span>
-                <span>{col.title}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ---------------------------------------------------------------------- */}
-      {/* 2. DEDICATED CATEGORY HERO BANNER                                      */}
+      {/* 1. COMPACT HEADER & CATEGORY PILLS                                     */}
       {/* ---------------------------------------------------------------------- */}
       <div
-        className="relative overflow-hidden rounded-3xl border p-6 sm:p-10 md:p-12 shadow-sm transition-colors"
-        style={{
-          backgroundColor: "var(--bg-surface)",
-          borderColor: "var(--border-medium)",
-        }}
-      >
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass mb-3">
-              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-              <span style={{ color: "var(--accent-cta)" }}>Category Collection</span>
-            </div>
-
-            <h1
-              className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
-              style={{ color: "var(--text-primary)" }}
-            >
-              {collection.title}
-            </h1>
-
-            <p
-              className="mt-3 text-sm sm:text-base leading-relaxed font-normal max-w-xl"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              {collection.description ||
-                `Explore our collection of ${collection.title.toLowerCase()} crafted with 18K gold polish, anti-tarnish finish, and skin-friendly materials.`}
-            </p>
-
-            {/* Badges */}
-            <div className="mt-5 flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
-              <span
-                className="px-3.5 py-1 rounded-full font-bold"
-                style={{
-                  backgroundColor: "var(--tag-bg)",
-                  color: "var(--tag-text)",
-                }}
-              >
-                {initialProducts.length} Designs Available
-              </span>
-              <span
-                className="px-3 py-1 rounded-full font-medium"
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  color: "var(--text-primary)",
-                }}
-              >
-                100% Anti-Tarnish Guaranteed
-              </span>
-            </div>
-          </div>
-
-          {/* Banner Graphic if available */}
-          {collection.image && (
-            <div
-              className="relative h-44 w-full sm:h-52 sm:w-52 lg:h-60 lg:w-60 shrink-0 overflow-hidden rounded-2xl border shadow-inner"
-              style={{ borderColor: "var(--border-medium)" }}
-            >
-              <Image
-                src={collection.image.url}
-                alt={collection.image.altText || collection.title}
-                fill
-                priority
-                sizes="(max-width: 640px) 100vw, 240px"
-                className="object-cover object-center"
-              />
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* ---------------------------------------------------------------------- */}
-      {/* 3. AMAZON/FLIPKART STYLE VALUE ASSURANCE BAR                            */}
-      {/* ---------------------------------------------------------------------- */}
-      <div
-        className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-2xl border transition-colors"
+        className="rounded-2xl border p-4 sm:p-5 transition-colors liquid-glass"
         style={{
           backgroundColor: "var(--bg-surface)",
           borderColor: "var(--border-subtle)",
         }}
       >
-        <div className="flex items-center gap-2.5 p-2">
-          <Truck className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-              Kerala Express
-            </p>
-            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-              2-4 Days Delivery
+            <div className="flex items-center gap-2.5">
+              <h1
+                className="font-serif-luxury text-2xl sm:text-3xl font-bold tracking-tight"
+                style={{ color: "var(--text-primary)" }}
+              >
+                {collection.title}
+              </h1>
+              <span
+                className="px-2.5 py-0.5 rounded-full text-xs font-bold"
+                style={{
+                  backgroundColor: "var(--tag-bg)",
+                  color: "var(--tag-text)",
+                }}
+              >
+                {initialProducts.length} Items
+              </span>
+              <span
+                className="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-semibold"
+                style={{
+                  backgroundColor: "var(--bg-secondary)",
+                  color: "var(--text-primary)",
+                }}
+              >
+                100% Anti-Tarnish &bull; 18K Gold Plated
+              </span>
+            </div>
+            <p
+              className="mt-1 text-xs sm:text-sm font-normal line-clamp-1"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {collection.description ||
+                `Browse our waterproof, sweatproof ${collection.title.toLowerCase()} collection crafted for daily wear.`}
             </p>
           </div>
-        </div>
 
-        <div className="flex items-center gap-2.5 p-2">
-          <ShieldCheck className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
-          <div>
-            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-              100% Anti-Tarnish
-            </p>
-            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-              Daily Wear Safe
-            </p>
-          </div>
-        </div>
+          {/* Category Pill Shortcuts */}
+          <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+            <Link
+              href="/#products"
+              className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border liquid-glass hover:scale-105 transition-all"
+              style={{
+                color: "var(--text-secondary)",
+                borderColor: "var(--border-medium)",
+              }}
+            >
+              ✨ All
+            </Link>
 
-        <div className="flex items-center gap-2.5 p-2">
-          <RotateCcw className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
-          <div>
-            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-              7-Day Exchange
-            </p>
-            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-              Hassle-Free Returns
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2.5 p-2">
-          <BadgeCheck className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
-          <div>
-            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-              Skin Friendly
-            </p>
-            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-              Hypoallergenic
-            </p>
+            {allCollections.map((col) => {
+              const isActive = col.handle === collection.handle;
+              const icon = categoryIcons[col.handle] || "💎";
+              return (
+                <Link
+                  key={col.id}
+                  href={`/collections/${col.handle}`}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 ${
+                    isActive
+                      ? "shadow-sm scale-105"
+                      : "border liquid-glass hover:scale-105"
+                  }`}
+                  style={{
+                    backgroundColor: isActive ? "var(--accent-cta)" : "var(--bg-surface)",
+                    color: isActive ? "var(--accent-cta-text)" : "var(--text-secondary)",
+                    borderColor: isActive ? "transparent" : "var(--border-medium)",
+                  }}
+                >
+                  <span className="mr-1">{icon}</span>
+                  <span>{col.title}</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -511,10 +422,69 @@ export default function CategoryView({
       </div>
 
       {/* ---------------------------------------------------------------------- */}
-      {/* 6. FLIPKART/AMAZON STYLE BUYING GUIDE & FAQS                            */}
+      {/* 6. BOTTOM VALUE ASSURANCE BAR                                           */}
       {/* ---------------------------------------------------------------------- */}
       <div
-        className="rounded-3xl border p-6 sm:p-10 transition-colors"
+        className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 p-3.5 sm:p-4 rounded-2xl border transition-colors"
+        style={{
+          backgroundColor: "var(--bg-surface)",
+          borderColor: "var(--border-subtle)",
+        }}
+      >
+        <div className="flex items-center gap-2 p-1.5">
+          <Truck className="h-4 w-4 shrink-0" style={{ color: "var(--accent-cta)" }} />
+          <div>
+            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+              Kerala Express
+            </p>
+            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+              2-4 Days Delivery
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 p-1.5">
+          <ShieldCheck className="h-4 w-4 shrink-0" style={{ color: "var(--accent-cta)" }} />
+          <div>
+            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+              100% Anti-Tarnish
+            </p>
+            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+              Waterproof &bull; Daily Wear
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 p-1.5">
+          <RotateCcw className="h-4 w-4 shrink-0" style={{ color: "var(--accent-cta)" }} />
+          <div>
+            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+              7-Day Exchange
+            </p>
+            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+              Hassle-Free Returns
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 p-1.5">
+          <BadgeCheck className="h-4 w-4 shrink-0" style={{ color: "var(--accent-cta)" }} />
+          <div>
+            <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+              Skin Friendly
+            </p>
+            <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+              100% Hypoallergenic
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------------------------------------------------------------------- */}
+      {/* 7. FLIPKART/AMAZON STYLE BUYING GUIDE & FAQS                            */}
+      {/* ---------------------------------------------------------------------- */}
+      <div
+        className="rounded-2xl border p-5 sm:p-8 transition-colors"
         style={{
           backgroundColor: "var(--bg-surface)",
           borderColor: "var(--border-subtle)",

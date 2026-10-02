@@ -1,4 +1,4 @@
-import { Sparkles, Gem, Droplets, ShieldCheck, Truck } from "lucide-react";
+import { Sparkles, Droplets, ShieldCheck, Truck } from "lucide-react";
 
 const perks = [
   {

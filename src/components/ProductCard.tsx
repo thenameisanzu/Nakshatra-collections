@@ -43,9 +43,6 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
     parseFloat(comparePrice.amount) > parseFloat(minPrice.amount);
 
   const formattedPrice = formatPrice(minPrice.amount, minPrice.currencyCode);
-  const formattedMaxPrice = isPriceRange
-    ? formatPrice(maxPrice.amount, maxPrice.currencyCode)
-    : null;
   const formattedComparePrice = hasComparePrice
     ? formatPrice(comparePrice.amount, comparePrice.currencyCode)
     : null;

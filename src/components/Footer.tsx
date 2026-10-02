@@ -166,19 +166,28 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-2.5 text-xs font-light" style={{ color: "var(--text-secondary)" }}>
               <li>
-                <Link href="/collections/necklaces" className="hover:underline">Necklaces &amp; Chokers</Link>
+                <Link href="/collections/necklaces" className="hover:underline">Necklaces &amp; Pendants</Link>
               </li>
               <li>
                 <Link href="/collections/earrings" className="hover:underline">Earrings &amp; Studs</Link>
               </li>
               <li>
+                <Link href="/collections/necklace-sets" className="hover:underline">Necklace Sets</Link>
+              </li>
+              <li>
+                <Link href="/collections/bridal-jewellery" className="hover:underline">Bridal Jewellery</Link>
+              </li>
+              <li>
+                <Link href="/collections/bangles" className="hover:underline">Bangles &amp; Kadas</Link>
+              </li>
+              <li>
                 <Link href="/collections/rings" className="hover:underline">Solitaires &amp; Rings</Link>
               </li>
               <li>
-                <Link href="/collections/bracelets" className="hover:underline">Bracelets &amp; Bangles</Link>
+                <Link href="/collections/anklets" className="hover:underline">Anklets &amp; Payals</Link>
               </li>
               <li>
-                <Link href="/collections/jewellery-sets" className="hover:underline">Jewellery Sets</Link>
+                <Link href="/collections/new-arrivals" className="hover:underline">New Arrivals</Link>
               </li>
             </ul>
           </div>

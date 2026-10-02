@@ -10,34 +10,52 @@ interface Category {
 
 const categories: Category[] = [
   {
-    title: "Necklaces",
-    subtitle: "Chokers, delicate chains & statement pieces",
+    title: "Necklaces & Pendants",
+    subtitle: "Chokers, layered chains & royal neckpieces",
     handle: "necklaces",
     tag: "Signature",
   },
   {
-    title: "Earrings",
-    subtitle: "Studs, elegant hoops & luminous drops",
+    title: "Earrings & Drops",
+    subtitle: "Luminous pearls, daily studs & chandeliers",
     handle: "earrings",
-    tag: "Essential",
+    tag: "Bestseller",
   },
   {
-    title: "Rings",
-    subtitle: "Solitaires, statement rings & stackables",
+    title: "Necklace Sets",
+    subtitle: "Harmonious bridal & festive matching sets",
+    handle: "necklace-sets",
+    tag: "Festive",
+  },
+  {
+    title: "Bridal Jewellery",
+    subtitle: "Traditional Kerala bridal heritage designs",
+    handle: "bridal-jewellery",
+    tag: "Bridal",
+  },
+  {
+    title: "Bangles & Kadas",
+    subtitle: "Waterproof daily cuffs & traditional bangles",
+    handle: "bangles",
+    tag: "Daily Wear",
+  },
+  {
+    title: "Solitaires & Rings",
+    subtitle: "American diamond solitaires & bands",
     handle: "rings",
     tag: "Iconic",
   },
   {
-    title: "Bracelets",
-    subtitle: "Refined chains, tennis bracelets & cuffs",
-    handle: "bracelets",
-    tag: "Bespoke",
+    title: "Anklets & Payals",
+    subtitle: "Dainty anti-tarnish daily wear payals",
+    handle: "anklets",
+    tag: "Trending",
   },
   {
-    title: "Jewellery Sets",
-    subtitle: "Harmonious sets for celebrations and special occasions",
-    handle: "jewellery-sets",
-    tag: "Curated",
+    title: "New Arrivals",
+    subtitle: "Fresh 2026 18K gold polished designs",
+    handle: "new-arrivals",
+    tag: "New In",
   },
 ];
 
@@ -69,13 +87,11 @@ export default function CategoryGrid() {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((cat, index) => (
+          {categories.map((cat) => (
             <Link
               key={cat.handle}
               href={`/collections/${cat.handle}`}
-              className={`group relative overflow-hidden rounded-3xl p-8 border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                index === 4 ? "sm:col-span-2 lg:col-span-2" : ""
-              }`}
+              className="group relative overflow-hidden rounded-3xl p-8 border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               style={{
                 backgroundColor: "var(--bg-surface)",
                 borderColor: "var(--border-subtle)",

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 const themeInitializerScript = `
   (function() {
     try {
-      var saved = localStorage.getItem('nakshatra_jewellery_theme') || localStorage.getItem('aurelia_jewellery_theme');
+      var saved = localStorage.getItem('nakshatra_jewellery_theme');
       if (saved && (saved === 'champagne-luxury' || saved === 'soft-blush' || saved === 'sage-contemporary')) {
         document.documentElement.setAttribute('data-theme', saved);
       } else {

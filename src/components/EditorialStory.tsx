@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, ArrowRight, ShieldCheck, Gem, Award, Heart } from "lucide-react";
+import { Sparkles, ArrowRight, ShieldCheck, Gem, Heart } from "lucide-react";
 
 export default function EditorialStory() {
   return (

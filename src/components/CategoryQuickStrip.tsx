@@ -2,7 +2,59 @@ import Link from "next/link";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 
-const quickCategories = [
+import type { ShopifyCollection } from "@/types/shopify";
+
+interface QuickCategoryItem {
+  name: string;
+  href: string;
+  image: string;
+  label: string;
+}
+
+const fallbackImages: Record<string, { image: string; label: string }> = {
+  necklaces: {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
+    label: "Chokers & Chains",
+  },
+  earrings: {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/cfcff7f80632b30fda8cc118d5faf3ba65f6ee80182e57bea5943f7b85484728.png?v=1790240218",
+    label: "Studs & Drops",
+  },
+  rings: {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
+    label: "Solitaires & Bands",
+  },
+  bracelets: {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+    label: "Waterproof Cuffs",
+  },
+  bangles: {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+    label: "Bangles & Kadas",
+  },
+  "jewellery-sets": {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    label: "Bridal & Festive",
+  },
+  "necklace-sets": {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    label: "Bridal & Festive",
+  },
+  "bridal-jewellery": {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    label: "Kerala Heritage",
+  },
+  anklets: {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+    label: "Daily Payals",
+  },
+  "new-arrivals": {
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
+    label: "Latest 2026",
+  },
+};
+
+const defaultQuickCategories: QuickCategoryItem[] = [
   {
     name: "Necklaces",
     href: "/collections/necklaces",
@@ -16,32 +68,63 @@ const quickCategories = [
     label: "Studs & Drops",
   },
   {
+    name: "Necklace Sets",
+    href: "/collections/necklace-sets",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    label: "Festive Sets",
+  },
+  {
+    name: "Bridal Jewellery",
+    href: "/collections/bridal-jewellery",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    label: "Kerala Bridal",
+  },
+  {
+    name: "Bangles",
+    href: "/collections/bangles",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+    label: "Waterproof Cuffs",
+  },
+  {
     name: "Rings",
     href: "/collections/rings",
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
     label: "Solitaires & Bands",
   },
   {
-    name: "Bracelets",
-    href: "/collections/bracelets",
+    name: "Anklets",
+    href: "/collections/anklets",
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
-    label: "Waterproof Cuffs",
-  },
-  {
-    name: "Jewellery Sets",
-    href: "/collections/jewellery-sets",
-    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    label: "Bridal & Festive",
+    label: "Daily Payals",
   },
   {
     name: "New Arrivals",
     href: "/collections/new-arrivals",
-    image: "/images/hero/model-lifestyle.jpg",
-    label: "Latest 2026 Designs",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
+    label: "Latest 2026",
   },
 ];
 
-export default function CategoryQuickStrip() {
+interface CategoryQuickStripProps {
+  collections?: ShopifyCollection[];
+}
+
+export default function CategoryQuickStrip({ collections }: CategoryQuickStripProps) {
+  const displayItems: QuickCategoryItem[] =
+    collections && collections.length > 0
+      ? collections.slice(0, 8).map((col) => {
+          const fallback = fallbackImages[col.handle] || {
+            image: fallbackImages.necklaces.image,
+            label: "Collection",
+          };
+          return {
+            name: col.title,
+            href: `/collections/${col.handle}`,
+            image: col.image?.url || fallback.image,
+            label: fallback.label,
+          };
+        })
+      : defaultQuickCategories;
   return (
     <section
       className="py-5 sm:py-6 border-b transition-colors"
@@ -71,7 +154,7 @@ export default function CategoryQuickStrip() {
 
         {/* Horizontal Category Strip with Real Product Visuals */}
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3.5">
-          {quickCategories.map((item) => (
+          {displayItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}

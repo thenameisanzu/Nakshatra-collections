@@ -64,8 +64,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const savedTheme = (localStorage.getItem(THEME_STORAGE_KEY) ||
-        localStorage.getItem("aurelia_jewellery_theme")) as ThemeType | null;
+      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemeType | null;
       if (
         savedTheme &&
         (savedTheme === "champagne-luxury" ||

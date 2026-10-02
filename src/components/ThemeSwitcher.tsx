@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTheme, THEMES } from "@/context/ThemeContext";
-import { Check, ChevronDown, Palette, Sparkles } from "lucide-react";
+import { Check, ChevronDown, Sparkles } from "lucide-react";
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();

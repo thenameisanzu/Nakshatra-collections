@@ -21,9 +21,11 @@ import {
 const categories = [
   { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: "📿", desc: "Chokers & Layered Gold Chains" },
   { label: "Earrings & Drops", href: "/collections/earrings", icon: "💎", desc: "Daily Studs, Jhumkas & Pearls" },
-  { label: "Rings & Solitaires", href: "/collections/rings", icon: "💍", desc: "American Diamond & Adjustable Bands" },
-  { label: "Bracelets & Bangles", href: "/collections/bracelets", icon: "🌟", desc: "Waterproof Cuffs & Clover Links" },
-  { label: "Jewellery Sets", href: "/collections/jewellery-sets", icon: "👑", desc: "Kerala Bridal & Festive Sets" },
+  { label: "Necklace Sets", href: "/collections/necklace-sets", icon: "👑", desc: "Harmonious Matching Sets" },
+  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery", icon: "👰", desc: "Kerala Bridal & Festive Heritage" },
+  { label: "Bangles & Bracelets", href: "/collections/bangles", icon: "🌟", desc: "Waterproof Cuffs & Daily Bangles" },
+  { label: "Rings & Solitaires", href: "/collections/rings", icon: "💍", desc: "American Diamond & Bands" },
+  { label: "Anklets & Payals", href: "/collections/anklets", icon: "✨", desc: "Anti-Tarnish Daily Payals" },
   { label: "New Arrivals", href: "/collections/new-arrivals", icon: "🔥", desc: "Fresh Designs & Latest Trends" },
 ];
 
@@ -385,9 +387,11 @@ export default function Navbar() {
                 {[
                   { label: "Choker Necklaces", href: "/collections/necklaces" },
                   { label: "Emerald Earrings", href: "/collections/earrings" },
+                  { label: "Necklace Sets", href: "/collections/necklace-sets" },
+                  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery" },
+                  { label: "Daily Bangles", href: "/collections/bangles" },
                   { label: "Solitaire Rings", href: "/collections/rings" },
-                  { label: "Clover Bracelets", href: "/collections/bracelets" },
-                  { label: "Bridal Sets", href: "/collections/jewellery-sets" },
+                  { label: "Anklets & Payals", href: "/collections/anklets" },
                   { label: "New Arrivals", href: "/collections/new-arrivals" },
                 ].map((chip) => (
                   <Link

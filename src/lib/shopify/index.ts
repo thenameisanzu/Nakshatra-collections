@@ -647,6 +647,8 @@ export async function getCollectionByHandle(
               handle
               title
               description
+              productType
+              tags
               availableForSale
               priceRange {
                 minVariantPrice {
@@ -673,6 +675,16 @@ export async function getCollectionByHandle(
                 altText
                 width
                 height
+              }
+              images(first: 5) {
+                edges {
+                  node {
+                    url
+                    altText
+                    width
+                    height
+                  }
+                }
               }
             }
           }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Sparkles, ArrowRight, ShieldCheck, Gem, Heart, Droplets, CheckCircle2, Award, Clock, Truck } from "lucide-react";
+import { Sparkles, ArrowRight, ShieldCheck, Gem, Heart, Droplets, CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Our Story | Nakshatra Collections Artificial Jewellery",

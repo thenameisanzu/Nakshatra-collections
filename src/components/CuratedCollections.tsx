@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Sparkles, Gem } from "lucide-react";
 
+import type { ShopifyCollection } from "@/types/shopify";
+
 interface CollectionItem {
   handle: string;
   title: string;
@@ -13,7 +15,60 @@ interface CollectionItem {
   imageAlt: string;
 }
 
-const collectionsData: CollectionItem[] = [
+const fallbackThumbnails: Record<string, { subtitle: string; tag: string; image: string }> = {
+  necklaces: {
+    subtitle: "Chokers, layered chains & royal neckpieces",
+    tag: "Signature",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
+  },
+  earrings: {
+    subtitle: "Luminous pearls, daily studs & chandeliers",
+    tag: "Bestseller",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/cfcff7f80632b30fda8cc118d5faf3ba65f6ee80182e57bea5943f7b85484728.png?v=1790240218",
+  },
+  rings: {
+    subtitle: "American diamond solitaires & bands",
+    tag: "Iconic",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
+  },
+  bracelets: {
+    subtitle: "Waterproof cuffs & dainty charm links",
+    tag: "Daily Wear",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+  },
+  bangles: {
+    subtitle: "Waterproof cuffs & traditional bangles",
+    tag: "Trending",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+  },
+  "jewellery-sets": {
+    subtitle: "Harmonious bridal & festive matching sets",
+    tag: "Bridal",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+  },
+  "necklace-sets": {
+    subtitle: "Harmonious bridal & festive matching sets",
+    tag: "Festive",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+  },
+  "bridal-jewellery": {
+    subtitle: "Traditional Kerala bridal heritage designs",
+    tag: "Bridal",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+  },
+  anklets: {
+    subtitle: "Dainty anti-tarnish daily wear payals",
+    tag: "Daily Wear",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+  },
+  "new-arrivals": {
+    subtitle: "Fresh 2026 18K gold polished designs",
+    tag: "New In",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
+  },
+};
+
+const defaultCollectionsData: CollectionItem[] = [
   {
     handle: "necklaces",
     title: "Necklaces & Pendants",
@@ -33,6 +88,33 @@ const collectionsData: CollectionItem[] = [
     imageAlt: "Nakshatra Earrings Collection",
   },
   {
+    handle: "necklace-sets",
+    title: "Necklace Sets",
+    subtitle: "Harmonious bridal & festive matching sets",
+    tag: "Festive",
+    imageSrc:
+      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    imageAlt: "Nakshatra Necklace Sets Collection",
+  },
+  {
+    handle: "bridal-jewellery",
+    title: "Bridal Jewellery",
+    subtitle: "Kerala traditional heritage wedding sets",
+    tag: "Bridal",
+    imageSrc:
+      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    imageAlt: "Nakshatra Bridal Jewellery Collection",
+  },
+  {
+    handle: "bangles",
+    title: "Bangles & Kadas",
+    subtitle: "Waterproof daily cuffs & classic bangles",
+    tag: "Daily Wear",
+    imageSrc:
+      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+    imageAlt: "Nakshatra Bangles Collection",
+  },
+  {
     handle: "rings",
     title: "Solitaires & Rings",
     subtitle: "American diamond solitaires & bands",
@@ -42,34 +124,48 @@ const collectionsData: CollectionItem[] = [
     imageAlt: "Nakshatra Solitaires & Rings Collection",
   },
   {
-    handle: "bracelets",
-    title: "Bracelets & Bangles",
-    subtitle: "Waterproof cuffs & dainty charm links",
-    tag: "Daily Wear",
+    handle: "anklets",
+    title: "Anklets & Payals",
+    subtitle: "Anti-tarnish waterproof daily payals",
+    tag: "Trending",
     imageSrc:
       "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
-    imageAlt: "Nakshatra Bracelets Collection",
-  },
-  {
-    handle: "jewellery-sets",
-    title: "Jewellery Sets",
-    subtitle: "Harmonious bridal & festive matching sets",
-    tag: "Bridal",
-    imageSrc:
-      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    imageAlt: "Nakshatra Jewellery Sets Collection",
+    imageAlt: "Nakshatra Anklets Collection",
   },
   {
     handle: "new-arrivals",
-    title: "Latest Arrivals",
+    title: "New Arrivals",
     subtitle: "Fresh 2026 18K gold polished designs",
     tag: "New In",
-    imageSrc: "/images/hero/model-lifestyle.jpg",
+    imageSrc:
+      "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
     imageAlt: "Nakshatra New Arrivals Collection",
   },
 ];
 
-export default function CuratedCollections() {
+interface CuratedCollectionsProps {
+  collections?: ShopifyCollection[];
+}
+
+export default function CuratedCollections({ collections }: CuratedCollectionsProps) {
+  const displayItems: CollectionItem[] =
+    collections && collections.length > 0
+      ? collections.map((col) => {
+          const fallback = fallbackThumbnails[col.handle] || {
+            subtitle: col.description || "Curated jewellery collection",
+            tag: "Curated",
+            image: fallbackThumbnails.necklaces.image,
+          };
+          return {
+            handle: col.handle,
+            title: col.title,
+            subtitle: col.description || fallback.subtitle,
+            tag: fallback.tag,
+            imageSrc: col.image?.url || fallback.image,
+            imageAlt: col.image?.altText || col.title,
+          };
+        })
+      : defaultCollectionsData;
   return (
     <section
       id="collections"
@@ -116,9 +212,9 @@ export default function CuratedCollections() {
           </Link>
         </div>
 
-        {/* Compact, Balanced 6-Card Category Grid */}
+        {/* Compact, Balanced Category Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-          {collectionsData.map((item) => (
+          {displayItems.map((item) => (
             <Link
               key={item.handle}
               href={`/collections/${item.handle}`}

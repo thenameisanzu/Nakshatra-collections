@@ -2,12 +2,10 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import type { ShopifyProduct, ShopifyCollection } from "@/types/shopify";
 import ProductCard from "./ProductCard";
 import {
   Sparkles,
-  SlidersHorizontal,
   ArrowUpDown,
   Check,
   ChevronDown,
@@ -32,7 +30,11 @@ const categoryIcons: Record<string, string> = {
   earrings: "💎",
   rings: "💍",
   bracelets: "🌟",
+  bangles: "🌟",
   "jewellery-sets": "👑",
+  "necklace-sets": "👑",
+  "bridal-jewellery": "👰",
+  anklets: "✨",
   "new-arrivals": "🔥",
 };
 
@@ -75,6 +77,34 @@ const categoryFaqs: Record<string, Array<{ q: string; a: string }>> = {
     {
       q: "Can I wear the bracelet during workouts or in the rain?",
       a: "Yes. Our bracelets are sweatproof, waterproof, and perfume-resistant, making them ideal for everyday active lifestyles.",
+    },
+  ],
+  bangles: [
+    {
+      q: "What sizes are available for bangles and kadas?",
+      a: "Our bangles come in standard 2.4, 2.6, and 2.8 sizes, with openable clasp options to fit all wrist sizes effortlessly.",
+    },
+    {
+      q: "Are the bangles suitable for daily wear?",
+      a: "Yes, they are anti-tarnish coated and water-resistant for all-day daily comfort.",
+    },
+  ],
+  "bridal-jewellery": [
+    {
+      q: "How does the bridal jewellery look compared to real gold?",
+      a: "Our bridal collections use premium 18K micro-gold plating and Kerala traditional motifs, giving them an authentic real gold lustre in weddings and photographs.",
+    },
+  ],
+  "necklace-sets": [
+    {
+      q: "Does the necklace set come with matching earrings?",
+      a: "Yes, every necklace set is curated as a complete harmonious set with matching designer earrings.",
+    },
+  ],
+  anklets: [
+    {
+      q: "Can I wear the anklets daily without blackening?",
+      a: "Yes! Crafted with waterproof stainless steel, our anklets will not tarnish or discolor with water, sweat, or perfume.",
     },
   ],
   default: [
@@ -257,7 +287,7 @@ export default function CategoryView({
               <button
                 key={pill.id}
                 type="button"
-                onClick={() => setPriceFilter(pill.id as any)}
+                onClick={() => setPriceFilter(pill.id as "all" | "under-2000" | "2000-3500" | "above-3500")}
                 className={`rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
                   isSelected
                     ? "font-bold shadow-xs"
@@ -301,7 +331,7 @@ export default function CategoryView({
             <ArrowUpDown className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
+              onChange={(e) => setSortBy(e.target.value as "featured" | "price-asc" | "price-desc" | "name")}
               className="rounded-xl px-2.5 py-1.5 text-xs font-medium bg-transparent border cursor-pointer focus:outline-none"
               style={{
                 color: "var(--text-primary)",

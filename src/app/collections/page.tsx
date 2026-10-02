@@ -21,8 +21,16 @@ const categoryThumbnails: Record<string, string> = {
     "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
   bracelets:
     "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+  bangles:
+    "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
   "jewellery-sets":
     "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/97880928ad3d0a92d47f9b88cf464ea07519106093fb6222b07d6124c6ef34a0.png?v=1790240263",
+  "necklace-sets":
+    "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/97880928ad3d0a92d47f9b88cf464ea07519106093fb6222b07d6124c6ef34a0.png?v=1790240263",
+  "bridal-jewellery":
+    "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/97880928ad3d0a92d47f9b88cf464ea07519106093fb6222b07d6124c6ef34a0.png?v=1790240263",
+  anklets:
+    "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
   "new-arrivals":
     "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
 };
@@ -32,7 +40,11 @@ const categoryBadges: Record<string, string> = {
   earrings: "Studs, Jhumkas & Drops",
   rings: "Solitaires & Bands",
   bracelets: "Waterproof Bangles & Cuffs",
+  bangles: "Waterproof Bangles & Kadas",
   "jewellery-sets": "Bridal & Festive Chokers",
+  "necklace-sets": "Bridal & Festive Chokers",
+  "bridal-jewellery": "Kerala Bridal Heritage",
+  anklets: "Daily Wear Payals",
   "new-arrivals": "Latest Designs",
 };
 

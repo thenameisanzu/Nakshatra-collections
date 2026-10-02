@@ -6,23 +6,28 @@ import NewArrivalsSection from "@/components/NewArrivalsSection";
 import CampaignStatement from "@/components/CampaignStatement";
 import WhyNakshatra from "@/components/WhyNakshatra";
 import Newsletter from "@/components/Newsletter";
-import { getProducts, getCollectionByHandle } from "@/lib/shopify";
-import type { ShopifyProduct } from "@/types/shopify";
+import { getProducts, getCollectionByHandle, getCollections } from "@/lib/shopify";
+import type { ShopifyProduct, ShopifyCollection } from "@/types/shopify";
 
 export const revalidate = 3600;
 
 export default async function Home() {
   let newArrivalsProducts: ShopifyProduct[] = [];
   let featuredProducts: ShopifyProduct[] = [];
+  let collections: ShopifyCollection[] = [];
 
   try {
-    const [newArrivalsCollection, allProducts] = await Promise.all([
+    const [newArrivalsCollection, allProducts, shopifyCollections] = await Promise.all([
       getCollectionByHandle("new-arrivals", 8).catch((err) => {
         console.error("Failed to load new-arrivals collection:", err);
         return null;
       }),
       getProducts(12).catch((err) => {
         console.error("Failed to load products catalogue:", err);
+        return [];
+      }),
+      getCollections(20).catch((err) => {
+        console.error("Failed to load collections from Shopify:", err);
         return [];
       }),
     ]);
@@ -34,6 +39,7 @@ export default async function Home() {
     }
 
     featuredProducts = allProducts;
+    collections = shopifyCollections;
   } catch (error) {
     console.error("Failed to load catalog data from Shopify:", error);
   }
@@ -44,10 +50,10 @@ export default async function Home() {
       <Hero />
 
       {/* 01.5 — Flipkart/Amazon Style Category Quick Strip */}
-      <CategoryQuickStrip />
+      <CategoryQuickStrip collections={collections} />
 
       {/* 02 — Curated Collections */}
-      <CuratedCollections />
+      <CuratedCollections collections={collections} />
 
       {/* 03 — Featured Jewellery Spotlight */}
       <FeaturedJewellery products={featuredProducts} />

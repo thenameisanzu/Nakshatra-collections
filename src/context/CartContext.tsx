@@ -98,50 +98,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setIsUpdating(false);
       }
     },
-    [cart?.id]
-  );
-
-  const updateItem = useCallback(
-    async (lineId: string, quantity: number) => {
-      if (!cart?.id) return;
-      setIsUpdating(true);
-      setError(null);
-
-      try {
-        if (quantity <= 0) {
-          return await removeItem(lineId);
-        }
-
-        const res = await fetch("/api/cart", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            action: "update",
-            cartId: cart.id,
-            lines: [{ id: lineId, quantity }],
-          }),
-        });
-
-        const data = await res.json();
-        if (!res.ok || data.error) {
-          throw new Error(data.error || "Failed to update item quantity");
-        }
-
-        setCart(data.cart);
-      } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : "Error updating item quantity";
-        setError(message);
-        console.error(err);
-      } finally {
-        setIsUpdating(false);
-      }
-    },
-    [cart?.id]
+    [cart]
   );
 
   const removeItem = useCallback(
     async (lineId: string) => {
-      if (!cart?.id) return;
+      const currentCartId = cart?.id || (typeof window !== "undefined" ? localStorage.getItem(CART_STORAGE_KEY) : null);
+      if (!currentCartId) return;
       setIsUpdating(true);
       setError(null);
 
@@ -151,7 +114,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             action: "remove",
-            cartId: cart.id,
+            cartId: currentCartId,
             lineIds: [lineId],
           }),
         });
@@ -170,7 +133,46 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setIsUpdating(false);
       }
     },
-    [cart?.id]
+    [cart]
+  );
+
+  const updateItem = useCallback(
+    async (lineId: string, quantity: number) => {
+      const currentCartId = cart?.id || (typeof window !== "undefined" ? localStorage.getItem(CART_STORAGE_KEY) : null);
+      if (!currentCartId) return;
+      setIsUpdating(true);
+      setError(null);
+
+      try {
+        if (quantity <= 0) {
+          return await removeItem(lineId);
+        }
+
+        const res = await fetch("/api/cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "update",
+            cartId: currentCartId,
+            lines: [{ id: lineId, quantity }],
+          }),
+        });
+
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          throw new Error(data.error || "Failed to update item quantity");
+        }
+
+        setCart(data.cart);
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Error updating item quantity";
+        setError(message);
+        console.error(err);
+      } finally {
+        setIsUpdating(false);
+      }
+    },
+    [cart, removeItem]
   );
 
   const totalQuantity = cart?.totalQuantity || 0;

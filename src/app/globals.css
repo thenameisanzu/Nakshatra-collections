@@ -283,6 +283,13 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  width: 100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-feature-settings: "pnum" on, "lnum" on;
 }

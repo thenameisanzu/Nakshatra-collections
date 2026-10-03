@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -26,6 +26,12 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: "NAKSHATRA COLLECTIONS | Artificial Jewellery Store",

@@ -195,12 +195,15 @@ export default function Footer() {
           {/* Customer Care (Span 2) */}
           <div className="lg:col-span-2">
             <h4
-              className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4 font-serif-luxury"
+              className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4 font-serif"
               style={{ color: "var(--text-primary)" }}
             >
               Client Care
             </h4>
             <ul className="flex flex-col gap-2.5 text-xs font-light" style={{ color: "var(--text-secondary)" }}>
+              <li>
+                <Link href="/account" className="hover:underline font-medium" style={{ color: "var(--accent-cta)" }}>Track Orders</Link>
+              </li>
               <li>
                 <Link href="/wishlist" className="hover:underline">Saved Wishlist</Link>
               </li>
@@ -208,10 +211,7 @@ export default function Footer() {
                 <Link href="/cart" className="hover:underline">Shopping Bag</Link>
               </li>
               <li>
-                <Link href="/our-story" className="hover:underline">Authenticity Guarantee</Link>
-              </li>
-              <li>
-                <Link href="/our-story" className="hover:underline">Care Guide</Link>
+                <Link href="/our-story" className="hover:underline">Anti-Tarnish Care Guide</Link>
               </li>
             </ul>
           </div>

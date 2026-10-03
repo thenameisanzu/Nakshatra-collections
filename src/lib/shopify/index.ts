@@ -834,94 +834,100 @@ export async function getCollectionByHandle(
 }
 
 /**
- * Searches products by keyword using Shopify Storefront API
+ * Searches products by keyword with intelligent token matching and category synonym expansion
  */
 export async function searchProducts(
   searchQuery: string,
-  first: number = 20
+  first: number = 30
 ): Promise<ShopifyProduct[]> {
-  if (!searchQuery.trim()) {
-    return getProducts(first);
+  const cleanQuery = (searchQuery || "").trim().toLowerCase();
+  
+  // 1. Fetch products from Shopify
+  let allProducts: ShopifyProduct[] = [];
+  try {
+    allProducts = await getProducts(100);
+  } catch (err) {
+    console.error("Failed to fetch products for search:", err);
+    return [];
   }
 
-  const query = `
-    query searchProducts($query: String!, $first: Int!) {
-      products(first: $first, query: $query) {
-        edges {
-          node {
-            id
-            handle
-            title
-            description
-            productType
-            availableForSale
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-              maxVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            compareAtPriceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-              maxVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            featuredImage {
-              url
-              altText
-              width
-              height
-            }
-            variants(first: 5) {
-              edges {
-                node {
-                  id
-                  title
-                  availableForSale
-                  price {
-                    amount
-                    currencyCode
-                  }
-                  compareAtPrice {
-                    amount
-                    currencyCode
-                  }
-                }
-              }
+  if (!cleanQuery) {
+    return allProducts.slice(0, first);
+  }
+
+  // Synonym dictionary for Indian / Kerala artificial jewellery
+  const synonyms: Record<string, string[]> = {
+    necklace: ["choker", "pendant", "chain", "haram", "mala", "necklace-set", "bridal"],
+    choker: ["necklace", "bridal", "jewellery-set", "necklace-set"],
+    earring: ["jhumka", "stud", "drop", "kammal", "dangler", "hoop"],
+    jhumka: ["earring", "stud", "drop"],
+    bangle: ["kada", "cuff", "bracelet", "valaya"],
+    bracelet: ["bangle", "kada", "cuff"],
+    ring: ["solitaire", "band", "finger ring", "diamond ring"],
+    anklet: ["payal", "kolusu", "footwear"],
+    payal: ["anklet", "kolusu"],
+    bridal: ["wedding", "temple", "heritage", "kundan", "necklace-set", "jewellery-set"],
+    gold: ["18k", "plated", "matte", "yellow"],
+    silver: ["white gold", "rhodium", "platinum"],
+    diamond: ["solitaire", "ad", "american diamond", "cz", "cubic zirconia"],
+  };
+
+  // Extract query keywords
+  const queryTokens = cleanQuery.split(/\s+/).filter(Boolean);
+
+  // Score each product
+  const scored = allProducts.map((product) => {
+    let score = 0;
+    const title = (product.title || "").toLowerCase();
+    const desc = (product.description || "").toLowerCase();
+    const pType = (product.productType || "").toLowerCase();
+    const handle = (product.handle || "").toLowerCase();
+
+    // Exact full query match
+    if (title === cleanQuery) score += 100;
+    else if (title.includes(cleanQuery)) score += 50;
+    else if (pType.includes(cleanQuery)) score += 40;
+    else if (handle.includes(cleanQuery)) score += 35;
+    else if (desc.includes(cleanQuery)) score += 20;
+
+    // Tokenized word match
+    for (const token of queryTokens) {
+      if (title.includes(token)) score += 25;
+      if (pType.includes(token)) score += 20;
+      if (handle.includes(token)) score += 15;
+      if (desc.includes(token)) score += 10;
+
+      // Check synonyms
+      for (const [key, synList] of Object.entries(synonyms)) {
+        if (token.includes(key) || key.includes(token)) {
+          for (const syn of synList) {
+            if (title.includes(syn) || pType.includes(syn) || desc.includes(syn)) {
+              score += 15;
             }
           }
         }
       }
     }
-  `;
 
-  try {
-    const data = await shopifyFetch<ShopifyProductsOperation["data"]>({
-      query,
-      variables: { query: searchQuery, first },
-      cache: "no-store",
+    return { product, score };
+  });
+
+  // Filter products that have at least some relevance score
+  const matched = scored
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map((item) => item.product);
+
+  // If no direct keyword score, fallback to partial inclusion
+  if (matched.length === 0) {
+    const fallback = allProducts.filter((p) => {
+      const combined = `${p.title} ${p.description || ""} ${p.productType || ""} ${p.handle}`.toLowerCase();
+      return queryTokens.some((t) => combined.includes(t));
     });
-
-    return data.products.edges.map((edge) => edge.node);
-  } catch (error) {
-    console.error("Shopify search failed, falling back to local filter:", error);
-    const allProducts = await getProducts(50).catch(() => []);
-    const normalizedQuery = searchQuery.toLowerCase();
-    return allProducts.filter(
-      (p) =>
-        p.title.toLowerCase().includes(normalizedQuery) ||
-        p.description?.toLowerCase().includes(normalizedQuery) ||
-        p.productType?.toLowerCase().includes(normalizedQuery)
-    );
+    return fallback.slice(0, first);
   }
+
+  return matched.slice(0, first);
 }
+
 

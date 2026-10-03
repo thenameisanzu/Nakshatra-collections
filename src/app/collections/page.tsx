@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight, Sparkles, ArrowRight, Truck, ShieldCheck, RotateCcw, Gem } from "lucide-react";
-import { getCollections } from "@/lib/shopify";
+import { ChevronRight, Sparkles, ArrowRight, Truck, ShieldCheck, RotateCcw, Gem, Search, X, Crown, Heart, CircleDot, Flame } from "lucide-react";
+import { getCollections, searchProducts } from "@/lib/shopify";
+import ProductCard from "@/components/ProductCard";
 
-export const revalidate = 3600;
+export const revalidate = 0; // Dynamic search handling
 
 export const metadata: Metadata = {
   title: "All Categories & Collections | NAKSHATRA COLLECTIONS",
@@ -48,8 +49,18 @@ const categoryBadges: Record<string, string> = {
   "new-arrivals": "Latest Designs",
 };
 
-export default async function CollectionsIndexPage() {
-  const collections = await getCollections(20).catch(() => []);
+interface PageProps {
+  searchParams: Promise<{ q?: string; search?: string }>;
+}
+
+export default async function CollectionsIndexPage({ searchParams }: PageProps) {
+  const resolvedParams = await searchParams;
+  const searchQuery = (resolvedParams.q || resolvedParams.search || "").trim();
+
+  const [collections, searchResults] = await Promise.all([
+    getCollections(20).catch(() => []),
+    searchQuery ? searchProducts(searchQuery, 50).catch(() => []) : Promise.resolve([]),
+  ]);
 
   return (
     <div
@@ -71,111 +82,278 @@ export default async function CollectionsIndexPage() {
             Home
           </Link>
           <ChevronRight className="h-3.5 w-3.5 opacity-60 shrink-0" />
-          <span className="font-bold" style={{ color: "var(--text-primary)" }}>
+          <Link
+            href="/collections"
+            className="transition-colors hover:underline"
+            style={{ color: searchQuery ? "var(--text-secondary)" : "var(--text-primary)" }}
+          >
             All Categories
-          </span>
+          </Link>
+          {searchQuery && (
+            <>
+              <ChevronRight className="h-3.5 w-3.5 opacity-60 shrink-0" />
+              <span className="font-bold" style={{ color: "var(--accent-cta)" }}>
+                Search: &ldquo;{searchQuery}&rdquo;
+              </span>
+            </>
+          )}
         </nav>
 
-        {/* Master Header */}
-        <div
-          className="rounded-3xl border p-6 sm:p-10 md:p-12 shadow-sm mb-10 transition-colors"
-          style={{
-            backgroundColor: "var(--bg-surface)",
-            borderColor: "var(--border-medium)",
-          }}
-        >
-          <div className="max-w-2xl">
-            <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass mb-3"
+        {/* 1. If Search Query is active -> Render Search Results Header & Grid */}
+        {searchQuery ? (
+          <div className="mb-14">
+            {/* Search Header Banner */}
+            <div
+              className="rounded-3xl border p-6 sm:p-10 shadow-sm mb-8 transition-colors"
               style={{
-                color: "var(--accent-cta)",
+                backgroundColor: "var(--bg-surface)",
+                borderColor: "var(--border-medium)",
+              }}
+            >
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <span
+                    className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass mb-3"
+                    style={{
+                      color: "var(--accent-cta)",
+                      borderColor: "var(--border-subtle)",
+                    }}
+                  >
+                    <Search className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+                    Live Search
+                  </span>
+                  <h1
+                    className="font-serif-luxury text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    Results for &ldquo;{searchQuery}&rdquo;
+                  </h1>
+                  <p className="mt-1 text-xs sm:text-sm font-light" style={{ color: "var(--text-secondary)" }}>
+                    Found {searchResults.length} {searchResults.length === 1 ? "creation" : "creations"} matching your search
+                  </p>
+                </div>
+
+                <Link
+                  href="/collections"
+                  className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider border transition-all hover:bg-black/5 self-start sm:self-auto"
+                  style={{
+                    backgroundColor: "var(--bg-secondary)",
+                    borderColor: "var(--border-subtle)",
+                    color: "var(--text-primary)",
+                  }}
+                >
+                  <X className="h-3.5 w-3.5" />
+                  <span>Clear Search</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Results Grid or Empty State */}
+            {searchResults.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                {searchResults.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div
+                className="rounded-3xl border border-dashed p-10 sm:p-16 text-center shadow-xs"
+                style={{
+                  backgroundColor: "var(--bg-surface)",
+                  borderColor: "var(--border-medium)",
+                }}
+              >
+                <Crown className="h-12 w-12 mx-auto mb-3 opacity-40" style={{ color: "var(--accent-gold)" }} />
+                <h3 className="font-serif text-xl sm:text-2xl font-normal" style={{ color: "var(--text-primary)" }}>
+                  No jewellery found for &ldquo;{searchQuery}&rdquo;
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm font-light max-w-md mx-auto" style={{ color: "var(--text-secondary)" }}>
+                  We couldn&apos;t find an exact match. Try searching for necklaces, bridal chokers, jhumkas, payals, or explore our collections below.
+                </p>
+                <div className="mt-6 flex flex-wrap justify-center gap-2">
+                  <Link
+                    href="/collections/bridal-jewellery"
+                    className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider border hover:bg-black/5"
+                    style={{ borderColor: "var(--border-subtle)", color: "var(--text-primary)" }}
+                  >
+                    Bridal Sets
+                  </Link>
+                  <Link
+                    href="/collections/necklaces"
+                    className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider border hover:bg-black/5"
+                    style={{ borderColor: "var(--border-subtle)", color: "var(--text-primary)" }}
+                  >
+                    Necklaces
+                  </Link>
+                  <Link
+                    href="/collections/earrings"
+                    className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider border hover:bg-black/5"
+                    style={{ borderColor: "var(--border-subtle)", color: "var(--text-primary)" }}
+                  >
+                    Earrings
+                  </Link>
+                  <Link
+                    href="/collections/new-arrivals"
+                    className="px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-white"
+                    style={{ backgroundColor: "var(--accent-cta)" }}
+                  >
+                    New Arrivals
+                  </Link>
+                </div>
+              </div>
+            )}
+
+            {/* Separator before all categories */}
+            <div className="mt-16 mb-8 border-t pt-10" style={{ borderColor: "var(--border-subtle)" }}>
+              <h2 className="font-serif-luxury text-2xl sm:text-3xl font-normal tracking-tight mb-2" style={{ color: "var(--text-primary)" }}>
+                Explore All Categories
+              </h2>
+              <p className="text-xs sm:text-sm font-light" style={{ color: "var(--text-secondary)" }}>
+                Browse our complete catalogue by jewellery type.
+              </p>
+            </div>
+          </div>
+        ) : (
+          /* 2. Standard Category Master Header (When No Search Query) */
+          <>
+            <div
+              className="rounded-3xl border p-6 sm:p-10 md:p-12 shadow-sm mb-10 transition-colors"
+              style={{
+                backgroundColor: "var(--bg-surface)",
+                borderColor: "var(--border-medium)",
+              }}
+            >
+              <div className="max-w-2xl">
+                <span
+                  className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.2em] shadow-xs liquid-glass mb-3"
+                  style={{
+                    color: "var(--accent-cta)",
+                    borderColor: "var(--border-subtle)",
+                  }}
+                >
+                  <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+                  Category Directory
+                </span>
+
+                <h1
+                  className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  Explore All Categories
+                </h1>
+
+                <p
+                  className="mt-3 text-sm sm:text-base leading-relaxed font-normal"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  Discover dedicated collections of anti-tarnish jewellery, 18K gold plated pieces, bridal necklace sets, and sparkling solitaires.
+                </p>
+              </div>
+            </div>
+
+            {/* Amazon/Flipkart Value Bar */}
+            <div
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-2xl border mb-10 transition-colors"
+              style={{
+                backgroundColor: "var(--bg-surface)",
                 borderColor: "var(--border-subtle)",
               }}
             >
-              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-              Category Directory
-            </span>
+              <div className="flex items-center gap-3 p-2">
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border"
+                  style={{
+                    backgroundColor: "var(--bg-secondary)",
+                    borderColor: "var(--border-subtle)",
+                    color: "var(--accent-gold)",
+                  }}
+                >
+                  <Truck className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+                    Express Delivery
+                  </h4>
+                  <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+                    2-4 Days in Kerala
+                  </p>
+                </div>
+              </div>
 
-            <h1
-              className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
-              style={{ color: "var(--text-primary)" }}
-            >
-              Explore All Categories
-            </h1>
+              <div className="flex items-center gap-3 p-2">
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border"
+                  style={{
+                    backgroundColor: "var(--bg-secondary)",
+                    borderColor: "var(--border-subtle)",
+                    color: "var(--accent-gold)",
+                  }}
+                >
+                  <ShieldCheck className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+                    100% Anti-Tarnish
+                  </h4>
+                  <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+                    Waterproof 18K Polish
+                  </p>
+                </div>
+              </div>
 
-            <p
-              className="mt-3 text-sm sm:text-base leading-relaxed font-normal"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Discover dedicated collections of anti-tarnish jewellery, 18K gold plated pieces, bridal necklace sets, and sparkling solitaires.
-            </p>
-          </div>
-        </div>
+              <div className="flex items-center gap-3 p-2">
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border"
+                  style={{
+                    backgroundColor: "var(--bg-secondary)",
+                    borderColor: "var(--border-subtle)",
+                    color: "var(--accent-gold)",
+                  }}
+                >
+                  <RotateCcw className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+                    7-Day Replacement
+                  </h4>
+                  <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+                    Easy Transit Protection
+                  </p>
+                </div>
+              </div>
 
-        {/* Amazon/Flipkart Value Bar */}
-        <div
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-2xl border mb-10 transition-colors"
-          style={{
-            backgroundColor: "var(--bg-surface)",
-            borderColor: "var(--border-subtle)",
-          }}
-        >
-          <div className="flex items-center gap-2.5 p-2">
-            <Truck className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
-            <div>
-              <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-                Fast Kerala Delivery
-              </p>
-              <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-                Tracked Express
-              </p>
+              <div className="flex items-center gap-3 p-2">
+                <div
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border"
+                  style={{
+                    backgroundColor: "var(--bg-secondary)",
+                    borderColor: "var(--border-subtle)",
+                    color: "var(--accent-gold)",
+                  }}
+                >
+                  <Gem className="h-4 w-4" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
+                    Hypoallergenic
+                  </h4>
+                  <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+                    Lead &amp; Nickel Free
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
+        )}
 
-          <div className="flex items-center gap-2.5 p-2">
-            <ShieldCheck className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
-            <div>
-              <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-                100% Anti-Tarnish
-              </p>
-              <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-                Shower &amp; Sweat Safe
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2.5 p-2">
-            <RotateCcw className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
-            <div>
-              <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-                Easy Exchange
-              </p>
-              <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-                7-Day Window
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2.5 p-2">
-            <Gem className="h-5 w-5 shrink-0" style={{ color: "var(--accent-cta)" }} />
-            <div>
-              <p className="text-xs font-bold" style={{ color: "var(--text-primary)" }}>
-                18K Real Gold Look
-              </p>
-              <p className="text-[10px]" style={{ color: "var(--text-muted)" }}>
-                Premium Micro-Plating
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Dedicated Categories Grid (Amazon & Flipkart Style Cards) */}
+        {/* Categories Grid Directory */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {collections.map((col) => {
             const imgSrc =
               col.image?.url ||
               categoryThumbnails[col.handle] ||
-              categoryThumbnails.necklaces;
+              "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242";
+
             const subtitle =
               categoryBadges[col.handle] || "Curated Jewellery Collection";
 

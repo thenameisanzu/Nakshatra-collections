@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import ThemeSwitcher from "./ThemeSwitcher";
+import InstantSearchModal from "./InstantSearchModal";
 import {
   Menu,
   X,
@@ -47,7 +48,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
@@ -63,6 +63,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Global Keyboard Shortcut: Cmd+K / Ctrl+K or / to open instant search
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setIsSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   // Close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -74,14 +86,6 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Handle Search Submission
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/collections?q=${encodeURIComponent(searchQuery.trim())}`);
-      setIsSearchOpen(false);
-    }
-  };
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -351,40 +355,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Search Overlay Bar */}
-        {isSearchOpen && (
-          <div
-            className="border-t py-3 px-4 sm:px-8 animate-in slide-in-from-top-2 duration-200"
-            style={{
-              backgroundColor: "var(--bg-surface)",
-              borderColor: "var(--border-subtle)",
-            }}
-          >
-            <div className="mx-auto max-w-xl flex items-center gap-3">
-              <Search className="h-4 w-4 shrink-0" style={{ color: "var(--accent-gold)" }} />
-              <form onSubmit={handleSearch} className="flex-1">
-                <input
-                  type="text"
-                  placeholder="Search 18K necklaces, bridal chokers, bangles, rings..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                  className="w-full bg-transparent text-xs sm:text-sm font-medium outline-hidden placeholder:text-[var(--text-muted)]"
-                  style={{ color: "var(--text-primary)" }}
-                />
-              </form>
-              <button
-                type="button"
-                onClick={() => setIsSearchOpen(false)}
-                className="text-xs uppercase tracking-wider font-semibold opacity-60 hover:opacity-100"
-                style={{ color: "var(--text-muted)" }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
-
         {/* Mobile Navigation Drawer */}
         {isOpen && (
           <div
@@ -401,6 +371,29 @@ export default function Navbar() {
                 <ThemeSwitcher />
               </div>
 
+              {/* Mobile Quick Search Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsSearchOpen(true);
+                }}
+                className="w-full flex items-center justify-between p-3 rounded-2xl border text-xs font-semibold tracking-wider uppercase transition active:scale-98"
+                style={{
+                  backgroundColor: "var(--bg-surface)",
+                  borderColor: "var(--border-subtle)",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                <span className="flex items-center gap-2">
+                  <Search className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
+                  <span>Search Jewellery...</span>
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full border bg-neutral-100" style={{ color: "var(--text-muted)", borderColor: "var(--border-subtle)" }}>
+                  Instant
+                </span>
+              </button>
+
               {/* Main Links */}
               <nav className="flex flex-col gap-1">
                 <Link
@@ -411,6 +404,7 @@ export default function Navbar() {
                 >
                   Home
                 </Link>
+
 
                 <Link
                   href="/collections"
@@ -470,6 +464,13 @@ export default function Navbar() {
           </div>
         )}
       </header>
+
+      {/* Instant Live Search & Filter Modal */}
+      <InstantSearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+      />
     </>
   );
 }
+

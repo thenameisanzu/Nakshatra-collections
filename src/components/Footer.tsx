@@ -142,7 +142,7 @@ export default function Footer() {
                 <Link href="/" className="hover:underline">Home</Link>
               </li>
               <li>
-                <Link href="/#collections" className="hover:underline">Collections</Link>
+                <Link href="/collections" className="hover:underline">All Collections</Link>
               </li>
               <li>
                 <Link href="/collections/new-arrivals" className="hover:underline font-semibold" style={{ color: "var(--accent-cta)" }}>New Arrivals</Link>
@@ -151,7 +151,7 @@ export default function Footer() {
                 <Link href="/our-story" className="hover:underline">About Story</Link>
               </li>
               <li>
-                <Link href="/#contact" className="hover:underline">Contact</Link>
+                <Link href="/contact" className="hover:underline">Contact Us</Link>
               </li>
             </ul>
           </div>
@@ -205,13 +205,16 @@ export default function Footer() {
                 <Link href="/account" className="hover:underline font-medium" style={{ color: "var(--accent-cta)" }}>Track Orders</Link>
               </li>
               <li>
+                <Link href="/shipping-policy" className="hover:underline">Shipping Policy</Link>
+              </li>
+              <li>
+                <Link href="/refund-policy" className="hover:underline">Return &amp; Refund</Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:underline">Contact Support</Link>
+              </li>
+              <li>
                 <Link href="/wishlist" className="hover:underline">Saved Wishlist</Link>
-              </li>
-              <li>
-                <Link href="/cart" className="hover:underline">Shopping Bag</Link>
-              </li>
-              <li>
-                <Link href="/our-story" className="hover:underline">Anti-Tarnish Care Guide</Link>
               </li>
             </ul>
           </div>
@@ -230,11 +233,13 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-6">
-            <span className="hover:underline cursor-pointer">Privacy Policy</span>
-            <span className="hover:underline cursor-pointer">Terms of Service</span>
-            <span className="hover:underline cursor-pointer">Shipping &amp; Returns</span>
+            <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="hover:underline">Terms of Service</Link>
+            <Link href="/shipping-policy" className="hover:underline">Shipping Policy</Link>
+            <Link href="/refund-policy" className="hover:underline">Refund Policy</Link>
           </div>
         </div>
+
       </div>
     </footer>
   );

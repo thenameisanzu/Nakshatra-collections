@@ -833,3 +833,95 @@ export async function getCollectionByHandle(
   return data.collection;
 }
 
+/**
+ * Searches products by keyword using Shopify Storefront API
+ */
+export async function searchProducts(
+  searchQuery: string,
+  first: number = 20
+): Promise<ShopifyProduct[]> {
+  if (!searchQuery.trim()) {
+    return getProducts(first);
+  }
+
+  const query = `
+    query searchProducts($query: String!, $first: Int!) {
+      products(first: $first, query: $query) {
+        edges {
+          node {
+            id
+            handle
+            title
+            description
+            productType
+            availableForSale
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            compareAtPriceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+              maxVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            featuredImage {
+              url
+              altText
+              width
+              height
+            }
+            variants(first: 5) {
+              edges {
+                node {
+                  id
+                  title
+                  availableForSale
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  compareAtPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const data = await shopifyFetch<ShopifyProductsOperation["data"]>({
+      query,
+      variables: { query: searchQuery, first },
+      cache: "no-store",
+    });
+
+    return data.products.edges.map((edge) => edge.node);
+  } catch (error) {
+    console.error("Shopify search failed, falling back to local filter:", error);
+    const allProducts = await getProducts(50).catch(() => []);
+    const normalizedQuery = searchQuery.toLowerCase();
+    return allProducts.filter(
+      (p) =>
+        p.title.toLowerCase().includes(normalizedQuery) ||
+        p.description?.toLowerCase().includes(normalizedQuery) ||
+        p.productType?.toLowerCase().includes(normalizedQuery)
+    );
+  }
+}
+

@@ -166,113 +166,153 @@ export default function CuratedCollections({ collections }: CuratedCollectionsPr
           };
         })
       : defaultCollectionsData;
+
   return (
     <section
       id="collections"
-      className="py-10 sm:py-14 border-t transition-colors scroll-mt-24"
+      className="py-14 sm:py-20 border-t transition-colors scroll-mt-24"
       style={{ borderColor: "var(--border-subtle)" }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex items-end justify-between mb-6 sm:mb-8 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               <span
-                className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.2em]"
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.22em] liquid-glass border"
                 style={{
                   backgroundColor: "var(--tag-bg)",
                   color: "var(--tag-text)",
+                  borderColor: "var(--border-subtle)",
                 }}
               >
-                <Sparkles className="h-2.5 w-2.5" style={{ color: "var(--accent-gold)" }} />
-                Categories
+                <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
+                The Nakshatra Atelier
               </span>
             </div>
             <h2
-              className="font-serif-luxury mt-2 text-2xl sm:text-3xl font-semibold tracking-tight"
+              className="font-serif-luxury mt-2.5 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
-              Shop By Category
+              Curated Collections Mosaic
             </h2>
             <p
-              className="mt-1 text-xs sm:text-sm"
+              className="mt-2 text-sm sm:text-base font-medium max-w-xl"
               style={{ color: "var(--text-secondary)" }}
             >
-              Explore anti-tarnish daily wear and festive sets.
+              Explore 8 dedicated artificial jewellery categories crafted with 18K micro-gold plating and 100% anti-tarnish guarantee.
             </p>
           </div>
 
           <Link
             href="/collections"
-            className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider hover:underline transition-colors shrink-0"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest hover:underline transition-all shrink-0 py-1"
             style={{ color: "var(--accent-cta)" }}
           >
-            <span>View All</span>
-            <ArrowRight className="h-3.5 w-3.5" />
+            <span>View All 8 Categories</span>
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* Compact, Balanced Category Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
-          {displayItems.map((item) => (
-            <Link
-              key={item.handle}
-              href={`/collections/${item.handle}`}
-              className="group relative rounded-2xl overflow-hidden border p-4 sm:p-5 flex flex-col justify-between h-[180px] sm:h-[200px] transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-              style={{
-                backgroundColor: "var(--bg-surface)",
-                borderColor: "var(--border-medium)",
-              }}
-            >
-              {/* Product Background Image Thumbnail */}
-              <div className="absolute right-0 bottom-0 top-0 w-1/2 opacity-95 transition-transform duration-500 ease-out group-hover:scale-105">
-                <Image
-                  src={item.imageSrc}
-                  alt={item.imageAlt}
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-contain object-right-bottom p-2"
-                />
-              </div>
+        {/* Asymmetrical Luxury Editorial Mosaic Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {displayItems.map((item, index) => {
+            // Asymmetrical layout configuration for luxury magazine feel
+            const isFeaturedWide = index === 0 || index === 3;
+            const isFullWidthBanner = index === 7;
 
-              {/* Gradient Mask for crisp readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[color:var(--bg-surface)] via-[color:var(--bg-surface)]/85 to-transparent pointer-events-none" />
-
-              {/* Tag Pill */}
-              <div className="relative z-10">
-                <span
-                  className="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-wider liquid-glass"
-                  style={{ color: "var(--accent-gold)" }}
-                >
-                  <Gem className="h-2.5 w-2.5" />
-                  {item.tag}
-                </span>
-              </div>
-
-              {/* Title, Subtitle, and CTA */}
-              <div className="relative z-10 max-w-[65%] mt-auto">
-                <h3
-                  className="font-serif-luxury text-lg sm:text-xl font-bold tracking-tight line-clamp-1"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  className="mt-0.5 text-[11px] sm:text-xs line-clamp-1 opacity-80"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  {item.subtitle}
-                </p>
+            return (
+              <Link
+                key={item.handle}
+                href={`/collections/${item.handle}`}
+                className={`group relative rounded-3xl overflow-hidden border p-5 sm:p-7 flex flex-col justify-between card-lift ${
+                  isFullWidthBanner
+                    ? "sm:col-span-2 lg:col-span-3 min-h-[220px] sm:min-h-[250px]"
+                    : isFeaturedWide
+                    ? "sm:col-span-2 min-h-[220px] sm:min-h-[270px]"
+                    : "min-h-[210px] sm:min-h-[250px]"
+                }`}
+                style={{
+                  backgroundColor: "var(--bg-surface)",
+                  borderColor: "var(--border-medium)",
+                  boxShadow: "var(--card-shadow)",
+                }}
+              >
+                {/* Visual Imagery Background with Soft Zoom */}
                 <div
-                  className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider group-hover:translate-x-1 transition-transform"
-                  style={{ color: "var(--accent-cta)" }}
+                  className={`absolute right-0 bottom-0 top-0 transition-transform duration-700 ease-out group-hover:scale-108 ${
+                    isFullWidthBanner
+                      ? "w-1/2 sm:w-2/5"
+                      : isFeaturedWide
+                      ? "w-3/5 sm:w-1/2"
+                      : "w-1/2"
+                  }`}
                 >
-                  <span>Explore</span>
-                  <ArrowRight className="h-3 w-3" />
+                  <Image
+                    src={item.imageSrc}
+                    alt={item.imageAlt}
+                    fill
+                    sizes="(max-width: 640px) 75vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-contain object-right-bottom p-3 sm:p-4 opacity-95"
+                  />
                 </div>
-              </div>
-            </Link>
-          ))}
+
+                {/* Scrim Gradient overlay ensuring crisp contrast */}
+                <div
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-90"
+                  style={{
+                    background:
+                      "linear-gradient(to right, var(--bg-surface) 0%, var(--bg-surface) 48%, rgba(255,255,255,0.7) 75%, transparent 100%)",
+                  }}
+                />
+
+                {/* Top: Luxury Tag & Counter Pill */}
+                <div className="relative z-10 flex items-center justify-between gap-2">
+                  <span
+                    className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider liquid-glass border"
+                    style={{
+                      color: "var(--accent-cta)",
+                      borderColor: "var(--border-subtle)",
+                    }}
+                  >
+                    <Gem className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+                    {item.tag}
+                  </span>
+
+                  <span
+                    className="text-[11px] font-mono font-extrabold tracking-widest opacity-60"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    0{index + 1}
+                  </span>
+                </div>
+
+                {/* Bottom: Typography, Subtitle & Reveal CTA */}
+                <div className={`relative z-10 mt-auto ${isFeaturedWide ? "max-w-[65%] sm:max-w-[55%]" : "max-w-[70%]"}`}>
+                  <h3
+                    className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight line-clamp-1 group-hover:opacity-90 transition-opacity"
+                    style={{ color: "var(--text-primary)" }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    className="mt-1 text-xs sm:text-sm line-clamp-2 leading-relaxed font-medium opacity-90"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    {item.subtitle}
+                  </p>
+
+                  <div
+                    className="mt-3.5 inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold uppercase tracking-wider group-hover:translate-x-1.5 transition-transform duration-300"
+                    style={{ color: "var(--accent-cta)" }}
+                  >
+                    <span>Explore Collection</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

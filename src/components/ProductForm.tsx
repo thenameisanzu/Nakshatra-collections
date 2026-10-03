@@ -19,6 +19,7 @@ import {
   Headphones,
   Heart,
 } from "lucide-react";
+import PincodeEstimator from "./PincodeEstimator";
 
 interface ProductFormProps {
   product: ShopifyProduct;
@@ -499,6 +500,9 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
           </span>
         </div>
       </div>
+
+      {/* Kerala & India Delivery Pincode Checker */}
+      <PincodeEstimator />
 
       {/* Product Details & Specifications Accordion */}
       <div

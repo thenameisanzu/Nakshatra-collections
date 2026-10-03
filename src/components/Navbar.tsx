@@ -16,17 +16,29 @@ import {
   ChevronRight,
   Sparkles,
   ArrowRight,
+  Gem,
+  Crown,
+  Flame,
+  CircleDot,
+  type LucideIcon,
 } from "lucide-react";
 
-const categories = [
-  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: "📿", desc: "Chokers & Layered Gold Chains" },
-  { label: "Earrings & Drops", href: "/collections/earrings", icon: "💎", desc: "Daily Studs, Jhumkas & Pearls" },
-  { label: "Necklace Sets", href: "/collections/necklace-sets", icon: "👑", desc: "Harmonious Matching Sets" },
-  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery", icon: "👰", desc: "Kerala Bridal & Festive Heritage" },
-  { label: "Bangles & Bracelets", href: "/collections/bangles", icon: "🌟", desc: "Waterproof Cuffs & Daily Bangles" },
-  { label: "Rings & Solitaires", href: "/collections/rings", icon: "💍", desc: "American Diamond & Bands" },
-  { label: "Anklets & Payals", href: "/collections/anklets", icon: "✨", desc: "Anti-Tarnish Daily Payals" },
-  { label: "New Arrivals", href: "/collections/new-arrivals", icon: "🔥", desc: "Fresh Designs & Latest Trends" },
+interface CategoryNavItem {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+  desc: string;
+}
+
+const categories: CategoryNavItem[] = [
+  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Sparkles, desc: "Chokers & Layered Gold Chains" },
+  { label: "Earrings & Drops", href: "/collections/earrings", icon: Gem, desc: "Daily Studs, Jhumkas & Pearls" },
+  { label: "Necklace Sets", href: "/collections/necklace-sets", icon: Crown, desc: "Harmonious Matching Sets" },
+  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery", icon: Heart, desc: "Kerala Bridal & Festive Heritage" },
+  { label: "Bangles & Bracelets", href: "/collections/bangles", icon: CircleDot, desc: "Waterproof Cuffs & Daily Bangles" },
+  { label: "Rings & Solitaires", href: "/collections/rings", icon: Gem, desc: "American Diamond & Bands" },
+  { label: "Anklets & Payals", href: "/collections/anklets", icon: Sparkles, desc: "Anti-Tarnish Daily Payals" },
+  { label: "New Arrivals", href: "/collections/new-arrivals", icon: Flame, desc: "Fresh Designs & Latest Trends" },
 ];
 
 export default function Navbar() {
@@ -226,9 +238,18 @@ export default function Navbar() {
                           onClick={() => setIsCategoryOpen(false)}
                           className="flex items-start gap-2.5 p-2.5 rounded-2xl transition-all hover:bg-black/5 active:scale-95 group"
                         >
-                          <span className="text-xl shrink-0 group-hover:scale-110 transition-transform">
-                            {cat.icon}
-                          </span>
+                          <div
+                            className="flex h-7 w-7 items-center justify-center rounded-xl shrink-0 border shadow-xs"
+                            style={{
+                              backgroundColor: "var(--bg-secondary)",
+                              borderColor: "var(--border-subtle)",
+                            }}
+                          >
+                            <cat.icon
+                              className="h-3.5 w-3.5 group-hover:scale-110 transition-transform"
+                              style={{ color: "var(--accent-gold)" }}
+                            />
+                          </div>
                           <div className="flex flex-col">
                             <span className="text-xs font-bold font-serif-luxury" style={{ color: "var(--text-primary)" }}>
                               {cat.label}
@@ -445,7 +466,7 @@ export default function Navbar() {
                         borderColor: "var(--border-subtle)",
                       }}
                     >
-                      <span>{cat.icon}</span>
+                      <cat.icon className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
                       <span className="truncate">{cat.label}</span>
                     </Link>
                   ))}

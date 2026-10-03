@@ -178,10 +178,10 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
                   className="object-cover object-center p-1"
                 />
               </div>
-              <span className="text-[11px] sm:text-xs font-bold font-serif-luxury line-clamp-1" style={{ color: "var(--text-primary)" }}>
+              <span className="text-xs sm:text-sm font-bold font-serif-luxury line-clamp-1 group-hover:underline" style={{ color: "var(--text-primary)" }}>
                 {item.name}
               </span>
-              <span className="text-[9.5px] hidden sm:block mt-0.5 opacity-70" style={{ color: "var(--text-muted)" }}>
+              <span className="text-[10px] sm:text-xs font-semibold hidden sm:block mt-0.5 opacity-80" style={{ color: "var(--text-muted)" }}>
                 {item.label}
               </span>
             </Link>

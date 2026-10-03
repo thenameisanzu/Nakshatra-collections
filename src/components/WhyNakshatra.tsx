@@ -53,14 +53,14 @@ export default function WhyNakshatra() {
           </span>
 
           <h2
-            className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
+            className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
             style={{ color: "var(--text-primary)" }}
           >
             Why Nakshatra
           </h2>
 
           <p
-            className="mt-2 text-sm sm:text-base leading-relaxed"
+            className="mt-2 text-sm sm:text-base leading-relaxed font-medium"
             style={{ color: "var(--text-secondary)" }}
           >
             Our pledge to refined aesthetics, authentic metalcraft, and an elevated jewellery acquisition experience.
@@ -77,36 +77,36 @@ export default function WhyNakshatra() {
                 className="group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl border transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                 style={{
                   backgroundColor: "var(--bg-surface)",
-                  borderColor: "var(--border-subtle)",
+                  borderColor: "var(--border-medium)",
                 }}
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <div
-                      className="flex h-11 w-11 items-center justify-center rounded-2xl border transition-colors group-hover:border-[color:var(--accent-gold)]"
+                      className="flex h-12 w-12 items-center justify-center rounded-2xl border transition-colors group-hover:border-[color:var(--accent-gold)]"
                       style={{
                         backgroundColor: "var(--bg-primary)",
                         borderColor: "var(--border-subtle)",
                         color: "var(--accent-gold)",
                       }}
                     >
-                      <Icon className="h-5 w-5" />
+                      <Icon className="h-6 w-6" />
                     </div>
-                    <span className="text-[11px] font-mono tracking-widest font-semibold" style={{ color: "var(--text-muted)" }}>
+                    <span className="text-xs font-mono tracking-widest font-extrabold" style={{ color: "var(--text-muted)" }}>
                       {item.number}
                     </span>
                   </div>
 
                   <h3
-                    className="font-serif-luxury text-lg font-bold tracking-tight"
+                    className="font-serif-luxury text-lg sm:text-xl font-bold tracking-tight"
                     style={{ color: "var(--text-primary)" }}
                   >
                     {item.title}
                   </h3>
 
                   <p
-                    className="mt-2.5 text-xs leading-relaxed"
-                    style={{ color: "var(--text-muted)" }}
+                    className="mt-2.5 text-xs sm:text-sm leading-relaxed font-normal"
+                    style={{ color: "var(--text-secondary)" }}
                   >
                     {item.description}
                   </p>

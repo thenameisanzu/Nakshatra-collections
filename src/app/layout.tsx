@@ -6,13 +6,17 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
+import { QuickViewProvider } from "@/context/QuickViewContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
 import WhatsAppSupportButton from "@/components/WhatsAppSupportButton";
+import QuickViewModal from "@/components/QuickViewModal";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -29,21 +33,6 @@ export const metadata: Metadata = {
     "Discover Nakshatra Collections - anti-tarnish artificial jewellery, 18K gold plated daily wear, wedding jewellery sets, and solitaire rings with fast delivery in Kerala & India.",
 };
 
-const themeInitializerScript = `
-  (function() {
-    try {
-      var saved = localStorage.getItem('nakshatra_jewellery_theme');
-      if (saved && (saved === 'champagne-luxury' || saved === 'soft-blush' || saved === 'sage-contemporary')) {
-        document.documentElement.setAttribute('data-theme', saved);
-      } else {
-        document.documentElement.setAttribute('data-theme', 'champagne-luxury');
-      }
-    } catch(e) {
-      document.documentElement.setAttribute('data-theme', 'champagne-luxury');
-    }
-  })();
-`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,18 +45,19 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${playfair.variable} ${jakarta.variable} h-full scroll-smooth antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitializerScript }} />
-      </head>
-      <body className="min-h-full flex flex-col font-sans selection:bg-[#C9A45C]/30 selection:text-[#261C14]">
+      <body className="min-h-full flex flex-col font-sans selection:bg-[#C9A45C]/30 selection:text-[#261C14] pb-16 lg:pb-0">
         <ThemeProvider>
           <CartProvider>
             <WishlistProvider>
-              <Navbar />
-              <div className="flex-1">{children}</div>
-              <Footer />
-              <CartDrawer />
-              <WhatsAppSupportButton />
+              <QuickViewProvider>
+                <Navbar />
+                <div className="flex-1">{children}</div>
+                <Footer />
+                <CartDrawer />
+                <WhatsAppSupportButton />
+                <QuickViewModal />
+                <MobileBottomNav />
+              </QuickViewProvider>
             </WishlistProvider>
           </CartProvider>
         </ThemeProvider>

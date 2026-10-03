@@ -59,13 +59,13 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
               Best Sellers
             </span>
             <h2
-              className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
+              className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
               Customer Favorites
             </h2>
             <p
-              className="mt-2 text-sm sm:text-base leading-relaxed"
+              className="mt-2 text-sm sm:text-base leading-relaxed font-medium"
               style={{ color: "var(--text-secondary)" }}
             >
               Our most popular anti-tarnish and gold-plated designs loved for their real gold shine and durability.
@@ -74,11 +74,11 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
 
           <Link
             href="/#products"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:underline transition-colors shrink-0"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest hover:underline transition-colors shrink-0"
             style={{ color: "var(--accent-cta)" }}
           >
             <span>View All Jewellery</span>
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -95,13 +95,13 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
             {/* Top Badges */}
             <div className="relative z-10 flex items-center justify-between">
               <span
-                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider liquid-glass"
+                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-extrabold uppercase tracking-wider liquid-glass"
                 style={{ color: "var(--accent-gold)" }}
               >
                 <Gem className="h-3.5 w-3.5" />
                 Spotlight Creation
               </span>
-              <span className="text-[10px] font-mono tracking-widest" style={{ color: "var(--text-muted)" }}>
+              <span className="text-[11px] font-mono font-bold tracking-widest" style={{ color: "var(--text-muted)" }}>
                 {heroFeatured.productType || "Bespoke Atelier"}
               </span>
             </div>
@@ -123,32 +123,32 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
             </Link>
 
             {/* Bottom Card Summary */}
-            <div className="relative z-10 pt-4 border-t" style={{ borderColor: "var(--border-subtle)" }}>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="relative z-10 pt-5 border-t" style={{ borderColor: "var(--border-subtle)" }}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <Link href={`/products/${heroFeatured.handle}`}>
                     <h3
-                      className="font-serif-luxury text-xl sm:text-2xl font-normal tracking-wide hover:underline"
+                      className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight hover:underline"
                       style={{ color: "var(--text-primary)" }}
                     >
                       {heroFeatured.title}
                     </h3>
                   </Link>
-                  <p className="text-base font-bold mt-1" style={{ color: "var(--accent-cta)" }}>
+                  <p className="text-lg sm:text-xl font-extrabold mt-1" style={{ color: "var(--accent-cta)" }}>
                     {heroPrice}
                   </p>
                 </div>
 
                 <Link
                   href={`/products/${heroFeatured.handle}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-wider shadow-md transition-all hover:scale-105 active:scale-95 shrink-0"
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-xs font-extrabold uppercase tracking-widest shadow-md transition-all hover:scale-105 active:scale-95 shrink-0"
                   style={{
                     backgroundColor: "var(--accent-cta)",
                     color: "var(--accent-cta-text)",
                   }}
                 >
                   <span>Acquire Piece</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>

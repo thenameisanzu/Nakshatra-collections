@@ -17,6 +17,13 @@ import {
   Grid3X3,
   LayoutGrid,
   HelpCircle,
+  Gem,
+  Crown,
+  Flame,
+  CircleDot,
+  Heart,
+  Layers,
+  type LucideIcon,
 } from "lucide-react";
 
 interface CategoryViewProps {
@@ -25,17 +32,29 @@ interface CategoryViewProps {
   initialProducts: ShopifyProduct[];
 }
 
-const categoryIcons: Record<string, string> = {
-  necklaces: "📿",
-  earrings: "💎",
-  rings: "💍",
-  bracelets: "🌟",
-  bangles: "🌟",
-  "jewellery-sets": "👑",
-  "necklace-sets": "👑",
-  "bridal-jewellery": "👰",
-  anklets: "✨",
-  "new-arrivals": "🔥",
+const getCategoryIcon = (handle: string): LucideIcon => {
+  switch (handle) {
+    case "new-arrivals":
+      return Flame;
+    case "necklaces":
+      return Gem;
+    case "earrings":
+      return Sparkles;
+    case "necklace-sets":
+    case "jewellery-sets":
+      return Layers;
+    case "bridal-jewellery":
+      return Crown;
+    case "bangles":
+    case "bracelets":
+      return CircleDot;
+    case "rings":
+      return Heart;
+    case "anklets":
+      return Sparkles;
+    default:
+      return Gem;
+  }
 };
 
 const categoryFaqs: Record<string, Array<{ q: string; a: string }>> = {
@@ -226,23 +245,24 @@ export default function CategoryView({
           <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
             <Link
               href="/#products"
-              className="px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border liquid-glass hover:scale-105 transition-all"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap border liquid-glass hover:scale-105 transition-all"
               style={{
                 color: "var(--text-secondary)",
                 borderColor: "var(--border-medium)",
               }}
             >
-              ✨ All
+              <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
+              <span>All</span>
             </Link>
 
             {allCollections.map((col) => {
               const isActive = col.handle === collection.handle;
-              const icon = categoryIcons[col.handle] || "💎";
+              const IconComp = getCategoryIcon(col.handle);
               return (
                 <Link
                   key={col.id}
                   href={`/collections/${col.handle}`}
-                  className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all duration-200 ${
                     isActive
                       ? "shadow-sm scale-105"
                       : "border liquid-glass hover:scale-105"
@@ -253,7 +273,7 @@ export default function CategoryView({
                     borderColor: isActive ? "transparent" : "var(--border-medium)",
                   }}
                 >
-                  <span className="mr-1">{icon}</span>
+                  <IconComp className="h-3 w-3 shrink-0" style={{ color: isActive ? "var(--accent-cta-text)" : "var(--accent-gold)" }} />
                   <span>{col.title}</span>
                 </Link>
               );
@@ -273,7 +293,7 @@ export default function CategoryView({
       >
         {/* Left: Price Filter Pills */}
         <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider hidden sm:inline-block mr-1" style={{ color: "var(--text-muted)" }}>
+          <span className="text-xs font-extrabold uppercase tracking-wider hidden sm:inline-block mr-1" style={{ color: "var(--text-muted)" }}>
             Price:
           </span>
           {[
@@ -288,15 +308,15 @@ export default function CategoryView({
                 key={pill.id}
                 type="button"
                 onClick={() => setPriceFilter(pill.id as "all" | "under-2000" | "2000-3500" | "above-3500")}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+                className={`rounded-full px-3.5 py-1.5 text-xs transition-all cursor-pointer ${
                   isSelected
-                    ? "font-bold shadow-xs"
-                    : "border opacity-80 hover:opacity-100"
+                    ? "font-extrabold shadow-sm scale-105"
+                    : "font-semibold border opacity-85 hover:opacity-100"
                 }`}
                 style={{
                   backgroundColor: isSelected ? "var(--accent-cta)" : "var(--bg-primary)",
                   color: isSelected ? "var(--accent-cta-text)" : "var(--text-primary)",
-                  borderColor: isSelected ? "transparent" : "var(--border-subtle)",
+                  borderColor: isSelected ? "transparent" : "var(--border-medium)",
                 }}
               >
                 {pill.label}
@@ -308,18 +328,18 @@ export default function CategoryView({
           <button
             type="button"
             onClick={() => setInStockOnly(!inStockOnly)}
-            className={`flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+            className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${
               inStockOnly
-                ? "font-bold border shadow-xs"
-                : "border opacity-80 hover:opacity-100"
+                ? "border shadow-sm scale-105"
+                : "border opacity-85 hover:opacity-100"
             }`}
             style={{
               backgroundColor: inStockOnly ? "var(--tag-bg)" : "var(--bg-primary)",
               color: inStockOnly ? "var(--tag-text)" : "var(--text-primary)",
-              borderColor: inStockOnly ? "var(--accent-gold)" : "var(--border-subtle)",
+              borderColor: inStockOnly ? "var(--accent-gold)" : "var(--border-medium)",
             }}
           >
-            {inStockOnly && <Check className="h-3 w-3 text-emerald-600" />}
+            {inStockOnly && <Check className="h-3.5 w-3.5 text-emerald-600" />}
             <span>In Stock Only</span>
           </button>
         </div>
@@ -332,7 +352,7 @@ export default function CategoryView({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as "featured" | "price-asc" | "price-desc" | "name")}
-              className="rounded-xl px-2.5 py-1.5 text-xs font-medium bg-transparent border cursor-pointer focus:outline-none"
+              className="rounded-xl px-3 py-1.5 text-xs font-bold bg-transparent border cursor-pointer focus:outline-none"
               style={{
                 color: "var(--text-primary)",
                 borderColor: "var(--border-medium)",
@@ -385,8 +405,8 @@ export default function CategoryView({
       {/* ---------------------------------------------------------------------- */}
       <div>
         <div className="flex items-center justify-between mb-4 px-1">
-          <p className="text-xs font-semibold" style={{ color: "var(--text-muted)" }}>
-            Showing <strong style={{ color: "var(--text-primary)" }}>{filteredProducts.length}</strong> of {initialProducts.length} items in {collection.title}
+          <p className="text-xs sm:text-sm font-semibold" style={{ color: "var(--text-muted)" }}>
+            Showing <strong className="font-extrabold" style={{ color: "var(--text-primary)" }}>{filteredProducts.length}</strong> of {initialProducts.length} items in {collection.title}
           </p>
 
           {(priceFilter !== "all" || inStockOnly) && (
@@ -396,7 +416,7 @@ export default function CategoryView({
                 setPriceFilter("all");
                 setInStockOnly(false);
               }}
-              className="text-xs underline cursor-pointer"
+              className="text-xs font-bold underline cursor-pointer"
               style={{ color: "var(--accent-cta)" }}
             >
               Reset Filters
@@ -413,10 +433,10 @@ export default function CategoryView({
             }}
           >
             <Sparkles className="h-8 w-8 mb-3" style={{ color: "var(--accent-gold)" }} />
-            <h3 className="font-serif-luxury text-xl font-normal" style={{ color: "var(--text-primary)" }}>
+            <h3 className="font-serif-luxury text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
               No items match your filter
             </h3>
-            <p className="mt-1 text-xs max-w-sm" style={{ color: "var(--text-muted)" }}>
+            <p className="mt-1 text-sm max-w-sm font-medium" style={{ color: "var(--text-muted)" }}>
               Try adjusting your price range or stock filter to see more designs.
             </p>
             <button
@@ -425,7 +445,7 @@ export default function CategoryView({
                 setPriceFilter("all");
                 setInStockOnly(false);
               }}
-              className="mt-4 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider border cursor-pointer"
+              className="mt-4 rounded-full px-6 py-2.5 text-xs font-extrabold uppercase tracking-wider border cursor-pointer transition hover:scale-105"
               style={{
                 backgroundColor: "var(--accent-cta)",
                 color: "var(--accent-cta-text)",
@@ -436,12 +456,12 @@ export default function CategoryView({
           </div>
         ) : (
           <div
-            className={`grid grid-cols-2 gap-2.5 sm:gap-4 ${
+            className={`grid grid-cols-2 gap-3.5 sm:gap-6 ${
               gridCols === 2
                 ? "md:grid-cols-2 lg:grid-cols-2"
                 : gridCols === 3
-                ? "sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3"
-                : "sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5"
+                ? "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+                : "sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
             }`}
           >
             {filteredProducts.map((product) => (

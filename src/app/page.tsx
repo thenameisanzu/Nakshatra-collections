@@ -3,9 +3,10 @@ import CategoryQuickStrip from "@/components/CategoryQuickStrip";
 import CuratedCollections from "@/components/CuratedCollections";
 import FeaturedJewellery from "@/components/FeaturedJewellery";
 import NewArrivalsSection from "@/components/NewArrivalsSection";
+import ShopTheLook from "@/components/ShopTheLook";
 import CampaignStatement from "@/components/CampaignStatement";
 import WhyNakshatra from "@/components/WhyNakshatra";
-import Newsletter from "@/components/Newsletter";
+import CustomerReviews from "@/components/CustomerReviews";
 import { getProducts, getCollectionByHandle, getCollections } from "@/lib/shopify";
 import type { ShopifyProduct, ShopifyCollection } from "@/types/shopify";
 
@@ -49,10 +50,10 @@ export default async function Home() {
       {/* 01 — Cinematic Hero Carousel */}
       <Hero />
 
-      {/* 01.5 — Flipkart/Amazon Style Category Quick Strip */}
+      {/* 01.5 — Category Quick Strip */}
       <CategoryQuickStrip collections={collections} />
 
-      {/* 02 — Curated Collections */}
+      {/* 02 — Curated Collections Mosaic */}
       <CuratedCollections collections={collections} />
 
       {/* 03 — Featured Jewellery Spotlight */}
@@ -61,14 +62,17 @@ export default async function Home() {
       {/* 04 — New Arrivals */}
       <NewArrivalsSection products={newArrivalsProducts} />
 
+      {/* 05 — Shop The Look / Visual Styling Canvas */}
+      <ShopTheLook products={featuredProducts} />
+
       {/* 06 — Campaign Statement */}
       <CampaignStatement />
 
-      {/* 07 — Why Nakshatra */}
+      {/* 07 — Why Nakshatra Atelier Standards */}
       <WhyNakshatra />
 
-      {/* 08 — Newsletter */}
-      <Newsletter />
+      {/* 08 — Customer Photo Reviews & Stories */}
+      <CustomerReviews />
     </main>
   );
 }

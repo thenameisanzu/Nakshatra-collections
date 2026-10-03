@@ -31,25 +31,25 @@ export default function CampaignStatement() {
       {/* Centered Campaign Content */}
       <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center text-white">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.25em] liquid-glass-dark mb-6"
+          className="inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.25em] liquid-glass-dark mb-6"
           style={{ color: "#E0BE75" }}
         >
-          <Sparkles className="h-3 w-3" />
+          <Sparkles className="h-3.5 w-3.5" />
           Everyday &amp; Wedding Jewellery
         </span>
 
-        <h2 className="font-serif-luxury text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight leading-[1.1] text-white">
+        <h2 className="font-serif-luxury text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold sm:font-extrabold tracking-tight leading-[1.08] text-white">
           Jewellery That Shines With You
         </h2>
 
-        <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-neutral-200 max-w-xl mx-auto font-normal leading-relaxed">
+        <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-neutral-200 max-w-xl mx-auto font-medium leading-relaxed">
           Crafted with care to give you the real gold look for college, office, festivals, and weddings across Kerala.
         </p>
 
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/collections/necklaces"
-            className="inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-4 text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full px-9 py-4 text-xs sm:text-sm font-extrabold uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl"
             style={{
               backgroundColor: "var(--accent-gold)",
               color: "#1a1612",

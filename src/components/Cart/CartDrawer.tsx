@@ -111,7 +111,7 @@ export default function CartDrawer() {
             <div className="flex items-center justify-between text-xs mb-1.5">
               <span className="font-semibold flex items-center gap-1.5" style={{ color: "var(--text-primary)" }}>
                 <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                <span>🎉 Free Insured Express Delivery Unlocked!</span>
+                <span>Free Insured Express Delivery Unlocked!</span>
               </span>
               <span className="font-bold text-[10px] uppercase" style={{ color: "var(--accent-cta)" }}>
                 Kerala &amp; India

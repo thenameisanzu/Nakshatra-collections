@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ShopifyProduct } from "@/types/shopify";
 import { useWishlist } from "@/context/WishlistContext";
-import { Heart, Sparkles } from "lucide-react";
+import { useQuickView } from "@/context/QuickViewContext";
+import { Heart, Sparkles, Eye } from "lucide-react";
 
 interface ProductCardProps {
   product: ShopifyProduct;
@@ -28,6 +29,7 @@ function formatPrice(amount: string, currencyCode: string): string {
 
 export default function ProductCard({ product, priority = false }: ProductCardProps) {
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const { openQuickView } = useQuickView();
 
   const isWishlisted = isInWishlist(product.id);
 
@@ -73,96 +75,113 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl border card-lift"
       style={{
         backgroundColor: "var(--card-bg)",
-        borderColor: "var(--border-subtle)",
+        borderColor: "var(--border-medium)",
         boxShadow: "var(--card-shadow)",
       }}
     >
       {/* Product Image Stage */}
-      <Link
-        href={`/products/${product.handle}`}
-        className="relative aspect-square w-full overflow-hidden block"
-        style={{ backgroundColor: "var(--bg-secondary)" }}
-        aria-label={`View ${product.title}`}
-      >
-        {product.featuredImage ? (
-          <Image
-            src={product.featuredImage.url}
-            alt={product.featuredImage.altText || product.title}
-            fill
-            priority={priority}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
-            className="object-cover object-center p-2.5 sm:p-3.5 transition-transform duration-500 ease-out group-hover:scale-104"
-          />
-        ) : (
-          <div className="flex h-full w-full flex-col items-center justify-center p-3 sm:p-4 text-center">
-            <div
-              className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full mb-1.5"
-              style={{ backgroundColor: "var(--bg-primary)" }}
-            >
-              <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 opacity-60" style={{ color: "var(--accent-gold)" }} />
+      <div className="relative aspect-square w-full overflow-hidden block" style={{ backgroundColor: "var(--bg-secondary)" }}>
+        <Link
+          href={`/products/${product.handle}`}
+          className="relative h-full w-full block"
+          aria-label={`View ${product.title}`}
+        >
+          {product.featuredImage ? (
+            <Image
+              src={product.featuredImage.url}
+              alt={product.featuredImage.altText || product.title}
+              fill
+              priority={priority}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="object-cover object-center p-3 sm:p-4 img-zoom"
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center">
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-full mb-2 animate-float"
+                style={{ backgroundColor: "var(--bg-primary)" }}
+              >
+                <Sparkles className="h-4 w-4 opacity-70" style={{ color: "var(--accent-gold)" }} />
+              </div>
+              <span
+                className="text-[10px] font-bold tracking-widest uppercase"
+                style={{ color: "var(--text-muted)" }}
+              >
+                Nakshatra
+              </span>
             </div>
-            <span
-              className="text-[9px] sm:text-[10px] font-medium tracking-wider uppercase"
-              style={{ color: "var(--text-muted)" }}
-            >
-              Nakshatra
-            </span>
-          </div>
-        )}
+          )}
 
-        {/* Badges */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1 z-10 pointer-events-none">
-          {!product.availableForSale ? (
-            <span
-              className="rounded-full px-2 py-0.5 text-[8px] sm:text-[8.5px] font-bold uppercase tracking-wider shadow-2xs"
-              style={{
-                backgroundColor: "var(--badge-soldout-bg)",
-                color: "var(--badge-soldout-text)",
-              }}
-            >
-              Sold Out
-            </span>
-          ) : hasComparePrice ? (
-            <span
-              className="rounded-full px-2 py-0.5 text-[8px] sm:text-[8.5px] font-bold uppercase tracking-wider shadow-2xs"
-              style={{
-                backgroundColor: "var(--badge-sale-bg)",
-                color: "var(--badge-sale-text)",
-              }}
-            >
-              Sale
-            </span>
-          ) : null}
+          {/* Badges */}
+          <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10 pointer-events-none">
+            {!product.availableForSale ? (
+              <span
+                className="rounded-full px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider shadow-xs"
+                style={{
+                  backgroundColor: "var(--badge-soldout-bg)",
+                  color: "var(--badge-soldout-text)",
+                }}
+              >
+                Sold Out
+              </span>
+            ) : hasComparePrice ? (
+              <span
+                className="rounded-full px-2.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider shadow-xs animate-pulse"
+                style={{
+                  backgroundColor: "var(--badge-sale-bg)",
+                  color: "var(--badge-sale-text)",
+                }}
+              >
+                Sale
+              </span>
+            ) : null}
+          </div>
+        </Link>
+
+        {/* Quick View Button (Reveals with smooth slide-up animation) */}
+        <div className="absolute inset-x-3 bottom-3 z-20 opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out hidden sm:block">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              openQuickView(product);
+            }}
+            className="w-full flex items-center justify-center gap-1.5 rounded-xl py-2 px-3 text-[11px] font-extrabold uppercase tracking-wider shadow-lg transition-all active:scale-95 cursor-pointer liquid-glass-dark text-white border border-white/20 hover:border-amber-300/60 hover:bg-black/90"
+          >
+            <Eye className="h-3.5 w-3.5 text-amber-300 group-hover:scale-110 transition-transform" />
+            <span>Quick Preview</span>
+          </button>
         </div>
-      </Link>
+      </div>
 
       {/* Liquid Glass Heart Wishlist Button */}
       <button
         type="button"
         onClick={handleWishlistClick}
-        className={`absolute top-2 right-2 z-20 flex h-7.5 w-7.5 sm:h-8 sm:w-8 items-center justify-center rounded-full liquid-glass liquid-glass-hover active:scale-90 transition-all cursor-pointer ${
+        className={`absolute top-2.5 right-2.5 z-20 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full liquid-glass liquid-glass-hover active:scale-75 transition-all duration-300 cursor-pointer ${
           isWishlisted
-            ? "text-rose-600 scale-105 opacity-100"
-            : "text-neutral-600 opacity-90 sm:opacity-75 sm:group-hover:opacity-100 hover:text-rose-600"
+            ? "text-rose-600 scale-105 opacity-100 shadow-md animate-heart-beat"
+            : "text-neutral-600 opacity-90 sm:opacity-80 sm:group-hover:opacity-100 hover:text-rose-600"
         }`}
         aria-label={isWishlisted ? `Remove ${product.title} from wishlist` : `Save ${product.title} to wishlist`}
       >
         <Heart
-          className={`h-3.5 w-3.5 sm:h-4 sm:w-4 transition-colors ${
-            isWishlisted ? "fill-rose-600 stroke-rose-600" : ""
+          className={`h-4 w-4 transition-transform duration-300 ${
+            isWishlisted ? "fill-rose-600 stroke-rose-600 scale-110" : "group-hover:scale-110"
           }`}
         />
       </button>
 
       {/* Details Container */}
-      <div className="flex flex-1 flex-col p-2.5 sm:p-3.5">
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
         {/* Category Tag */}
         {product.productType && (
           <span
-            className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.18em] mb-0.5 block line-clamp-1"
+            className="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-[0.2em] mb-1 block line-clamp-1"
             style={{ color: "var(--accent-gold)" }}
           >
             {product.productType}
@@ -171,7 +190,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
         <Link href={`/products/${product.handle}`} className="group/title">
           <h3
-            className="font-serif-luxury text-xs sm:text-sm font-normal tracking-wide transition-colors line-clamp-1 group-hover/title:opacity-80"
+            className="font-serif-luxury text-sm sm:text-base font-bold tracking-tight transition-colors line-clamp-1 group-hover/title:opacity-80"
             style={{ color: "var(--text-primary)" }}
           >
             {product.title}
@@ -179,16 +198,16 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         </Link>
 
         {/* Pricing & Link */}
-        <div className="mt-auto pt-2.5 flex items-baseline justify-between border-t border-black/5 gap-1">
+        <div className="mt-auto pt-3 flex items-baseline justify-between border-t border-black/5 gap-1.5">
           <div className="flex items-baseline gap-1.5 flex-wrap">
             <span
-              className="text-xs sm:text-sm font-bold tracking-tight"
+              className="text-sm sm:text-base font-extrabold tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
               {isPriceRange ? `From ${formattedPrice}` : formattedPrice}
             </span>
             {formattedComparePrice && (
-              <span className="text-[10px] sm:text-xs line-through opacity-60" style={{ color: "var(--text-muted)" }}>
+              <span className="text-xs line-through font-medium opacity-60" style={{ color: "var(--text-muted)" }}>
                 {formattedComparePrice}
               </span>
             )}
@@ -196,7 +215,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
           <Link
             href={`/products/${product.handle}`}
-            className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase transition hover:underline shrink-0"
+            className="text-[10px] sm:text-xs font-extrabold tracking-wider uppercase transition hover:underline shrink-0"
             style={{ color: "var(--accent-cta)" }}
           >
             View &rarr;

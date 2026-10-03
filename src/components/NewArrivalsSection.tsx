@@ -23,45 +23,45 @@ export default function NewArrivalsSection({ products }: NewArrivalsSectionProps
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-14 gap-6">
           <div>
             <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.25em]"
+              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.25em]"
               style={{
                 backgroundColor: "var(--tag-bg)",
                 color: "var(--tag-text)",
               }}
             >
-              <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
-              05 &bull; New Season 2026
+              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+              Fresh Additions 2026
             </span>
             <h2
-              className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
+              className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
               New Arrivals
             </h2>
             <p
-              className="mt-2 text-sm sm:text-base leading-relaxed"
+              className="mt-2 text-sm sm:text-base leading-relaxed font-medium"
               style={{ color: "var(--text-secondary)" }}
             >
-              Fresh additions crafted with contemporary grace and timeless appeal.
+              Fresh additions crafted with contemporary grace, 18K micro-gold polish, and timeless appeal.
             </p>
           </div>
 
           <Link
             href="/collections/new-arrivals"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:underline transition-colors shrink-0"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-widest hover:underline transition-colors shrink-0"
             style={{ color: "var(--accent-cta)" }}
           >
             <span>View All New Arrivals</span>
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* 5-column responsive compact grid */}
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
-          {products.slice(0, 5).map((product) => (
+        {/* Responsive Grid with bold breathing room */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          {products.slice(0, 8).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

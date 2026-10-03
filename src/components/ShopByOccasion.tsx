@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, ArrowRight, Heart, Crown, Gem, Droplets } from "lucide-react";
+import { Sparkles, ArrowRight, Heart, Crown, Gem, Droplets, type LucideIcon } from "lucide-react";
 
 interface OccasionCard {
   title: string;
@@ -10,7 +10,7 @@ interface OccasionCard {
   tag: string;
   image: string;
   href: string;
-  icon: any;
+  icon: LucideIcon;
 }
 
 const occasions: OccasionCard[] = [

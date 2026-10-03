@@ -59,7 +59,7 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
               Best Sellers
             </span>
             <h2
-              className="font-serif-luxury mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
+              className="font-serif mt-3 sm:mt-4 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
               Customer Favorites

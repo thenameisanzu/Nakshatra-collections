@@ -262,7 +262,7 @@ export default function CuratedCollections({ collections }: CuratedCollectionsPr
                   className="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-90"
                   style={{
                     background:
-                      "linear-gradient(to right, var(--bg-surface) 0%, var(--bg-surface) 48%, rgba(255,255,255,0.7) 75%, transparent 100%)",
+                      "linear-gradient(to right, var(--bg-surface) 0%, var(--bg-surface) 48%, transparent 100%)",
                   }}
                 />
 

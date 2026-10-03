@@ -11,6 +11,10 @@ export default function MobileBottomNav() {
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
 
+  // Hide mobile nav on product detail pages so sticky Add to Bag takes priority
+  const isProductDetailPage = pathname.startsWith("/products/");
+  if (isProductDetailPage) return null;
+
   const isHomeActive = pathname === "/";
   const isCategoriesActive = pathname.startsWith("/collections");
   const isWishlistActive = pathname === "/wishlist";

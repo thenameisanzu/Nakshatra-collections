@@ -86,9 +86,9 @@ export default function ThemeSwitcher() {
           <div className="px-3 py-2 border-b mb-1.5 flex items-center justify-between" style={{ borderColor: "var(--border-subtle)" }}>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent-gold)" }}>
-                3 Visual Themes
+                6 Curated Themes
               </p>
-              <p className="text-xs font-serif-luxury mt-0.5" style={{ color: "var(--text-secondary)" }}>
+              <p className="text-xs font-serif mt-0.5" style={{ color: "var(--text-secondary)" }}>
                 Select Storefront Atmosphere
               </p>
             </div>

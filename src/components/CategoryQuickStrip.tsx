@@ -20,7 +20,7 @@ const fallbackImages: Record<string, { image: string; label: string }> = {
   },
   earrings: {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/cfcff7f80632b30fda8cc118d5faf3ba65f6ee80182e57bea5943f7b85484728.png?v=1790240218",
-    label: "Studs & Jhumkas",
+    label: "Studs & Drops",
   },
   rings: {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
@@ -40,11 +40,11 @@ const fallbackImages: Record<string, { image: string; label: string }> = {
   },
   "necklace-sets": {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    label: "Festive Sets",
+    label: "Matching Sets",
   },
   "bridal-jewellery": {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    label: "Kerala Heritage",
+    label: "Kerala Bridal",
   },
   anklets: {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
@@ -84,7 +84,7 @@ const defaultQuickCategories: QuickCategoryItem[] = [
     isHot: true,
   },
   {
-    name: "Solitaires & Rings",
+    name: "Rings & Solitaires",
     href: "/collections/rings",
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
     label: "American Diamond",
@@ -132,7 +132,7 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
 
   return (
     <section
-      className="py-4 sm:py-6 border-b transition-colors"
+      className="py-5 sm:py-7 border-b transition-colors"
       style={{
         backgroundColor: "var(--bg-surface)",
         borderColor: "var(--border-subtle)",
@@ -140,16 +140,17 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
       aria-label="Category Stories Strip"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
+        {/* Centered Category Header */}
+        <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
-            <h2 className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--text-primary)" }}>
+            <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+            <h2 className="font-sans text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--text-primary)" }}>
               Shop By Category
             </h2>
           </div>
           <Link
             href="/collections"
-            className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1 hover:underline"
+            className="font-sans text-xs font-semibold uppercase tracking-wider flex items-center gap-1 hover:underline"
             style={{ color: "var(--accent-cta)" }}
           >
             <span>View All (8)</span>
@@ -157,18 +158,18 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
           </Link>
         </div>
 
-        {/* Myntra / Nykaa Style Horizontal Story Circles */}
-        <div className="flex items-start gap-4 sm:gap-6 overflow-x-auto no-scrollbar pb-1">
+        {/* Center-Aligned Horizontal Story Circles */}
+        <div className="flex items-start justify-start md:justify-center gap-3.5 sm:gap-6 md:gap-7 overflow-x-auto no-scrollbar py-1">
           {displayItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="group flex flex-col items-center shrink-0 text-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer w-[72px] sm:w-[88px]"
+              className="group flex flex-col items-center shrink-0 text-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer w-[70px] sm:w-[84px] md:w-[92px]"
             >
-              {/* Circular Thumbnail with Luxury Gold Story Ring */}
-              <div className="relative p-0.5 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-300 to-amber-600 shadow-xs mb-2">
+              {/* Circular Thumbnail with Gold Gradient Ring */}
+              <div className="relative p-0.5 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-300 to-amber-600 shadow-2xs mb-2">
                 <div
-                  className="relative h-15 w-15 sm:h-18 sm:w-18 rounded-full overflow-hidden p-1"
+                  className="relative h-14 w-14 sm:h-17 sm:w-17 md:h-18 md:w-18 rounded-full overflow-hidden p-1"
                   style={{
                     backgroundColor: "var(--bg-secondary)",
                   }}
@@ -177,7 +178,7 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
                     src={item.image}
                     alt={item.name}
                     fill
-                    sizes="(max-width: 640px) 60px, 72px"
+                    sizes="(max-width: 640px) 56px, (max-width: 768px) 68px, 72px"
                     className="object-contain p-1 group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
@@ -189,15 +190,15 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
                 )}
               </div>
 
-              {/* Category Name */}
+              {/* Clean Geometric Sans Category Name (No Serif) */}
               <span
-                className="font-serif text-[11px] sm:text-xs font-medium line-clamp-1 group-hover:underline"
+                className="font-sans text-[11px] sm:text-xs font-medium tracking-tight line-clamp-1 group-hover:underline"
                 style={{ color: "var(--text-primary)" }}
               >
                 {item.name}
               </span>
               <span
-                className="text-[9px] font-sans font-light opacity-70 hidden sm:block"
+                className="font-sans text-[9px] font-normal opacity-65 hidden sm:block truncate max-w-full"
                 style={{ color: "var(--text-muted)" }}
               >
                 {item.label}

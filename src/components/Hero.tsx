@@ -19,7 +19,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full min-h-[480px] sm:min-h-[540px] lg:min-h-[620px] flex items-center overflow-hidden transition-colors"
+      className="relative w-full min-h-[calc(100svh-4.5rem)] lg:min-h-[calc(100vh-5rem)] flex items-center overflow-hidden transition-colors"
       style={{ backgroundColor: "#110D0A" }}
       aria-label="Nakshatra Collections Cinematic Showcase"
     >

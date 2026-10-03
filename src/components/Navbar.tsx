@@ -213,10 +213,10 @@ export default function Navbar() {
                             />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-xs font-serif font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
+                            <span className="text-xs font-sans font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
                               {cat.label}
                             </span>
-                            <span className="text-[9.5px] line-clamp-1 opacity-70 font-light" style={{ color: "var(--text-muted)" }}>
+                            <span className="text-[9.5px] font-sans line-clamp-1 opacity-70 font-light" style={{ color: "var(--text-muted)" }}>
                               {cat.desc}
                             </span>
                           </div>

@@ -107,29 +107,31 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
           </div>
 
           {/* Quick Filter Pill Buttons */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 self-start md:self-auto">
-            {filterTabs.map((tab) => {
-              const isSelected = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`rounded-full px-3.5 sm:px-4 py-1.5 text-xs font-semibold tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer ${
-                    isSelected
-                      ? "shadow-sm scale-105"
-                      : "border liquid-glass hover:scale-105"
-                  }`}
-                  style={{
-                    backgroundColor: isSelected ? "var(--accent-cta)" : "var(--bg-surface)",
-                    color: isSelected ? "var(--accent-cta-text)" : "var(--text-secondary)",
-                    borderColor: isSelected ? "transparent" : "var(--border-medium)",
-                  }}
-                >
-                  {tab.label}
-                </button>
-              );
-            })}
+          <div className="w-full md:w-auto max-w-full overflow-x-auto no-scrollbar py-1">
+            <div className="flex items-center gap-1.5 sm:gap-2 min-w-max md:min-w-0 md:flex-wrap">
+              {filterTabs.map((tab) => {
+                const isSelected = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`rounded-full px-3 sm:px-4 py-1.5 text-xs font-semibold tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer shrink-0 ${
+                      isSelected
+                        ? "shadow-sm scale-105"
+                        : "border liquid-glass hover:scale-105"
+                    }`}
+                    style={{
+                      backgroundColor: isSelected ? "var(--accent-cta)" : "var(--bg-surface)",
+                      color: isSelected ? "var(--accent-cta-text)" : "var(--text-secondary)",
+                      borderColor: isSelected ? "transparent" : "var(--border-medium)",
+                    }}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 

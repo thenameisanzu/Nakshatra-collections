@@ -153,19 +153,21 @@ export default function Hero() {
             </div>
 
             {/* Quick Category 1-Tap Shortcut Pills */}
-            <div className="mt-4 sm:mt-5 flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-1">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300/80 mr-0.5 shrink-0 hidden sm:inline">
-                Shop:
-              </span>
-              {quickCategoryPills.map((pill) => (
-                <Link
-                  key={pill.label}
-                  href={pill.href}
-                  className="rounded-full px-3 py-1 text-[10px] sm:text-[11px] font-medium tracking-wide whitespace-nowrap liquid-glass-dark border border-white/20 text-neutral-200 hover:text-white hover:border-amber-300/60 transition-all hover:scale-105 active:scale-95 shrink-0"
-                >
-                  {pill.label}
-                </Link>
-              ))}
+            <div className="mt-4 sm:mt-5 w-full max-w-full overflow-x-auto no-scrollbar py-1">
+              <div className="flex items-center gap-1.5 sm:gap-2 min-w-max">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300/80 mr-0.5 shrink-0 hidden sm:inline">
+                  Shop:
+                </span>
+                {quickCategoryPills.map((pill) => (
+                  <Link
+                    key={pill.label}
+                    href={pill.href}
+                    className="rounded-full px-3 py-1 text-[10px] sm:text-[11px] font-medium tracking-wide whitespace-nowrap liquid-glass-dark border border-white/20 text-neutral-200 hover:text-white hover:border-amber-300/60 transition-all hover:scale-105 active:scale-95 shrink-0"
+                  >
+                    {pill.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 

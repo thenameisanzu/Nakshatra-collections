@@ -10,6 +10,7 @@ import { QuickViewProvider } from "@/context/QuickViewContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
 import WhatsAppSupportButton from "@/components/WhatsAppSupportButton";
 import QuickViewModal from "@/components/QuickViewModal";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -50,8 +51,9 @@ export default function RootLayout({
             <WishlistProvider>
               <QuickViewProvider>
                 <Navbar />
-                <div className="flex-1">{children}</div>
+                <div className="flex-1 pb-16 md:pb-0">{children}</div>
                 <Footer />
+                <MobileBottomNav />
                 <CartDrawer />
                 <WhatsAppSupportButton />
                 <QuickViewModal />

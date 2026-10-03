@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import ThemeSwitcher from "./ThemeSwitcher";
@@ -12,14 +13,15 @@ import {
   ShoppingBag,
   Search,
   Heart,
-  ChevronDown,
+  User,
   Sparkles,
   ArrowRight,
-  Gem,
   Crown,
-  Flame,
+  Gem,
+  Droplets,
   CircleDot,
-  User,
+  Flame,
+  Tag,
   type LucideIcon,
 } from "lucide-react";
 
@@ -27,28 +29,37 @@ interface CategoryNavItem {
   label: string;
   href: string;
   icon: LucideIcon;
-  desc: string;
+  isHot?: boolean;
 }
 
-const categories: CategoryNavItem[] = [
-  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Sparkles, desc: "Chokers & Layered Chains" },
-  { label: "Earrings & Drops", href: "/collections/earrings", icon: Gem, desc: "Daily Studs & Jhumkas" },
-  { label: "Necklace Sets", href: "/collections/necklace-sets", icon: Crown, desc: "Harmonious Matching Sets" },
-  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery", icon: Heart, desc: "Kerala Bridal Heritage" },
-  { label: "Bangles & Bracelets", href: "/collections/bangles", icon: CircleDot, desc: "Waterproof Daily Cuffs" },
-  { label: "Rings & Solitaires", href: "/collections/rings", icon: Gem, desc: "American Diamond Solitaires" },
-  { label: "Anklets & Payals", href: "/collections/anklets", icon: Sparkles, desc: "Anti-Tarnish Daily Payals" },
-  { label: "New Arrivals", href: "/collections/new-arrivals", icon: Flame, desc: "Fresh 2026 Additions" },
+const navCategories: CategoryNavItem[] = [
+  { label: "All Jewellery", href: "/#products", icon: Sparkles },
+  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Gem },
+  { label: "Earrings & Drops", href: "/collections/earrings", icon: Heart },
+  { label: "Kerala Bridal Sets", href: "/collections/bridal-jewellery", icon: Crown, isHot: true },
+  { label: "Bangles & Cuffs", href: "/collections/bangles", icon: Droplets },
+  { label: "Solitaire Rings", href: "/collections/rings", icon: CircleDot },
+  { label: "New In 2026", href: "/collections/new-arrivals", icon: Flame, isHot: true },
+  { label: "Deals Under ₹999", href: "/collections/rings", icon: Tag },
+];
+
+const searchPlaceholders = [
+  "Search '18K Gold Necklace'...",
+  "Search 'Kerala Bridal Choker'...",
+  "Search 'Anti-Tarnish Clover Bracelet'...",
+  "Search 'American Diamond Rings'...",
+  "Search 'Waterproof Payals'...",
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
-  const categoryMenuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   // Scroll detection
   useEffect(() => {
@@ -59,16 +70,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close category dropdown on outside click
+  // Placeholder animation
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (categoryMenuRef.current && !categoryMenuRef.current.contains(event.target as Node)) {
-        setIsCategoryOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    const interval = setInterval(() => {
+      setPlaceholderIndex((prev) => (prev + 1) % searchPlaceholders.length);
+    }, 3200);
+    return () => clearInterval(interval);
   }, []);
+
+  // Handle Search Submission
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/collections?q=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchOpen(false);
+    }
+  };
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -84,9 +101,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Announcement Bar */}
+      {/* 1. Top Announcement Marquee */}
       <div
-        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] font-semibold tracking-[0.18em] uppercase transition-colors"
+        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] font-semibold tracking-[0.16em] uppercase transition-colors"
         style={{
           backgroundColor: "var(--accent-cta)",
           color: "var(--accent-cta-text)",
@@ -94,162 +111,41 @@ export default function Navbar() {
       >
         <span className="inline-flex items-center gap-2">
           <Sparkles className="h-3 w-3 text-amber-300 opacity-90" />
-          <span>100% Anti-Tarnish 18K Gold Plated Jewellery &bull; Express Tracked Courier</span>
+          <span>100% Anti-Tarnish 18K Gold Plated Jewellery &bull; Express Tracked Courier in Kerala</span>
           <Sparkles className="h-3 w-3 text-amber-300 opacity-90" />
         </span>
       </div>
 
-      {/* Main Luxury Header */}
+      {/* 2. Main Sticky Header */}
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+        className={`sticky top-0 z-40 w-full transition-all duration-300 border-b ${
           isScrolled
-            ? "liquid-glass shadow-sm py-2.5 sm:py-3 border-b"
-            : "bg-[var(--bg-primary)] py-3.5 sm:py-4 border-b"
+            ? "liquid-glass shadow-sm py-2.5 sm:py-3"
+            : "bg-[var(--bg-primary)] py-3 sm:py-3.5"
         }`}
         style={{
           borderColor: "var(--border-subtle)",
         }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 gap-4">
           {/* Mobile: Hamburger Button */}
           <div className="flex lg:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
               className="flex h-9 w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
-              style={{
-                color: "var(--text-primary)",
-              }}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={isOpen}
+              style={{ color: "var(--text-primary)" }}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
 
-          {/* Left: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            <div
-              className="relative"
-              ref={categoryMenuRef}
-              onMouseEnter={() => setIsCategoryOpen(true)}
-              onMouseLeave={() => setIsCategoryOpen(false)}
-            >
-              <button
-                type="button"
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                className="group flex items-center gap-1 text-xs font-semibold tracking-[0.16em] uppercase transition-colors cursor-pointer"
-                style={{ color: isCategoryOpen ? "var(--accent-cta)" : "var(--text-secondary)" }}
-                aria-expanded={isCategoryOpen}
-              >
-                <span>Collections</span>
-                <ChevronDown
-                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                    isCategoryOpen ? "rotate-180" : ""
-                  }`}
-                  style={{ color: "var(--accent-gold)" }}
-                />
-              </button>
-
-              {/* Mega Dropdown Menu */}
-              {isCategoryOpen && (
-                <div className="absolute top-full left-0 pt-2 z-50 w-[380px] animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div
-                    className="rounded-3xl p-4 shadow-2xl border liquid-glass"
-                    style={{
-                      backgroundColor: "var(--bg-surface-elevated)",
-                      borderColor: "var(--border-medium)",
-                    }}
-                  >
-                    <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b" style={{ borderColor: "var(--border-subtle)" }}>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent-gold)" }}>
-                        Shop By Category
-                      </span>
-                      <Link
-                        href="/collections"
-                        onClick={() => setIsCategoryOpen(false)}
-                        className="text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition hover:underline"
-                        style={{ color: "var(--accent-cta)" }}
-                      >
-                        <span>All (8)</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2">
-                      {categories.map((cat) => (
-                        <Link
-                          key={cat.href}
-                          href={cat.href}
-                          onClick={() => setIsCategoryOpen(false)}
-                          className="flex items-start gap-2.5 p-2 rounded-2xl transition-all hover:bg-black/5 group"
-                        >
-                          <div
-                            className="flex h-7 w-7 items-center justify-center rounded-xl shrink-0 border"
-                            style={{
-                              backgroundColor: "var(--bg-secondary)",
-                              borderColor: "var(--border-subtle)",
-                            }}
-                          >
-                            <cat.icon
-                              className="h-3.5 w-3.5 group-hover:scale-110 transition-transform"
-                              style={{ color: "var(--accent-gold)" }}
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-xs font-serif font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
-                              {cat.label}
-                            </span>
-                            <span className="text-[9.5px] line-clamp-1 opacity-70" style={{ color: "var(--text-muted)" }}>
-                              {cat.desc}
-                            </span>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <Link
-              href="/collections/necklaces"
-              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Necklaces
-            </Link>
-
-            <Link
-              href="/collections/earrings"
-              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Earrings
-            </Link>
-
-            <Link
-              href="/collections/bridal-jewellery"
-              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Bridal
-            </Link>
-
-            <Link
-              href="/collections/new-arrivals"
-              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
-              style={{ color: "var(--accent-cta)" }}
-            >
-              New In
-            </Link>
-          </nav>
-
-          {/* Center: Brand Logo */}
+          {/* Left / Center: Brand Logo */}
           <Link
             href="/"
-            className="group flex flex-col items-center text-center transition-transform hover:scale-[1.01]"
-            aria-label="NAKSHATRA Collections - Artificial Jewellery Store"
+            className="group flex flex-col items-start sm:items-center text-left sm:text-center transition-transform hover:scale-[1.01]"
+            aria-label="NAKSHATRA Collections"
           >
             <div className="flex items-center gap-2">
               <div className="relative h-7 w-7 sm:h-8 sm:w-8 shrink-0">
@@ -263,44 +159,71 @@ export default function Navbar() {
                 />
               </div>
               <span
-                className="font-serif text-lg sm:text-2xl font-normal tracking-[0.22em] uppercase leading-none"
+                className="font-serif text-lg sm:text-2xl font-normal tracking-[0.2em] uppercase leading-none"
                 style={{ color: "var(--text-primary)" }}
               >
                 NAKSHATRA
               </span>
             </div>
             <span
-              className="text-[7px] sm:text-[8px] font-semibold tracking-[0.3em] uppercase leading-none mt-1 opacity-80"
+              className="text-[7.5px] sm:text-[8px] font-semibold tracking-[0.3em] uppercase leading-none mt-1 opacity-80"
               style={{ color: "var(--accent-gold)" }}
             >
               COLLECTIONS
             </span>
           </Link>
 
-          {/* Right: Actions, Customer Account & Theme Switcher */}
+          {/* Center (Desktop): App Search Bar with Live Placeholder */}
+          <div className="hidden lg:flex flex-1 max-w-md mx-6">
+            <form onSubmit={handleSearch} className="relative w-full">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={searchPlaceholders[placeholderIndex]}
+                className="w-full pl-10 pr-4 py-2 rounded-full border text-xs outline-hidden transition-all duration-300 focus:border-[var(--accent-gold)] shadow-xs"
+                style={{
+                  backgroundColor: "var(--bg-surface)",
+                  borderColor: "var(--border-medium)",
+                  color: "var(--text-primary)",
+                }}
+              />
+              <Search
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 pointer-events-none opacity-60"
+                style={{ color: "var(--text-muted)" }}
+              />
+            </form>
+          </div>
+
+          {/* Right: Actions, Theme Switcher, Account, Wishlist, Bag */}
           <div className="flex items-center gap-1.5 sm:gap-2.5">
-            {/* Search Trigger */}
+            {/* Mobile Search Button */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
+              className="flex lg:hidden h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer"
               style={{ color: "var(--text-secondary)" }}
-              aria-label="Search Catalogue"
+              aria-label="Search"
             >
               <Search className="h-4 w-4" />
             </button>
 
-            {/* Customer Account & Order Tracking (Mobile & Desktop) */}
+            {/* 3-Theme Switcher */}
+            <div className="pl-0.5">
+              <ThemeSwitcher />
+            </div>
+
+            {/* Customer Account */}
             <Link
               href="/account"
-              className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
+              className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer"
               style={{ color: "var(--text-primary)" }}
               aria-label="Customer Account & Order Tracking"
             >
               <User className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
             </Link>
 
-            {/* Desktop Only: Wishlist (On Mobile, lives in bottom navigation) */}
+            {/* Desktop Only: Wishlist (On mobile, lives in bottom navigation) */}
             <Link
               href="/wishlist"
               className="relative hidden md:flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
@@ -322,7 +245,7 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Desktop Only: Cart Bag (On Mobile, lives in bottom navigation) */}
+            {/* Desktop Only: Shopping Bag (On mobile, lives in bottom navigation) */}
             <button
               type="button"
               onClick={openCart}
@@ -340,48 +263,66 @@ export default function Navbar() {
                 </span>
               )}
             </button>
-
-            {/* Theme Switcher */}
-            <div className="pl-0.5">
-              <ThemeSwitcher />
-            </div>
           </div>
         </div>
 
-        {/* Search Bar Overlay */}
+        {/* Mobile Search Overlay Bar */}
         {isSearchOpen && (
           <div
-            className="border-t py-4 px-4 sm:px-8 animate-in slide-in-from-top-2 duration-200"
+            className="lg:hidden border-t py-3 px-4 animate-in slide-in-from-top-2 duration-200"
             style={{
               backgroundColor: "var(--bg-surface)",
               borderColor: "var(--border-subtle)",
             }}
           >
-            <div className="mx-auto max-w-xl flex items-center gap-3">
-              <Search className="h-4 w-4 shrink-0" style={{ color: "var(--accent-gold)" }} />
+            <form onSubmit={handleSearch} className="relative w-full">
               <input
                 type="text"
-                placeholder="Search jewellery, necklaces, studs, bangles, solitaires..."
-                className="w-full bg-transparent text-sm font-sans focus:outline-none placeholder:text-xs"
-                style={{ color: "var(--text-primary)" }}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search necklaces, earrings, bridal sets..."
                 autoFocus
-              />
-              <button
-                type="button"
-                onClick={() => setIsSearchOpen(false)}
-                className="text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full border cursor-pointer"
+                className="w-full pl-10 pr-4 py-2.5 rounded-full border text-xs outline-hidden focus:border-[var(--accent-gold)]"
                 style={{
+                  backgroundColor: "var(--bg-primary)",
                   borderColor: "var(--border-medium)",
-                  color: "var(--text-secondary)",
+                  color: "var(--text-primary)",
                 }}
-              >
-                Close
-              </button>
-            </div>
+              />
+              <Search
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 opacity-60"
+                style={{ color: "var(--text-muted)" }}
+              />
+            </form>
           </div>
         )}
 
-        {/* Mobile Navigation Drawer */}
+        {/* 3. Secondary Desktop Navigation Menu Bar */}
+        <nav
+          className="hidden lg:flex items-center justify-center gap-7 pt-2.5 mt-2 border-t"
+          style={{ borderColor: "var(--border-subtle)" }}
+        >
+          {navCategories.map((cat) => (
+            <Link
+              key={cat.label}
+              href={cat.href}
+              className="text-[11px] font-semibold tracking-[0.14em] uppercase transition-colors hover:opacity-75 flex items-center gap-1.5 py-0.5 group"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              <span>{cat.label}</span>
+              {cat.isHot && (
+                <span
+                  className="px-1.5 py-0.2 rounded-md text-[8px] font-bold text-white uppercase tracking-wider"
+                  style={{ backgroundColor: "var(--accent-cta)" }}
+                >
+                  Hot
+                </span>
+              )}
+            </Link>
+          ))}
+        </nav>
+
+        {/* 4. Mobile Navigation Drawer */}
         {isOpen && (
           <div
             className="fixed inset-0 top-[calc(var(--spacing)*12)] z-50 lg:hidden flex flex-col justify-between p-6 backdrop-blur-xl animate-in fade-in duration-200 overflow-y-auto"
@@ -397,7 +338,7 @@ export default function Navbar() {
                 <ThemeSwitcher />
               </div>
 
-              {/* Main Links */}
+              {/* Main Category Links */}
               <nav className="flex flex-col gap-1">
                 <Link
                   href="/"
@@ -414,21 +355,28 @@ export default function Navbar() {
                   className="py-3 text-lg font-serif font-normal border-b flex items-center justify-between"
                   style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
-                  <span>All Collections (8)</span>
+                  <span>All Categories (8)</span>
                   <ArrowRight className="h-4 w-4 opacity-50" />
                 </Link>
 
                 <div className="py-2 pl-3 flex flex-col gap-2 border-b" style={{ borderColor: "var(--border-subtle)" }}>
-                  {categories.map((cat) => (
+                  {navCategories.slice(1).map((cat) => (
                     <Link
-                      key={cat.href}
+                      key={cat.label}
                       href={cat.href}
                       onClick={() => setIsOpen(false)}
-                      className="py-1 text-xs font-semibold tracking-wider uppercase flex items-center gap-2"
+                      className="py-1.5 text-xs font-semibold tracking-wider uppercase flex items-center justify-between"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      <cat.icon className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                      <span>{cat.label}</span>
+                      <span className="flex items-center gap-2">
+                        <cat.icon className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+                        <span>{cat.label}</span>
+                      </span>
+                      {cat.isHot && (
+                        <span className="text-[8px] font-bold px-1.5 py-0.5 rounded-full text-white bg-rose-600">
+                          HOT
+                        </span>
+                      )}
                     </Link>
                   ))}
                 </div>

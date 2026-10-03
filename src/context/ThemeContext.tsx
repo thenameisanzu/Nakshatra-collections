@@ -18,32 +18,32 @@ export interface ThemeOption {
 export const THEMES: ThemeOption[] = [
   {
     id: "champagne-luxury",
-    name: "Champagne Luxury",
-    tagline: "Warm, Festive & Regal",
+    name: "Champagne & Gold",
+    tagline: "Warm, Regal & Festive",
     colors: {
-      bg: "#FFF9EF",
-      accent: "#C9A45C",
-      cta: "#6B1E2E",
+      bg: "#FFFDF9",
+      accent: "#C5A059",
+      cta: "#721C24",
     },
   },
   {
     id: "soft-blush",
-    name: "Soft Blush",
-    tagline: "Feminine, Fresh & Romantic",
+    name: "Rose Gold Blush",
+    tagline: "Feminine, Romantic & Fresh",
     colors: {
-      bg: "#FFFFFF",
-      accent: "#C8A45D",
-      cta: "#8A3D52",
+      bg: "#FFF8F8",
+      accent: "#C98A7D",
+      cta: "#8B3A4F",
     },
   },
   {
     id: "sage-contemporary",
-    name: "Sage & Gold",
-    tagline: "Calm, Sophisticated & Natural",
+    name: "Emerald & Gold",
+    tagline: "Imperial, Calm & Sophisticated",
     colors: {
-      bg: "#FAF5EA",
-      accent: "#B8944D",
-      cta: "#2E4633",
+      bg: "#F7FAF7",
+      accent: "#C5A059",
+      cta: "#1B4332",
     },
   },
 ];

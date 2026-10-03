@@ -1,137 +1,142 @@
 @import "tailwindcss";
 
 /* -------------------------------------------------------------------------- */
-/* 3 VISUAL THEMES & DESIGN SYSTEM TOKENS                                     */
+/* 3 REFINED LUXURY STOREFRONT THEMES                                        */
 /* -------------------------------------------------------------------------- */
 
 :root,
 [data-theme="champagne-luxury"] {
-  --bg-primary: #FFF9EF;
-  --bg-secondary: #F8EFE0;
+  --bg-primary: #FFFDF9;
+  --bg-secondary: #FBF4E8;
   --bg-surface: #FFFFFF;
   --bg-surface-elevated: #FFFFFF;
-  --text-primary: #261C14;
-  --text-secondary: #5C4E43;
-  --text-muted: #726255;
-  --accent-gold: #C9A45C;
-  --accent-gold-hover: #B5914A;
-  --accent-cta: #6B1E2E;
-  --accent-cta-hover: #541523;
+  --text-primary: #211710;
+  --text-secondary: #57483C;
+  --text-muted: #7E6C5F;
+  --accent-gold: #C5A059;
+  --accent-gold-hover: #AF8B45;
+  --accent-cta: #721C24;
+  --accent-cta-hover: #581219;
   --accent-cta-text: #FFFFFF;
-  --border-subtle: rgba(201, 164, 92, 0.2);
-  --border-medium: #DEC9B5;
+  --border-subtle: rgba(197, 160, 89, 0.22);
+  --border-medium: #E8D9C5;
   --card-bg: #FFFFFF;
-  --card-shadow: 0 12px 36px -12px rgba(107, 30, 46, 0.09);
-  --badge-sale-bg: #6B1E2E;
+  --card-shadow: 0 12px 32px -8px rgba(114, 28, 36, 0.08);
+  --badge-sale-bg: #721C24;
   --badge-sale-text: #FFFFFF;
-  --badge-soldout-bg: #ECE3D7;
-  --badge-soldout-text: #6E6258;
+  --badge-soldout-bg: #EFE6D9;
+  --badge-soldout-text: #6B5E53;
   --tag-bg: #FAF2E4;
-  --tag-text: #8C6C2D;
+  --tag-text: #8C6A28;
 
   /* Liquid Glass Tokens */
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-bg-hover: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(201, 164, 92, 0.28);
-  --glass-shadow: 0 8px 32px 0 rgba(107, 30, 46, 0.08);
+  --glass-bg: rgba(255, 253, 249, 0.82);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(197, 160, 89, 0.25);
+  --glass-shadow: 0 8px 32px 0 rgba(114, 28, 36, 0.07);
   --glass-blur: 16px;
-  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(201, 164, 92, 0.12) 0%, transparent 70%);
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.14) 0%, transparent 70%);
 }
 
 [data-theme="soft-blush"] {
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #FFF7F8;
-  --bg-surface: #FDF4F6;
+  --bg-primary: #FFF8F8;
+  --bg-secondary: #FFF0F3;
+  --bg-surface: #FFFFFF;
   --bg-surface-elevated: #FFFFFF;
-  --text-primary: #291D21;
-  --text-secondary: #664F56;
-  --text-muted: #7A626A;
-  --accent-gold: #C8A45D;
-  --accent-gold-hover: #B6924D;
-  --accent-cta: #8A3D52;
-  --accent-cta-hover: #732F42;
+  --text-primary: #2B191E;
+  --text-secondary: #63474F;
+  --text-muted: #82666E;
+  --accent-gold: #C98A7D;
+  --accent-gold-hover: #B57467;
+  --accent-cta: #8B3A4F;
+  --accent-cta-hover: #6F2A3D;
   --accent-cta-text: #FFFFFF;
-  --border-subtle: rgba(232, 204, 211, 0.6);
-  --border-medium: #E8CCD3;
+  --border-subtle: rgba(238, 215, 220, 0.7);
+  --border-medium: #EED7DC;
   --card-bg: #FFFFFF;
-  --card-shadow: 0 12px 36px -12px rgba(138, 61, 82, 0.09);
-  --badge-sale-bg: #8A3D52;
+  --card-shadow: 0 12px 32px -8px rgba(139, 58, 79, 0.08);
+  --badge-sale-bg: #8B3A4F;
   --badge-sale-text: #FFFFFF;
-  --badge-soldout-bg: #F5E6E9;
-  --badge-soldout-text: #7A5B64;
-  --tag-bg: #FDF2F4;
-  --tag-text: #94465B;
+  --badge-soldout-bg: #F8E8EC;
+  --badge-soldout-text: #7C5B64;
+  --tag-bg: #FDF1F4;
+  --tag-text: #8F3B50;
 
   /* Liquid Glass Tokens */
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-bg-hover: rgba(255, 255, 255, 0.95);
-  --glass-border: rgba(200, 164, 93, 0.25);
-  --glass-shadow: 0 8px 32px 0 rgba(138, 61, 82, 0.08);
+  --glass-bg: rgba(255, 248, 248, 0.85);
+  --glass-bg-hover: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(201, 138, 125, 0.28);
+  --glass-shadow: 0 8px 32px 0 rgba(139, 58, 79, 0.07);
   --glass-blur: 16px;
-  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(244, 221, 226, 0.35) 0%, transparent 70%);
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(248, 218, 224, 0.35) 0%, transparent 70%);
 }
 
 [data-theme="sage-contemporary"],
 [data-theme="sage-and-gold"] {
-  --bg-primary: #FAF5EA;
-  --bg-secondary: #F0ECE1;
-  --bg-surface: #F6F8F4;
+  --bg-primary: #F7FAF7;
+  --bg-secondary: #EEF3EE;
+  --bg-surface: #FFFFFF;
   --bg-surface-elevated: #FFFFFF;
-  --text-primary: #222923;
-  --text-secondary: #4D5C50;
-  --text-muted: #5B6B5E;
-  --accent-gold: #B8944D;
-  --accent-gold-hover: #A4823E;
-  --accent-cta: #2E4633;
-  --accent-cta-hover: #203324;
+  --text-primary: #18241C;
+  --text-secondary: #46564A;
+  --text-muted: #627467;
+  --accent-gold: #C5A059;
+  --accent-gold-hover: #B08D47;
+  --accent-cta: #1B4332;
+  --accent-cta-hover: #123024;
   --accent-cta-text: #FFFFFF;
-  --border-subtle: rgba(200, 211, 195, 0.6);
-  --border-medium: #C8D3C3;
+  --border-subtle: rgba(207, 222, 211, 0.7);
+  --border-medium: #CFDED3;
   --card-bg: #FFFFFF;
-  --card-shadow: 0 12px 36px -12px rgba(46, 70, 51, 0.08);
-  --badge-sale-bg: #2E4633;
+  --card-shadow: 0 12px 32px -8px rgba(27, 67, 50, 0.08);
+  --badge-sale-bg: #1B4332;
   --badge-sale-text: #FFFFFF;
-  --badge-soldout-bg: #DFE5DC;
-  --badge-soldout-text: #505E53;
-  --tag-bg: #EFF4EC;
-  --tag-text: #3B5741;
+  --badge-soldout-bg: #E5EDE6;
+  --badge-soldout-text: #4C5D50;
+  --tag-bg: #EDF4EE;
+  --tag-text: #22513C;
 
   /* Liquid Glass Tokens */
-  --glass-bg: rgba(250, 245, 234, 0.82);
-  --glass-bg-hover: rgba(255, 255, 255, 0.95);
-  --glass-border: rgba(184, 148, 77, 0.25);
-  --glass-shadow: 0 8px 32px 0 rgba(46, 70, 51, 0.08);
+  --glass-bg: rgba(247, 250, 247, 0.85);
+  --glass-bg-hover: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(197, 160, 89, 0.25);
+  --glass-shadow: 0 8px 32px 0 rgba(27, 67, 50, 0.07);
   --glass-blur: 16px;
-  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(168, 181, 160, 0.2) 0%, transparent 70%);
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(183, 206, 189, 0.22) 0%, transparent 70%);
 }
 
 /* -------------------------------------------------------------------------- */
-/* GLOBAL RESET & BASE STYLING                                                */
+/* STRICT 2-FONT TYPOGRAPHY SYSTEM & BASE STYLING                             */
 /* -------------------------------------------------------------------------- */
 
 html {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
   min-height: 100vh;
 }
 
+/* Font 1: Elegant Luxury Serif (Brand Logos, Headlines, Product Titles) */
 .font-serif,
 .font-serif-luxury {
-  font-family: var(--font-serif), "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: var(--font-serif), "Playfair Display", Georgia, serif;
   letter-spacing: -0.01em;
+}
+
+/* Font 2: Clean Geometric Sans (UI, Microcopy, Pricing, Buttons, Tags) */
+.font-sans {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -151,10 +156,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .liquid-glass-dark {
-  background: rgba(18, 14, 12, 0.65);
+  background: rgba(18, 14, 12, 0.72);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
@@ -191,115 +196,23 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--accent-gold);
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* -------------------------------------------------------------------------- */
-/* ANIMATIONS & LUXURY TRANSITIONS                                            */
+/* CARDS & HOVER EFFECTS                                                      */
 /* -------------------------------------------------------------------------- */
 
-@keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-6px) rotate(0.5deg);
-  }
-}
-
-@keyframes goldGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px -5px rgba(201, 164, 92, 0.25);
-  }
-  50% {
-    box-shadow: 0 0 35px 2px rgba(201, 164, 92, 0.45);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes heartBeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.2);
-  }
-  40% {
-    transform: scale(0.95);
-  }
-  60% {
-    transform: scale(1.1);
-  }
-}
-
-@keyframes entranceFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-float {
-  animation: floatGentle 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-.animate-gold-glow {
-  animation: goldGlow 3s ease-in-out infinite;
-}
-
-.animate-heart-beat {
-  animation: heartBeat 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.animate-entrance {
-  animation: entranceFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Luxury Card Lift Micro-Interaction */
 .card-lift {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-lift:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
-  border-color: var(--accent-gold);
-}
-
-/* Smooth Image Reveal */
-.img-zoom {
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-}
-
-.group:hover .img-zoom {
-  transform: scale(1.08);
-}
-
-/* Luxury Button Press */
-.btn-press {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-press:active {
-  transform: scale(0.96);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow);
 }

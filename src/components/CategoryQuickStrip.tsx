@@ -1,7 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, ArrowRight } from "lucide-react";
-
+import { Sparkles, ArrowRight, Flame } from "lucide-react";
 import type { ShopifyCollection } from "@/types/shopify";
 
 interface QuickCategoryItem {
@@ -9,6 +10,7 @@ interface QuickCategoryItem {
   href: string;
   image: string;
   label: string;
+  isHot?: boolean;
 }
 
 const fallbackImages: Record<string, { image: string; label: string }> = {
@@ -18,7 +20,7 @@ const fallbackImages: Record<string, { image: string; label: string }> = {
   },
   earrings: {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/cfcff7f80632b30fda8cc118d5faf3ba65f6ee80182e57bea5943f7b85484728.png?v=1790240218",
-    label: "Studs & Drops",
+    label: "Studs & Jhumkas",
   },
   rings: {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
@@ -34,11 +36,11 @@ const fallbackImages: Record<string, { image: string; label: string }> = {
   },
   "jewellery-sets": {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    label: "Bridal & Festive",
+    label: "Bridal Sets",
   },
   "necklace-sets": {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    label: "Bridal & Festive",
+    label: "Festive Sets",
   },
   "bridal-jewellery": {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
@@ -50,11 +52,18 @@ const fallbackImages: Record<string, { image: string; label: string }> = {
   },
   "new-arrivals": {
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
-    label: "Latest 2026",
+    label: "Fresh 2026",
   },
 };
 
 const defaultQuickCategories: QuickCategoryItem[] = [
+  {
+    name: "Bridal Sets",
+    href: "/collections/bridal-jewellery",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
+    label: "Kerala Bridal",
+    isHot: true,
+  },
   {
     name: "Necklaces",
     href: "/collections/necklaces",
@@ -68,40 +77,35 @@ const defaultQuickCategories: QuickCategoryItem[] = [
     label: "Studs & Drops",
   },
   {
+    name: "Bangles & Cuffs",
+    href: "/collections/bangles",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
+    label: "Anti-Tarnish",
+    isHot: true,
+  },
+  {
+    name: "Solitaires & Rings",
+    href: "/collections/rings",
+    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
+    label: "American Diamond",
+  },
+  {
     name: "Necklace Sets",
     href: "/collections/necklace-sets",
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    label: "Festive Sets",
+    label: "Matching Sets",
   },
   {
-    name: "Bridal Jewellery",
-    href: "/collections/bridal-jewellery",
-    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/80adacfa6be919de9607a60cea76b15a3f411a4f7d85fca420cc75df8c4e0577.png?v=1790239866",
-    label: "Kerala Bridal",
-  },
-  {
-    name: "Bangles",
-    href: "/collections/bangles",
-    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
-    label: "Waterproof Cuffs",
-  },
-  {
-    name: "Rings",
-    href: "/collections/rings",
-    image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/9b7c6affde3ecafe09d7f6354dc119745cc47ad1feb6874e05683cd47b1b00fe.png?v=1790240194",
-    label: "Solitaires & Bands",
-  },
-  {
-    name: "Anklets",
+    name: "Daily Payals",
     href: "/collections/anklets",
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/04a0f6367f40b11fdd9a8f07233351b49f94e9eda12869616f0db06f34e1a11f_270d1797-e20a-4840-ba59-ba23533fcb94.png?v=1790240167",
-    label: "Daily Payals",
+    label: "Waterproof",
   },
   {
     name: "New Arrivals",
     href: "/collections/new-arrivals",
     image: "https://cdn.shopify.com/s/files/1/0830/8224/8405/files/26096492af4818da9104753e8af444d6df2653a7d76abd88c3a84a2c07e99686.png?v=1790240242",
-    label: "Latest 2026",
+    label: "2026 Additions",
   },
 ];
 
@@ -125,63 +129,77 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
           };
         })
       : defaultQuickCategories;
+
   return (
     <section
-      className="py-5 sm:py-6 border-b transition-colors"
+      className="py-4 sm:py-6 border-b transition-colors"
       style={{
         backgroundColor: "var(--bg-surface)",
         borderColor: "var(--border-subtle)",
       }}
-      aria-label="Category Quick Links"
+      aria-label="Category Stories Strip"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
-            <h2 className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "var(--text-primary)" }}>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--text-primary)" }}>
               Shop By Category
             </h2>
           </div>
           <Link
             href="/collections"
-            className="text-xs font-bold uppercase tracking-wider flex items-center gap-1 hover:underline"
+            className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1 hover:underline"
             style={{ color: "var(--accent-cta)" }}
           >
-            <span>All Categories</span>
+            <span>View All (8)</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
 
-        {/* Horizontal Category Strip with Real Product Visuals */}
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3.5">
+        {/* Myntra / Nykaa Style Horizontal Story Circles */}
+        <div className="flex items-start gap-4 sm:gap-6 overflow-x-auto no-scrollbar pb-1">
           {displayItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="group flex flex-col items-center justify-center p-2.5 sm:p-3.5 rounded-2xl border liquid-glass transition-all duration-300 hover:-translate-y-1 hover:shadow-md active:scale-95 text-center"
-              style={{
-                borderColor: "var(--border-subtle)",
-              }}
+              className="group flex flex-col items-center shrink-0 text-center transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer w-[72px] sm:w-[88px]"
             >
-              <div
-                className="relative h-12 w-12 sm:h-14 sm:w-14 rounded-full overflow-hidden mb-2 border-2 transition-transform duration-300 group-hover:scale-105 shadow-xs"
-                style={{
-                  borderColor: "var(--accent-gold)",
-                  backgroundColor: "var(--bg-secondary)",
-                }}
-              >
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  sizes="56px"
-                  className="object-cover object-center p-1"
-                />
+              {/* Circular Thumbnail with Luxury Gold Story Ring */}
+              <div className="relative p-0.5 rounded-full bg-gradient-to-tr from-amber-500 via-yellow-300 to-amber-600 shadow-xs mb-2">
+                <div
+                  className="relative h-15 w-15 sm:h-18 sm:w-18 rounded-full overflow-hidden p-1"
+                  style={{
+                    backgroundColor: "var(--bg-secondary)",
+                  }}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 640px) 60px, 72px"
+                    className="object-contain p-1 group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+
+                {item.isHot && (
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-rose-600 text-white shadow-xs">
+                    <Flame className="h-2.5 w-2.5" />
+                  </span>
+                )}
               </div>
-              <span className="text-xs sm:text-sm font-bold font-serif-luxury line-clamp-1 group-hover:underline" style={{ color: "var(--text-primary)" }}>
+
+              {/* Category Name */}
+              <span
+                className="font-serif text-[11px] sm:text-xs font-medium line-clamp-1 group-hover:underline"
+                style={{ color: "var(--text-primary)" }}
+              >
                 {item.name}
               </span>
-              <span className="text-[10px] sm:text-xs font-semibold hidden sm:block mt-0.5 opacity-80" style={{ color: "var(--text-muted)" }}>
+              <span
+                className="text-[9px] font-sans font-light opacity-70 hidden sm:block"
+                style={{ color: "var(--text-muted)" }}
+              >
                 {item.label}
               </span>
             </Link>

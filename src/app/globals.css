@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* -------------------------------------------------------------------------- */
-/* 3 CLIENT-SPECIFIED LUXURY THEMES                                           */
+/* 6 CLIENT & CURATED LUXURY THEMES                                           */
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------- */
@@ -32,6 +32,10 @@
   --badge-soldout-text: #6E6258;
   --tag-bg: #FAF2E4;
   --tag-text: #8C6C2D;
+
+  /* Hero Video Tint Overlay */
+  --hero-video-tint: rgba(107, 30, 46, 0.18);
+  --hero-video-glow: rgba(201, 164, 92, 0.25);
 
   /* Liquid Glass Tokens */
   --glass-bg: rgba(255, 249, 239, 0.85);
@@ -69,6 +73,10 @@
   --badge-soldout-text: #7A5B64;
   --tag-bg: #FDF2F4;
   --tag-text: #94465B;
+
+  /* Hero Video Tint Overlay */
+  --hero-video-tint: rgba(138, 61, 82, 0.18);
+  --hero-video-glow: rgba(244, 221, 226, 0.35);
 
   /* Liquid Glass Tokens */
   --glass-bg: rgba(255, 255, 255, 0.88);
@@ -108,6 +116,10 @@
   --tag-bg: #EFF4EC;
   --tag-text: #3B5741;
 
+  /* Hero Video Tint Overlay */
+  --hero-video-tint: rgba(46, 70, 51, 0.2);
+  --hero-video-glow: rgba(168, 181, 160, 0.3);
+
   /* Liquid Glass Tokens */
   --glass-bg: rgba(250, 245, 234, 0.88);
   --glass-bg-hover: rgba(255, 255, 255, 0.98);
@@ -115,6 +127,126 @@
   --glass-shadow: 0 8px 32px 0 rgba(46, 70, 51, 0.08);
   --glass-blur: 16px;
   --hero-gradient: radial-gradient(circle at 50% 0%, rgba(168, 181, 160, 0.25) 0%, transparent 70%);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. Royal Sapphire + Alabaster + Imperial Gold                             */
+/* -------------------------------------------------------------------------- */
+[data-theme="royal-sapphire"] {
+  --bg-primary: #FAFAFD;
+  --bg-secondary: #F0F3F9;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --text-primary: #121A26;
+  --text-secondary: #3D4F68;
+  --text-muted: #5F7491;
+  --accent-gold: #D4AF37;
+  --accent-gold-hover: #BF9C2C;
+  --accent-cta: #122647;
+  --accent-cta-hover: #0B1A33;
+  --accent-cta-text: #FFFFFF;
+  --border-subtle: rgba(18, 38, 71, 0.2);
+  --border-medium: #CAD5E5;
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 12px 36px -10px rgba(18, 38, 71, 0.1);
+  --badge-sale-bg: #122647;
+  --badge-sale-text: #FFFFFF;
+  --badge-soldout-bg: #E4EAF4;
+  --badge-soldout-text: #485A74;
+  --tag-bg: #EEF3FA;
+  --tag-text: #173663;
+
+  /* Hero Video Tint Overlay */
+  --hero-video-tint: rgba(18, 38, 71, 0.24);
+  --hero-video-glow: rgba(212, 175, 55, 0.25);
+
+  /* Liquid Glass Tokens */
+  --glass-bg: rgba(250, 250, 253, 0.88);
+  --glass-bg-hover: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(212, 175, 55, 0.28);
+  --glass-shadow: 0 8px 32px 0 rgba(18, 38, 71, 0.08);
+  --glass-blur: 16px;
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(18, 38, 71, 0.18) 0%, transparent 70%);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. Velvet Plum + Pearl + Rose Gold                                        */
+/* -------------------------------------------------------------------------- */
+[data-theme="velvet-plum"] {
+  --bg-primary: #FCF8F5;
+  --bg-secondary: #F6ECE6;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --text-primary: #2B1420;
+  --text-secondary: #5C3A4D;
+  --text-muted: #7D5B6E;
+  --accent-gold: #D4A373;
+  --accent-gold-hover: #BF8E5E;
+  --accent-cta: #5A183C;
+  --accent-cta-hover: #430E2B;
+  --accent-cta-text: #FFFFFF;
+  --border-subtle: rgba(90, 24, 60, 0.22);
+  --border-medium: #E3CDD8;
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 12px 36px -10px rgba(90, 24, 60, 0.1);
+  --badge-sale-bg: #5A183C;
+  --badge-sale-text: #FFFFFF;
+  --badge-soldout-bg: #F3E4ED;
+  --badge-soldout-text: #6B435B;
+  --tag-bg: #FAEEF5;
+  --tag-text: #731D4B;
+
+  /* Hero Video Tint Overlay */
+  --hero-video-tint: rgba(90, 24, 60, 0.22);
+  --hero-video-glow: rgba(212, 163, 115, 0.25);
+
+  /* Liquid Glass Tokens */
+  --glass-bg: rgba(252, 248, 245, 0.88);
+  --glass-bg-hover: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(212, 163, 115, 0.28);
+  --glass-shadow: 0 8px 32px 0 rgba(90, 24, 60, 0.08);
+  --glass-blur: 16px;
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(90, 24, 60, 0.18) 0%, transparent 70%);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. Terracotta & Kerala Temple Gold                                        */
+/* -------------------------------------------------------------------------- */
+[data-theme="terracotta-gold"] {
+  --bg-primary: #FDF7F2;
+  --bg-secondary: #F7EDE4;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --text-primary: #291811;
+  --text-secondary: #5E3D31;
+  --text-muted: #825E51;
+  --accent-gold: #C59B4B;
+  --accent-gold-hover: #AF8537;
+  --accent-cta: #8A341E;
+  --accent-cta-hover: #6F2411;
+  --accent-cta-text: #FFFFFF;
+  --border-subtle: rgba(138, 52, 30, 0.22);
+  --border-medium: #E3CFCA;
+  --card-bg: #FFFFFF;
+  --card-shadow: 0 12px 36px -10px rgba(138, 52, 30, 0.1);
+  --badge-sale-bg: #8A341E;
+  --badge-sale-text: #FFFFFF;
+  --badge-soldout-bg: #F4E5E1;
+  --badge-soldout-text: #70473B;
+  --tag-bg: #FBF0EB;
+  --tag-text: #963B23;
+
+  /* Hero Video Tint Overlay */
+  --hero-video-tint: rgba(138, 52, 30, 0.2);
+  --hero-video-glow: rgba(197, 155, 75, 0.25);
+
+  /* Liquid Glass Tokens */
+  --glass-bg: rgba(253, 247, 242, 0.88);
+  --glass-bg-hover: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(197, 155, 75, 0.28);
+  --glass-shadow: 0 8px 32px 0 rgba(138, 52, 30, 0.08);
+  --glass-blur: 16px;
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(138, 52, 30, 0.18) 0%, transparent 70%);
 }
 
 /* -------------------------------------------------------------------------- */

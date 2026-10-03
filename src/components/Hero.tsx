@@ -9,43 +9,20 @@ import {
   Droplets,
   ShieldCheck,
   Crown,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
   Truck,
 } from "lucide-react";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch(() => {
-        setIsPlaying(false);
+        // Handled silently for autoplay restrictions
       });
     }
   }, []);
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
 
   return (
     <section
@@ -54,7 +31,7 @@ export default function Hero() {
       aria-label="Nakshatra Collections Cinematic Showcase"
     >
       {/* ==================================================================== */}
-      {/* 1. FULL BLEED CINEMATIC JEWELLERY VIDEO BACKGROUND                   */}
+      {/* 1. CINEMATIC PERMANENTLY MUTED JEWELLERY VIDEO BACKGROUND            */}
       {/* ==================================================================== */}
       <div className="relative w-full min-h-[520px] sm:min-h-[580px] lg:min-h-[640px] xl:min-h-[700px] flex items-center overflow-hidden">
         {/* Fallback Poster Image */}
@@ -69,7 +46,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* HTML5 Autoplaying Video Background */}
+        {/* HTML5 Autoplaying Permanently Muted Looping Video */}
         <video
           ref={videoRef}
           autoPlay
@@ -92,33 +69,52 @@ export default function Hero() {
           />
         </video>
 
-        {/* Deep Luxury Scrim Gradient Overlay for Crisp Readability */}
+        {/* ------------------------------------------------------------------ */}
+        {/* 2. DYNAMIC THEME-TINTED TRANSPARENT OVERLAY LAYER                  */}
+        {/* ------------------------------------------------------------------ */}
         <div
-          className="absolute inset-0 z-10 pointer-events-none"
+          className="absolute inset-0 z-10 pointer-events-none transition-colors duration-700 mix-blend-multiply"
+          style={{
+            backgroundColor: "var(--hero-video-tint)",
+          }}
+        />
+
+        {/* Ambient Theme Radial Glow */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none transition-colors duration-700"
           style={{
             background:
-              "linear-gradient(to right, rgba(14, 10, 8, 0.92) 0%, rgba(14, 10, 8, 0.7) 45%, rgba(14, 10, 8, 0.35) 75%, rgba(14, 10, 8, 0.2) 100%)",
+              "radial-gradient(circle at 30% 50%, var(--hero-video-glow) 0%, transparent 65%)",
+          }}
+        />
+
+        {/* High-Contrast Luxury Scrim for 100% Crisp Typography Readability */}
+        <div
+          className="absolute inset-0 z-15 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(14, 10, 8, 0.92) 0%, rgba(14, 10, 8, 0.68) 48%, rgba(14, 10, 8, 0.3) 78%, rgba(14, 10, 8, 0.15) 100%)",
           }}
         />
 
         <div
-          className="absolute inset-0 z-10 pointer-events-none sm:hidden"
+          className="absolute inset-0 z-15 pointer-events-none sm:hidden"
           style={{
             background:
               "linear-gradient(to top, rgba(14, 10, 8, 0.95) 0%, rgba(14, 10, 8, 0.65) 50%, rgba(14, 10, 8, 0.25) 100%)",
           }}
         />
 
-        {/* Ambient Bottom Fade to Primary Background */}
+        {/* Ambient Bottom Fade to Active Theme Background */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-24 z-10 pointer-events-none"
+          className="absolute bottom-0 left-0 right-0 h-24 z-15 pointer-events-none"
           style={{
             background: "linear-gradient(to top, var(--bg-primary), transparent)",
           }}
         />
 
         {/* ================================================================== */}
-        {/* 2. FOREGROUND EDITORIAL CONTENT                                    */}
+        {/* 3. FOREGROUND EDITORIAL CONTENT                                    */}
         {/* ================================================================== */}
         <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32 w-full text-white">
           <div className="max-w-2xl">
@@ -179,30 +175,10 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
-        {/* Video Controls (Play/Pause & Mute in bottom right) */}
-        <div className="absolute right-4 bottom-6 z-20 flex items-center gap-2">
-          <button
-            type="button"
-            onClick={togglePlay}
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full liquid-glass-dark border border-white/20 text-white/80 hover:text-white hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-lg"
-            aria-label={isPlaying ? "Pause video" : "Play video"}
-          >
-            {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-          </button>
-          <button
-            type="button"
-            onClick={toggleMute}
-            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full liquid-glass-dark border border-white/20 text-white/80 hover:text-white hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-lg"
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
-          >
-            {isMuted ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
-          </button>
-        </div>
       </div>
 
       {/* ==================================================================== */}
-      {/* 3. STORE VALUE GUARANTEE STRIP                                       */}
+      {/* 4. STORE VALUE GUARANTEE STRIP                                       */}
       {/* ==================================================================== */}
       <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8 mb-6">
         <div

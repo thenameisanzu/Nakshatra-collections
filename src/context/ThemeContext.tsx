@@ -2,7 +2,13 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-export type ThemeType = "champagne-luxury" | "soft-blush" | "sage-contemporary";
+export type ThemeType =
+  | "champagne-luxury"
+  | "soft-blush"
+  | "sage-contemporary"
+  | "royal-sapphire"
+  | "velvet-plum"
+  | "terracotta-gold";
 
 export interface ThemeOption {
   id: ThemeType;
@@ -46,6 +52,36 @@ export const THEMES: ThemeOption[] = [
       cta: "#2E4633",
     },
   },
+  {
+    id: "royal-sapphire",
+    name: "Royal Sapphire & Gold",
+    tagline: "Celestial Navy, Alabaster & Imperial Gold",
+    colors: {
+      bg: "#FAFAFD",
+      accent: "#D4AF37",
+      cta: "#122647",
+    },
+  },
+  {
+    id: "velvet-plum",
+    name: "Velvet Plum & Pearl",
+    tagline: "Warm Pearl, Amethyst Plum & Antique Gold",
+    colors: {
+      bg: "#FCF8F5",
+      accent: "#D4A373",
+      cta: "#5A183C",
+    },
+  },
+  {
+    id: "terracotta-gold",
+    name: "Terracotta & Temple Gold",
+    tagline: "Earthy Rust, Bisque & Kerala Temple Gold",
+    colors: {
+      bg: "#FDF7F2",
+      accent: "#C59B4B",
+      cta: "#8A341E",
+    },
+  },
 ];
 
 const THEME_STORAGE_KEY = "nakshatra_jewellery_theme";
@@ -65,14 +101,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemeType | null;
-      if (
-        savedTheme &&
-        (savedTheme === "champagne-luxury" ||
-          savedTheme === "soft-blush" ||
-          savedTheme === "sage-contemporary")
-      ) {
-        setThemeState(savedTheme);
-        document.documentElement.setAttribute("data-theme", savedTheme);
+      const validTheme = THEMES.find((t) => t.id === savedTheme);
+      if (validTheme) {
+        setThemeState(validTheme.id);
+        document.documentElement.setAttribute("data-theme", validTheme.id);
       } else {
         document.documentElement.setAttribute("data-theme", "champagne-luxury");
       }

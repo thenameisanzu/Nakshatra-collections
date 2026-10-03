@@ -66,8 +66,10 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
   const handleWishlistClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    const firstVariant = product.variants?.edges?.[0]?.node;
     toggleWishlist({
       id: product.id,
+      variantId: firstVariant?.id,
       handle: product.handle,
       title: product.title,
       price: {

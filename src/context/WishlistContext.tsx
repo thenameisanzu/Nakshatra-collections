@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState, useCallback, use
 
 export interface WishlistItem {
   id: string;
+  variantId?: string;
   handle: string;
   title: string;
   price: {

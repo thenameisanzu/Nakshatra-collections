@@ -31,7 +31,8 @@ export default function WishlistPage() {
   const handleAddToCart = async (item: typeof items[0]) => {
     try {
       setAddingId(item.id);
-      await addItem(item.id, 1);
+      const targetId = item.variantId || item.id;
+      await addItem(targetId, 1);
       setAddedId(item.id);
       setTimeout(() => {
         setAddedId(null);

@@ -112,14 +112,14 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 border-b ${
           isScrolled
-            ? "liquid-glass shadow-sm py-2.5 sm:py-3"
-            : "bg-[var(--bg-primary)] py-3 sm:py-3.5"
+            ? "liquid-glass shadow-sm py-2 sm:py-2.5"
+            : "bg-[var(--bg-primary)] py-2.5 sm:py-3.5"
         }`}
         style={{
           borderColor: "var(--border-subtle)",
         }}
       >
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 min-h-[44px]">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 min-h-[52px] sm:min-h-[60px]">
           {/* Mobile Menu Trigger & Search (Mobile) */}
           <div className="flex lg:hidden items-center gap-1">
             <button
@@ -245,20 +245,20 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Mathematical Dead Center: Brand Logo with Emblem Above */}
+          {/* Mathematical Dead Center: Brand Logo with Enriched Emblem */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center justify-center">
             <Link
               href="/"
-              className="group flex flex-col items-center justify-center text-center transition-transform hover:scale-[1.01]"
+              className="group flex flex-col items-center justify-center text-center transition-transform hover:scale-[1.02]"
               aria-label="NAKSHATRA Collections"
             >
-              {/* Emblem Image Centered on Top */}
-              <div className="relative h-5 w-5 sm:h-6 sm:w-6 shrink-0 mb-0.5">
+              {/* Enriched Prominent Emblem Image Centered on Top */}
+              <div className="relative h-7 w-7 sm:h-9 sm:w-9 md:h-10 md:w-10 shrink-0 mb-1 drop-shadow-xs">
                 <Image
                   src="/nakshatra-logo.png"
                   alt="NAKSHATRA Emblem"
                   fill
-                  sizes="28px"
+                  sizes="(max-width: 640px) 32px, 40px"
                   className="object-contain"
                   priority
                 />
@@ -274,7 +274,7 @@ export default function Navbar() {
 
               {/* Subtitle */}
               <span
-                className="text-[6.5px] sm:text-[7.5px] font-semibold tracking-[0.34em] uppercase leading-none mt-0.5 opacity-75"
+                className="text-[6.5px] sm:text-[7.5px] font-semibold tracking-[0.36em] uppercase leading-none mt-0.5 opacity-75"
                 style={{ color: "var(--accent-gold)" }}
               >
                 COLLECTIONS

@@ -136,7 +136,7 @@ export default function ThemeSwitcher() {
 
                     <div>
                       <div
-                        className="text-xs font-semibold tracking-wide font-serif-luxury"
+                        className="text-xs font-semibold tracking-wide font-serif"
                         style={{
                           color: isSelected ? "var(--accent-cta)" : "var(--text-primary)",
                         }}

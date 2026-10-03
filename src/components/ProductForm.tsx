@@ -607,7 +607,7 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
                   <dt className="font-semibold" style={{ color: "var(--text-muted)" }}>
                     Product Handle
                   </dt>
-                  <dd className="font-mono text-[11px]" style={{ color: "var(--text-primary)" }}>
+                  <dd className="font-sans text-[11px] font-medium" style={{ color: "var(--text-primary)" }}>
                     {product.handle}
                   </dd>
                 </div>

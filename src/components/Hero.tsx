@@ -250,7 +250,7 @@ export default function Hero() {
                 })}
               </div>
 
-              <span className="text-[10px] font-mono tracking-widest text-neutral-300 uppercase">
+              <span className="text-[10px] font-sans font-medium tracking-widest text-neutral-300 uppercase">
                 0{current + 1} / 0{heroSlides.length}
               </span>
             </div>

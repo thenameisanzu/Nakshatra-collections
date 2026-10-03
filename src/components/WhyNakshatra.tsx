@@ -92,13 +92,13 @@ export default function WhyNakshatra() {
                     >
                       <Icon className="h-6 w-6" />
                     </div>
-                    <span className="text-xs font-mono tracking-widest font-extrabold" style={{ color: "var(--text-muted)" }}>
+                    <span className="text-xs font-sans tracking-widest font-semibold opacity-60" style={{ color: "var(--text-muted)" }}>
                       {item.number}
                     </span>
                   </div>
 
                   <h3
-                    className="font-serif-luxury text-lg sm:text-xl font-bold tracking-tight"
+                    className="font-serif text-lg sm:text-xl font-medium tracking-tight"
                     style={{ color: "var(--text-primary)" }}
                   >
                     {item.title}

@@ -19,6 +19,7 @@ import {
   Crown,
   Flame,
   CircleDot,
+  User,
   type LucideIcon,
 } from "lucide-react";
 
@@ -276,7 +277,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Right: Actions & Theme Switcher */}
+          {/* Right: Actions, Customer Account & Theme Switcher */}
           <div className="flex items-center gap-1.5 sm:gap-2.5">
             {/* Search Trigger */}
             <button
@@ -289,10 +290,20 @@ export default function Navbar() {
               <Search className="h-4 w-4" />
             </button>
 
-            {/* Wishlist */}
+            {/* Customer Account & Order Tracking (Mobile & Desktop) */}
+            <Link
+              href="/account"
+              className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
+              style={{ color: "var(--text-primary)" }}
+              aria-label="Customer Account & Order Tracking"
+            >
+              <User className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+            </Link>
+
+            {/* Desktop Only: Wishlist (On Mobile, lives in bottom navigation) */}
             <Link
               href="/wishlist"
-              className="relative flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
+              className="relative hidden md:flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Wishlist with ${totalWishlistItems} saved items`}
             >
@@ -311,11 +322,11 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Cart Bag */}
+            {/* Desktop Only: Cart Bag (On Mobile, lives in bottom navigation) */}
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
+              className="relative hidden md:flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Shopping bag with ${totalQuantity} items`}
             >
@@ -331,7 +342,7 @@ export default function Navbar() {
             </button>
 
             {/* Theme Switcher */}
-            <div className="hidden md:block pl-1">
+            <div className="pl-0.5">
               <ThemeSwitcher />
             </div>
           </div>
@@ -432,23 +443,16 @@ export default function Navbar() {
                 </Link>
 
                 <Link
-                  href="/wishlist"
+                  href="/account"
                   onClick={() => setIsOpen(false)}
                   className="py-3 text-lg font-serif font-normal border-b flex items-center justify-between"
                   style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
                   <span className="flex items-center gap-2">
-                    <Heart className="h-4 w-4 text-rose-600" />
-                    <span>Saved Wishlist</span>
+                    <User className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
+                    <span>My Account &amp; Track Orders</span>
                   </span>
-                  {totalWishlistItems > 0 && (
-                    <span
-                      className="px-2 py-0.5 rounded-full text-xs font-bold text-white"
-                      style={{ backgroundColor: "var(--accent-cta)" }}
-                    >
-                      {totalWishlistItems}
-                    </span>
-                  )}
+                  <ArrowRight className="h-4 w-4 opacity-50" />
                 </Link>
               </nav>
             </div>

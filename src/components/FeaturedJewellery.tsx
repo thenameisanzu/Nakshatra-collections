@@ -101,7 +101,7 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
                 <Gem className="h-3.5 w-3.5" />
                 Spotlight Creation
               </span>
-              <span className="text-[11px] font-mono font-bold tracking-widest" style={{ color: "var(--text-muted)" }}>
+              <span className="text-[11px] font-sans font-medium tracking-widest uppercase" style={{ color: "var(--text-muted)" }}>
                 {heroFeatured.productType || "Bespoke Atelier"}
               </span>
             </div>

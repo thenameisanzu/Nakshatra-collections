@@ -280,7 +280,7 @@ export default function CuratedCollections({ collections }: CuratedCollectionsPr
                   </span>
 
                   <span
-                    className="text-[11px] font-mono font-extrabold tracking-widest opacity-60"
+                    className="text-[11px] font-sans font-semibold tracking-widest opacity-60"
                     style={{ color: "var(--text-muted)" }}
                   >
                     0{index + 1}

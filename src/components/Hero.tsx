@@ -6,123 +6,105 @@ import Image from "next/image";
 import {
   ArrowRight,
   Sparkles,
-  Droplets,
-  ShieldCheck,
   Crown,
+  Droplets,
   Gem,
-  CircleDot,
-  Heart,
+  ShieldCheck,
+  Truck,
   ChevronLeft,
   ChevronRight,
-  type LucideIcon,
+  Flame,
 } from "lucide-react";
 
-interface HeroSlide {
+interface MainBannerSlide {
   id: string;
-  src: string;
+  image: string;
   alt: string;
-  eyebrow: string;
-  headline: string;
-  accent: string;
-  description: string;
-  primaryCtaText: string;
-  primaryCtaLink: string;
-  spotlight: {
-    title: string;
-    category: string;
-    price: string;
-    link: string;
-  };
+  tag: string;
+  title: string;
+  highlight: string;
+  subtitle: string;
+  ctaText: string;
+  ctaLink: string;
 }
 
-const heroSlides: HeroSlide[] = [
+const mainSlides: MainBannerSlide[] = [
   {
-    id: "signature-daily",
-    src: "/images/hero/model-lifestyle.jpg",
-    alt: "Modern 18K gold plated anti-tarnish daily wear jewellery",
-    eyebrow: "Signature 2026 Collection",
-    headline: "Everyday Jewellery,",
-    accent: "That Never Fades",
-    description:
-      "Waterproof, sweatproof & hypoallergenic 18K micro-gold plated artificial jewellery crafted for daily elegance and celebrations in Kerala.",
-    primaryCtaText: "Shop Daily Wear",
-    primaryCtaLink: "/collections/necklaces",
-    spotlight: {
-      title: "18K Gold Emerald Pendant",
-      category: "Necklaces & Pendants",
-      price: "₹1,499",
-      link: "/collections/necklaces",
-    },
+    id: "daily-anti-tarnish",
+    image: "/images/hero/model-lifestyle.jpg",
+    alt: "18K Gold Plated Anti-Tarnish Daily Wear Jewellery",
+    tag: "Signature 2026 Collection",
+    title: "18K Gold Plated Jewellery,",
+    highlight: "That Never Fades",
+    subtitle: "Waterproof, sweatproof & hypoallergenic daily essentials crafted for modern life in Kerala.",
+    ctaText: "Shop Daily Wear",
+    ctaLink: "/collections/necklaces",
   },
   {
-    id: "bridal-heritage",
-    src: "/images/hero/festive-necklace.jpg",
-    alt: "Traditional gold and emerald choker bridal set",
-    eyebrow: "Kerala Bridal & Festive",
-    headline: "Opulent Bridal Sets,",
-    accent: "Worthy of Royalty",
-    description:
-      "Temple-inspired choker sets and heritage neckpieces finished with authentic real gold lustre and gemstone sparkle.",
-    primaryCtaText: "Explore Bridal Sets",
-    primaryCtaLink: "/collections/bridal-jewellery",
-    spotlight: {
-      title: "Royal Heritage Kundan Set",
-      category: "Bridal Jewellery",
-      price: "₹3,899",
-      link: "/collections/bridal-jewellery",
-    },
+    id: "kerala-bridal",
+    image: "/images/hero/festive-necklace.jpg",
+    alt: "Kerala Bridal Choker Necklace Sets",
+    tag: "The Bridal Heritage",
+    title: "Opulent Bridal Chokers,",
+    highlight: "Royal Gold Lustre",
+    subtitle: "Traditional Kerala temple motifs and Kundan sets finished with authentic real gold shine.",
+    ctaText: "Explore Bridal Sets",
+    ctaLink: "/collections/bridal-jewellery",
   },
   {
-    id: "anti-tarnish-clovers",
-    src: "/images/hero/anti-tarnish-waterproof.jpg",
-    alt: "Waterproof anti-tarnish gold clover bracelets and cuffs",
-    eyebrow: "Everyday Active Luxury",
-    headline: "Shower & Sweat Safe,",
-    accent: "Wear Everywhere",
-    description:
-      "Engineered on medical-grade 316L stainless steel. Wear your favourite clovers and bangles to work, gym, and beach without tarnishing.",
-    primaryCtaText: "Shop Anti-Tarnish",
-    primaryCtaLink: "/collections/bangles",
-    spotlight: {
-      title: "Four-Leaf Clover Bracelet",
-      category: "Bangles & Cuffs",
-      price: "₹1,299",
-      link: "/collections/bangles",
-    },
-  },
-  {
-    id: "solitaires-crystals",
-    src: "/images/hero/solitaire-rings.jpg",
-    alt: "Sparkling American Diamond Solitaire Rings",
-    eyebrow: "American Diamonds",
-    headline: "Diamond Brilliance,",
-    accent: "Pure Fire",
-    description:
-      "Flawless AAA+ American Diamonds and Cubic Zirconia set in comfort-fit adjustable bands that sparkle with optical perfection.",
-    primaryCtaText: "Discover Rings",
-    primaryCtaLink: "/collections/rings",
-    spotlight: {
-      title: "Solitaire Crown Ring",
-      category: "Solitaires & Rings",
-      price: "₹999",
-      link: "/collections/rings",
-    },
+    id: "waterproof-clovers",
+    image: "/images/hero/anti-tarnish-waterproof.jpg",
+    alt: "Waterproof 316L Stainless Steel Clovers and Bangles",
+    tag: "100% Anti-Tarnish 316L",
+    title: "Shower & Sweat Safe,",
+    highlight: "Wear It Everywhere",
+    subtitle: "Medical-grade stainless steel clovers and daily cuffs that never blacken or discolor.",
+    ctaText: "Shop Anti-Tarnish",
+    ctaLink: "/collections/bangles",
   },
 ];
 
-interface QuickCategory {
-  label: string;
-  href: string;
-  icon: LucideIcon;
-}
+const sideGridBanners = [
+  {
+    id: "bridal-spotlight",
+    title: "Kerala Bridal Sets",
+    subtitle: "Heritage Kundan & Temple Sets",
+    priceLabel: "From ₹2,499",
+    tag: "Royal Bridal",
+    image: "/images/hero/festive-necklace.jpg",
+    href: "/collections/bridal-jewellery",
+    icon: Crown,
+    isHot: true,
+  },
+  {
+    id: "waterproof-cuffs",
+    title: "Anti-Tarnish Cuffs",
+    subtitle: "Waterproof 316L Gold Clovers",
+    priceLabel: "From ₹999",
+    tag: "Shower Safe",
+    image: "/images/hero/anti-tarnish-waterproof.jpg",
+    href: "/collections/bangles",
+    icon: Droplets,
+    isHot: false,
+  },
+  {
+    id: "solitaire-rings",
+    title: "Solitaires & Bands",
+    subtitle: "AAA+ American Diamonds",
+    priceLabel: "From ₹899",
+    tag: "Bestseller",
+    image: "/images/hero/solitaire-rings.jpg",
+    href: "/collections/rings",
+    icon: Gem,
+    isHot: false,
+  },
+];
 
-const quickCategories: QuickCategory[] = [
-  { label: "All Jewellery", href: "/#products", icon: Sparkles },
-  { label: "Bridal Sets", href: "/collections/bridal-jewellery", icon: Crown },
-  { label: "Necklaces", href: "/collections/necklaces", icon: Gem },
-  { label: "Earrings", href: "/collections/earrings", icon: Heart },
-  { label: "Anti-Tarnish", href: "/collections/bangles", icon: Droplets },
-  { label: "Rings", href: "/collections/rings", icon: CircleDot },
+const trustFeatures = [
+  { icon: Sparkles, text: "18K Real Gold Lustre" },
+  { icon: Droplets, text: "100% Waterproof 316L" },
+  { icon: ShieldCheck, text: "Hypoallergenic & Skin Safe" },
+  { icon: Truck, text: "Express Kerala Delivery" },
 ];
 
 export default function Hero() {
@@ -132,17 +114,16 @@ export default function Hero() {
   const touchEndX = useRef<number | null>(null);
 
   const nextSlide = useCallback(() => {
-    setCurrent((prev) => (prev + 1) % heroSlides.length);
+    setCurrent((prev) => (prev + 1) % mainSlides.length);
   }, []);
 
   const prevSlide = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    setCurrent((prev) => (prev - 1 + mainSlides.length) % mainSlides.length);
   }, []);
 
-  // Auto advance every 6s
   useEffect(() => {
     if (isPaused) return;
-    const interval = setInterval(nextSlide, 6000);
+    const interval = setInterval(nextSlide, 5500);
     return () => clearInterval(interval);
   }, [isPaused, nextSlide]);
 
@@ -163,272 +144,244 @@ export default function Hero() {
     touchEndX.current = null;
   };
 
-  const activeSlide = heroSlides[current];
+  const activeSlide = mainSlides[current];
 
   return (
     <section
-      className="relative w-full overflow-hidden transition-colors pt-4 sm:pt-8 pb-6 sm:pb-10"
+      className="relative w-full overflow-hidden transition-colors pt-3 sm:pt-6 pb-4 sm:pb-8"
       style={{ backgroundColor: "var(--bg-primary)" }}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      aria-label="Nakshatra Collections Featured Showcase"
+      aria-label="Nakshatra Collections E-Commerce Showcase"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         {/* ================================================================== */}
-        {/* 1. ASYMMETRICAL EDITORIAL SPLIT HERO (Mejuri / Vogue Inspired)      */}
+        {/* 1. STORE-FEEL HERO GRID LAYOUT (Bento E-Commerce Grid)             */}
         {/* ================================================================== */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* LEFT COLUMN: Editorial Typography & Value Proposition */}
-          <div className="lg:col-span-6 flex flex-col justify-center order-2 lg:order-1">
-            {/* Eyebrow Pill */}
-            <div className="inline-flex items-center gap-2 self-start rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] border shadow-xs"
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-5">
+          {/* ---------------------------------------------------------------- */}
+          {/* A. MAIN PROMO CAROUSEL (7 Columns on Desktop)                    */}
+          {/* ---------------------------------------------------------------- */}
+          <div
+            className="lg:col-span-7 xl:col-span-8 relative aspect-[4/5] xs:aspect-[1/1] sm:aspect-[16/10] lg:aspect-auto lg:min-h-[460px] xl:min-h-[500px] rounded-3xl overflow-hidden border shadow-md group"
+            style={{
+              borderColor: "var(--border-subtle)",
+              backgroundColor: "#16120E",
+            }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Background Images */}
+            {mainSlides.map((slide, index) => {
+              const isActive = index === current;
+              return (
+                <div
+                  key={slide.id}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                  }`}
+                >
+                  <Image
+                    src={slide.image}
+                    alt={slide.alt}
+                    fill
+                    priority={index === 0}
+                    sizes="(max-width: 1024px) 100vw, 65vw"
+                    className={`object-cover object-[center_30%] sm:object-center transition-transform duration-7000 ease-out ${
+                      isActive ? "scale-105" : "scale-100"
+                    }`}
+                  />
+                </div>
+              );
+            })}
+
+            {/* Deep High-Contrast Gradient Scrim for 100% Readability */}
+            <div
+              className="absolute inset-0 z-20 pointer-events-none"
               style={{
-                backgroundColor: "var(--bg-surface)",
-                borderColor: "var(--border-subtle)",
-                color: "var(--accent-cta)",
+                background:
+                  "linear-gradient(to top, rgba(16, 12, 10, 0.94) 0%, rgba(16, 12, 10, 0.6) 42%, rgba(16, 12, 10, 0.2) 75%, transparent 100%)",
               }}
+            />
+
+            {/* Desktop Left/Right Navigation Arrows */}
+            <button
+              type="button"
+              onClick={prevSlide}
+              className="hidden sm:flex absolute left-3.5 top-1/2 -translate-y-1/2 z-30 h-9 w-9 items-center justify-center rounded-full liquid-glass-dark text-white/80 hover:text-white hover:scale-110 active:scale-95 transition-all cursor-pointer border border-white/15"
+              aria-label="Previous banner"
             >
-              <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-              <span>{activeSlide.eyebrow}</span>
-            </div>
-
-            {/* Serif Headline */}
-            <h1
-              className="font-serif mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.12]"
-              style={{ color: "var(--text-primary)" }}
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={nextSlide}
+              className="hidden sm:flex absolute right-3.5 top-1/2 -translate-y-1/2 z-30 h-9 w-9 items-center justify-center rounded-full liquid-glass-dark text-white/80 hover:text-white hover:scale-110 active:scale-95 transition-all cursor-pointer border border-white/15"
+              aria-label="Next banner"
             >
-              {activeSlide.headline} <br />
-              <span className="italic font-normal" style={{ color: "var(--accent-gold)" }}>
-                {activeSlide.accent}
-              </span>
-            </h1>
+              <ChevronRight className="h-4 w-4" />
+            </button>
 
-            {/* Description Subtext */}
-            <p
-              className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-light"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              {activeSlide.description}
-            </p>
+            {/* Foreground Content */}
+            <div className="absolute inset-0 z-20 flex flex-col justify-end p-5 sm:p-8 lg:p-10 text-white">
+              <div className="max-w-xl">
+                {/* Eyebrow Pill */}
+                <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] liquid-glass-dark border border-white/20 text-amber-300 mb-2.5 sm:mb-3">
+                  <Sparkles className="h-3 w-3" />
+                  <span>{activeSlide.tag}</span>
+                </span>
 
-            {/* Value Pillars Strip (Pure SVG Icons, Zero Emojis) */}
-            <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2.5 text-xs font-medium" style={{ color: "var(--text-secondary)" }}>
-              <span
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border"
-                style={{
-                  backgroundColor: "var(--bg-surface)",
-                  borderColor: "var(--border-subtle)",
-                }}
-              >
-                <Droplets className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                <span>Waterproof &amp; Anti-Tarnish</span>
-              </span>
+                {/* Headline */}
+                <h1 className="font-serif text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight leading-[1.12]">
+                  {activeSlide.title} <br />
+                  <span className="italic font-normal text-amber-300">
+                    {activeSlide.highlight}
+                  </span>
+                </h1>
 
-              <span
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border"
-                style={{
-                  backgroundColor: "var(--bg-surface)",
-                  borderColor: "var(--border-subtle)",
-                }}
-              >
-                <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                <span>18K Real Gold Plating</span>
-              </span>
+                {/* Subtitle */}
+                <p className="mt-2 text-xs sm:text-sm text-neutral-200 line-clamp-2 font-light leading-relaxed max-w-md opacity-90">
+                  {activeSlide.subtitle}
+                </p>
 
-              <span
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border"
-                style={{
-                  backgroundColor: "var(--bg-surface)",
-                  borderColor: "var(--border-subtle)",
-                }}
-              >
-                <ShieldCheck className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                <span>Hypoallergenic Safe</span>
-              </span>
-            </div>
+                {/* Primary CTA Button */}
+                <div className="mt-4 sm:mt-5 flex items-center gap-3">
+                  <Link
+                    href={activeSlide.ctaLink}
+                    className="inline-flex items-center justify-center gap-2 rounded-full px-6 sm:px-8 py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest shadow-xl transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer text-black"
+                    style={{
+                      backgroundColor: "var(--accent-gold)",
+                    }}
+                  >
+                    <span>{activeSlide.ctaText}</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
 
-            {/* Action Buttons */}
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
-              <Link
-                href={activeSlide.primaryCtaLink}
-                className="inline-flex items-center justify-center gap-2.5 rounded-full px-8 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold uppercase tracking-widest shadow-md transition-all duration-300 hover:scale-105 active:scale-95 text-center"
-                style={{
-                  backgroundColor: "var(--accent-cta)",
-                  color: "var(--accent-cta-text)",
-                }}
-              >
-                <span>{activeSlide.primaryCtaText}</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+                  <Link
+                    href="/collections"
+                    className="inline-flex items-center justify-center rounded-full px-5 py-3 text-xs font-medium uppercase tracking-wider text-white/90 border border-white/25 liquid-glass-dark hover:bg-white/10 transition-all active:scale-95"
+                  >
+                    <span>All (8)</span>
+                  </Link>
+                </div>
+              </div>
 
-              <Link
-                href="/collections"
-                className="inline-flex items-center justify-center rounded-full px-7 py-3.5 sm:py-4 text-xs sm:text-sm font-medium uppercase tracking-wider border transition-all duration-300 hover:bg-black/5 active:scale-95 text-center"
-                style={{
-                  color: "var(--text-primary)",
-                  borderColor: "var(--border-medium)",
-                  backgroundColor: "var(--bg-surface)",
-                }}
-              >
-                <span>Explore All Categories</span>
-              </Link>
-            </div>
-
-            {/* Slide Indicators & Controls (Desktop & Mobile) */}
-            <div className="mt-8 pt-4 border-t flex items-center justify-between" style={{ borderColor: "var(--border-subtle)" }}>
-              <div className="flex items-center gap-2">
-                {heroSlides.map((slide, idx) => {
-                  const isActive = idx === current;
-                  return (
+              {/* Slide Dots Progress */}
+              <div className="mt-4 sm:mt-6 flex items-center justify-between border-t border-white/15 pt-2.5">
+                <div className="flex items-center gap-1.5">
+                  {mainSlides.map((slide, idx) => (
                     <button
                       key={slide.id}
                       onClick={() => setCurrent(idx)}
-                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                        isActive
-                          ? "w-8 shadow-xs"
-                          : "w-2.5 opacity-40 hover:opacity-75"
+                      className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        idx === current
+                          ? "w-7 bg-amber-400"
+                          : "w-2 bg-white/40 hover:bg-white/75"
                       }`}
-                      style={{
-                        backgroundColor: isActive ? "var(--accent-cta)" : "var(--text-muted)",
-                      }}
-                      aria-label={`Go to slide ${idx + 1}`}
+                      aria-label={`Slide ${idx + 1}`}
                     />
-                  );
-                })}
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={prevSlide}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-medium)",
-                    color: "var(--text-primary)",
-                  }}
-                  aria-label="Previous slide"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={nextSlide}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-medium)",
-                    color: "var(--text-primary)",
-                  }}
-                  aria-label="Next slide"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
+                  ))}
+                </div>
+                <span className="text-[10px] font-sans font-medium tracking-widest text-neutral-300 uppercase">
+                  0{current + 1} / 0{mainSlides.length}
+                </span>
               </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Unobstructed High-Resolution Editorial Showcase */}
-          <div className="lg:col-span-6 order-1 lg:order-2">
-            <div
-              className="relative w-full aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] rounded-3xl overflow-hidden border shadow-xl group"
-              style={{
-                borderColor: "var(--border-medium)",
-                backgroundColor: "var(--bg-secondary)",
-              }}
-            >
-              {/* Carousel Images */}
-              {heroSlides.map((slide, index) => {
-                const isActive = index === current;
-                return (
-                  <div
-                    key={slide.id}
-                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                      isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                    }`}
-                  >
-                    <Image
-                      src={slide.src}
-                      alt={slide.alt}
-                      fill
-                      priority={index === 0}
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className={`object-cover transition-transform duration-6000 ease-out ${
-                        isActive ? "scale-105" : "scale-100"
-                      } object-center`}
-                    />
-                  </div>
-                );
-              })}
-
-              {/* Floating Product Spotlight Card */}
-              <div className="absolute bottom-4 left-4 right-4 z-20">
+          {/* ---------------------------------------------------------------- */}
+          {/* B. RIGHT STORE SPOTLIGHT TILES (5 Columns on Desktop)            */}
+          {/* ---------------------------------------------------------------- */}
+          <div className="lg:col-span-5 xl:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-3.5 sm:gap-4">
+            {sideGridBanners.slice(0, 2).map((banner) => {
+              const IconComp = banner.icon;
+              return (
                 <Link
-                  href={activeSlide.spotlight.link}
-                  className="flex items-center justify-between p-3.5 sm:p-4 rounded-2xl liquid-glass border shadow-xl transition-all duration-300 hover:scale-102 card-lift group/spotlight"
+                  key={banner.id}
+                  href={banner.href}
+                  className="group relative rounded-3xl overflow-hidden border p-4 sm:p-5 flex flex-col justify-between min-h-[170px] sm:min-h-[220px] lg:min-h-[235px] transition-all duration-300 hover:shadow-lg hover:-translate-y-1 card-lift"
                   style={{
-                    borderColor: "var(--border-subtle)",
+                    backgroundColor: "var(--bg-surface)",
+                    borderColor: "var(--border-medium)",
                   }}
                 >
-                  <div className="flex flex-col">
-                    <span
-                      className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest"
-                      style={{ color: "var(--accent-gold)" }}
-                    >
-                      Featured &bull; {activeSlide.spotlight.category}
-                    </span>
-                    <span
-                      className="font-serif text-sm sm:text-base font-medium mt-0.5 line-clamp-1"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {activeSlide.spotlight.title}
-                    </span>
+                  {/* Background Image with Scrim */}
+                  <div className="absolute inset-0 z-0">
+                    <Image
+                      src={banner.image}
+                      alt={banner.title}
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 35vw"
+                      className="object-cover object-center group-hover:scale-108 transition-transform duration-700 opacity-90"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(16, 12, 10, 0.92) 0%, rgba(16, 12, 10, 0.5) 50%, rgba(16, 12, 10, 0.2) 80%, transparent 100%)",
+                      }}
+                    />
                   </div>
 
-                  <div className="flex items-center gap-2 pl-3 shrink-0">
-                    <span
-                      className="text-xs sm:text-sm font-semibold tracking-tight"
-                      style={{ color: "var(--accent-cta)" }}
-                    >
-                      {activeSlide.spotlight.price}
+                  {/* Top Badge */}
+                  <div className="relative z-10 flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider liquid-glass-dark border border-white/20 text-white">
+                      <IconComp className="h-3 w-3 text-amber-300" />
+                      <span>{banner.tag}</span>
                     </span>
-                    <span
-                      className="flex h-7 w-7 items-center justify-center rounded-full text-white transition-transform group-hover/spotlight:translate-x-1"
-                      style={{ backgroundColor: "var(--accent-cta)" }}
-                    >
-                      <ArrowRight className="h-3.5 w-3.5" />
+
+                    {banner.isHot && (
+                      <span className="flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-rose-600 text-white shadow-xs">
+                        <Flame className="h-2.5 w-2.5" />
+                        <span>Hot</span>
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Bottom Text & Price */}
+                  <div className="relative z-10 text-white mt-auto">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-300 block">
+                      {banner.priceLabel}
                     </span>
+                    <h3 className="font-serif text-base sm:text-lg font-medium tracking-tight mt-0.5">
+                      {banner.title}
+                    </h3>
+                    <p className="text-[11px] text-neutral-200 line-clamp-1 font-light opacity-80">
+                      {banner.subtitle}
+                    </p>
+                    <div className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-amber-300 group-hover:translate-x-1 transition-transform">
+                      <span>Shop Now</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </div>
                   </div>
                 </Link>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
 
         {/* ================================================================== */}
-        {/* 2. APP-STYLE QUICK CATEGORY CHIPS (Pure SVG Icons, Zero Emojis)    */}
+        {/* 2. E-COMMERCE TRUST BAR (Subtle 4-Column Feature Strip)             */}
         {/* ================================================================== */}
-        <div className="mt-8 pt-6 border-t overflow-x-auto no-scrollbar" style={{ borderColor: "var(--border-subtle)" }}>
-          <div className="flex items-center gap-2 sm:gap-3 min-w-max">
-            {quickCategories.map((cat) => (
-              <Link
-                key={cat.label}
-                href={cat.href}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-medium border transition-all duration-200 hover:border-[color:var(--accent-gold)] active:scale-95 shadow-xs group"
-                style={{
-                  backgroundColor: "var(--bg-surface)",
-                  borderColor: "var(--border-medium)",
-                  color: "var(--text-primary)",
-                }}
-              >
-                <cat.icon className="h-3.5 w-3.5 transition-transform group-hover:scale-110" style={{ color: "var(--accent-gold)" }} />
-                <span>{cat.label}</span>
-              </Link>
-            ))}
-          </div>
+        <div
+          className="mt-3.5 sm:mt-5 p-3.5 sm:p-4 rounded-2xl border grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 text-center shadow-2xs"
+          style={{
+            backgroundColor: "var(--bg-surface)",
+            borderColor: "var(--border-subtle)",
+          }}
+        >
+          {trustFeatures.map((feat) => {
+            const Icon = feat.icon;
+            return (
+              <div key={feat.text} className="flex items-center justify-center gap-2 py-1">
+                <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
+                <span className="text-[11px] sm:text-xs font-medium" style={{ color: "var(--text-primary)" }}>
+                  {feat.text}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

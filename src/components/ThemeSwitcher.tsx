@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTheme, THEMES } from "@/context/ThemeContext";
-import { Check, ChevronDown, Sparkles } from "lucide-react";
+import { Check, Palette, Sparkles } from "lucide-react";
 
 export default function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
@@ -28,55 +28,38 @@ export default function ThemeSwitcher() {
 
   if (!mounted) {
     return (
-      <div className="h-9 w-9 sm:w-28 rounded-full border opacity-50" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-surface)" }} />
+      <div className="h-8.5 w-8.5 rounded-full border opacity-50" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-surface)" }} />
     );
   }
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Liquid Glass Floating Theme Trigger Button */}
+      {/* Sleek Minimalist Palette Icon Trigger Button */}
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="group flex items-center gap-1.5 sm:gap-2 rounded-full px-2.5 sm:px-3 py-1.5 text-xs font-medium transition-all duration-300 liquid-glass liquid-glass-hover active:scale-95 cursor-pointer shadow-xs"
+        className="group relative flex h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-full transition-all duration-300 liquid-glass hover:border-[color:var(--accent-gold)] active:scale-95 cursor-pointer shadow-2xs"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        title={`Current Theme: ${current.name}. Click to switch theme.`}
+        title={`Store Theme: ${current.name}. Click to switch theme palette.`}
       >
-        {/* Swatch Trio */}
-        <div className="flex items-center">
-          <span
-            className="h-2.5 w-2.5 rounded-full ring-1 ring-black/15 shadow-2xs"
-            style={{ backgroundColor: current.colors.bg }}
-          />
-          <span
-            className="h-2.5 w-2.5 rounded-full ring-1 ring-black/15 shadow-2xs -ml-1"
-            style={{ backgroundColor: current.colors.accent }}
-          />
-          <span
-            className="h-2.5 w-2.5 rounded-full ring-1 ring-black/15 shadow-2xs -ml-1"
-            style={{ backgroundColor: current.colors.cta }}
-          />
-        </div>
-
-        <span className="hidden sm:inline-block font-sans tracking-wide text-[11px] font-semibold" style={{ color: "var(--text-primary)" }}>
-          {current.name}
-        </span>
-
-        <ChevronDown
-          className="h-3 w-3 opacity-60 transition-transform duration-300 group-hover:opacity-100"
+        <Palette className="h-4 w-4 transition-transform group-hover:rotate-12" style={{ color: "var(--text-secondary)" }} />
+        
+        {/* Active Theme Color Micro-Indicator */}
+        <span
+          className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full ring-2 shadow-xs transition-colors"
           style={{
-            transform: isOpen ? "rotate(180deg)" : "none",
-            color: "var(--text-primary)",
+            backgroundColor: current.colors.cta,
+            borderColor: "var(--bg-primary)",
           }}
         />
       </button>
 
-      {/* Floating 3-Theme Selector Menu */}
+      {/* Floating 6-Theme Selector Dropdown */}
       {isOpen && (
         <div
           role="listbox"
-          className="absolute right-0 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-3xl p-3 shadow-2xl border z-50 animate-in fade-in zoom-in-95 duration-200 liquid-glass"
+          className="absolute right-0 mt-2.5 w-72 max-w-[calc(100vw-2rem)] rounded-3xl p-3 shadow-2xl border z-50 animate-in fade-in zoom-in-95 duration-200 liquid-glass"
           style={{
             backgroundColor: "var(--bg-surface-elevated)",
             borderColor: "var(--border-medium)",
@@ -86,17 +69,17 @@ export default function ThemeSwitcher() {
           <div className="px-3 py-2 border-b mb-1.5 flex items-center justify-between" style={{ borderColor: "var(--border-subtle)" }}>
             <div>
               <p className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent-gold)" }}>
-                6 Curated Themes
+                Storefront Palette
               </p>
               <p className="text-xs font-serif mt-0.5" style={{ color: "var(--text-secondary)" }}>
-                Select Storefront Atmosphere
+                Select Color Theme (6)
               </p>
             </div>
             <Sparkles className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
           </div>
 
           {/* Theme Options */}
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-1 max-h-[340px] overflow-y-auto no-scrollbar">
             {THEMES.map((opt) => {
               const isSelected = opt.id === theme;
               return (
@@ -125,11 +108,11 @@ export default function ThemeSwitcher() {
                       }}
                     >
                       <span
-                        className="h-3.5 w-3.5 rounded-full shadow-xs"
+                        className="h-3 w-3 rounded-full shadow-xs"
                         style={{ backgroundColor: opt.colors.accent }}
                       />
                       <span
-                        className="h-3.5 w-3.5 rounded-full -ml-1.5 shadow-xs"
+                        className="h-3 w-3 rounded-full -ml-1.5 shadow-xs"
                         style={{ backgroundColor: opt.colors.cta }}
                       />
                     </div>
@@ -143,7 +126,7 @@ export default function ThemeSwitcher() {
                       >
                         {opt.name}
                       </div>
-                      <div className="text-[10px] tracking-wider" style={{ color: "var(--text-muted)" }}>
+                      <div className="text-[9.5px] tracking-wider opacity-70" style={{ color: "var(--text-muted)" }}>
                         {opt.tagline}
                       </div>
                     </div>
@@ -151,10 +134,10 @@ export default function ThemeSwitcher() {
 
                   {isSelected && (
                     <div
-                      className="flex h-5 w-5 items-center justify-center rounded-full text-white shadow-xs"
+                      className="flex h-4.5 w-4.5 items-center justify-center rounded-full text-white shadow-xs"
                       style={{ backgroundColor: "var(--accent-cta)" }}
                     >
-                      <Check className="h-3 w-3 stroke-3" />
+                      <Check className="h-2.5 w-2.5 stroke-3" />
                     </div>
                   )}
                 </button>

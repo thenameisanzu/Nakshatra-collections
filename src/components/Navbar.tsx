@@ -97,35 +97,31 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. Top Announcement Strip */}
+      {/* 1. Ultra-Slim Announcement Strip */}
       <div
-        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] font-semibold tracking-[0.16em] uppercase transition-colors"
+        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] font-semibold tracking-[0.2em] uppercase transition-colors"
         style={{
           backgroundColor: "var(--accent-cta)",
           color: "var(--accent-cta-text)",
         }}
       >
-        <span className="inline-flex items-center gap-2">
-          <Sparkles className="h-3 w-3 text-amber-300 opacity-90" />
-          <span>100% Anti-Tarnish 18K Gold Plated Jewellery &bull; Express Tracked Courier in Kerala</span>
-          <Sparkles className="h-3 w-3 text-amber-300 opacity-90" />
-        </span>
+        <span>18K Real Gold Plated &bull; 100% Anti-Tarnish &bull; Express Kerala Delivery</span>
       </div>
 
-      {/* 2. Unified Single Luxury Header */}
+      {/* 2. Symmetrical Luxury Navigation Bar */}
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 border-b ${
           isScrolled
-            ? "liquid-glass shadow-sm py-3"
-            : "bg-[var(--bg-primary)] py-3.5 sm:py-4"
+            ? "liquid-glass shadow-sm py-2.5 sm:py-3"
+            : "bg-[var(--bg-primary)] py-3 sm:py-3.5"
         }`}
         style={{
           borderColor: "var(--border-subtle)",
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Mobile Menu Trigger */}
-          <div className="flex lg:hidden items-center">
+          {/* Mobile Menu Trigger & Search (Mobile) */}
+          <div className="flex lg:hidden items-center gap-1">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
@@ -135,10 +131,20 @@ export default function Navbar() {
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
+            <button
+              type="button"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="flex h-9 w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
+              style={{ color: "var(--text-secondary)" }}
+              aria-label="Search"
+            >
+              <Search className="h-4 w-4" />
+            </button>
           </div>
 
-          {/* Left: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+          {/* Left: Minimalist Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-7">
+            {/* Collections Dropdown */}
             <div
               className="relative"
               ref={categoryMenuRef}
@@ -148,7 +154,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                className="group flex items-center gap-1 text-xs font-semibold tracking-[0.14em] uppercase transition-colors cursor-pointer"
+                className="group flex items-center gap-1 text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors cursor-pointer"
                 style={{ color: isCategoryOpen ? "var(--accent-cta)" : "var(--text-secondary)" }}
                 aria-expanded={isCategoryOpen}
               >
@@ -163,7 +169,7 @@ export default function Navbar() {
 
               {/* Mega Dropdown Menu */}
               {isCategoryOpen && (
-                <div className="absolute top-full left-0 pt-2 z-50 w-[380px] animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="absolute top-full left-0 pt-2 z-50 w-[360px] animate-in fade-in slide-in-from-top-2 duration-200">
                   <div
                     className="rounded-3xl p-4 shadow-2xl border liquid-glass"
                     style={{
@@ -223,35 +229,19 @@ export default function Navbar() {
             </div>
 
             <Link
-              href="/collections/necklaces"
-              className="text-xs font-semibold tracking-[0.14em] uppercase transition-colors hover:opacity-75"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Necklaces
-            </Link>
-
-            <Link
-              href="/collections/earrings"
-              className="text-xs font-semibold tracking-[0.14em] uppercase transition-colors hover:opacity-75"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              Earrings
-            </Link>
-
-            <Link
               href="/collections/bridal-jewellery"
-              className="text-xs font-semibold tracking-[0.14em] uppercase transition-colors hover:opacity-75"
+              className="text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors hover:opacity-70"
               style={{ color: "var(--text-secondary)" }}
             >
-              Bridal
+              Bridal Sets
             </Link>
 
             <Link
               href="/collections/new-arrivals"
-              className="text-xs font-semibold tracking-[0.14em] uppercase transition-colors hover:opacity-75"
+              className="text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors hover:opacity-70"
               style={{ color: "var(--accent-cta)" }}
             >
-              New In
+              New Arrivals
             </Link>
           </nav>
 
@@ -262,74 +252,72 @@ export default function Navbar() {
             aria-label="NAKSHATRA Collections"
           >
             <div className="flex items-center gap-2">
-              <div className="relative h-7 w-7 sm:h-8 sm:w-8 shrink-0">
+              <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
                 <Image
                   src="/nakshatra-logo.png"
                   alt="NAKSHATRA"
                   fill
-                  sizes="32px"
+                  sizes="28px"
                   className="object-contain"
                   priority
                 />
               </div>
               <span
-                className="font-serif text-lg sm:text-2xl font-normal tracking-[0.22em] uppercase leading-none"
+                className="font-serif text-lg sm:text-2xl font-normal tracking-[0.24em] uppercase leading-none"
                 style={{ color: "var(--text-primary)" }}
               >
                 NAKSHATRA
               </span>
             </div>
             <span
-              className="text-[7.5px] sm:text-[8px] font-semibold tracking-[0.3em] uppercase leading-none mt-1 opacity-80"
+              className="text-[7.5px] sm:text-[8px] font-semibold tracking-[0.34em] uppercase leading-none mt-1 opacity-75"
               style={{ color: "var(--accent-gold)" }}
             >
               COLLECTIONS
             </span>
           </Link>
 
-          {/* Right: Search, Theme Switcher, Account, Wishlist, Bag */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5">
-            {/* Search Button */}
+          {/* Right: Minimalist Utility Icons */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Desktop Search */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
+              className="hidden lg:flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-secondary)" }}
               aria-label="Search catalogue"
             >
               <Search className="h-4 w-4" />
             </button>
 
-            {/* 6-Theme Switcher */}
-            <div className="pl-0.5">
-              <ThemeSwitcher />
-            </div>
+            {/* Sleek Theme Palette Switcher */}
+            <ThemeSwitcher />
 
             {/* Customer Account */}
             <Link
               href="/account"
-              className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
+              className="flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label="Customer Account & Order Tracking"
             >
-              <User className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+              <User className="h-4 w-4" />
             </Link>
 
-            {/* Desktop Only: Wishlist (On mobile, lives in bottom navigation) */}
+            {/* Desktop Only: Wishlist */}
             <Link
               href="/wishlist"
-              className="relative hidden md:flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
+              className="relative hidden md:flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Wishlist with ${totalWishlistItems} saved items`}
             >
               <Heart
-                className={`h-4 w-4 sm:h-4.5 sm:w-4.5 transition-colors ${
+                className={`h-4 w-4 transition-colors ${
                   totalWishlistItems > 0 ? "fill-rose-600 text-rose-600" : ""
                 }`}
               />
               {totalWishlistItems > 0 && (
                 <span
-                  className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-[8.5px] font-bold text-white shadow-xs"
+                  className="absolute top-0 right-0 flex h-3.5 w-3.5 items-center justify-center rounded-full text-[8px] font-bold text-white shadow-2xs"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalWishlistItems}
@@ -337,18 +325,18 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Desktop Only: Shopping Bag (On mobile, lives in bottom navigation) */}
+            {/* Desktop Only: Shopping Bag */}
             <button
               type="button"
               onClick={openCart}
-              className="relative hidden md:flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
+              className="relative hidden md:flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Shopping bag with ${totalQuantity} items`}
             >
-              <ShoppingBag className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+              <ShoppingBag className="h-4 w-4" />
               {totalQuantity > 0 && (
                 <span
-                  className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-[8.5px] font-bold text-white shadow-xs"
+                  className="absolute top-0 right-0 flex h-3.5 w-3.5 items-center justify-center rounded-full text-[8px] font-bold text-white shadow-2xs"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalQuantity}
@@ -413,7 +401,7 @@ export default function Navbar() {
                 <Link
                   href="/"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-lg font-serif font-normal border-b"
+                  className="py-3 text-base font-serif font-normal border-b"
                   style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
                   Home
@@ -422,7 +410,7 @@ export default function Navbar() {
                 <Link
                   href="/collections"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-lg font-serif font-normal border-b flex items-center justify-between"
+                  className="py-3 text-base font-serif font-normal border-b flex items-center justify-between"
                   style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
                   <span>All Collections (8)</span>
@@ -447,7 +435,7 @@ export default function Navbar() {
                 <Link
                   href="/our-story"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-lg font-serif font-normal border-b"
+                  className="py-3 text-base font-serif font-normal border-b"
                   style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
                   Our Story &amp; Craftsmanship
@@ -456,7 +444,7 @@ export default function Navbar() {
                 <Link
                   href="/account"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-lg font-serif font-normal border-b flex items-center justify-between"
+                  className="py-3 text-base font-serif font-normal border-b flex items-center justify-between"
                   style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
                   <span className="flex items-center gap-2">

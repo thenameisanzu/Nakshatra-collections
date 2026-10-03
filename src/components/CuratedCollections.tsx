@@ -290,7 +290,7 @@ export default function CuratedCollections({ collections }: CuratedCollectionsPr
                 {/* Bottom: Typography, Subtitle & Reveal CTA */}
                 <div className={`relative z-10 mt-auto ${isFeaturedWide ? "max-w-[65%] sm:max-w-[55%]" : "max-w-[70%]"}`}>
                   <h3
-                    className="font-serif-luxury text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight line-clamp-1 group-hover:opacity-90 transition-opacity"
+                    className="font-serif text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight line-clamp-1 group-hover:opacity-85 transition-opacity"
                     style={{ color: "var(--text-primary)" }}
                   >
                     {item.title}

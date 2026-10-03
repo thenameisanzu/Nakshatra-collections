@@ -190,7 +190,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
         <Link href={`/products/${product.handle}`} className="group/title">
           <h3
-            className="font-serif-luxury text-sm sm:text-base font-bold tracking-tight transition-colors line-clamp-1 group-hover/title:opacity-80"
+            className="font-serif text-sm sm:text-base font-medium tracking-normal transition-colors line-clamp-1 group-hover/title:opacity-75"
             style={{ color: "var(--text-primary)" }}
           >
             {product.title}
@@ -198,16 +198,16 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         </Link>
 
         {/* Pricing & Link */}
-        <div className="mt-auto pt-3 flex items-baseline justify-between border-t border-black/5 gap-1.5">
+        <div className="mt-auto pt-2.5 flex items-baseline justify-between border-t border-black/5 gap-1.5">
           <div className="flex items-baseline gap-1.5 flex-wrap">
             <span
-              className="text-sm sm:text-base font-extrabold tracking-tight"
+              className="text-sm sm:text-base font-semibold tracking-tight"
               style={{ color: "var(--text-primary)" }}
             >
               {isPriceRange ? `From ${formattedPrice}` : formattedPrice}
             </span>
             {formattedComparePrice && (
-              <span className="text-xs line-through font-medium opacity-60" style={{ color: "var(--text-muted)" }}>
+              <span className="text-xs line-through font-normal opacity-50" style={{ color: "var(--text-muted)" }}>
                 {formattedComparePrice}
               </span>
             )}
@@ -215,7 +215,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
           <Link
             href={`/products/${product.handle}`}
-            className="text-[10px] sm:text-xs font-extrabold tracking-wider uppercase transition hover:underline shrink-0"
+            className="text-[11px] font-medium tracking-widest uppercase transition-opacity hover:opacity-70 shrink-0"
             style={{ color: "var(--accent-cta)" }}
           >
             View &rarr;

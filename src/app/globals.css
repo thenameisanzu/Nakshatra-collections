@@ -128,9 +128,10 @@ body {
   min-height: 100vh;
 }
 
+.font-serif,
 .font-serif-luxury {
   font-family: var(--font-serif), "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
 }
 
 h1, h2, h3, h4, h5, h6 {

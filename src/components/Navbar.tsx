@@ -13,7 +13,6 @@ import {
   Search,
   Heart,
   ChevronDown,
-  ChevronRight,
   Sparkles,
   ArrowRight,
   Gem,
@@ -31,14 +30,14 @@ interface CategoryNavItem {
 }
 
 const categories: CategoryNavItem[] = [
-  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Sparkles, desc: "Chokers & Layered Gold Chains" },
-  { label: "Earrings & Drops", href: "/collections/earrings", icon: Gem, desc: "Daily Studs, Jhumkas & Pearls" },
+  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Sparkles, desc: "Chokers & Layered Chains" },
+  { label: "Earrings & Drops", href: "/collections/earrings", icon: Gem, desc: "Daily Studs & Jhumkas" },
   { label: "Necklace Sets", href: "/collections/necklace-sets", icon: Crown, desc: "Harmonious Matching Sets" },
-  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery", icon: Heart, desc: "Kerala Bridal & Festive Heritage" },
-  { label: "Bangles & Bracelets", href: "/collections/bangles", icon: CircleDot, desc: "Waterproof Cuffs & Daily Bangles" },
-  { label: "Rings & Solitaires", href: "/collections/rings", icon: Gem, desc: "American Diamond & Bands" },
+  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery", icon: Heart, desc: "Kerala Bridal Heritage" },
+  { label: "Bangles & Bracelets", href: "/collections/bangles", icon: CircleDot, desc: "Waterproof Daily Cuffs" },
+  { label: "Rings & Solitaires", href: "/collections/rings", icon: Gem, desc: "American Diamond Solitaires" },
   { label: "Anklets & Payals", href: "/collections/anklets", icon: Sparkles, desc: "Anti-Tarnish Daily Payals" },
-  { label: "New Arrivals", href: "/collections/new-arrivals", icon: Flame, desc: "Fresh Designs & Latest Trends" },
+  { label: "New Arrivals", href: "/collections/new-arrivals", icon: Flame, desc: "Fresh 2026 Additions" },
 ];
 
 export default function Navbar() {
@@ -50,7 +49,7 @@ export default function Navbar() {
   const { totalWishlistItems } = useWishlist();
   const categoryMenuRef = useRef<HTMLDivElement>(null);
 
-  // Scroll detection for liquid glass transition
+  // Scroll detection
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -86,101 +85,49 @@ export default function Navbar() {
     <>
       {/* Top Announcement Bar */}
       <div
-        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] sm:text-[11px] font-semibold tracking-[0.15em] uppercase transition-colors"
+        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] font-semibold tracking-[0.18em] uppercase transition-colors"
         style={{
           backgroundColor: "var(--accent-cta)",
           color: "var(--accent-cta-text)",
         }}
       >
         <span className="inline-flex items-center gap-2">
-          <Sparkles className="h-3 w-3 animate-pulse text-amber-300" />
-          <span>Free Express Delivery Across Kerala &amp; India &bull; 100% Anti-Tarnish Jewellery</span>
-          <Sparkles className="h-3 w-3 animate-pulse text-amber-300" />
+          <Sparkles className="h-3 w-3 text-amber-300 opacity-90" />
+          <span>100% Anti-Tarnish 18K Gold Plated Jewellery &bull; Express Tracked Courier</span>
+          <Sparkles className="h-3 w-3 text-amber-300 opacity-90" />
         </span>
       </div>
 
-      {/* Main Liquid Glass Header */}
+      {/* Main Luxury Header */}
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
             ? "liquid-glass shadow-sm py-2.5 sm:py-3 border-b"
-            : "bg-transparent py-3 sm:py-4 border-b border-transparent"
+            : "bg-[var(--bg-primary)] py-3.5 sm:py-4 border-b"
         }`}
         style={{
-          borderColor: isScrolled ? "var(--glass-border)" : "transparent",
+          borderColor: "var(--border-subtle)",
         }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Left: Brand Logo & Insignia */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5">
-            {/* Mobile Hamburger Toggle */}
-            <div className="flex lg:hidden items-center">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                type="button"
-                className="flex h-8.5 w-8.5 sm:h-9 sm:w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
-                style={{
-                  color: "var(--text-primary)",
-                  backgroundColor: isScrolled ? "transparent" : "var(--glass-bg)",
-                }}
-                aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-                aria-expanded={isOpen}
-              >
-                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </button>
-            </div>
-
-            {/* Logo Link */}
-            <Link
-              href="/"
-              className="group flex items-center gap-2 sm:gap-2.5 transition-transform hover:scale-[1.01]"
-              aria-label="NAKSHATRA Collections - Artificial Jewellery Store"
+          {/* Mobile: Hamburger Button */}
+          <div className="flex lg:hidden items-center">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              type="button"
+              className="flex h-9 w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
+              style={{
+                color: "var(--text-primary)",
+              }}
+              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isOpen}
             >
-              <div className="relative h-8 w-8 sm:h-10 sm:w-10 shrink-0">
-                <Image
-                  src="/nakshatra-logo.png"
-                  alt="NAKSHATRA Collections"
-                  fill
-                  sizes="(max-width: 640px) 32px, 40px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-
-              <div className="flex flex-col text-left">
-                <span
-                  className="font-serif-luxury text-base sm:text-xl lg:text-2xl font-normal tracking-[0.18em] sm:tracking-[0.2em] uppercase leading-none"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  NAKSHATRA
-                </span>
-                <span
-                  className="text-[6.5px] sm:text-[8px] font-semibold tracking-[0.25em] uppercase leading-none mt-0.5 sm:mt-1"
-                  style={{ color: "var(--accent-gold)" }}
-                >
-                  COLLECTIONS
-                </span>
-              </div>
-            </Link>
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
 
-          {/* Center: Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
-            <Link
-              href="/"
-              className="group relative text-xs font-semibold tracking-[0.15em] uppercase transition-colors"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              <span className="transition-colors group-hover:text-[color:var(--accent-cta)]">
-                Home
-              </span>
-              <span
-                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
-                style={{ backgroundColor: "var(--accent-gold)" }}
-              />
-            </Link>
-
-            {/* Interactive Categories Dropdown */}
+          {/* Left: Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             <div
               className="relative"
               ref={categoryMenuRef}
@@ -190,11 +137,11 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                className="group flex items-center gap-1 text-xs font-semibold tracking-[0.15em] uppercase transition-colors cursor-pointer"
+                className="group flex items-center gap-1 text-xs font-semibold tracking-[0.16em] uppercase transition-colors cursor-pointer"
                 style={{ color: isCategoryOpen ? "var(--accent-cta)" : "var(--text-secondary)" }}
                 aria-expanded={isCategoryOpen}
               >
-                <span>Categories</span>
+                <span>Collections</span>
                 <ChevronDown
                   className={`h-3.5 w-3.5 transition-transform duration-200 ${
                     isCategoryOpen ? "rotate-180" : ""
@@ -205,9 +152,7 @@ export default function Navbar() {
 
               {/* Mega Dropdown Menu */}
               {isCategoryOpen && (
-                <div
-                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50 w-[420px] animate-in fade-in slide-in-from-top-2 duration-200"
-                >
+                <div className="absolute top-full left-0 pt-2 z-50 w-[380px] animate-in fade-in slide-in-from-top-2 duration-200">
                   <div
                     className="rounded-3xl p-4 shadow-2xl border liquid-glass"
                     style={{
@@ -225,7 +170,7 @@ export default function Navbar() {
                         className="text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition hover:underline"
                         style={{ color: "var(--accent-cta)" }}
                       >
-                        <span>All Categories</span>
+                        <span>All (8)</span>
                         <ArrowRight className="h-3 w-3" />
                       </Link>
                     </div>
@@ -236,10 +181,10 @@ export default function Navbar() {
                           key={cat.href}
                           href={cat.href}
                           onClick={() => setIsCategoryOpen(false)}
-                          className="flex items-start gap-2.5 p-2.5 rounded-2xl transition-all hover:bg-black/5 active:scale-95 group"
+                          className="flex items-start gap-2.5 p-2 rounded-2xl transition-all hover:bg-black/5 group"
                         >
                           <div
-                            className="flex h-7 w-7 items-center justify-center rounded-xl shrink-0 border shadow-xs"
+                            className="flex h-7 w-7 items-center justify-center rounded-xl shrink-0 border"
                             style={{
                               backgroundColor: "var(--bg-secondary)",
                               borderColor: "var(--border-subtle)",
@@ -251,10 +196,10 @@ export default function Navbar() {
                             />
                           </div>
                           <div className="flex flex-col">
-                            <span className="text-xs font-bold font-serif-luxury" style={{ color: "var(--text-primary)" }}>
+                            <span className="text-xs font-serif font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
                               {cat.label}
                             </span>
-                            <span className="text-[10px] line-clamp-1" style={{ color: "var(--text-muted)" }}>
+                            <span className="text-[9.5px] line-clamp-1 opacity-70" style={{ color: "var(--text-muted)" }}>
                               {cat.desc}
                             </span>
                           </div>
@@ -267,65 +212,87 @@ export default function Navbar() {
             </div>
 
             <Link
+              href="/collections/necklaces"
+              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Necklaces
+            </Link>
+
+            <Link
+              href="/collections/earrings"
+              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Earrings
+            </Link>
+
+            <Link
+              href="/collections/bridal-jewellery"
+              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Bridal
+            </Link>
+
+            <Link
               href="/collections/new-arrivals"
-              className="group relative text-xs font-semibold tracking-[0.15em] uppercase transition-colors"
-              style={{ color: "var(--text-secondary)" }}
+              className="text-xs font-semibold tracking-[0.16em] uppercase transition-colors hover:opacity-75"
+              style={{ color: "var(--accent-cta)" }}
             >
-              <span className="transition-colors group-hover:text-[color:var(--accent-cta)]">
-                New Arrivals
-              </span>
-              <span
-                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
-                style={{ backgroundColor: "var(--accent-gold)" }}
-              />
-            </Link>
-
-            <Link
-              href="/our-story"
-              className="group relative text-xs font-semibold tracking-[0.15em] uppercase transition-colors"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              <span className="transition-colors group-hover:text-[color:var(--accent-cta)]">
-                Our Story
-              </span>
-              <span
-                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
-                style={{ backgroundColor: "var(--accent-gold)" }}
-              />
-            </Link>
-
-            <Link
-              href="/#contact"
-              className="group relative text-xs font-semibold tracking-[0.15em] uppercase transition-colors"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              <span className="transition-colors group-hover:text-[color:var(--accent-cta)]">
-                Contact
-              </span>
-              <span
-                className="absolute -bottom-1 left-0 h-[1.5px] w-0 transition-all duration-300 group-hover:w-full"
-                style={{ backgroundColor: "var(--accent-gold)" }}
-              />
+              New In
             </Link>
           </nav>
 
-          {/* Right: Action Icons & Theme Switcher */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            {/* Search Button */}
+          {/* Center: Brand Logo */}
+          <Link
+            href="/"
+            className="group flex flex-col items-center text-center transition-transform hover:scale-[1.01]"
+            aria-label="NAKSHATRA Collections - Artificial Jewellery Store"
+          >
+            <div className="flex items-center gap-2">
+              <div className="relative h-7 w-7 sm:h-8 sm:w-8 shrink-0">
+                <Image
+                  src="/nakshatra-logo.png"
+                  alt="NAKSHATRA"
+                  fill
+                  sizes="32px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span
+                className="font-serif text-lg sm:text-2xl font-normal tracking-[0.22em] uppercase leading-none"
+                style={{ color: "var(--text-primary)" }}
+              >
+                NAKSHATRA
+              </span>
+            </div>
+            <span
+              className="text-[7px] sm:text-[8px] font-semibold tracking-[0.3em] uppercase leading-none mt-1 opacity-80"
+              style={{ color: "var(--accent-gold)" }}
+            >
+              COLLECTIONS
+            </span>
+          </Link>
+
+          {/* Right: Actions & Theme Switcher */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Search Trigger */}
             <button
               type="button"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
-              className="flex h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer shrink-0"
+              className="flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-secondary)" }}
               aria-label="Search Catalogue"
             >
               <Search className="h-4 w-4" />
             </button>
 
-            {/* Wishlist Button */}
+            {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="relative flex h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 shrink-0"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Wishlist with ${totalWishlistItems} saved items`}
             >
@@ -336,7 +303,7 @@ export default function Navbar() {
               />
               {totalWishlistItems > 0 && (
                 <span
-                  className="absolute -top-1 -right-1 flex h-4 w-4 sm:h-4.5 sm:w-4.5 items-center justify-center rounded-full text-[8.5px] sm:text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
+                  className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-[8.5px] font-bold text-white shadow-xs"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalWishlistItems}
@@ -344,18 +311,18 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Shopping Bag / Cart */}
+            {/* Cart Bag */}
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 items-center justify-center rounded-full transition-all liquid-glass liquid-glass-hover active:scale-95 cursor-pointer shrink-0"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-primary)" }}
               aria-label={`Shopping bag with ${totalQuantity} items`}
             >
               <ShoppingBag className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
               {totalQuantity > 0 && (
                 <span
-                  className="absolute -top-1 -right-1 flex h-4 w-4 sm:h-4.5 sm:w-4.5 items-center justify-center rounded-full text-[8.5px] sm:text-[9px] font-bold text-white shadow-xs animate-in zoom-in"
+                  className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-[8.5px] font-bold text-white shadow-xs"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalQuantity}
@@ -363,72 +330,42 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Visual 3-Theme Switcher (Desktop & Tablets) */}
-            <div className="hidden sm:block pl-0.5">
+            {/* Theme Switcher */}
+            <div className="hidden md:block pl-1">
               <ThemeSwitcher />
             </div>
           </div>
         </div>
 
-        {/* Liquid Glass Search Drawer */}
+        {/* Search Bar Overlay */}
         {isSearchOpen && (
           <div
-            className="border-t py-4 px-4 sm:px-8 animate-in slide-in-from-top-3 duration-200 liquid-glass"
+            className="border-t py-4 px-4 sm:px-8 animate-in slide-in-from-top-2 duration-200"
             style={{
+              backgroundColor: "var(--bg-surface)",
               borderColor: "var(--border-subtle)",
             }}
           >
-            <div className="mx-auto max-w-2xl flex flex-col gap-3">
-              <div className="flex items-center gap-3">
-                <Search className="h-4.5 w-4.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
-                <input
-                  type="text"
-                  placeholder="Search necklaces, emerald drops, solitaires, clover bracelets..."
-                  className="w-full bg-transparent text-sm font-sans focus:outline-none placeholder:text-xs"
-                  style={{
-                    color: "var(--text-primary)",
-                  }}
-                  autoFocus
-                />
-                <button
-                  type="button"
-                  onClick={() => setIsSearchOpen(false)}
-                  className="text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full border liquid-glass cursor-pointer"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  Close
-                </button>
-              </div>
-
-              {/* Popular Search Suggestion Chips */}
-              <div className="flex items-center gap-2 flex-wrap pt-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "var(--accent-gold)" }}>
-                  Popular:
-                </span>
-                {[
-                  { label: "Choker Necklaces", href: "/collections/necklaces" },
-                  { label: "Emerald Earrings", href: "/collections/earrings" },
-                  { label: "Necklace Sets", href: "/collections/necklace-sets" },
-                  { label: "Bridal Jewellery", href: "/collections/bridal-jewellery" },
-                  { label: "Daily Bangles", href: "/collections/bangles" },
-                  { label: "Solitaire Rings", href: "/collections/rings" },
-                  { label: "Anklets & Payals", href: "/collections/anklets" },
-                  { label: "New Arrivals", href: "/collections/new-arrivals" },
-                ].map((chip) => (
-                  <Link
-                    key={chip.label}
-                    href={chip.href}
-                    onClick={() => setIsSearchOpen(false)}
-                    className="text-[11px] px-2.5 py-1 rounded-full border liquid-glass transition-all hover:scale-105"
-                    style={{
-                      color: "var(--text-primary)",
-                      borderColor: "var(--border-subtle)",
-                    }}
-                  >
-                    {chip.label}
-                  </Link>
-                ))}
-              </div>
+            <div className="mx-auto max-w-xl flex items-center gap-3">
+              <Search className="h-4 w-4 shrink-0" style={{ color: "var(--accent-gold)" }} />
+              <input
+                type="text"
+                placeholder="Search jewellery, necklaces, studs, bangles, solitaires..."
+                className="w-full bg-transparent text-sm font-sans focus:outline-none placeholder:text-xs"
+                style={{ color: "var(--text-primary)" }}
+                autoFocus
+              />
+              <button
+                type="button"
+                onClick={() => setIsSearchOpen(false)}
+                className="text-xs uppercase font-bold tracking-wider px-3 py-1 rounded-full border cursor-pointer"
+                style={{
+                  borderColor: "var(--border-medium)",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                Close
+              </button>
             </div>
           </div>
         )}
@@ -436,113 +373,90 @@ export default function Navbar() {
         {/* Mobile Navigation Drawer */}
         {isOpen && (
           <div
-            className="fixed inset-0 top-[calc(var(--spacing)*12)] z-50 lg:hidden flex flex-col justify-between p-6 sm:p-8 backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200 overflow-y-auto"
+            className="fixed inset-0 top-[calc(var(--spacing)*12)] z-50 lg:hidden flex flex-col justify-between p-6 backdrop-blur-xl animate-in fade-in duration-200 overflow-y-auto"
             style={{
               backgroundColor: "var(--bg-primary)",
             }}
           >
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               <div className="flex items-center justify-between pb-3 border-b" style={{ borderColor: "var(--border-subtle)" }}>
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent-gold)" }}>
-                  Menu &amp; Categories
+                  Menu
                 </span>
                 <ThemeSwitcher />
               </div>
 
-              {/* Quick Categories Bar in Mobile Drawer */}
-              <div className="py-2">
-                <p className="text-[10px] font-bold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)" }}>
-                  Explore Categories:
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {categories.map((cat) => (
-                    <Link
-                      key={cat.href}
-                      href={cat.href}
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2 p-2.5 rounded-2xl border liquid-glass text-xs font-semibold"
-                      style={{
-                        color: "var(--text-primary)",
-                        borderColor: "var(--border-subtle)",
-                      }}
-                    >
-                      <cat.icon className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--accent-gold)" }} />
-                      <span className="truncate">{cat.label}</span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <nav className="flex flex-col gap-1 mt-2 border-t pt-3" style={{ borderColor: "var(--border-subtle)" }}>
+              {/* Main Links */}
+              <nav className="flex flex-col gap-1">
                 <Link
                   href="/"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-xl text-base font-serif-luxury"
-                  style={{ color: "var(--text-primary)" }}
+                  className="py-3 text-lg font-serif font-normal border-b"
+                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
-                  <span>Home</span>
-                  <ChevronRight className="h-4 w-4 opacity-50" />
+                  Home
                 </Link>
 
                 <Link
                   href="/collections"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-xl text-base font-serif-luxury"
-                  style={{ color: "var(--text-primary)" }}
+                  className="py-3 text-lg font-serif font-normal border-b flex items-center justify-between"
+                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
-                  <span>All Categories Hub</span>
-                  <ChevronRight className="h-4 w-4 opacity-50" />
+                  <span>All Collections (8)</span>
+                  <ArrowRight className="h-4 w-4 opacity-50" />
+                </Link>
+
+                <div className="py-2 pl-3 flex flex-col gap-2 border-b" style={{ borderColor: "var(--border-subtle)" }}>
+                  {categories.map((cat) => (
+                    <Link
+                      key={cat.href}
+                      href={cat.href}
+                      onClick={() => setIsOpen(false)}
+                      className="py-1 text-xs font-semibold tracking-wider uppercase flex items-center gap-2"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
+                      <cat.icon className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+                      <span>{cat.label}</span>
+                    </Link>
+                  ))}
+                </div>
+
+                <Link
+                  href="/our-story"
+                  onClick={() => setIsOpen(false)}
+                  className="py-3 text-lg font-serif font-normal border-b"
+                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
+                >
+                  Our Story &amp; Craftsmanship
                 </Link>
 
                 <Link
                   href="/wishlist"
                   onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-xl text-base font-serif-luxury"
-                  style={{ color: "var(--text-primary)" }}
+                  className="py-3 text-lg font-serif font-normal border-b flex items-center justify-between"
+                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
                 >
                   <span className="flex items-center gap-2">
-                    <Heart className="h-4.5 w-4.5 text-rose-600" />
-                    <span>Wishlist</span>
+                    <Heart className="h-4 w-4 text-rose-600" />
+                    <span>Saved Wishlist</span>
                   </span>
                   {totalWishlistItems > 0 && (
                     <span
-                      className="px-2.5 py-0.5 rounded-full text-xs font-bold text-white"
+                      className="px-2 py-0.5 rounded-full text-xs font-bold text-white"
                       style={{ backgroundColor: "var(--accent-cta)" }}
                     >
                       {totalWishlistItems}
                     </span>
                   )}
                 </Link>
-
-                <Link
-                  href="/our-story"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-xl text-base font-serif-luxury"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  <span>Our Story</span>
-                  <ChevronRight className="h-4 w-4 opacity-50" />
-                </Link>
-
-                <Link
-                  href="/#contact"
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between py-2.5 px-3 rounded-xl text-base font-serif-luxury"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  <span>Contact &amp; Support</span>
-                  <ChevronRight className="h-4 w-4 opacity-50" />
-                </Link>
               </nav>
             </div>
 
-            {/* Mobile Footer Inside Drawer */}
-            <div className="pt-4 border-t mt-6 flex flex-col gap-2" style={{ borderColor: "var(--border-subtle)" }}>
-              <p className="text-[11px] font-semibold uppercase tracking-widest text-center" style={{ color: "var(--accent-gold)" }}>
+            {/* Drawer Footer */}
+            <div className="pt-6 border-t mt-6 text-center" style={{ borderColor: "var(--border-subtle)" }}>
+              <p className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: "var(--accent-gold)" }}>
                 NAKSHATRA COLLECTIONS &bull; KERALA
-              </p>
-              <p className="text-[10px] text-center" style={{ color: "var(--text-muted)" }}>
-                100% Anti-Tarnish Jewellery &bull; Express Tracked Courier
               </p>
             </div>
           </div>

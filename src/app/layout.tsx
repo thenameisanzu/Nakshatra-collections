@@ -10,12 +10,11 @@ import { QuickViewProvider } from "@/context/QuickViewContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
 import WhatsAppSupportButton from "@/components/WhatsAppSupportButton";
 import QuickViewModal from "@/components/QuickViewModal";
-import MobileBottomNav from "@/components/MobileBottomNav";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -23,7 +22,7 @@ const playfair = Playfair_Display({
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -45,7 +44,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${playfair.variable} ${jakarta.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans selection:bg-[#C9A45C]/30 selection:text-[#261C14] pb-16 lg:pb-0">
+      <body className="min-h-full flex flex-col font-sans selection:bg-[#C9A45C]/30 selection:text-[#261C14]">
         <ThemeProvider>
           <CartProvider>
             <WishlistProvider>
@@ -56,7 +55,6 @@ export default function RootLayout({
                 <CartDrawer />
                 <WhatsAppSupportButton />
                 <QuickViewModal />
-                <MobileBottomNav />
               </QuickViewProvider>
             </WishlistProvider>
           </CartProvider>

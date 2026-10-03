@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import CategoryQuickStrip from "@/components/CategoryQuickStrip";
 import CuratedCollections from "@/components/CuratedCollections";
 import FeaturedJewellery from "@/components/FeaturedJewellery";
 import NewArrivalsSection from "@/components/NewArrivalsSection";
@@ -49,9 +48,6 @@ export default async function Home() {
     <main className="flex-1 transition-colors" style={{ backgroundColor: "var(--bg-primary)" }}>
       {/* 01 — Cinematic Hero Carousel */}
       <Hero />
-
-      {/* 01.5 — Category Quick Strip */}
-      <CategoryQuickStrip collections={collections} />
 
       {/* 02 — Curated Collections Mosaic */}
       <CuratedCollections collections={collections} />

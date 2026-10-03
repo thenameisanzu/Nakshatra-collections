@@ -38,7 +38,7 @@ export default function CampaignStatement() {
           Everyday &amp; Wedding Jewellery
         </span>
 
-        <h2 className="font-serif-luxury text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold sm:font-extrabold tracking-tight leading-[1.08] text-white">
+        <h2 className="font-serif text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal sm:font-medium tracking-tight leading-[1.08] text-white">
           Jewellery That Shines With You
         </h2>
 

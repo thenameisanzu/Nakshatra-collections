@@ -224,12 +224,12 @@ export default function Hero() {
 
             {/* Headline */}
             <h1
-              className="font-serif-luxury mt-3 sm:mt-5 text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold sm:font-extrabold tracking-tight leading-[1.12] sm:leading-[1.08]"
+              className="font-serif mt-3 sm:mt-5 text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-normal sm:font-medium tracking-tight leading-[1.12] sm:leading-[1.08]"
               style={{ color: "var(--text-primary)" }}
             >
               {currentSlide.headline} <br className="hidden sm:inline" />
               <span
-                className="italic font-bold"
+                className="italic font-normal"
                 style={{ color: "var(--accent-gold)" }}
               >
                 {currentSlide.accent}

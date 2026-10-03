@@ -119,7 +119,7 @@ export default function Navbar() {
           borderColor: "var(--border-subtle)",
         }}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 min-h-[44px]">
           {/* Mobile Menu Trigger & Search (Mobile) */}
           <div className="flex lg:hidden items-center gap-1">
             <button
@@ -245,37 +245,39 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Center: Brand Logo */}
-          <Link
-            href="/"
-            className="group flex flex-col items-center text-center transition-transform hover:scale-[1.01]"
-            aria-label="NAKSHATRA Collections"
-          >
-            <div className="flex items-center gap-2">
-              <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
-                <Image
-                  src="/nakshatra-logo.png"
-                  alt="NAKSHATRA"
-                  fill
-                  sizes="28px"
-                  className="object-contain"
-                  priority
-                />
+          {/* Mathematical Dead Center: Brand Logo */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center justify-center">
+            <Link
+              href="/"
+              className="group flex flex-col items-center text-center transition-transform hover:scale-[1.01]"
+              aria-label="NAKSHATRA Collections"
+            >
+              <div className="flex items-center gap-2">
+                <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
+                  <Image
+                    src="/nakshatra-logo.png"
+                    alt="NAKSHATRA"
+                    fill
+                    sizes="28px"
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <span
+                  className="font-serif text-lg sm:text-2xl font-normal tracking-[0.24em] uppercase leading-none"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  NAKSHATRA
+                </span>
               </div>
               <span
-                className="font-serif text-lg sm:text-2xl font-normal tracking-[0.24em] uppercase leading-none"
-                style={{ color: "var(--text-primary)" }}
+                className="text-[7.5px] sm:text-[8px] font-semibold tracking-[0.34em] uppercase leading-none mt-1 opacity-75"
+                style={{ color: "var(--accent-gold)" }}
               >
-                NAKSHATRA
+                COLLECTIONS
               </span>
-            </div>
-            <span
-              className="text-[7.5px] sm:text-[8px] font-semibold tracking-[0.34em] uppercase leading-none mt-1 opacity-75"
-              style={{ color: "var(--accent-gold)" }}
-            >
-              COLLECTIONS
-            </span>
-          </Link>
+            </Link>
+          </div>
 
           {/* Right: Minimalist Utility Icons */}
           <div className="flex items-center gap-1 sm:gap-2">

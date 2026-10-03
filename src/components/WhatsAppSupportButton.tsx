@@ -23,7 +23,7 @@ export default function WhatsAppSupportButton({
           borderColor: "var(--border-medium)",
         }}
       >
-        💬 WhatsApp Support &bull; Kerala
+        WhatsApp Concierge &bull; Kerala
       </span>
 
       <a

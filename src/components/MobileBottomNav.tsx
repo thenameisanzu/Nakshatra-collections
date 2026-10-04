@@ -4,12 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { useSearch } from "@/context/SearchContext";
 import { Home, LayoutGrid, Search, Heart, ShoppingBag } from "lucide-react";
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
+  const { isOpen: isSearchOpen, openSearch } = useSearch();
 
   // Hide mobile nav on product detail pages so sticky Add to Bag takes priority
   const isProductDetailPage = pathname.startsWith("/products/");
@@ -109,27 +111,42 @@ export default function MobileBottomNav() {
           </Link>
 
           {/* 3. Search Tab */}
-          <Link
-            href="/collections"
-            className="relative flex flex-1 flex-col items-center justify-center py-1 transition-all duration-200 active:scale-90 opacity-60 hover:opacity-90"
+          <button
+            type="button"
+            onClick={openSearch}
+            className={`relative flex flex-1 flex-col items-center justify-center py-1 transition-all duration-200 active:scale-90 cursor-pointer ${
+              isSearchOpen ? "opacity-100" : "opacity-60 hover:opacity-90"
+            }`}
             aria-label="Search Jewellery"
           >
             <div className="relative flex items-center justify-center h-6 w-6">
               <Search
-                className="h-5 w-5"
+                className={`h-5 w-5 transition-transform duration-200 ${
+                  isSearchOpen ? "scale-110" : ""
+                }`}
                 style={{
-                  color: "var(--text-primary)",
-                  strokeWidth: 1.8,
+                  color: isSearchOpen ? "var(--accent-cta)" : "var(--text-primary)",
+                  strokeWidth: isSearchOpen ? 2.3 : 1.8,
                 }}
               />
             </div>
             <span
-              className="mt-1 text-[10px] font-medium tracking-wider uppercase"
-              style={{ color: "var(--text-secondary)" }}
+              className={`mt-1 text-[10px] tracking-wider uppercase ${
+                isSearchOpen ? "font-bold" : "font-medium"
+              }`}
+              style={{
+                color: isSearchOpen ? "var(--accent-cta)" : "var(--text-secondary)",
+              }}
             >
               Search
             </span>
-          </Link>
+            {isSearchOpen && (
+              <span
+                className="absolute -bottom-0.5 h-0.5 w-4 rounded-full"
+                style={{ backgroundColor: "var(--accent-gold)" }}
+              />
+            )}
+          </button>
 
           {/* 4. Wishlist Tab with Badge */}
           <Link

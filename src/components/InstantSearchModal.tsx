@@ -20,10 +20,11 @@ import type { ShopifyProduct } from "@/types/shopify";
 import { formatPrice } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { useSearch } from "@/context/SearchContext";
 
 interface InstantSearchModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 const POPULAR_SEARCHES = [
@@ -46,7 +47,14 @@ const CATEGORY_FILTERS = [
   { id: "rings", label: "Rings" },
 ];
 
-export default function InstantSearchModal({ isOpen, onClose }: InstantSearchModalProps) {
+export default function InstantSearchModal({
+  isOpen: propIsOpen,
+  onClose: propOnClose,
+}: InstantSearchModalProps = {}) {
+  const searchCtx = useSearch();
+  const isOpen = propIsOpen !== undefined ? propIsOpen : searchCtx.isOpen;
+  const onClose = propOnClose || searchCtx.closeSearch;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
   const [results, setResults] = useState<ShopifyProduct[]>([]);

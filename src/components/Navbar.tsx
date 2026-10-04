@@ -6,8 +6,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { useSearch } from "@/context/SearchContext";
 import ThemeSwitcher from "./ThemeSwitcher";
-import InstantSearchModal from "./InstantSearchModal";
 import {
   Menu,
   X,
@@ -47,7 +47,7 @@ const categories: CategoryNavItem[] = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { isOpen: isSearchOpen, toggleSearch, openSearch } = useSearch();
   const [isScrolled, setIsScrolled] = useState(false);
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
@@ -68,12 +68,12 @@ export default function Navbar() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        setIsSearchOpen((prev) => !prev);
+        toggleSearch();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [toggleSearch]);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -137,7 +137,7 @@ export default function Navbar() {
             </button>
             <button
               type="button"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              onClick={toggleSearch}
               className="flex h-9 w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
               style={{ color: "var(--text-secondary)" }}
               aria-label="Search"
@@ -291,7 +291,7 @@ export default function Navbar() {
             {/* Desktop Search */}
             <button
               type="button"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              onClick={toggleSearch}
               className="hidden lg:flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
               style={{ color: "var(--text-secondary)" }}
               aria-label="Search catalogue"
@@ -376,7 +376,7 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   setIsOpen(false);
-                  setIsSearchOpen(true);
+                  openSearch();
                 }}
                 className="w-full flex items-center justify-between p-3 rounded-2xl border text-xs font-semibold tracking-wider uppercase transition active:scale-98"
                 style={{
@@ -464,12 +464,6 @@ export default function Navbar() {
           </div>
         )}
       </header>
-
-      {/* Instant Live Search & Filter Modal */}
-      <InstantSearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-      />
     </>
   );
 }

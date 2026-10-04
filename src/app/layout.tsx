@@ -7,9 +7,11 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { QuickViewProvider } from "@/context/QuickViewContext";
+import { SearchProvider } from "@/context/SearchContext";
 import CartDrawer from "@/components/Cart/CartDrawer";
 import WhatsAppSupportButton from "@/components/WhatsAppSupportButton";
 import QuickViewModal from "@/components/QuickViewModal";
+import InstantSearchModal from "@/components/InstantSearchModal";
 import MobileBottomNav from "@/components/MobileBottomNav";
 
 const playfair = Playfair_Display({
@@ -56,13 +58,16 @@ export default function RootLayout({
           <CartProvider>
             <WishlistProvider>
               <QuickViewProvider>
-                <Navbar />
-                <div className="flex-1 pb-16 md:pb-0">{children}</div>
-                <Footer />
-                <MobileBottomNav />
-                <CartDrawer />
-                <WhatsAppSupportButton />
-                <QuickViewModal />
+                <SearchProvider>
+                  <Navbar />
+                  <div className="flex-1 pb-16 md:pb-0">{children}</div>
+                  <Footer />
+                  <MobileBottomNav />
+                  <CartDrawer />
+                  <WhatsAppSupportButton />
+                  <QuickViewModal />
+                  <InstantSearchModal />
+                </SearchProvider>
               </QuickViewProvider>
             </WishlistProvider>
           </CartProvider>

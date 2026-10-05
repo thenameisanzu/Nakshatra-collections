@@ -54,13 +54,14 @@ export default function Hero() {
           }}
           aria-label="Shop Nakshatra Collections - Your Everyday Sparkle"
         >
-          {/* Banner Graphic Image */}
+          {/* Banner Graphic Image (High-Res 3K Retina) */}
           <Image
-            src="/images/hero-banner.jpg"
+            src="/images/hero-banner.webp"
             alt="Nakshatra Collections - Your Everyday Sparkle Artificial Jewellery"
             fill
             priority
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1280px"
+            unoptimized
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1920px"
             className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
           />
 

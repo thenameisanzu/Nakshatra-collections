@@ -33,9 +33,9 @@ export default function Hero() {
       aria-label="Nakshatra Collections - Your Everyday Sparkle"
     >
       {/* ================================================================= */}
-      {/* 1. HERO BANNER - FULL VIEWPORT HEIGHT WITH TAILORED DUAL IMAGES   */}
+      {/* 1. HERO BANNER - PERFECTLY FITTED VIEWPORT HEIGHT                 */}
       {/* ================================================================= */}
-      <div className="relative w-full h-[calc(100svh-4rem)] min-h-[500px] max-h-[820px] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-end sm:justify-center">
+      <div className="relative w-full h-[calc(100svh-10rem)] min-h-[440px] max-h-[620px] sm:h-auto sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-end sm:justify-center">
         {/* Background Image: Desktop Landscape (16:9) */}
         <div className="absolute inset-0 z-0 hidden sm:block">
           <Image
@@ -85,14 +85,14 @@ export default function Hero() {
           className="absolute inset-0 z-10 pointer-events-none sm:hidden"
           style={{
             background:
-              "linear-gradient(to top, rgba(22, 7, 10, 0.98) 0%, rgba(22, 7, 10, 0.88) 32%, rgba(22, 7, 10, 0.25) 60%, transparent 80%)",
+              "linear-gradient(to top, rgba(22, 7, 10, 0.98) 0%, rgba(22, 7, 10, 0.9) 38%, rgba(22, 7, 10, 0.3) 65%, transparent 85%)",
           }}
         />
 
         {/* =============================================================== */}
         {/* 2. OVERLAY CONTENT (DESKTOP & MOBILE TAILORED)                  */}
         {/* =============================================================== */}
-        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-16 w-full text-white">
+        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 sm:py-16 w-full text-white">
           {/* DESKTOP & TABLET CONTENT */}
           <div className="hidden sm:flex flex-col lg:flex-row lg:items-center lg:justify-end">
             <div className="w-full lg:max-w-xl xl:max-w-2xl flex flex-col items-start text-left">
@@ -199,11 +199,11 @@ export default function Hero() {
           </div>
 
           {/* =============================================================== */}
-          {/* MOBILE STREAMLINED EDITORIAL OVERLAY (Prominent Face + Bottom Content) */}
+          {/* MOBILE STREAMLINED EDITORIAL OVERLAY (Fitted & Fully Visible)   */}
           {/* =============================================================== */}
-          <div className="flex sm:hidden flex-col items-center text-center pb-6">
+          <div className="flex sm:hidden flex-col items-center text-center pb-3">
             {/* Minimalist Brand Pill */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full liquid-glass-dark border border-amber-400/30 mb-2 shadow-md">
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full liquid-glass-dark border border-amber-400/30 mb-1.5 shadow-md">
               <Sparkles className="h-2.5 w-2.5 text-amber-300" />
               <span className="text-[8.5px] font-bold uppercase tracking-[0.2em] text-amber-200">
                 Nakshatra Collections
@@ -219,15 +219,15 @@ export default function Hero() {
             </h1>
 
             {/* Subheading */}
-            <p className="mt-1 text-[11px] text-neutral-200/90 font-light max-w-xs leading-snug drop-shadow-sm">
+            <p className="mt-0.5 text-[10.5px] text-neutral-200/90 font-light max-w-xs leading-snug drop-shadow-sm">
               18K Gold Plated &bull; Anti-Tarnish &bull; Kerala Bridal Jewellery
             </p>
 
             {/* Shop Now Button */}
-            <div className="mt-3.5">
+            <div className="mt-3">
               <Link
                 href="/collections"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest transition-all active:scale-95 shadow-2xl cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all active:scale-95 shadow-2xl cursor-pointer"
                 style={{
                   backgroundColor: "#F3DEC0",
                   color: "#281206",

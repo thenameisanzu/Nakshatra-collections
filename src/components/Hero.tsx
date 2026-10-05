@@ -35,7 +35,7 @@ export default function Hero() {
       {/* ================================================================= */}
       {/* 1. HERO BANNER WITH RESPONSIVE DUAL PHOTOGRAPHY                   */}
       {/* ================================================================= */}
-      <div className="relative w-full min-h-[520px] xs:min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-between sm:justify-center">
+      <div className="relative w-full min-h-[540px] xs:min-h-[580px] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-end sm:justify-center">
         {/* Background Image: Desktop Landscape (16:9) */}
         <div className="absolute inset-0 z-0 hidden sm:block">
           <Image
@@ -49,7 +49,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Background Image: Mobile Portrait (9:16) - Optimized alignment */}
+        {/* Background Image: Mobile Portrait (9:16) - Aligned to top for model focus */}
         <div className="absolute inset-0 z-0 sm:hidden">
           <Image
             src="/images/hero/hero-mobile.webp"
@@ -58,7 +58,7 @@ export default function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className="object-cover object-[center_65%]"
+            className="object-cover object-[center_15%]"
           />
         </div>
 
@@ -80,19 +80,19 @@ export default function Hero() {
           }}
         />
 
-        {/* Mobile Scrim: Soft shadow at top for text, clear center for model */}
+        {/* Mobile Scrim: Clear at the top for model face, rich dark velvet at the bottom for text */}
         <div
           className="absolute inset-0 z-10 pointer-events-none sm:hidden"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(22, 7, 10, 0.92) 0%, rgba(22, 7, 10, 0.65) 28%, rgba(22, 7, 10, 0.15) 50%, rgba(22, 7, 10, 0.7) 85%, rgba(22, 7, 10, 0.95) 100%)",
+              "linear-gradient(to top, rgba(22, 7, 10, 0.98) 0%, rgba(22, 7, 10, 0.88) 35%, rgba(22, 7, 10, 0.25) 65%, transparent 100%)",
           }}
         />
 
         {/* =============================================================== */}
         {/* 2. OVERLAY CONTENT (DESKTOP & MOBILE TAILORED)                  */}
         {/* =============================================================== */}
-        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-16 w-full text-white">
+        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-16 w-full text-white">
           {/* DESKTOP & TABLET CONTENT */}
           <div className="hidden sm:flex flex-col lg:flex-row lg:items-center lg:justify-end">
             <div className="w-full lg:max-w-xl xl:max-w-2xl flex flex-col items-start text-left">
@@ -199,11 +199,11 @@ export default function Hero() {
           </div>
 
           {/* =============================================================== */}
-          {/* MOBILE STREAMLINED LUXURY LAYOUT (Clean Top Header & Clear Model)*/}
+          {/* MOBILE STREAMLINED LUXURY LAYOUT (Placed Elegantly at Bottom)   */}
           {/* =============================================================== */}
-          <div className="flex sm:hidden flex-col items-center text-center pt-2">
-            {/* Minimalist Top Brand Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full liquid-glass-dark border border-amber-400/30 mb-2.5 shadow-md">
+          <div className="flex sm:hidden flex-col items-center text-center pb-2">
+            {/* Minimalist Brand Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full liquid-glass-dark border border-amber-400/30 mb-2 shadow-md">
               <Sparkles className="h-3 w-3 text-amber-300" />
               <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-amber-200">
                 Nakshatra Collections
@@ -223,11 +223,11 @@ export default function Hero() {
               18K Gold Plated &bull; Anti-Tarnish &bull; Kerala Bridal Jewellery
             </p>
 
-            {/* Shop Now Button in Mobile Top Banner */}
-            <div className="mt-3">
+            {/* Shop Now Button */}
+            <div className="mt-3.5">
               <Link
                 href="/collections"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all active:scale-95 shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all active:scale-95 shadow-2xl cursor-pointer"
                 style={{
                   backgroundColor: "#F3DEC0",
                   color: "#281206",

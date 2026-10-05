@@ -28,172 +28,223 @@ export default function Hero() {
     <section
       className="relative w-full overflow-hidden transition-colors"
       style={{
-        backgroundColor: "var(--bg-primary)",
+        backgroundColor: "#16070a",
       }}
-      aria-label="Nakshatra Collections Featured Showcase"
+      aria-label="Nakshatra Collections - Your Everyday Sparkle"
     >
       {/* ================================================================= */}
-      {/* 1. 100% FULL-BLEED SCREEN FILL HERO BANNER (Edge-to-Edge)         */}
+      {/* 1. HERO SECTION WITH RICH PHOTOGRAPHY & LIVE OVERLAY CONTENT       */}
       {/* ================================================================= */}
-      <Link
-        href="/collections"
-        className="group relative block w-full aspect-[16/9] sm:aspect-[16/8.5] lg:aspect-[16/7.5] xl:aspect-[16/7] 2xl:aspect-[16/6.5] max-h-[85vh] min-h-[220px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden transition-all duration-500 cursor-pointer active:opacity-95"
-        style={{
-          backgroundColor: "#2a080c",
-        }}
-        aria-label="Shop Nakshatra Collections - Your Everyday Sparkle"
-      >
-        {/* Banner Graphic Image (Ultra High-Res 3K Retina) */}
-        <Image
-          src="/images/hero-banner.webp"
-          alt="Nakshatra Collections - Your Everyday Sparkle Artificial Jewellery"
-          fill
-          priority
-          unoptimized
-          sizes="100vw"
-          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+      <div className="relative w-full min-h-[580px] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex items-center">
+        {/* Background Image: Desktop Landscape (16:9) */}
+        <div className="absolute inset-0 z-0 hidden sm:block">
+          <Image
+            src="/images/hero/hero-desktop.webp"
+            alt="Nakshatra Collections Artificial Jewellery Model"
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
+
+        {/* Background Image: Mobile Portrait (9:16) */}
+        <div className="absolute inset-0 z-0 sm:hidden">
+          <Image
+            src="/images/hero/hero-mobile.webp"
+            alt="Nakshatra Collections Artificial Jewellery Model"
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="object-cover object-[center_20%]"
+          />
+        </div>
+
+        {/* Gradient Scrim Layer for Crystal-Clear Text Legibility */}
+        {/* Desktop: Dark vignette on the right for text */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(22, 7, 10, 0.15) 0%, rgba(22, 7, 10, 0.45) 45%, rgba(22, 7, 10, 0.88) 70%, rgba(22, 7, 10, 0.96) 100%)",
+          }}
         />
 
-        {/* Interactive Hover Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        {/* Tablet / Medium Screens Scrim */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none hidden sm:block lg:hidden"
+          style={{
+            background:
+              "linear-gradient(to right, rgba(22, 7, 10, 0.3) 0%, rgba(22, 7, 10, 0.75) 50%, rgba(22, 7, 10, 0.94) 100%)",
+          }}
+        />
 
-        {/* Floating Subtle Click Prompt Badge on Desktop */}
-        <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full liquid-glass-dark text-white text-xs font-semibold uppercase tracking-wider shadow-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 border border-white/20">
-          <span>Explore All Categories</span>
-          <ArrowRight className="h-4 w-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
-        </div>
-      </Link>
+        {/* Mobile Scrim: Top & Bottom soft shading */}
+        <div
+          className="absolute inset-0 z-10 pointer-events-none sm:hidden"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(22, 7, 10, 0.85) 0%, rgba(22, 7, 10, 0.4) 35%, rgba(22, 7, 10, 0.82) 70%, rgba(22, 7, 10, 0.98) 100%)",
+          }}
+        />
 
-      {/* ================================================================= */}
-      {/* 2. CATEGORY QUICK STRIP & BRAND TRUST TICKER (Contained Max-W)    */}
-      {/* ================================================================= */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 pb-6 sm:pb-8">
-        {/* Quick 1-Tap Categories Strip */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-          <span
-            className="text-[10px] sm:text-xs font-bold uppercase tracking-widest shrink-0 flex items-center gap-1.5 pl-1"
-            style={{ color: "var(--accent-gold)" }}
-          >
-            <Sparkles className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">Explore:</span>
-          </span>
-
-          <div className="flex items-center gap-2 min-w-max">
-            {quickCategoryPills.map((pill) => {
-              const Icon = pill.icon;
-              return (
-                <Link
-                  key={pill.label}
-                  href={pill.href}
-                  className="group flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-200 border card-lift active:scale-95 shadow-xs"
-                  style={{
-                    backgroundColor: "var(--bg-surface)",
-                    borderColor: "var(--border-subtle)",
-                    color: "var(--text-primary)",
-                  }}
-                >
-                  <Icon
-                    className="h-3.5 w-3.5 transition-transform group-hover:scale-110"
-                    style={{ color: "var(--accent-gold)" }}
+        {/* =============================================================== */}
+        {/* 2. OVERLAY CONTENT: LOGO, HEADLINE, 4 BADGES & SHOP NOW BUTTON   */}
+        {/* =============================================================== */}
+        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 w-full text-white">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-end">
+            <div className="w-full lg:max-w-xl xl:max-w-2xl flex flex-col items-start text-left">
+              {/* Brand Logo & Circular Emblem */}
+              <div className="inline-flex items-center gap-3 p-1.5 pr-4 rounded-full liquid-glass-dark border border-amber-400/30 mb-4 sm:mb-6 shadow-xl backdrop-blur-md">
+                <div className="relative h-9 w-9 sm:h-11 sm:w-11 shrink-0 rounded-full overflow-hidden border border-amber-400/40 bg-black/40 p-1">
+                  <Image
+                    src="/nakshatra-logo.png"
+                    alt="Nakshatra Collections Logo"
+                    fill
+                    sizes="44px"
+                    className="object-contain"
                   />
-                  <span>{pill.label}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-serif tracking-[0.22em] text-xs sm:text-sm font-semibold uppercase text-amber-200 leading-none">
+                    NAKSHATRA
+                  </span>
+                  <span className="text-[7.5px] sm:text-[8.5px] tracking-[0.16em] uppercase text-neutral-300 font-medium leading-none mt-1">
+                    FANCY JEWELLERY &bull; COSMETICS &bull; GIFTS
+                  </span>
+                </div>
+              </div>
+
+              {/* Main Headline */}
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-white leading-[1.12] tracking-tight">
+                Your Everyday{" "}
+                <span className="relative inline-block text-amber-200 italic font-serif">
+                  Sparkle
+                  <span className="inline-block ml-1.5 not-italic text-amber-300 animate-pulse text-2xl sm:text-4xl align-top">
+                    ✦
+                  </span>
+                </span>
+              </h1>
+
+              {/* Subheading */}
+              <p className="mt-3 sm:mt-4 text-xs sm:text-base text-neutral-200/90 font-light max-w-lg leading-relaxed">
+                A beautiful collection of anti-tarnish artificial jewellery, 18K gold plated essentials &amp; bridal masterpieces for every moment.
+              </p>
+
+              {/* 4 Brand Benefits Grid */}
+              <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-lg">
+                {/* 1. Trendy Collections */}
+                <div className="flex flex-col items-start gap-1.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
+                    <Gem className="h-4 w-4" />
+                  </div>
+                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
+                    Trendy Collections
+                  </span>
+                </div>
+
+                {/* 2. Affordable Prices */}
+                <div className="flex flex-col items-start gap-1.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner font-bold text-sm">
+                    ₹
+                  </div>
+                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
+                    Affordable Prices
+                  </span>
+                </div>
+
+                {/* 3. All India Shipping */}
+                <div className="flex flex-col items-start gap-1.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
+                    <Truck className="h-4 w-4" />
+                  </div>
+                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
+                    All India Shipping
+                  </span>
+                </div>
+
+                {/* 4. Loved by Customers */}
+                <div className="flex flex-col items-start gap-1.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
+                    <Heart className="h-4 w-4 fill-amber-300/30" />
+                  </div>
+                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
+                    Loved by Customers
+                  </span>
+                </div>
+              </div>
+
+              {/* Primary "Shop Now" Action Button */}
+              <div className="mt-8 sm:mt-10 flex items-center gap-4">
+                <Link
+                  href="/collections"
+                  className="group inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl cursor-pointer"
+                  style={{
+                    backgroundColor: "#F3DEC0",
+                    color: "#281206",
+                  }}
+                  aria-label="Shop Now - View All Jewellery Collections"
+                >
+                  <span>Shop Now</span>
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
-              );
-            })}
+
+                <Link
+                  href="/collections/bridal-jewellery"
+                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-200/90 hover:text-white transition hover:underline"
+                >
+                  <span>Bridal Sets</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Key Brand Values & Assurance Ticker */}
-        <div
-          className="mt-4 p-3.5 sm:p-4 rounded-2xl border liquid-glass shadow-xs"
-          style={{
-            borderColor: "var(--border-subtle)",
-            backgroundColor: "var(--bg-surface)",
-          }}
-        >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            <div className="flex items-center gap-2.5">
-              <div
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl shrink-0 border"
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderColor: "var(--border-subtle)",
-                  color: "var(--accent-gold)",
-                }}
-              >
-                <Gem className="h-4 w-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-bold font-serif leading-tight" style={{ color: "var(--text-primary)" }}>
-                  Trendy Collections
-                </span>
-                <span className="text-[10px] font-light opacity-75" style={{ color: "var(--text-secondary)" }}>
-                  Fresh 2026 Designs
-                </span>
-              </div>
-            </div>
+      {/* ================================================================= */}
+      {/* 3. QUICK 1-TAP CATEGORIES STRIP & TRUST ASSURANCE BAR              */}
+      {/* ================================================================= */}
+      <div
+        className="w-full border-t border-white/10 py-3 sm:py-4"
+        style={{
+          backgroundColor: "var(--bg-primary)",
+        }}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <span
+              className="text-[10px] sm:text-xs font-bold uppercase tracking-widest shrink-0 flex items-center gap-1.5 pl-1"
+              style={{ color: "var(--accent-gold)" }}
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Explore:</span>
+            </span>
 
-            <div className="flex items-center gap-2.5">
-              <div
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl shrink-0 border"
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderColor: "var(--border-subtle)",
-                  color: "var(--accent-gold)",
-                }}
-              >
-                <span className="text-xs font-bold">₹</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-bold font-serif leading-tight" style={{ color: "var(--text-primary)" }}>
-                  Affordable Prices
-                </span>
-                <span className="text-[10px] font-light opacity-75" style={{ color: "var(--text-secondary)" }}>
-                  18K Gold Finish Daily Wear
-                </span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5">
-              <div
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl shrink-0 border"
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderColor: "var(--border-subtle)",
-                  color: "var(--accent-gold)",
-                }}
-              >
-                <Truck className="h-4 w-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-bold font-serif leading-tight" style={{ color: "var(--text-primary)" }}>
-                  All India Shipping
-                </span>
-                <span className="text-[10px] font-light opacity-75" style={{ color: "var(--text-secondary)" }}>
-                  Fast Kerala Delivery
-                </span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5">
-              <div
-                className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl shrink-0 border"
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderColor: "var(--border-subtle)",
-                  color: "var(--accent-gold)",
-                }}
-              >
-                <Heart className="h-4 w-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-bold font-serif leading-tight" style={{ color: "var(--text-primary)" }}>
-                  Loved by Customers
-                </span>
-                <span className="text-[10px] font-light opacity-75" style={{ color: "var(--text-secondary)" }}>
-                  4.9★ Kerala Brides &amp; Girls
-                </span>
-              </div>
+            <div className="flex items-center gap-2 min-w-max">
+              {quickCategoryPills.map((pill) => {
+                const Icon = pill.icon;
+                return (
+                  <Link
+                    key={pill.label}
+                    href={pill.href}
+                    className="group flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-200 border card-lift active:scale-95 shadow-xs"
+                    style={{
+                      backgroundColor: "var(--bg-surface)",
+                      borderColor: "var(--border-subtle)",
+                      color: "var(--text-primary)",
+                    }}
+                  >
+                    <Icon
+                      className="h-3.5 w-3.5 transition-transform group-hover:scale-110"
+                      style={{ color: "var(--accent-gold)" }}
+                    />
+                    <span>{pill.label}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>

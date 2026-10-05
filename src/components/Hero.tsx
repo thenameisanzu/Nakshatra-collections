@@ -32,53 +32,44 @@ export default function Hero() {
       }}
       aria-label="Nakshatra Collections Featured Showcase"
     >
-      {/* 1. Ambient Background Glow Effect */}
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 pointer-events-none opacity-40 blur-3xl"
+      {/* ================================================================= */}
+      {/* 1. 100% FULL-BLEED SCREEN FILL HERO BANNER (Edge-to-Edge)         */}
+      {/* ================================================================= */}
+      <Link
+        href="/collections"
+        className="group relative block w-full aspect-[16/9] sm:aspect-[16/8.5] lg:aspect-[16/7.5] xl:aspect-[16/7] 2xl:aspect-[16/6.5] max-h-[85vh] min-h-[220px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden transition-all duration-500 cursor-pointer active:opacity-95"
         style={{
-          background:
-            "radial-gradient(circle at 50% 20%, rgba(201, 164, 92, 0.25) 0%, rgba(120, 20, 30, 0.15) 50%, transparent 80%)",
+          backgroundColor: "#2a080c",
         }}
-      />
+        aria-label="Shop Nakshatra Collections - Your Everyday Sparkle"
+      >
+        {/* Banner Graphic Image (Ultra High-Res 3K Retina) */}
+        <Image
+          src="/images/hero-banner.webp"
+          alt="Nakshatra Collections - Your Everyday Sparkle Artificial Jewellery"
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+        />
 
-      <div className="relative mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6 pb-6 sm:pb-8">
-        {/* ================================================================= */}
-        {/* 2. MAIN CLICKABLE HERO BANNER                                     */}
-        {/* ================================================================= */}
-        <Link
-          href="/collections"
-          className="group relative block w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-[0_20px_60px_rgba(201,164,92,0.22)] border cursor-pointer active:scale-[0.99]"
-          style={{
-            borderColor: "var(--border-medium)",
-            backgroundColor: "#2a080c",
-          }}
-          aria-label="Shop Nakshatra Collections - Your Everyday Sparkle"
-        >
-          {/* Banner Graphic Image (High-Res 3K Retina) */}
-          <Image
-            src="/images/hero-banner.webp"
-            alt="Nakshatra Collections - Your Everyday Sparkle Artificial Jewellery"
-            fill
-            priority
-            unoptimized
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 95vw, 1920px"
-            className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-          />
+        {/* Interactive Hover Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-          {/* Interactive Hover Vignette / Shimmer Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+        {/* Floating Subtle Click Prompt Badge on Desktop */}
+        <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full liquid-glass-dark text-white text-xs font-semibold uppercase tracking-wider shadow-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 border border-white/20">
+          <span>Explore All Categories</span>
+          <ArrowRight className="h-4 w-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
+        </div>
+      </Link>
 
-          {/* Floating Subtle Click Prompt Badge on Desktop */}
-          <div className="absolute bottom-4 right-4 hidden md:flex items-center gap-2 px-4 py-2 rounded-full liquid-glass-dark text-white text-xs font-semibold uppercase tracking-wider shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-            <span>Explore All Categories</span>
-            <ArrowRight className="h-3.5 w-3.5 text-amber-300 group-hover:translate-x-1 transition-transform" />
-          </div>
-        </Link>
-
-        {/* ================================================================= */}
-        {/* 3. QUICK 1-TAP CATEGORIES STRIP                                   */}
-        {/* ================================================================= */}
-        <div className="mt-4 sm:mt-6 flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+      {/* ================================================================= */}
+      {/* 2. CATEGORY QUICK STRIP & BRAND TRUST TICKER (Contained Max-W)    */}
+      {/* ================================================================= */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 pb-6 sm:pb-8">
+        {/* Quick 1-Tap Categories Strip */}
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
           <span
             className="text-[10px] sm:text-xs font-bold uppercase tracking-widest shrink-0 flex items-center gap-1.5 pl-1"
             style={{ color: "var(--accent-gold)" }}
@@ -112,11 +103,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ================================================================= */}
-        {/* 4. KEY BRAND VALUES & ASSURANCE TICKER                            */}
-        {/* ================================================================= */}
+        {/* Key Brand Values & Assurance Ticker */}
         <div
-          className="mt-6 p-3.5 sm:p-4 rounded-2xl border liquid-glass"
+          className="mt-4 p-3.5 sm:p-4 rounded-2xl border liquid-glass shadow-xs"
           style={{
             borderColor: "var(--border-subtle)",
             backgroundColor: "var(--bg-surface)",

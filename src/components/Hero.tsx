@@ -33,9 +33,9 @@ export default function Hero() {
       aria-label="Nakshatra Collections - Your Everyday Sparkle"
     >
       {/* ================================================================= */}
-      {/* 1. HERO SECTION WITH RICH PHOTOGRAPHY & LIVE OVERLAY CONTENT       */}
+      {/* 1. HERO BANNER WITH RESPONSIVE DUAL PHOTOGRAPHY                   */}
       {/* ================================================================= */}
-      <div className="relative w-full min-h-[580px] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex items-center">
+      <div className="relative w-full min-h-[520px] xs:min-h-[560px] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-between sm:justify-center">
         {/* Background Image: Desktop Landscape (16:9) */}
         <div className="absolute inset-0 z-0 hidden sm:block">
           <Image
@@ -49,7 +49,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Background Image: Mobile Portrait (9:16) */}
+        {/* Background Image: Mobile Portrait (9:16) - Optimized alignment */}
         <div className="absolute inset-0 z-0 sm:hidden">
           <Image
             src="/images/hero/hero-mobile.webp"
@@ -58,43 +58,43 @@ export default function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className="object-cover object-[center_20%]"
+            className="object-cover object-[center_65%]"
           />
         </div>
 
-        {/* Gradient Scrim Layer for Crystal-Clear Text Legibility */}
-        {/* Desktop: Dark vignette on the right for text */}
+        {/* Desktop Gradient Scrim (Right side shadow for text) */}
         <div
           className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
           style={{
             background:
-              "linear-gradient(to right, rgba(22, 7, 10, 0.15) 0%, rgba(22, 7, 10, 0.45) 45%, rgba(22, 7, 10, 0.88) 70%, rgba(22, 7, 10, 0.96) 100%)",
+              "linear-gradient(to right, rgba(22, 7, 10, 0.1) 0%, rgba(22, 7, 10, 0.4) 45%, rgba(22, 7, 10, 0.88) 70%, rgba(22, 7, 10, 0.96) 100%)",
           }}
         />
 
-        {/* Tablet / Medium Screens Scrim */}
+        {/* Tablet Gradient Scrim */}
         <div
           className="absolute inset-0 z-10 pointer-events-none hidden sm:block lg:hidden"
           style={{
             background:
-              "linear-gradient(to right, rgba(22, 7, 10, 0.3) 0%, rgba(22, 7, 10, 0.75) 50%, rgba(22, 7, 10, 0.94) 100%)",
+              "linear-gradient(to right, rgba(22, 7, 10, 0.25) 0%, rgba(22, 7, 10, 0.7) 50%, rgba(22, 7, 10, 0.94) 100%)",
           }}
         />
 
-        {/* Mobile Scrim: Top & Bottom soft shading */}
+        {/* Mobile Scrim: Soft shadow at top for text, clear center for model */}
         <div
           className="absolute inset-0 z-10 pointer-events-none sm:hidden"
           style={{
             background:
-              "linear-gradient(to bottom, rgba(22, 7, 10, 0.85) 0%, rgba(22, 7, 10, 0.4) 35%, rgba(22, 7, 10, 0.82) 70%, rgba(22, 7, 10, 0.98) 100%)",
+              "linear-gradient(to bottom, rgba(22, 7, 10, 0.92) 0%, rgba(22, 7, 10, 0.65) 28%, rgba(22, 7, 10, 0.15) 50%, rgba(22, 7, 10, 0.7) 85%, rgba(22, 7, 10, 0.95) 100%)",
           }}
         />
 
         {/* =============================================================== */}
-        {/* 2. OVERLAY CONTENT: LOGO, HEADLINE, 4 BADGES & SHOP NOW BUTTON   */}
+        {/* 2. OVERLAY CONTENT (DESKTOP & MOBILE TAILORED)                  */}
         {/* =============================================================== */}
-        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 w-full text-white">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-end">
+        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-16 w-full text-white">
+          {/* DESKTOP & TABLET CONTENT */}
+          <div className="hidden sm:flex flex-col lg:flex-row lg:items-center lg:justify-end">
             <div className="w-full lg:max-w-xl xl:max-w-2xl flex flex-col items-start text-left">
               {/* Brand Logo & Circular Emblem */}
               <div className="inline-flex items-center gap-3 p-1.5 pr-4 rounded-full liquid-glass-dark border border-amber-400/30 mb-4 sm:mb-6 shadow-xl backdrop-blur-md">
@@ -135,7 +135,6 @@ export default function Hero() {
 
               {/* 4 Brand Benefits Grid */}
               <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-lg">
-                {/* 1. Trendy Collections */}
                 <div className="flex flex-col items-start gap-1.5">
                   <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
                     <Gem className="h-4 w-4" />
@@ -145,7 +144,6 @@ export default function Hero() {
                   </span>
                 </div>
 
-                {/* 2. Affordable Prices */}
                 <div className="flex flex-col items-start gap-1.5">
                   <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner font-bold text-sm">
                     ₹
@@ -155,7 +153,6 @@ export default function Hero() {
                   </span>
                 </div>
 
-                {/* 3. All India Shipping */}
                 <div className="flex flex-col items-start gap-1.5">
                   <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
                     <Truck className="h-4 w-4" />
@@ -165,7 +162,6 @@ export default function Hero() {
                   </span>
                 </div>
 
-                {/* 4. Loved by Customers */}
                 <div className="flex flex-col items-start gap-1.5">
                   <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
                     <Heart className="h-4 w-4 fill-amber-300/30" />
@@ -201,11 +197,53 @@ export default function Hero() {
               </div>
             </div>
           </div>
+
+          {/* =============================================================== */}
+          {/* MOBILE STREAMLINED LUXURY LAYOUT (Clean Top Header & Clear Model)*/}
+          {/* =============================================================== */}
+          <div className="flex sm:hidden flex-col items-center text-center pt-2">
+            {/* Minimalist Top Brand Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full liquid-glass-dark border border-amber-400/30 mb-2.5 shadow-md">
+              <Sparkles className="h-3 w-3 text-amber-300" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-amber-200">
+                Nakshatra Collections
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="font-serif text-2xl xs:text-3xl font-normal text-white leading-tight">
+              Your Everyday{" "}
+              <span className="text-amber-200 italic font-serif">
+                Sparkle ✦
+              </span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="mt-1 text-[11px] text-neutral-200/90 font-light max-w-xs leading-relaxed">
+              18K Gold Plated &bull; Anti-Tarnish &bull; Kerala Bridal Jewellery
+            </p>
+
+            {/* Shop Now Button in Mobile Top Banner */}
+            <div className="mt-3">
+              <Link
+                href="/collections"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all active:scale-95 shadow-xl"
+                style={{
+                  backgroundColor: "#F3DEC0",
+                  color: "#281206",
+                }}
+                aria-label="Shop Now"
+              >
+                <span>Shop Now</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* ================================================================= */}
-      {/* 3. QUICK 1-TAP CATEGORIES STRIP & TRUST ASSURANCE BAR              */}
+      {/* 3. MOBILE BENEFIT BAR + CATEGORY QUICK STRIP                       */}
       {/* ================================================================= */}
       <div
         className="w-full border-t border-white/10 py-3 sm:py-4"
@@ -214,7 +252,36 @@ export default function Hero() {
         }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+          {/* Mobile Only: 4 Horizontal Quick Trust Badges */}
+          <div className="grid grid-cols-4 gap-2 sm:hidden pb-3 mb-2 border-b border-white/10 text-center">
+            <div className="flex flex-col items-center">
+              <Gem className="h-3.5 w-3.5 text-amber-400 mb-0.5" />
+              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
+                Trendy
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-xs font-bold text-amber-400 leading-none mb-0.5">₹</span>
+              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
+                Affordable
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Truck className="h-3.5 w-3.5 text-amber-400 mb-0.5" />
+              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
+                All India
+              </span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Heart className="h-3.5 w-3.5 text-amber-400 mb-0.5" />
+              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
+                4.9★ Loved
+              </span>
+            </div>
+          </div>
+
+          {/* Quick Category Pills Strip */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
             <span
               className="text-[10px] sm:text-xs font-bold uppercase tracking-widest shrink-0 flex items-center gap-1.5 pl-1"
               style={{ color: "var(--accent-gold)" }}
@@ -230,7 +297,7 @@ export default function Hero() {
                   <Link
                     key={pill.label}
                     href={pill.href}
-                    className="group flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-200 border card-lift active:scale-95 shadow-xs"
+                    className="group flex items-center gap-1.5 px-3.5 py-1.5 sm:py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-200 border card-lift active:scale-95 shadow-xs"
                     style={{
                       backgroundColor: "var(--bg-surface)",
                       borderColor: "var(--border-subtle)",

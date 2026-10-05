@@ -33,9 +33,9 @@ export default function Hero() {
       aria-label="Nakshatra Collections - Your Everyday Sparkle"
     >
       {/* ================================================================= */}
-      {/* 1. HERO BANNER WITH RESPONSIVE DUAL PHOTOGRAPHY                   */}
+      {/* 1. HERO BANNER - FULL VIEWPORT HEIGHT ON MOBILE & DESKTOP         */}
       {/* ================================================================= */}
-      <div className="relative w-full min-h-[500px] xs:min-h-[540px] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-end sm:justify-center">
+      <div className="relative w-full min-h-[calc(100svh-4rem)] sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-end sm:justify-center">
         {/* Background Image: Desktop Landscape (16:9) */}
         <div className="absolute inset-0 z-0 hidden sm:block">
           <Image
@@ -49,7 +49,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* Background Image: Mobile Portrait - Cropped & Focused on Model's Face */}
+        {/* Background Image: Mobile Portrait (9:16 Full Viewport Height) */}
         <div className="absolute inset-0 z-0 sm:hidden">
           <Image
             src="/images/hero/hero-mobile.webp"
@@ -58,7 +58,7 @@ export default function Hero() {
             priority
             unoptimized
             sizes="100vw"
-            className="object-cover object-[center_top] scale-105"
+            className="object-cover object-center"
           />
         </div>
 
@@ -80,19 +80,19 @@ export default function Hero() {
           }}
         />
 
-        {/* Mobile Scrim: Crystal clear on face, smooth velvet at the bottom for text */}
+        {/* Mobile Scrim: Soft shadow at top & rich velvet gradient at the bottom */}
         <div
           className="absolute inset-0 z-10 pointer-events-none sm:hidden"
           style={{
             background:
-              "linear-gradient(to top, rgba(22, 7, 10, 0.98) 0%, rgba(22, 7, 10, 0.85) 30%, rgba(22, 7, 10, 0.15) 55%, transparent 80%)",
+              "linear-gradient(to top, rgba(22, 7, 10, 0.96) 0%, rgba(22, 7, 10, 0.8) 32%, rgba(22, 7, 10, 0.1) 58%, transparent 75%)",
           }}
         />
 
         {/* =============================================================== */}
         {/* 2. OVERLAY CONTENT (DESKTOP & MOBILE TAILORED)                  */}
         {/* =============================================================== */}
-        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 sm:py-16 w-full text-white">
+        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-16 w-full text-white">
           {/* DESKTOP & TABLET CONTENT */}
           <div className="hidden sm:flex flex-col lg:flex-row lg:items-center lg:justify-end">
             <div className="w-full lg:max-w-xl xl:max-w-2xl flex flex-col items-start text-left">
@@ -199,13 +199,13 @@ export default function Hero() {
           </div>
 
           {/* =============================================================== */}
-          {/* MOBILE STREAMLINED LUXURY LAYOUT (Clean Bottom Focus)           */}
+          {/* MOBILE STREAMLINED LUXURY LAYOUT (Full Viewport Height)         */}
           {/* =============================================================== */}
-          <div className="flex sm:hidden flex-col items-center text-center pb-1">
+          <div className="flex sm:hidden flex-col items-center text-center pb-2">
             {/* Minimalist Brand Pill */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full liquid-glass-dark border border-amber-400/30 mb-1.5 shadow-md">
-              <Sparkles className="h-2.5 w-2.5 text-amber-300" />
-              <span className="text-[8.5px] font-bold uppercase tracking-[0.2em] text-amber-200">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full liquid-glass-dark border border-amber-400/30 mb-2 shadow-md">
+              <Sparkles className="h-3 w-3 text-amber-300" />
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-amber-200">
                 Nakshatra Collections
               </span>
             </div>
@@ -219,15 +219,15 @@ export default function Hero() {
             </h1>
 
             {/* Subheading */}
-            <p className="mt-0.5 text-[10.5px] text-neutral-200/90 font-light max-w-xs leading-tight">
+            <p className="mt-1 text-[11px] text-neutral-200/90 font-light max-w-xs leading-relaxed">
               18K Gold Plated &bull; Anti-Tarnish &bull; Kerala Bridal Jewellery
             </p>
 
             {/* Shop Now Button */}
-            <div className="mt-3">
+            <div className="mt-3.5">
               <Link
                 href="/collections"
-                className="inline-flex items-center justify-center gap-2 px-7 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all active:scale-95 shadow-2xl cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all active:scale-95 shadow-2xl cursor-pointer"
                 style={{
                   backgroundColor: "#F3DEC0",
                   color: "#281206",

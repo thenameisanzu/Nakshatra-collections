@@ -19,7 +19,8 @@ export default function AccountPage() {
     );
   };
 
-  const shopifyLoginUrl = "https://nakshatra-collections-ttrghptp.myshopify.com/account/login";
+  const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "nakshatra-collections-ttrghptp.myshopify.com";
+  const shopifyLoginUrl = `https://${storeDomain.replace(/^https?:\/\//, "")}/account/login`;
 
   return (
     <div

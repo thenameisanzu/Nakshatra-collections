@@ -234,14 +234,6 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                <Link
-                  href="/collections/rings"
-                  onClick={() => setIsOpen(false)}
-                  className="py-3 flex items-center justify-between text-amber-700 font-semibold"
-                >
-                  <span>Shop Under ₹299 (Budget Store)</span>
-                  <ArrowRight className="h-4 w-4 text-amber-700" />
-                </Link>
 
                 <Link
                   href="/wishlist"

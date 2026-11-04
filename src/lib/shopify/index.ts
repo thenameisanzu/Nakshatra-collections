@@ -708,6 +708,20 @@ export async function getCollections(first: number = 20): Promise<ShopifyCollect
               width
               height
             }
+            products(first: 1) {
+              edges {
+                node {
+                  id
+                  title
+                  featuredImage {
+                    url
+                    altText
+                    width
+                    height
+                  }
+                }
+              }
+            }
           }
         }
       }

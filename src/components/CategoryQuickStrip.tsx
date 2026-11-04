@@ -137,16 +137,21 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
   const displayItems: QuickCategoryItem[] =
     collections && collections.length > 0
       ? collections.slice(0, 8).map((col) => {
+          // Priority 1: Shopify Collection Cover Image
+          // Priority 2: First Product Image from this Collection in Shopify
+          // Priority 3: Fallback image if collection is completely empty
+          const backendProductImage = col.products?.edges?.[0]?.node?.featuredImage?.url;
           const fallback = fallbackImages[col.handle] || {
             image: fallbackImages.necklaces.image,
-            label: "Collection",
-            itemCount: `${col.products?.edges?.length || 24} items`,
+            label: col.title,
+            itemCount: "View All",
           };
+
           return {
             name: col.title,
             href: `/collections/${col.handle}`,
-            image: col.image?.url || fallback.image,
-            label: fallback.label,
+            image: col.image?.url || backendProductImage || fallback.image,
+            label: col.title,
             itemCount: fallback.itemCount,
           };
         })

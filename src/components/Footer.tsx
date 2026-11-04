@@ -5,7 +5,14 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-t border-gray-100 bg-[#FAFAFA] text-gray-700">
+    <footer 
+      className="mt-auto border-t transition-colors duration-300"
+      style={{
+        backgroundColor: "var(--bg-secondary)",
+        borderColor: "var(--border-subtle)",
+        color: "var(--text-secondary)",
+      }}
+    >
       {/* Main Footer Links */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">

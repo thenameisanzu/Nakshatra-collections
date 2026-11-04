@@ -17,17 +17,27 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
   return (
     <section
       id="featured-showcase"
-      className="py-10 sm:py-14 border-t border-gray-100 bg-white"
+      className="py-10 sm:py-14 border-t transition-colors"
+      style={{
+        backgroundColor: "var(--bg-primary)",
+        borderColor: "var(--border-subtle)",
+      }}
       aria-label="Bestselling Jewellery"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header (Super clean & minimal) */}
         <div className="text-center mb-6 sm:mb-8">
-          <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-700 mb-1">
-            <Sparkles className="h-3 w-3 text-amber-600" />
+          <span
+            className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] mb-1"
+            style={{ color: "var(--accent-gold)" }}
+          >
+            <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
             18K GOLD PLATED
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-gray-900">
+          <h2
+            className="text-2xl sm:text-3xl font-normal tracking-tight"
+            style={{ color: "var(--text-primary)" }}
+          >
             Bestsellers
           </h2>
         </div>
@@ -46,10 +56,15 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
         {/* Minimal Bottom CTA Button */}
         <div className="mt-8 sm:mt-10 flex items-center justify-center">
           <Link
-            href="/collections"
-            className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-2.5 text-xs font-semibold uppercase tracking-wider bg-white text-gray-900 border border-gray-300 hover:border-black hover:bg-gray-50 transition-all duration-200 active:scale-95 shadow-2xs"
+            href="/products"
+            className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-2.5 text-xs font-semibold uppercase tracking-wider border transition-all duration-200 active:scale-95 shadow-2xs hover:opacity-90"
+            style={{
+              backgroundColor: "var(--bg-surface)",
+              color: "var(--text-primary)",
+              borderColor: "var(--border-medium)",
+            }}
           >
-            <span>View All ({products.length > 8 ? "30+" : products.length})</span>
+            <span>View All Products ({products.length > 8 ? "30+" : products.length})</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>

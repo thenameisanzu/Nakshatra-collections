@@ -29,7 +29,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex-1 bg-white">
+    <main className="flex-1 transition-colors" style={{ backgroundColor: "var(--bg-primary)" }}>
       {/* 01 — Minimal Split Hero Showcase */}
       <Hero />
 

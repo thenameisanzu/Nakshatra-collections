@@ -72,35 +72,42 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating Clean Pill Navbar (Budget Blings Inspired - Desktop & Tablet) */}
-      <header className="hidden md:block sticky top-2 sm:top-3 z-40 mx-auto w-[94%] max-w-6xl transition-all duration-200">
-        <div className="relative flex items-center justify-between px-5 sm:px-8 py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_4px_25px_-2px_rgba(0,0,0,0.06)]">
-          {/* Left: 3 Clean Minimal Navigation Links */}
-          <nav className="flex items-center gap-6 sm:gap-8">
+      {/* Floating Clean Pill Navbar (Budget Blings Inspired - Desktop & Mobile) */}
+      <header className="sticky top-2 sm:top-3 z-40 mx-auto w-[94%] max-w-6xl transition-all duration-200">
+        <div 
+          className="relative flex items-center justify-between px-4 sm:px-8 py-2.5 rounded-full backdrop-blur-md transition-all duration-200"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.94)",
+            border: "1px solid var(--border-subtle)",
+            boxShadow: "0 8px 30px rgba(31, 26, 24, 0.06)",
+          }}
+        >
+          {/* Left: 3 Clean Minimal Navigation Links (Desktop) */}
+          <nav className="hidden md:flex items-center gap-6 sm:gap-8">
             <Link
               href="/"
-              className="text-xs sm:text-sm font-normal text-gray-600 hover:text-black transition-colors"
+              className="text-xs sm:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors"
             >
               Home
             </Link>
             <Link
               href="/products"
-              className="text-xs sm:text-sm font-normal text-gray-600 hover:text-black transition-colors"
+              className="text-xs sm:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors"
             >
               Collections
             </Link>
             <Link
               href="/contact"
-              className="text-xs sm:text-sm font-normal text-gray-600 hover:text-black transition-colors"
+              className="text-xs sm:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors"
             >
               Contact
             </Link>
           </nav>
 
-          {/* Center: Brand Logo & Title */}
+          {/* Brand Logo & Title (Desktop: Centered, Mobile: Left) */}
           <Link
             href="/"
-            className="flex items-center gap-2 group transition-transform hover:opacity-90 absolute left-1/2 -translate-x-1/2"
+            className="flex items-center gap-2 group transition-transform hover:opacity-90 md:absolute md:left-1/2 md:-translate-x-1/2"
             aria-label="Nakshatra Collections"
           >
             <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
@@ -113,7 +120,10 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <span className="text-sm sm:text-base font-medium tracking-[0.16em] uppercase text-gray-900 leading-none">
+            <span 
+              className="text-xs sm:text-base font-medium tracking-[0.16em] uppercase leading-none"
+              style={{ color: "var(--text-primary)" }}
+            >
               Nakshatra Collections
             </span>
           </Link>
@@ -148,12 +158,15 @@ export default function Navbar() {
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-700"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-stone-100 active:scale-95 transition-colors cursor-pointer text-stone-700"
               aria-label={`Shopping bag (${totalQuantity} items)`}
             >
               <ShoppingBag className="h-4.5 w-4.5" />
               {totalQuantity > 0 && (
-                <span className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-gray-950 px-1 text-[8.5px] font-bold text-white shadow-xs">
+                <span 
+                  className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-bold text-white shadow-xs"
+                  style={{ backgroundColor: "var(--accent-cta)" }}
+                >
                   {totalQuantity > 99 ? "99+" : totalQuantity}
                 </span>
               )}

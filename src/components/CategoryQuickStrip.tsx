@@ -154,17 +154,27 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
 
   return (
     <section
-      className="py-10 sm:py-14 border-b border-gray-100 bg-white"
+      className="py-10 sm:py-14 border-b transition-colors"
+      style={{
+        backgroundColor: "var(--bg-primary)",
+        borderColor: "var(--border-subtle)",
+      }}
       aria-label="Curated Collections"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Centered Category Header (Exact Budget Blings style from reference) */}
         <div className="text-center mb-8 sm:mb-10">
-          <span className="inline-flex items-center gap-1.5 text-[10.5px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-amber-700 mb-2">
-            <Sparkles className="h-3 w-3 text-amber-600" />
+          <span
+            className="inline-flex items-center gap-1.5 text-[10.5px] sm:text-xs font-semibold uppercase tracking-[0.22em] mb-2"
+            style={{ color: "var(--accent-gold)" }}
+          >
+            <Sparkles className="h-3 w-3" style={{ color: "var(--accent-gold)" }} />
             ANTI-TARNISH COLLECTIONS
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight text-gray-900">
+          <h2
+            className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight"
+            style={{ color: "var(--text-primary)" }}
+          >
             Curated Collections
           </h2>
         </div>
@@ -175,10 +185,20 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
             <Link
               key={item.name}
               href={item.href}
-              className="group relative flex flex-col p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border border-gray-200/80 bg-white transition-all duration-300 hover:border-gray-900 hover:shadow-md hover:-translate-y-1 active:scale-[0.98] cursor-pointer"
+              className="group relative flex flex-col p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border transition-all duration-300 hover:shadow-md hover:-translate-y-1 active:scale-[0.98] cursor-pointer"
+              style={{
+                backgroundColor: "var(--bg-surface)",
+                borderColor: "var(--border-subtle)",
+              }}
             >
               {/* Product Showcase Image Container with Prominent Rounded Corners */}
-              <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#F8F9FA] border border-gray-100/80">
+              <div
+                className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden border"
+                style={{
+                  backgroundColor: "var(--bg-secondary)",
+                  borderColor: "var(--border-subtle)",
+                }}
+              >
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -190,10 +210,16 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
 
               {/* Category Details at Bottom of Card */}
               <div className="pt-2.5 pb-1 sm:pt-3 text-center flex flex-col items-center">
-                <h3 className="text-xs sm:text-sm font-medium text-gray-900 group-hover:text-black line-clamp-1 transition-colors">
+                <h3
+                  className="text-xs sm:text-sm font-medium line-clamp-1 transition-colors"
+                  style={{ color: "var(--text-primary)" }}
+                >
                   {item.name}
                 </h3>
-                <span className="text-[10px] sm:text-[11px] text-gray-400 font-light mt-0.5">
+                <span
+                  className="text-[10px] sm:text-[11px] font-light mt-0.5"
+                  style={{ color: "var(--text-muted)" }}
+                >
                   {item.itemCount}
                 </span>
               </div>
@@ -205,7 +231,12 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
         <div className="mt-8 sm:mt-10 flex items-center justify-center">
           <Link
             href="/collections"
-            className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-2.5 text-xs font-semibold uppercase tracking-wider bg-white text-gray-900 border border-gray-300 hover:border-black hover:bg-gray-50 transition-all duration-200 active:scale-95 shadow-2xs"
+            className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-2.5 text-xs font-semibold uppercase tracking-wider border transition-all duration-200 active:scale-95 shadow-2xs hover:opacity-90"
+            style={{
+              backgroundColor: "var(--bg-surface)",
+              color: "var(--text-primary)",
+              borderColor: "var(--border-medium)",
+            }}
           >
             <span>Explore All 8 Collections</span>
             <ArrowRight className="h-3.5 w-3.5" />

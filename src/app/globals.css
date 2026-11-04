@@ -1,49 +1,46 @@
 @import "tailwindcss";
 
 /* -------------------------------------------------------------------------- */
-/* THEMES: MINIMAL & CLEAN (BUDGET BLINGS INSPIRED) + CURATED PALETTES        */
+/* THEMES: BESPOKE WARM ATELIER (ALABASTER SILK, ESPRESSO NOIR & 18K GOLD)    */
 /* -------------------------------------------------------------------------- */
 
-/* -------------------------------------------------------------------------- */
-/* Default / 1. Minimal Clean Blings (Budget Blings Inspired)                 */
-/* Pure White: #FFFFFF | Carbon Black: #111827 | Warm Champagne: #C5A059     */
-/* -------------------------------------------------------------------------- */
 :root,
-[data-theme="minimal-clean"] {
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8F9FA;
+[data-theme="minimal-clean"],
+[data-theme="warm-luxury"] {
+  --bg-primary: #FAF7F2;
+  --bg-secondary: #F3EFE8;
   --bg-surface: #FFFFFF;
   --bg-surface-elevated: #FFFFFF;
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --text-muted: #6B7280;
-  --accent-gold: #C5A059;
-  --accent-gold-hover: #B08C44;
-  --accent-cta: #111827;
-  --accent-cta-hover: #1F2937;
+  --text-primary: #1F1A18;
+  --text-secondary: #57524E;
+  --text-muted: #8C827A;
+  --accent-gold: #C59B4E;
+  --accent-gold-hover: #B2873A;
+  --accent-cta: #241815;
+  --accent-cta-hover: #382622;
   --accent-cta-text: #FFFFFF;
-  --border-subtle: #E5E7EB;
-  --border-medium: #D1D5DB;
+  --border-subtle: #EBE5DC;
+  --border-medium: #DDD4C7;
   --card-bg: #FFFFFF;
-  --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-  --badge-sale-bg: #111827;
+  --card-shadow: 0 4px 20px -2px rgba(36, 24, 21, 0.05);
+  --badge-sale-bg: #80222F;
   --badge-sale-text: #FFFFFF;
-  --badge-soldout-bg: #F3F4F6;
-  --badge-soldout-text: #6B7280;
-  --tag-bg: #F9FAFB;
-  --tag-text: #111827;
+  --badge-soldout-bg: #F3EFE8;
+  --badge-soldout-text: #78716C;
+  --tag-bg: #F7F3EC;
+  --tag-text: #241815;
 
-  /* Hero Video Tint Overlay */
-  --hero-video-tint: rgba(17, 24, 39, 0.12);
-  --hero-video-glow: rgba(197, 160, 89, 0.15);
+  /* Hero Accent Glow Overlay */
+  --hero-video-tint: rgba(36, 24, 21, 0.12);
+  --hero-video-glow: rgba(197, 155, 78, 0.15);
 
   /* Clean Frosted Liquid Glass Tokens */
-  --glass-bg: rgba(255, 255, 255, 0.76);
-  --glass-bg-hover: rgba(255, 255, 255, 0.92);
-  --glass-border: rgba(255, 255, 255, 0.7);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
-  --glass-blur: 20px;
-  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.08) 0%, transparent 60%);
+  --glass-bg: rgba(250, 247, 242, 0.85);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(235, 229, 220, 0.85);
+  --glass-shadow: 0 12px 36px -6px rgba(36, 24, 21, 0.08);
+  --glass-blur: 24px;
+  --hero-gradient: radial-gradient(circle at 50% 0%, rgba(197, 155, 78, 0.09) 0%, transparent 60%);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -116,11 +113,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .liquid-glass-pill {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.05), inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(235, 229, 220, 0.9);
+  box-shadow: 0 16px 40px -8px rgba(36, 24, 21, 0.12), 0 0 0 1px rgba(36, 24, 21, 0.04), inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.95);
   border-radius: 9999px;
 }
 

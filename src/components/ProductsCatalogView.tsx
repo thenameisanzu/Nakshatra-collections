@@ -132,16 +132,28 @@ export default function ProductsCatalogView({
   };
 
   return (
-    <div className="bg-white min-h-screen py-8 sm:py-12">
+    <div
+      className="min-h-screen py-8 sm:py-12 transition-colors"
+      style={{ backgroundColor: "var(--bg-primary)" }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ================================================================= */}
         {/* 1. PAGE HEADER (Exact Budget Blings Typography)                   */}
         {/* ================================================================= */}
-        <div className="mb-8 sm:mb-10 border-b border-gray-100 pb-6 sm:pb-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-gray-900 font-serif">
+        <div
+          className="mb-8 sm:mb-10 border-b pb-6 sm:pb-8"
+          style={{ borderColor: "var(--border-subtle)" }}
+        >
+          <h1
+            className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight font-serif"
+            style={{ color: "var(--text-primary)" }}
+          >
             {pageTitle}
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-gray-500 font-light">
+          <p
+            className="mt-2 text-sm sm:text-base font-light"
+            style={{ color: "var(--text-secondary)" }}
+          >
             {pageSubtitle}
           </p>
         </div>
@@ -155,13 +167,23 @@ export default function ProductsCatalogView({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search products..."
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 text-xs text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-gray-900 bg-white"
+              className="w-full pl-10 pr-4 py-2 rounded-lg border text-xs placeholder:text-gray-400 focus:outline-none"
+              style={{
+                backgroundColor: "var(--bg-surface)",
+                borderColor: "var(--border-subtle)",
+                color: "var(--text-primary)",
+              }}
             />
           </div>
           <button
             type="button"
             onClick={() => setIsMobileFilterOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-xs font-medium text-gray-700 bg-white active:scale-95 shrink-0"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg border text-xs font-medium active:scale-95 shrink-0"
+            style={{
+              backgroundColor: "var(--bg-surface)",
+              borderColor: "var(--border-subtle)",
+              color: "var(--text-primary)",
+            }}
           >
             <SlidersHorizontal className="h-3.5 w-3.5" />
             <span>Categories</span>
@@ -184,7 +206,12 @@ export default function ProductsCatalogView({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="w-full pl-10 pr-9 py-2.5 rounded-lg border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-gray-900 bg-white transition-colors"
+                className="w-full pl-10 pr-9 py-2.5 rounded-lg border text-sm placeholder:text-gray-400 focus:outline-none transition-colors"
+                style={{
+                  backgroundColor: "var(--bg-surface)",
+                  borderColor: "var(--border-subtle)",
+                  color: "var(--text-primary)",
+                }}
               />
               {searchQuery && (
                 <button
@@ -200,7 +227,10 @@ export default function ProductsCatalogView({
 
             {/* Categories Navigation Header */}
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 block mb-3">
+              <span
+                className="text-[11px] font-bold uppercase tracking-[0.2em] block mb-3"
+                style={{ color: "var(--text-muted)" }}
+              >
                 CATEGORIES
               </span>
 
@@ -211,9 +241,14 @@ export default function ProductsCatalogView({
                   onClick={() => handleCategorySelect("all")}
                   className={`w-full text-left py-2 px-4 rounded-full text-sm transition-all cursor-pointer ${
                     selectedCategory === "all"
-                      ? "border border-[#2B0E14] text-[#2B0E14] font-medium bg-white"
-                      : "text-gray-600 hover:text-black font-normal"
+                      ? "font-semibold shadow-2xs"
+                      : "font-normal hover:opacity-80"
                   }`}
+                  style={{
+                    backgroundColor: selectedCategory === "all" ? "var(--bg-surface)" : "transparent",
+                    color: selectedCategory === "all" ? "var(--accent-cta)" : "var(--text-secondary)",
+                    border: `1px solid ${selectedCategory === "all" ? "var(--accent-cta)" : "transparent"}`,
+                  }}
                 >
                   All Products
                 </button>
@@ -228,12 +263,20 @@ export default function ProductsCatalogView({
                       onClick={() => handleCategorySelect(cat.handle)}
                       className={`w-full flex items-center justify-between py-2 px-4 rounded-full text-sm transition-all cursor-pointer text-left ${
                         isSelected
-                          ? "border border-[#2B0E14] text-[#2B0E14] font-medium bg-white"
-                          : "text-gray-600 hover:text-black font-normal"
+                          ? "font-semibold shadow-2xs"
+                          : "font-normal hover:opacity-80"
                       }`}
+                      style={{
+                        backgroundColor: isSelected ? "var(--bg-surface)" : "transparent",
+                        color: isSelected ? "var(--accent-cta)" : "var(--text-secondary)",
+                        border: `1px solid ${isSelected ? "var(--accent-cta)" : "transparent"}`,
+                      }}
                     >
                       <span className="truncate pr-2">{cat.title}</span>
-                      <span className="text-xs text-gray-400 font-light shrink-0">
+                      <span
+                        className="text-xs font-light shrink-0"
+                        style={{ color: "var(--text-muted)" }}
+                      >
                         {cat.count}
                       </span>
                     </button>
@@ -248,16 +291,20 @@ export default function ProductsCatalogView({
           {/* --------------------------------------------------------------- */}
           <main className="flex-1 min-w-0 w-full">
             {/* Counter Bar */}
-            <div className="mb-5 flex items-center justify-between text-xs sm:text-sm text-gray-500 font-light">
+            <div
+              className="mb-5 flex items-center justify-between text-xs sm:text-sm font-light"
+              style={{ color: "var(--text-secondary)" }}
+            >
               <span>
-                Showing <strong className="font-semibold text-gray-900">{filteredProducts.length}</strong> of{" "}
-                <strong className="font-semibold text-gray-900">{initialProducts.length}</strong> products
+                Showing <strong className="font-semibold" style={{ color: "var(--text-primary)" }}>{filteredProducts.length}</strong> of{" "}
+                <strong className="font-semibold" style={{ color: "var(--text-primary)" }}>{initialProducts.length}</strong> products
               </span>
               {selectedCategory !== "all" && (
                 <button
                   type="button"
                   onClick={() => setSelectedCategory("all")}
-                  className="text-xs text-amber-800 hover:underline font-medium cursor-pointer"
+                  className="text-xs hover:underline font-medium cursor-pointer"
+                  style={{ color: "var(--accent-gold)" }}
                 >
                   Clear filter
                 </button>
@@ -272,10 +319,16 @@ export default function ProductsCatalogView({
                 ))}
               </div>
             ) : (
-              <div className="py-20 text-center flex flex-col items-center justify-center rounded-2xl border border-gray-100 bg-[#FAFAFA]">
-                <Sparkles className="h-8 w-8 text-amber-600 mb-3 opacity-60" />
-                <h3 className="text-base font-medium text-gray-900">No products found</h3>
-                <p className="mt-1 text-xs text-gray-500 max-w-sm">
+              <div
+                className="py-20 text-center flex flex-col items-center justify-center rounded-2xl border"
+                style={{
+                  backgroundColor: "var(--bg-surface)",
+                  borderColor: "var(--border-subtle)",
+                }}
+              >
+                <Sparkles className="h-8 w-8 mb-3 opacity-60" style={{ color: "var(--accent-gold)" }} />
+                <h3 className="text-base font-medium" style={{ color: "var(--text-primary)" }}>No products found</h3>
+                <p className="mt-1 text-xs max-w-sm" style={{ color: "var(--text-muted)" }}>
                   We couldn&apos;t find any items matching your search. Try adjusting your search query or selecting another category.
                 </p>
                 <button
@@ -284,7 +337,8 @@ export default function ProductsCatalogView({
                     setSearchQuery("");
                     setSelectedCategory("all");
                   }}
-                  className="mt-4 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider bg-black text-white hover:bg-gray-800 transition-colors"
+                  className="mt-4 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider text-white transition-opacity hover:opacity-90"
+                  style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   View All Products
                 </button>
@@ -303,9 +357,18 @@ export default function ProductsCatalogView({
             className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
             onClick={() => setIsMobileFilterOpen(false)}
           />
-          <div className="relative ml-auto w-full max-w-xs bg-white h-full p-6 shadow-2xl flex flex-col z-10 overflow-y-auto">
-            <div className="flex items-center justify-between pb-4 border-b border-gray-100">
-              <span className="text-xs font-bold uppercase tracking-widest text-gray-900">
+          <div
+            className="relative ml-auto w-full max-w-xs h-full p-6 shadow-2xl flex flex-col z-10 overflow-y-auto"
+            style={{ backgroundColor: "var(--bg-surface)" }}
+          >
+            <div
+              className="flex items-center justify-between pb-4 border-b"
+              style={{ borderColor: "var(--border-subtle)" }}
+            >
+              <span
+                className="text-xs font-bold uppercase tracking-widest"
+                style={{ color: "var(--text-primary)" }}
+              >
                 Filter by Category
               </span>
               <button
@@ -323,9 +386,14 @@ export default function ProductsCatalogView({
                 onClick={() => handleCategorySelect("all")}
                 className={`w-full text-left py-2.5 px-4 rounded-full text-sm transition-all ${
                   selectedCategory === "all"
-                    ? "border border-[#2B0E14] text-[#2B0E14] font-medium"
-                    : "text-gray-600"
+                    ? "font-medium"
+                    : ""
                 }`}
+                style={{
+                  backgroundColor: selectedCategory === "all" ? "var(--bg-secondary)" : "transparent",
+                  color: selectedCategory === "all" ? "var(--accent-cta)" : "var(--text-secondary)",
+                  border: `1px solid ${selectedCategory === "all" ? "var(--accent-cta)" : "transparent"}`,
+                }}
               >
                 All Products
               </button>
@@ -334,14 +402,15 @@ export default function ProductsCatalogView({
                   key={cat.id}
                   type="button"
                   onClick={() => handleCategorySelect(cat.handle)}
-                  className={`w-full flex items-center justify-between py-2.5 px-4 rounded-full text-sm transition-all text-left ${
-                    selectedCategory === cat.handle
-                      ? "border border-[#2B0E14] text-[#2B0E14] font-medium"
-                      : "text-gray-600"
-                  }`}
+                  className="w-full flex items-center justify-between py-2.5 px-4 rounded-full text-sm transition-all text-left"
+                  style={{
+                    backgroundColor: selectedCategory === cat.handle ? "var(--bg-secondary)" : "transparent",
+                    color: selectedCategory === cat.handle ? "var(--accent-cta)" : "var(--text-secondary)",
+                    border: `1px solid ${selectedCategory === cat.handle ? "var(--accent-cta)" : "transparent"}`,
+                  }}
                 >
                   <span className="truncate pr-2">{cat.title}</span>
-                  <span className="text-xs text-gray-400">{cat.count}</span>
+                  <span className="text-xs" style={{ color: "var(--text-muted)" }}>{cat.count}</span>
                 </button>
               ))}
             </div>

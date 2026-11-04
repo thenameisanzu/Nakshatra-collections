@@ -113,9 +113,18 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
   };
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200/80 bg-white transition-all duration-200 hover:shadow-md hover:border-gray-300">
+    <div
+      className="group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-md"
+      style={{
+        backgroundColor: "var(--bg-surface)",
+        borderColor: "var(--border-subtle)",
+      }}
+    >
       {/* Product Image Stage */}
-      <div className="relative aspect-square w-full overflow-hidden block bg-[#F9FAFB]">
+      <div
+        className="relative aspect-square w-full overflow-hidden block"
+        style={{ backgroundColor: "var(--bg-secondary)" }}
+      >
         <Link
           href={`/products/${product.handle}`}
           className="relative h-full w-full block"
@@ -128,23 +137,35 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
               fill
               priority={priority}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain object-center p-3 sm:p-5 transition-transform duration-300 group-hover:scale-105"
+              className="object-contain object-center p-3 sm:p-5 transition-transform duration-500 group-hover:scale-108"
             />
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full mb-2 bg-gray-100">
-                <Sparkles className="h-4 w-4 text-amber-600" />
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-full mb-2"
+                style={{ backgroundColor: "var(--bg-primary)" }}
+              >
+                <Sparkles className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
               </div>
-              <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400">
+              <span
+                className="text-[10px] font-bold tracking-widest uppercase"
+                style={{ color: "var(--text-muted)" }}
+              >
                 Nakshatra Collections
               </span>
             </div>
           )}
 
-          {/* E-Commerce Badge: Sold Out only (Discounts are elegantly shown near price) */}
+          {/* E-Commerce Badge: Sold Out only */}
           {!product.availableForSale && (
             <div className="absolute top-2 left-2 z-10 pointer-events-none">
-              <span className="rounded-md px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-gray-900/90 backdrop-blur-xs text-white shadow-xs">
+              <span
+                className="rounded-md px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider backdrop-blur-xs shadow-xs"
+                style={{
+                  backgroundColor: "var(--badge-soldout-bg)",
+                  color: "var(--badge-soldout-text)",
+                }}
+              >
                 Sold Out
               </span>
             </div>
@@ -160,7 +181,12 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
               e.stopPropagation();
               openQuickView(product);
             }}
-            className="w-full flex items-center justify-center gap-1.5 rounded-lg py-2 px-3 text-[11px] font-semibold uppercase tracking-wider shadow-md transition-all active:scale-95 cursor-pointer bg-white/95 text-gray-900 border border-gray-200 hover:bg-black hover:text-white hover:border-black"
+            className="w-full flex items-center justify-center gap-1.5 rounded-lg py-2 px-3 text-[11px] font-semibold uppercase tracking-wider shadow-md transition-all active:scale-95 cursor-pointer border"
+            style={{
+              backgroundColor: "var(--bg-surface)",
+              color: "var(--text-primary)",
+              borderColor: "var(--border-subtle)",
+            }}
           >
             <Eye className="h-3.5 w-3.5" />
             <span>Quick Preview</span>
@@ -187,31 +213,52 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
       </button>
 
       {/* Details Container (Minimal & Clean - Budget Blings Style) */}
-      <div className="flex flex-1 flex-col p-3 sm:p-3.5 bg-white">
+      <div
+        className="flex flex-1 flex-col p-3 sm:p-3.5"
+        style={{ backgroundColor: "var(--bg-surface)" }}
+      >
         {/* Category Label */}
-        <span className="text-[9.5px] font-bold uppercase tracking-[0.14em] text-[#80222F] block line-clamp-1 mb-1">
+        <span
+          className="text-[9.5px] font-bold uppercase tracking-[0.14em] block line-clamp-1 mb-1"
+          style={{ color: "var(--accent-gold)" }}
+        >
           {product.productType || "18K Gold Plated"}
         </span>
 
         {/* Title */}
         <Link href={`/products/${product.handle}`} className="group/title">
-          <h3 className="text-xs sm:text-sm font-medium text-gray-900 transition-colors line-clamp-1 group-hover/title:text-black">
+          <h3
+            className="text-xs sm:text-sm font-medium transition-colors line-clamp-1 hover:opacity-85"
+            style={{ color: "var(--text-primary)" }}
+          >
             {product.title}
           </h3>
         </Link>
 
         {/* Pricing Stack */}
         <div className="mt-2 flex items-baseline gap-1.5 flex-wrap">
-          <span className="text-sm sm:text-base font-bold tracking-tight text-gray-950">
+          <span
+            className="text-sm sm:text-base font-bold tracking-tight"
+            style={{ color: "var(--text-primary)" }}
+          >
             {isPriceRange ? `From ${formattedPrice}` : formattedPrice}
           </span>
           {formattedComparePrice && (
-            <span className="text-xs line-through font-normal text-gray-400">
+            <span
+              className="text-xs line-through font-normal"
+              style={{ color: "var(--text-muted)" }}
+            >
               {formattedComparePrice}
             </span>
           )}
           {discountPercent && discountPercent > 0 && (
-            <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded">
+            <span
+              className="text-[10px] font-semibold px-1 py-0.2 rounded"
+              style={{
+                backgroundColor: "var(--bg-secondary)",
+                color: "var(--badge-sale-bg)",
+              }}
+            >
               {discountPercent}% off
             </span>
           )}
@@ -222,13 +269,11 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           type="button"
           onClick={handleAddToCart}
           disabled={!product.availableForSale || isAdding}
-          className={`mt-3 w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] cursor-pointer ${
-            !product.availableForSale
-              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-              : isAdded
-              ? "bg-emerald-700 text-white"
-              : "bg-[#2B0E14] hover:bg-black text-white shadow-xs"
-          }`}
+          className="mt-3 w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] cursor-pointer hover:opacity-90 shadow-xs"
+          style={{
+            backgroundColor: isAdded ? "#2D6A4F" : "var(--accent-cta)",
+            color: "var(--accent-cta-text)",
+          }}
           aria-label={`Add ${product.title} to bag`}
         >
           {isAdded ? (

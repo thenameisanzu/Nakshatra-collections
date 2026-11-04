@@ -18,12 +18,12 @@ export interface ThemeOption {
 export const THEMES: ThemeOption[] = [
   {
     id: "minimal-clean",
-    name: "Minimal Clean (Budget Blings Inspired)",
-    tagline: "Crisp White, Obsidian Black & Warm Gold",
+    name: "Warm Ivory & 18K Molten Gold Atelier",
+    tagline: "Warm Alabaster Silk, Royal Espresso Bronze & 18K Champagne Gold",
     colors: {
-      bg: "#FFFFFF",
-      accent: "#C5A059",
-      cta: "#111827",
+      bg: "#FAF7F2",
+      accent: "#C59B4E",
+      cta: "#241815",
     },
   },
 ];

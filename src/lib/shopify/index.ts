@@ -21,7 +21,9 @@ export const TAGS = {
 } as const;
 
 const rawDomain = process.env.SHOPIFY_STORE_DOMAIN;
-const privateToken = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN;
+const privateToken =
+  process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN ||
+  process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 const apiVersion = process.env.SHOPIFY_API_VERSION || "2025-01";
 
 // Normalize domain by stripping protocol and trailing slashes
@@ -61,8 +63,14 @@ export async function shopifyFetch<T>({
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Shopify-Storefront-Private-Token": privateToken,
   };
+
+  // Seamlessly support both Private tokens (shpat_...) and Public Storefront Access tokens
+  if (privateToken.startsWith("shpat_")) {
+    headers["Shopify-Storefront-Private-Token"] = privateToken;
+  } else {
+    headers["X-Shopify-Storefront-Access-Token"] = privateToken;
+  }
 
   const nextOptions: { tags?: string[]; revalidate?: number } = {};
   if (tags) nextOptions.tags = tags;

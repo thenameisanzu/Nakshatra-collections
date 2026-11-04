@@ -45,25 +45,40 @@ export default function ProductsCatalogView({
     []
   );
 
-  // Compute categories and dynamic counts
+  // Compute categories and dynamic counts accurately from Shopify backend
   const categoriesList = useMemo(() => {
     if (initialCollections && initialCollections.length > 0) {
       return initialCollections.map((col) => {
-        const productCount =
-          col.products?.edges?.length ||
-          initialProducts.filter((p) => {
-            const type = (p.productType || "").toLowerCase();
-            const colTitle = col.title.toLowerCase();
-            const colHandle = col.handle.toLowerCase();
-            return type.includes(colTitle) || type.includes(colHandle);
-          }).length ||
-          24;
+        const colProductsCount = col.products?.edges?.length || 0;
+        const catName = col.title.toLowerCase();
+        const catHandle = col.handle.toLowerCase();
+
+        const matchingCount = initialProducts.filter((product) => {
+          const type = (product.productType || "").toLowerCase();
+          const title = product.title.toLowerCase();
+          const tags = (product.tags || []).map((t) => t.toLowerCase());
+
+          if (type.includes(catName) || type.includes(catHandle)) return true;
+          if (title.includes(catName) || title.includes(catHandle)) return true;
+          if (tags.some((t) => t.includes(catName) || t.includes(catHandle))) return true;
+
+          if (catHandle.includes("bangle") && title.includes("bangle")) return true;
+          if (catHandle.includes("ring") && title.includes("ring")) return true;
+          if (catHandle.includes("necklace") && title.includes("necklace")) return true;
+          if (catHandle.includes("bracelet") && title.includes("bracelet")) return true;
+          if (catHandle.includes("anklet") && title.includes("anklet")) return true;
+          if (catHandle.includes("ear") && title.includes("earring")) return true;
+
+          return false;
+        }).length;
+
+        const count = colProductsCount > 0 ? colProductsCount : matchingCount;
 
         return {
           id: col.id || col.handle,
           handle: col.handle,
           title: col.title,
-          count: productCount,
+          count,
         };
       });
     }
@@ -97,23 +112,29 @@ export default function ProductsCatalogView({
         const matchesTitle = title.includes(catName) || title.includes(catHandle);
         const matchesTags = tags.some((t) => t.includes(catName) || t.includes(catHandle));
 
-        // Keyword heuristics for artificial jewellery collections
-        if (catHandle === "necklaces" && (title.includes("necklace") || title.includes("chain") || title.includes("choker") || title.includes("locket") || title.includes("pendant"))) {
+        // Keyword heuristics for artificial jewellery collections (handles both singular and plural)
+        if (catHandle.includes("necklace") && (title.includes("necklace") || title.includes("chain") || title.includes("choker") || title.includes("locket") || title.includes("pendant"))) {
           return true;
         }
-        if (catHandle === "rings" && (title.includes("ring") || title.includes("solitaire"))) {
+        if (catHandle.includes("ring") && (title.includes("ring") || title.includes("solitaire"))) {
           return true;
         }
-        if (catHandle === "bangles" && (title.includes("bangle") || title.includes("kada"))) {
+        if (catHandle.includes("bangle") && (title.includes("bangle") || title.includes("kada"))) {
           return true;
         }
-        if (catHandle === "earrings" && (title.includes("earring") || title.includes("stud") || title.includes("jhumka") || title.includes("drop"))) {
+        if (catHandle.includes("bracelet") && title.includes("bracelet")) {
           return true;
         }
-        if (catHandle === "anklets" && (title.includes("anklet") || title.includes("payal"))) {
+        if ((catHandle.includes("earring") || catHandle.includes("ear-ring")) && (title.includes("earring") || title.includes("stud") || title.includes("jhumka") || title.includes("drop"))) {
           return true;
         }
-        if (catHandle === "bridal-jewellery" && (title.includes("bridal") || title.includes("traditional") || title.includes("kerala") || title.includes("set"))) {
+        if (catHandle.includes("anklet") && (title.includes("anklet") || title.includes("payal"))) {
+          return true;
+        }
+        if (catHandle.includes("mens") && (title.includes("men") || title.includes("accessories"))) {
+          return true;
+        }
+        if (catHandle.includes("bridal") && (title.includes("bridal") || title.includes("traditional") || title.includes("kerala") || title.includes("set"))) {
           return true;
         }
 

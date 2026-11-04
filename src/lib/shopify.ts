@@ -210,7 +210,7 @@ export const GET_ALL_COLLECTIONS_QUERY = `
             url
             altText
           }
-          products(first: 1) {
+          products(first: 50) {
             edges {
               node {
                 id
@@ -273,3 +273,4 @@ export async function createCheckoutSession(
 
 // Re-export existing utilities for backwards compatibility
 export * from "./shopify/index";
+

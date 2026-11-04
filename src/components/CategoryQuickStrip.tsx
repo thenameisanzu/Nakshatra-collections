@@ -144,15 +144,18 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
           const fallback = fallbackImages[col.handle] || {
             image: fallbackImages.necklaces.image,
             label: col.title,
-            itemCount: "View All",
+            itemCount: "Explore",
           };
+
+          const realCount = col.products?.edges?.length || 0;
+          const countText = realCount > 0 ? `${realCount} ${realCount === 1 ? "item" : "items"}` : "Explore";
 
           return {
             name: col.title,
             href: `/collections/${col.handle}`,
             image: col.image?.url || backendProductImage || fallback.image,
             label: col.title,
-            itemCount: fallback.itemCount,
+            itemCount: countText,
           };
         })
       : defaultQuickCategories;

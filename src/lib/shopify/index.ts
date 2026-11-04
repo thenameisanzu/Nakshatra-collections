@@ -708,7 +708,7 @@ export async function getCollections(first: number = 20): Promise<ShopifyCollect
               width
               height
             }
-            products(first: 1) {
+            products(first: 50) {
               edges {
                 node {
                   id

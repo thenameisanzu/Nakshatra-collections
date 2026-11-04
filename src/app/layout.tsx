@@ -13,6 +13,7 @@ import WhatsAppSupportButton from "@/components/WhatsAppSupportButton";
 import QuickViewModal from "@/components/QuickViewModal";
 import InstantSearchModal from "@/components/InstantSearchModal";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import ScrollRevealProvider from "@/components/ScrollRevealProvider";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -51,14 +52,16 @@ export default function RootLayout({
             <WishlistProvider>
               <QuickViewProvider>
                 <SearchProvider>
-                  <Navbar />
-                  <div className="flex-1 pb-20 md:pb-0">{children}</div>
-                  <Footer />
-                  <MobileBottomNav />
-                  <CartDrawer />
-                  <WhatsAppSupportButton />
-                  <QuickViewModal />
-                  <InstantSearchModal />
+                  <ScrollRevealProvider>
+                    <Navbar />
+                    <div className="flex-1 pb-20 md:pb-0">{children}</div>
+                    <Footer />
+                    <MobileBottomNav />
+                    <CartDrawer />
+                    <WhatsAppSupportButton />
+                    <QuickViewModal />
+                    <InstantSearchModal />
+                  </ScrollRevealProvider>
                 </SearchProvider>
               </QuickViewProvider>
             </WishlistProvider>

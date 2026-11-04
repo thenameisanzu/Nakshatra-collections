@@ -348,8 +348,12 @@ export default function ProductsCatalogView({
             {/* Product Cards Grid */}
             {filteredProducts.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                {filteredProducts.map((product, idx) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    className={`reveal-on-scroll-scale stagger-${(idx % 12) + 1}`}
+                  />
                 ))}
               </div>
             ) : (

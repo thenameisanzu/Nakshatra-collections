@@ -223,6 +223,7 @@ export default function ClientCollectionView({
                 key={product.id || idx}
                 product={product}
                 priority={idx < 4}
+                className={`reveal-on-scroll-scale stagger-${(idx % 12) + 1}`}
               />
             ))}
           </div>

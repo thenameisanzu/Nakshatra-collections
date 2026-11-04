@@ -12,6 +12,7 @@ import { Heart, Sparkles, Eye, ShoppingBag, Check } from "lucide-react";
 interface ProductCardProps {
   product: ShopifyProduct;
   priority?: boolean;
+  className?: string;
 }
 
 function formatPrice(amount: string, currencyCode: string): string {
@@ -29,7 +30,11 @@ function formatPrice(amount: string, currencyCode: string): string {
   }
 }
 
-export default function ProductCard({ product, priority = false }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  priority = false,
+  className = "",
+}: ProductCardProps) {
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { openQuickView } = useQuickView();
   const { addItem, openCart } = useCart();
@@ -117,7 +122,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-md"
+      className={`group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-md ${className}`}
       style={{
         backgroundColor: "var(--bg-surface)",
         borderColor: "var(--border-subtle)",

@@ -26,7 +26,7 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header (Super clean & minimal) */}
-        <div className="text-center mb-6 sm:mb-8">
+        <div className="text-center mb-6 sm:mb-8 reveal-on-scroll">
           <span
             className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] mb-1"
             style={{ color: "var(--accent-gold)" }}
@@ -49,12 +49,13 @@ export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) 
               key={product.id}
               product={product}
               priority={idx < 4}
+              className={`reveal-on-scroll-scale stagger-${(idx % 12) + 1}`}
             />
           ))}
         </div>
 
         {/* Minimal Bottom CTA Button */}
-        <div className="mt-8 sm:mt-10 flex items-center justify-center">
+        <div className="mt-8 sm:mt-10 flex items-center justify-center reveal-on-scroll">
           <Link
             href="/products"
             className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-2.5 text-xs font-semibold uppercase tracking-wider border transition-all duration-200 active:scale-95 shadow-2xs hover:opacity-90"

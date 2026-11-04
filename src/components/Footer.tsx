@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Brand Column (Span 5) */}
-          <div className="lg:col-span-5 flex flex-col items-start">
+          <div className="lg:col-span-5 flex flex-col items-start reveal-on-scroll">
             <Link href="/" className="inline-flex items-center gap-2.5 group">
               <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0">
                 <Image
@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links (Span 3) */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 reveal-on-scroll stagger-2">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-3 text-gray-900">
               Collections
             </h4>
@@ -77,7 +77,7 @@ export default function Footer() {
           </div>
 
           {/* Customer Support (Span 4) */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 reveal-on-scroll stagger-3">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-3 text-gray-900">
               Customer Support
             </h4>
@@ -102,7 +102,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="mt-8 pt-6 border-t border-gray-200/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-gray-400">
+        <div className="mt-8 pt-6 border-t border-gray-200/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-gray-400 reveal-on-scroll">
           <p>
             &copy; {new Date().getFullYear()} Nakshatra Collections. All rights reserved.
           </p>

@@ -63,132 +63,26 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   }, []);
 
-  // Autoplay timer (4.5 seconds per slide)
+  // Autoplay timer (5 seconds per slide)
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       goToNext();
-    }, 4500);
+    }, 5000);
     return () => clearInterval(interval);
   }, [isPaused, goToNext]);
 
   return (
     <section
-      className="min-h-[60vh] md:min-h-[72vh] flex flex-col md:flex-row w-full overflow-hidden relative border-b transition-colors"
-      style={{
-        backgroundColor: "var(--bg-primary)",
-        borderColor: "var(--border-subtle)",
-      }}
-      aria-label="Nakshatra Collections Anti-Tarnish Jewellery"
+      className="relative w-full -mt-14 sm:-mt-16 overflow-hidden select-none"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      aria-label="Nakshatra Collections Cinematic Hero Banner"
     >
       {/* =================================================================== */}
-      {/* 1. TEXT COLUMN (Top on Mobile, Left on Desktop)                     */}
+      {/* 1. FULL-WIDTH IMAGE CAROUSEL SLIDES                                */}
       {/* =================================================================== */}
-      <div
-        className="w-full md:w-1/2 flex flex-col items-center justify-center text-center py-10 px-6 sm:px-8 md:px-12 lg:px-16 relative z-10 min-h-[35vh] md:min-h-[72vh] space-y-4"
-        style={{ backgroundColor: "var(--bg-surface)" }}
-      >
-        {/* Brand Logo & Name */}
-        <div className="flex flex-col items-center">
-          <div className="relative h-12 w-12 sm:h-14 sm:w-14 mb-1">
-            <Image
-              src="/nakshatra-logo.png"
-              alt="Nakshatra Collections"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-          <span
-            className="text-xl sm:text-2xl md:text-3xl font-medium tracking-[0.16em] uppercase"
-            style={{ color: "var(--text-primary)" }}
-          >
-            Nakshatra Collections
-          </span>
-          <span
-            className="text-[8px] sm:text-[9px] tracking-[0.28em] uppercase font-semibold mt-0.5"
-            style={{ color: "var(--accent-gold)" }}
-          >
-            ANTI-TARNISH JEWELLERY
-          </span>
-        </div>
-
-        {/* Headline Stack (Exact Budget Blings typography with warm bespoke palette) */}
-        <div className="space-y-1">
-          <p
-            className="font-sans text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase"
-            style={{ color: "var(--text-muted)" }}
-          >
-            WHOLESALE &amp; RETAIL
-          </p>
-          <h1
-            className="font-sans text-sm sm:text-base md:text-lg font-bold tracking-[0.16em] uppercase"
-            style={{ color: "var(--text-primary)" }}
-          >
-            ANTI-TARNISH JEWELLERY
-          </h1>
-          <p
-            className="font-sans text-[11px] sm:text-xs font-medium tracking-[0.2em] uppercase"
-            style={{ color: "var(--text-secondary)" }}
-          >
-            FOR EVERYDAY LUXURY
-          </p>
-        </div>
-
-        {/* Action Buttons: Solid Deep Bronze Pill [ ⊞ COLLECTIONS ] + Outline Pill [ SHOP ALL → ] */}
-        <div className="flex items-center gap-3 pt-1">
-          <Link
-            href="/collections"
-            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all active:scale-95 shadow-xs hover:opacity-90"
-            style={{
-              backgroundColor: "var(--accent-cta)",
-            }}
-          >
-            <LayoutGrid className="h-3.5 w-3.5" />
-            <span>COLLECTIONS</span>
-          </Link>
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-1.5 px-5 sm:px-6 py-2.5 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all active:scale-95 border hover:opacity-80"
-            style={{
-              borderColor: "var(--accent-cta)",
-              color: "var(--accent-cta)",
-              backgroundColor: "transparent",
-            }}
-          >
-            <span>SHOP ALL &rarr;</span>
-          </Link>
-        </div>
-
-        {/* Micro-Trust Information */}
-        <div
-          className="pt-2 text-[11px] sm:text-xs space-y-1 font-light"
-          style={{ color: "var(--text-secondary)" }}
-        >
-          <p className="flex items-center justify-center gap-2">
-            <span>₹500 min order</span>
-            <span className="opacity-40">&bull;</span>
-            <span>₹60 domestic express shipping</span>
-          </p>
-          <p className="text-[10.5px] sm:text-[11px] opacity-80" style={{ color: "var(--text-muted)" }}>
-            100% waterproof &amp; anti-tarnish stainless steel
-          </p>
-          <p className="text-[10px] opacity-75" style={{ color: "var(--text-muted)" }}>
-            worldwide express delivery
-          </p>
-        </div>
-      </div>
-
-      {/* =================================================================== */}
-      {/* 2. IMAGE CAROUSEL COLUMN (Bottom on Mobile, Right on Desktop)       */}
-      {/* =================================================================== */}
-      <div
-        className="w-full md:w-1/2 min-h-[42vh] sm:min-h-[48vh] md:min-h-[72vh] relative overflow-hidden group select-none"
-        style={{ backgroundColor: "var(--bg-secondary)" }}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        {/* Slides Container */}
+      <div className="absolute inset-0 z-0">
         {heroSlides.map((slide, index) => {
           const isActive = index === currentSlide;
           return (
@@ -202,66 +96,149 @@ export default function Hero() {
                 src={slide.image}
                 alt={slide.alt}
                 fill
-                priority={index === 0 || index === 1}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className={`object-cover object-center transition-transform duration-7000 ease-out ${
+                priority={index === 0}
+                sizes="100vw"
+                className={`object-cover object-center md:object-[center_28%] transition-transform duration-[8000ms] ease-out ${
                   isActive ? "scale-100" : "scale-105"
                 }`}
               />
-
-              {/* Bottom Subtle Gradient Scrim for Text Contrast */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-
-              {/* Slide Title & Tag Pill */}
-              <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-col items-start text-white pointer-events-none">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9.5px] sm:text-[10px] font-bold uppercase tracking-[0.2em] bg-white/90 backdrop-blur-md text-[#241815] shadow-xs mb-1.5">
-                  <Sparkles className="h-2.5 w-2.5 text-[#C59B4E]" />
-                  {slide.tag}
-                </span>
-                <p className="text-sm sm:text-base font-medium tracking-tight text-white drop-shadow-sm line-clamp-1">
-                  {slide.title}
-                </p>
-              </div>
             </div>
           );
         })}
+      </div>
 
-        {/* Desktop Prev / Next Navigation Arrows (Reveals on Hover) */}
-        <div className="hidden md:flex absolute inset-y-0 inset-x-3 items-center justify-between z-30 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      {/* =================================================================== */}
+      {/* 2. LUXURY MULTI-STOP GRADIENT SCRIM (Ensures Perfect Text Contrast) */}
+      {/* =================================================================== */}
+      {/* Left-to-right dark vignette for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/85 via-black/55 md:via-black/45 to-black/30 md:to-transparent z-10 pointer-events-none" />
+
+      {/* Top soft shadow to let floating pill navbar pop */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/50 via-black/20 to-transparent z-10 pointer-events-none" />
+
+      {/* Bottom soft gradient for controls and section transition */}
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 via-black/25 to-transparent z-10 pointer-events-none" />
+
+      {/* =================================================================== */}
+      {/* 3. CINEMATIC TEXT CONTENT (Left-Aligned Luxury Presentation)       */}
+      {/* =================================================================== */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 md:pt-40 pb-24 sm:pb-28 md:pb-32 flex flex-col justify-center min-h-[78vh] sm:min-h-[82vh] md:min-h-[88vh]">
+        <div className="max-w-2xl flex flex-col items-start text-left space-y-4 sm:space-y-5">
+          {/* Eyebrow Pill */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/25 text-[#FAF7F2] text-[10.5px] sm:text-xs font-medium tracking-[0.22em] uppercase shadow-sm">
+            <Sparkles className="h-3.5 w-3.5 text-[#E8C27A]" />
+            <span>18K Real Gold Plated &bull; Anti-Tarnish</span>
+          </div>
+
+          {/* Main Editorial Headline */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light tracking-tight text-white leading-[1.14] drop-shadow-md">
+            Everyday Luxury,{" "}
+            <span className="font-serif italic font-normal text-[#E8C27A] block sm:inline">
+              Crafted to Never Fade.
+            </span>
+          </h1>
+
+          {/* Subtitle Story */}
+          <p className="text-sm sm:text-base md:text-lg text-white/85 font-light leading-relaxed max-w-xl drop-shadow-sm">
+            100% waterproof, sweatproof, and hypoallergenic jewellery designed for daily elegance and Kerala&apos;s grandest celebrations.
+          </p>
+
+          {/* Action CTAs */}
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 px-6 sm:px-8 py-3.5 rounded-full bg-[#FAF7F2] text-[#1F1A18] hover:bg-[#E8C27A] hover:text-[#1F1A18] text-xs sm:text-sm font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 group"
+            >
+              <span>Explore Collections</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+
+            <Link
+              href="/collections/rings"
+              className="inline-flex items-center gap-2 px-5 sm:px-7 py-3.5 rounded-full bg-black/30 hover:bg-black/50 backdrop-blur-md text-white border border-white/30 hover:border-white/50 text-xs sm:text-sm font-medium uppercase tracking-[0.14em] transition-all duration-300 active:scale-95"
+            >
+              <LayoutGrid className="h-4 w-4 text-[#E8C27A]" />
+              <span>Under ₹299 Store</span>
+            </Link>
+          </div>
+
+          {/* Minimal Icon Trust Badges */}
+          <div className="pt-3 sm:pt-5 flex flex-wrap items-center gap-4 sm:gap-6 text-white/90 text-xs sm:text-sm font-light">
+            <div className="flex items-center gap-2">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E8C27A]/25 text-[#E8C27A] text-xs font-bold">💧</span>
+              <span>100% Waterproof</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E8C27A]/25 text-[#E8C27A] text-xs font-bold">✨</span>
+              <span>Anti-Tarnish Guarantee</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E8C27A]/25 text-[#E8C27A] text-xs font-bold">🚚</span>
+              <span>₹60 Express Delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* =================================================================== */}
+      {/* 4. BOTTOM-RIGHT CAROUSEL CONTROLLER DOCK (Non-intrusive to model)   */}
+      {/* =================================================================== */}
+      <div className="absolute bottom-6 right-4 sm:bottom-8 sm:right-8 z-30 flex items-center gap-3">
+        {/* Active Slide Info Pill (Hidden on mobile, visible on sm+) */}
+        <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-black/45 backdrop-blur-md border border-white/20 text-white shadow-lg pointer-events-none">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#E8C27A]">
+            {heroSlides[currentSlide].tag}
+          </span>
+          <span className="text-white/40">&bull;</span>
+          <span className="text-xs font-normal text-white/90">
+            {heroSlides[currentSlide].title}
+          </span>
+        </div>
+
+        {/* Controller Capsule: Prev, Slide Dots & Counter, Next */}
+        <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:py-2 rounded-full bg-black/50 backdrop-blur-md border border-white/25 shadow-xl text-white">
+          {/* Prev Button */}
           <button
             type="button"
             onClick={goToPrev}
-            className="pointer-events-auto h-9 w-9 rounded-full bg-white/90 backdrop-blur-md border border-white/60 shadow-md flex items-center justify-center text-gray-800 hover:bg-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
-            aria-label="Previous slide"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-white/20 active:scale-90 transition-all text-white/90 hover:text-white cursor-pointer"
+            aria-label="Previous Slide"
           >
-            <ChevronLeft className="h-5 w-5" />
+            <ChevronLeft className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
           </button>
+
+          {/* Slide Indicator Dots & Counter */}
+          <div className="flex items-center gap-1.5 px-2">
+            <span className="text-[11px] font-mono font-medium tracking-wider text-white/80 mr-1">
+              0{currentSlide + 1}
+            </span>
+            <div className="flex items-center gap-1">
+              {heroSlides.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setCurrentSlide(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    i === currentSlide ? "w-5 sm:w-6 bg-[#E8C27A]" : "w-1.5 bg-white/40 hover:bg-white/70"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+            <span className="text-[11px] font-mono text-white/50 ml-1">
+              / 0{heroSlides.length}
+            </span>
+          </div>
+
+          {/* Next Button */}
           <button
             type="button"
             onClick={goToNext}
-            className="pointer-events-auto h-9 w-9 rounded-full bg-white/90 backdrop-blur-md border border-white/60 shadow-md flex items-center justify-center text-gray-800 hover:bg-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
-            aria-label="Next slide"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-white/20 active:scale-90 transition-all text-white/90 hover:text-white cursor-pointer"
+            aria-label="Next Slide"
           >
-            <ChevronRight className="h-5 w-5" />
+            <ChevronRight className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
           </button>
-        </div>
-
-        {/* Carousel Progress Indicators (Bottom Right) */}
-        <div className="absolute bottom-6 right-6 z-30 flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-          <span className="text-[10px] font-semibold text-white/90 tracking-widest mr-1">
-            0{currentSlide + 1} / 0{heroSlides.length}
-          </span>
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setCurrentSlide(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                i === currentSlide ? "w-6 bg-[#C59B4E]" : "w-1.5 bg-white/50 hover:bg-white/80"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
         </div>
       </div>
     </section>

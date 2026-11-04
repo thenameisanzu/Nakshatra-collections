@@ -173,9 +173,9 @@ export default function ProductsCatalogView({
         {/* ================================================================= */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
           {/* --------------------------------------------------------------- */}
-          {/* LEFT SIDEBAR: Search + Categories with Item Counts               */}
+          {/* LEFT SIDEBAR: Search + Categories with Item Counts (Sticky Fixed)*/}
           {/* --------------------------------------------------------------- */}
-          <aside className="hidden lg:block w-64 shrink-0 sticky top-20 self-start space-y-6">
+          <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start space-y-6 max-h-[calc(100vh-7rem)] overflow-y-auto no-scrollbar pr-1 pb-8">
             {/* Search Input Box */}
             <div className="relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -351,3 +351,4 @@ export default function ProductsCatalogView({
     </div>
   );
 }
+

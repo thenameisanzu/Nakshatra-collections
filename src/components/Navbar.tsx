@@ -12,6 +12,7 @@ import {
   ShoppingBag,
   Search,
   Heart,
+  User,
   ArrowRight,
   Gem,
   Sparkles,
@@ -71,31 +72,41 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating Clean Pill Navbar (Desktop & Tablet only - Mobile uses native-like bottom pill nav) */}
+      {/* Floating Clean Pill Navbar (Budget Blings Inspired - Desktop & Tablet) */}
       <header className="hidden md:block sticky top-2 sm:top-3 z-40 mx-auto w-[94%] max-w-6xl transition-all duration-200">
-        <div className="flex items-center justify-between px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/95 backdrop-blur-md border border-gray-200/90 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06)]">
-          {/* Mobile Left: Menu Drawer Trigger */}
-          <div className="flex lg:hidden items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-800"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
+        <div className="relative flex items-center justify-between px-5 sm:px-8 py-2.5 rounded-full bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_4px_25px_-2px_rgba(0,0,0,0.06)]">
+          {/* Left: 3 Clean Minimal Navigation Links */}
+          <nav className="flex items-center gap-6 sm:gap-8">
+            <Link
+              href="/"
+              className="text-xs sm:text-sm font-normal text-gray-600 hover:text-black transition-colors"
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
+              Home
+            </Link>
+            <Link
+              href="/products"
+              className="text-xs sm:text-sm font-normal text-gray-600 hover:text-black transition-colors"
+            >
+              Collections
+            </Link>
+            <Link
+              href="/contact"
+              className="text-xs sm:text-sm font-normal text-gray-600 hover:text-black transition-colors"
+            >
+              Contact
+            </Link>
+          </nav>
 
-          {/* Brand Logo (Center on Mobile, Left on Desktop) */}
+          {/* Center: Brand Logo & Title */}
           <Link
             href="/"
-            className="flex items-center gap-2 group transition-transform hover:opacity-90"
+            className="flex items-center gap-2 group transition-transform hover:opacity-90 absolute left-1/2 -translate-x-1/2"
             aria-label="Nakshatra Collections"
           >
             <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
               <Image
                 src="/nakshatra-logo.png"
-                alt="NAKSHATRA"
+                alt="Nakshatra Collections"
                 fill
                 sizes="32px"
                 className="object-contain"
@@ -107,92 +118,55 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Center: Minimal Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            <Link
-              href="/collections"
-              className="text-xs font-semibold tracking-wider uppercase text-gray-900 hover:text-amber-700 transition-colors"
-            >
-              All Jewellery
-            </Link>
-            <Link
-              href="/collections/necklaces"
-              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Necklaces
-            </Link>
-            <Link
-              href="/collections/earrings"
-              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Earrings
-            </Link>
-            <Link
-              href="/collections/bangles"
-              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Bangles
-            </Link>
-            <Link
-              href="/collections/rings"
-              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Rings
-            </Link>
-            <Link
-              href="/collections/bridal-jewellery"
-              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              Bridal
-            </Link>
-            <Link
-              href="/collections/rings"
-              className="text-xs font-bold tracking-wider uppercase text-amber-700 hover:text-amber-800 transition-colors"
-            >
-              Under ₹299
-            </Link>
-          </nav>
-
-          {/* Right Action Icons: Search, Wishlist, Bag */}
+          {/* Right Action Icons: Search, Wishlist, Bag, Account */}
           <div className="flex items-center gap-1 sm:gap-2">
             {/* Search Trigger */}
             <button
               type="button"
               onClick={toggleSearch}
-              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-800"
+              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-700"
               aria-label="Search"
             >
               <Search className="h-4.5 w-4.5" />
             </button>
 
-            {/* Wishlist (Desktop) */}
+            {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="hidden sm:flex relative h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-800"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
               aria-label={`Wishlist (${totalWishlistItems} items)`}
             >
               <Heart className="h-4.5 w-4.5" />
               {totalWishlistItems > 0 && (
-                <span className="absolute 1 top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-rose-600 px-1 text-[8.5px] font-bold text-white">
+                <span className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-rose-600 px-1 text-[8.5px] font-bold text-white">
                   {totalWishlistItems > 99 ? "99+" : totalWishlistItems}
                 </span>
               )}
             </Link>
 
-            {/* Cart Bag Drawer Trigger */}
+            {/* Shopping Bag */}
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-800"
+              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-700"
               aria-label={`Shopping bag (${totalQuantity} items)`}
             >
               <ShoppingBag className="h-4.5 w-4.5" />
               {totalQuantity > 0 && (
-                <span className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-gray-900 px-1 text-[8.5px] font-bold text-white shadow-xs">
+                <span className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-gray-950 px-1 text-[8.5px] font-bold text-white shadow-xs">
                   {totalQuantity > 99 ? "99+" : totalQuantity}
                 </span>
               )}
             </button>
+
+            {/* Account Profile */}
+            <Link
+              href="/account"
+              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
+              aria-label="Customer Account"
+            >
+              <User className="h-4.5 w-4.5" />
+            </Link>
           </div>
         </div>
 

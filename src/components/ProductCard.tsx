@@ -186,64 +186,63 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         />
       </button>
 
-      {/* Details Container (Minimal & Clean) */}
-      <div className="flex flex-1 flex-col p-3 sm:p-3.5">
+      {/* Details Container (Minimal & Clean - Budget Blings Style) */}
+      <div className="flex flex-1 flex-col p-3 sm:p-3.5 bg-white">
         {/* Category Label */}
-        <span className="text-[10px] font-medium uppercase tracking-widest text-gray-400 block line-clamp-1 mb-1">
+        <span className="text-[9.5px] font-bold uppercase tracking-[0.14em] text-[#80222F] block line-clamp-1 mb-1">
           {product.productType || "18K Gold Plated"}
         </span>
 
         {/* Title */}
         <Link href={`/products/${product.handle}`} className="group/title">
-          <h3 className="font-sans text-xs sm:text-sm font-medium text-gray-900 transition-colors line-clamp-1 group-hover/title:text-black">
+          <h3 className="text-xs sm:text-sm font-medium text-gray-900 transition-colors line-clamp-1 group-hover/title:text-black">
             {product.title}
           </h3>
         </Link>
 
-        {/* Pricing & Fast Add to Cart Action */}
-        <div className="mt-auto pt-2.5 flex items-center justify-between border-t border-gray-100 gap-2">
-          {/* Price Stack */}
-          <div className="flex items-baseline gap-1.5 flex-wrap">
-            <span className="text-sm sm:text-base font-semibold tracking-tight text-gray-900">
-              {isPriceRange ? `From ${formattedPrice}` : formattedPrice}
+        {/* Pricing Stack */}
+        <div className="mt-2 flex items-baseline gap-1.5 flex-wrap">
+          <span className="text-sm sm:text-base font-bold tracking-tight text-gray-950">
+            {isPriceRange ? `From ${formattedPrice}` : formattedPrice}
+          </span>
+          {formattedComparePrice && (
+            <span className="text-xs line-through font-normal text-gray-400">
+              {formattedComparePrice}
             </span>
-            {formattedComparePrice && (
-              <span className="text-xs line-through font-normal text-gray-400">
-                {formattedComparePrice}
-              </span>
-            )}
-            {discountPercent && discountPercent > 0 && (
-              <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded">
-                {discountPercent}% off
-              </span>
-            )}
-          </div>
-
-          {/* 1-Tap Fast Add to Bag Button */}
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            disabled={!product.availableForSale || isAdding}
-            className={`flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-95 cursor-pointer shrink-0 ${
-              isAdded
-                ? "bg-emerald-600 text-white"
-                : "bg-gray-900 hover:bg-black text-white shadow-xs"
-            }`}
-            aria-label={`Add ${product.title} to bag`}
-          >
-            {isAdded ? (
-              <>
-                <Check className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Added</span>
-              </>
-            ) : (
-              <>
-                <ShoppingBag className="h-3 w-3" />
-                <span>Add</span>
-              </>
-            )}
-          </button>
+          )}
+          {discountPercent && discountPercent > 0 && (
+            <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded">
+              {discountPercent}% off
+            </span>
+          )}
         </div>
+
+        {/* Full-Width Solid ADD TO CART Button */}
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          disabled={!product.availableForSale || isAdding}
+          className={`mt-3 w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] cursor-pointer ${
+            !product.availableForSale
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : isAdded
+              ? "bg-emerald-700 text-white"
+              : "bg-[#2B0E14] hover:bg-black text-white shadow-xs"
+          }`}
+          aria-label={`Add ${product.title} to bag`}
+        >
+          {isAdded ? (
+            <>
+              <Check className="h-3.5 w-3.5" />
+              <span>Added to Cart</span>
+            </>
+          ) : (
+            <>
+              <ShoppingBag className="h-3.5 w-3.5" />
+              <span>Add to Cart</span>
+            </>
+          )}
+        </button>
       </div>
     </div>
   );

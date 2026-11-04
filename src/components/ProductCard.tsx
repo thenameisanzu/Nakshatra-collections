@@ -112,6 +112,9 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
     }
   };
 
+  const primaryImage = product.featuredImage || product.images?.edges?.[0]?.node;
+  const secondaryImage = product.images?.edges?.[1]?.node;
+
   return (
     <div
       className="group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-md"
@@ -120,7 +123,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
         borderColor: "var(--border-subtle)",
       }}
     >
-      {/* Product Image Stage */}
+      {/* Product Image Stage with Secondary Image Hover Transition */}
       <div
         className="relative aspect-square w-full overflow-hidden block"
         style={{ backgroundColor: "var(--bg-secondary)" }}
@@ -130,15 +133,30 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           className="relative h-full w-full block"
           aria-label={`View ${product.title}`}
         >
-          {product.featuredImage ? (
-            <Image
-              src={product.featuredImage.url}
-              alt={product.featuredImage.altText || product.title}
-              fill
-              priority={priority}
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain object-center p-3 sm:p-5 transition-transform duration-500 group-hover:scale-108"
-            />
+          {primaryImage ? (
+            <>
+              <Image
+                src={primaryImage.url}
+                alt={primaryImage.altText || product.title}
+                fill
+                priority={priority}
+                loading={priority ? undefined : "lazy"}
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                className={`object-contain object-center p-3 sm:p-5 transition-all duration-500 ${
+                  secondaryImage ? "group-hover:opacity-0" : "group-hover:scale-105"
+                }`}
+              />
+              {secondaryImage && (
+                <Image
+                  src={secondaryImage.url}
+                  alt={secondaryImage.altText || product.title}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-contain object-center p-3 sm:p-5 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-100 group-hover:scale-105"
+                />
+              )}
+            </>
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center">
               <div

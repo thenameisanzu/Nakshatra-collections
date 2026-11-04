@@ -7,7 +7,7 @@ import ProductDetailView from "@/components/ProductDetailView";
 import ProductCard from "@/components/ProductCard";
 
 export const revalidate = 3600;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   try {

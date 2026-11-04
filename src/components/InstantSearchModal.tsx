@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import type { ShopifyProduct } from "@/types/shopify";
 import { formatPrice } from "@/lib/utils";
+import { searchProducts } from "@/lib/shopify";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useSearch } from "@/context/SearchContext";
@@ -97,32 +98,37 @@ export default function InstantSearchModal({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Search API fetcher with debounce
+  // Search direct fetcher with client-side query
   const performSearch = useCallback(async (query: string, category: string) => {
     setIsLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (query.trim()) params.append("q", query.trim());
+      let products = await searchProducts(query, 30);
 
       if (category === "under-999") {
-        params.append("maxPrice", "999");
+        products = products.filter((p) => {
+          const price = parseFloat(p.priceRange.minVariantPrice.amount);
+          return price <= 999;
+        });
       } else if (category !== "all") {
-        params.append("category", category);
+        const normalizedCat = category.toLowerCase().replace(/[-_]/g, " ");
+        products = products.filter((p) => {
+          const type = (p.productType || "").toLowerCase();
+          const handle = (p.handle || "").toLowerCase();
+          const title = (p.title || "").toLowerCase();
+          return (
+            type.includes(normalizedCat) ||
+            handle.includes(category.toLowerCase()) ||
+            title.includes(normalizedCat)
+          );
+        });
       }
 
-      const res = await fetch(`/api/search?${params.toString()}`);
-      const data = await res.json();
-
-      if (data.success && Array.isArray(data.products)) {
-        setResults(data.products);
-        setTotalCount(data.totalCount || data.products.length);
-      } else {
-        setResults([]);
-        setTotalCount(0);
-      }
+      setResults(products);
+      setTotalCount(products.length);
     } catch (err) {
       console.error("Instant search failed:", err);
       setResults([]);
+      setTotalCount(0);
     } finally {
       setIsLoading(false);
     }

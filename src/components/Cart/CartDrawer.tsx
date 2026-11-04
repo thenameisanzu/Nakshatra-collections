@@ -29,6 +29,7 @@ export default function CartDrawer() {
     isUpdating,
     updateItem,
     removeItem,
+    checkout,
     error,
     totalQuantity,
   } = useCart();
@@ -36,10 +37,14 @@ export default function CartDrawer() {
   const [isRedirecting, setIsRedirecting] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  const handleCheckout = () => {
-    if (!cart?.checkoutUrl) return;
-    setIsRedirecting(true);
-    window.location.href = cart.checkoutUrl;
+  const handleCheckout = async () => {
+    try {
+      setIsRedirecting(true);
+      await checkout();
+    } catch (err) {
+      console.error("Checkout redirection failed:", err);
+      setIsRedirecting(false);
+    }
   };
 
   useEffect(() => {

@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
 
+/** @type {import('next').NextConfig} */
 const nextConfig: NextConfig = {
+  output: "export",
   images: {
-    unoptimized: true,
+    unoptimized: true, // Prevents serverless image optimization function invocations on Netlify
     remotePatterns: [
       {
         protocol: "https",
@@ -16,6 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  trailingSlash: true,
 };
 
 export default nextConfig;

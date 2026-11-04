@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getProducts, getCollections, searchProducts } from "@/lib/shopify";
+import { getProducts, getCollections } from "@/lib/shopify";
 import ProductsCatalogView from "@/components/ProductsCatalogView";
 import type { ShopifyProduct, ShopifyCollection } from "@/types/shopify";
 
@@ -11,14 +11,7 @@ export const metadata: Metadata = {
     "Explore our complete range of anti-tarnish artificial jewellery. Necklaces, earrings, rings, bangles, and bridal sets with fast delivery in Kerala and India.",
 };
 
-interface PageProps {
-  searchParams: Promise<{ q?: string; search?: string; category?: string }>;
-}
-
-export default async function CollectionsIndexPage({ searchParams }: PageProps) {
-  const resolvedParams = await searchParams;
-  const initialCategory = resolvedParams.category || "all";
-
+export default async function CollectionsIndexPage() {
   let products: ShopifyProduct[] = [];
   let collections: ShopifyCollection[] = [];
 
@@ -44,8 +37,8 @@ export default async function CollectionsIndexPage({ searchParams }: PageProps) 
     <ProductsCatalogView
       initialProducts={products}
       initialCollections={collections}
-      defaultCategory={initialCategory}
-      pageTitle="Products"
+      defaultCategory="all"
+      pageTitle="Collections"
       pageSubtitle="Discover our curated collection of premium products"
     />
   );

@@ -47,7 +47,7 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* STRICT 2-FONT TYPOGRAPHY SYSTEM & BASE STYLING                             */
+/* UNIFIED MODERN LUXURY TYPOGRAPHY SYSTEM (OUTFIT)                           */
 /* -------------------------------------------------------------------------- */
 
 html {
@@ -60,7 +60,7 @@ html {
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -68,16 +68,11 @@ body {
   min-height: 100vh;
 }
 
-/* Font 1: Luxury Serif for Headlines, Logo, Product Titles */
+/* Unified font family for all elements: Clean, Modern, Elegant */
+.font-sans,
 .font-serif,
 .font-serif-luxury {
-  font-family: var(--font-serif), "Playfair Display", Georgia, serif;
-  letter-spacing: -0.01em;
-}
-
-/* Font 2: Clean Geometric Sans for Body, UI, Microcopy, Buttons */
-.font-sans {
-  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 html,
@@ -88,6 +83,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-feature-settings: "pnum" on, "lnum" on;
 }
 

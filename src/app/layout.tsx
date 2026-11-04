@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,16 +14,8 @@ import QuickViewModal from "@/components/QuickViewModal";
 import InstantSearchModal from "@/components/InstantSearchModal";
 import MobileBottomNav from "@/components/MobileBottomNav";
 
-const playfair = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
@@ -51,7 +43,7 @@ export default function RootLayout({
       lang="en"
       data-theme="minimal-clean"
       suppressHydrationWarning
-      className={`${playfair.variable} ${jakarta.variable} h-full scroll-smooth antialiased`}
+      className={`${outfit.variable} font-sans h-full scroll-smooth antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans selection:bg-[#C9A45C]/30 selection:text-[#261C14]">
         <ThemeProvider>

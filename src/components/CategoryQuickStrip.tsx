@@ -164,33 +164,33 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
             <Sparkles className="h-3 w-3 text-amber-600" />
             ANTI-TARNISH COLLECTIONS
           </span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight text-gray-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-tight text-gray-900">
             Curated Collections
           </h2>
         </div>
 
-        {/* Responsive Collection Cards Grid (Budget Blings Category Grid) */}
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
+        {/* Responsive Collection Cards Grid with Rounded Corner Images */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {displayItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="group relative flex flex-col rounded-2xl border border-gray-200/90 bg-white overflow-hidden transition-all duration-300 hover:border-gray-900 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
+              className="group relative flex flex-col p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border border-gray-200/80 bg-white transition-all duration-300 hover:border-gray-900 hover:shadow-md hover:-translate-y-1 active:scale-[0.98] cursor-pointer"
             >
-              {/* Product Showcase Image Stage */}
-              <div className="relative aspect-[4/5] sm:aspect-square w-full overflow-hidden bg-[#F9FAFB]">
+              {/* Product Showcase Image Container with Prominent Rounded Corners */}
+              <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#F8F9FA] border border-gray-100/80">
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-contain p-4 sm:p-6 transition-transform duration-500 group-hover:scale-108"
+                  className="object-contain p-3 sm:p-5 rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-108"
                 />
               </div>
 
               {/* Category Details at Bottom of Card */}
-              <div className="p-3 sm:p-4 text-center flex flex-col items-center bg-white border-t border-gray-100">
-                <h3 className="font-serif text-xs sm:text-sm font-medium text-gray-900 group-hover:text-black line-clamp-1 transition-colors">
+              <div className="pt-2.5 pb-1 sm:pt-3 text-center flex flex-col items-center">
+                <h3 className="text-xs sm:text-sm font-medium text-gray-900 group-hover:text-black line-clamp-1 transition-colors">
                   {item.name}
                 </h3>
                 <span className="text-[10px] sm:text-[11px] text-gray-400 font-light mt-0.5">

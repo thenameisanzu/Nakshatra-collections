@@ -22,8 +22,8 @@ export default function Footer() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif text-lg sm:text-xl font-normal tracking-[0.2em] uppercase leading-none text-gray-900">
-                  NAKSHATRA
+                <span className="text-base sm:text-lg font-medium tracking-[0.16em] uppercase leading-none text-gray-900">
+                  Nakshatra Collections
                 </span>
                 <span className="text-[8px] font-semibold tracking-[0.28em] uppercase leading-none mt-1 text-amber-700">
                   ANTI-TARNISH JEWELLERY

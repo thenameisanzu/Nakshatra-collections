@@ -102,8 +102,8 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <span className="font-serif text-base sm:text-lg font-normal tracking-[0.2em] uppercase text-gray-900 leading-none">
-              NAKSHATRA
+            <span className="text-sm sm:text-base font-medium tracking-[0.16em] uppercase text-gray-900 leading-none">
+              Nakshatra Collections
             </span>
           </Link>
 

@@ -136,7 +136,7 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
                 <Sparkles className="h-4 w-4 text-amber-600" />
               </div>
               <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400">
-                Nakshatra
+                Nakshatra Collections
               </span>
             </div>
           )}

@@ -20,11 +20,11 @@ export default function Hero() {
               priority
             />
           </div>
-          <span className="font-serif text-2xl sm:text-3xl tracking-[0.18em] text-gray-900 uppercase">
-            Nakshatra
+          <span className="text-xl sm:text-2xl md:text-3xl font-medium tracking-[0.16em] text-gray-900 uppercase">
+            Nakshatra Collections
           </span>
-          <span className="text-[8px] sm:text-[9px] tracking-[0.3em] uppercase text-amber-700 font-semibold mt-0.5">
-            JEWELLERY
+          <span className="text-[8px] sm:text-[9px] tracking-[0.28em] uppercase text-amber-700 font-semibold mt-0.5">
+            ANTI-TARNISH JEWELLERY
           </span>
         </div>
 

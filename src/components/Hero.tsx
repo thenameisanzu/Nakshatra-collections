@@ -2,319 +2,88 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Sparkles,
-  ArrowRight,
-  Gem,
-  Truck,
-  Heart,
-  ShieldCheck,
-  Crown,
-  Flame,
-} from "lucide-react";
-
-const quickCategoryPills = [
-  { label: "All Collections", href: "/collections", icon: Sparkles },
-  { label: "Kerala Bridal Sets", href: "/collections/bridal-jewellery", icon: Crown },
-  { label: "Necklaces & Chokers", href: "/collections/necklaces", icon: Gem },
-  { label: "Earrings & Jhumkas", href: "/collections/earrings", icon: Flame },
-  { label: "Bangles & Kadas", href: "/collections/bangles", icon: ShieldCheck },
-  { label: "Solitaires & Rings", href: "/collections/rings", icon: Gem },
-  { label: "Daily Payals", href: "/collections/anklets", icon: Sparkles },
-];
+import { LayoutGrid, ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section
-      className="relative w-full overflow-hidden transition-colors"
-      style={{
-        backgroundColor: "#16070a",
-      }}
-      aria-label="Nakshatra Collections - Your Everyday Sparkle"
-    >
-      {/* ================================================================= */}
-      {/* 1. HERO BANNER - PERFECTLY FITTED VIEWPORT HEIGHT                 */}
-      {/* ================================================================= */}
-      <div className="relative w-full h-[calc(100svh-10rem)] min-h-[440px] max-h-[620px] sm:h-auto sm:min-h-[620px] lg:min-h-[680px] xl:min-h-[720px] flex flex-col justify-end sm:justify-center">
-        {/* Background Image: Desktop Landscape (16:9) */}
-        <div className="absolute inset-0 z-0 hidden sm:block">
-          <Image
-            src="/images/hero/hero-desktop.webp"
-            alt="Nakshatra Collections Artificial Jewellery Model"
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="object-cover object-center"
-          />
+    <section className="min-h-[60vh] md:min-h-[70vh] flex flex-col md:flex-row w-full overflow-hidden bg-white relative border-b border-gray-100">
+      {/* 1. Text Column (Top on Mobile, Left on Desktop) */}
+      <div className="w-full md:w-1/2 flex flex-col items-center justify-center text-center py-10 px-6 sm:px-8 md:px-12 lg:px-16 bg-white relative z-10 min-h-[35vh] md:min-h-[70vh] space-y-4">
+        {/* Brand Logo & Name */}
+        <div className="flex flex-col items-center">
+          <div className="relative h-12 w-12 sm:h-14 sm:w-14 mb-1">
+            <Image
+              src="/nakshatra-logo.png"
+              alt="Nakshatra Collections"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+          <span className="font-serif text-2xl sm:text-3xl tracking-[0.18em] text-gray-900 uppercase">
+            Nakshatra
+          </span>
+          <span className="text-[8px] sm:text-[9px] tracking-[0.3em] uppercase text-amber-700 font-semibold mt-0.5">
+            JEWELLERY
+          </span>
         </div>
 
-        {/* Background Image: Mobile Portrait (Framed on Face & Jewellery) */}
-        <div className="absolute inset-0 z-0 sm:hidden">
-          <Image
-            src="/images/hero/hero-mobile.webp"
-            alt="Nakshatra Collections Artificial Jewellery Model"
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="object-cover object-[center_top]"
-          />
+        {/* Headline Stack (Exact Budget Blings typography) */}
+        <div className="space-y-1">
+          <p className="font-sans text-[11px] sm:text-xs font-semibold tracking-[0.22em] text-gray-400 uppercase">
+            WHOLESALE &amp; RETAIL
+          </p>
+          <h1 className="font-sans text-sm sm:text-base md:text-lg font-bold tracking-[0.16em] text-gray-900 uppercase">
+            ANTI-TARNISH JEWELLERY
+          </h1>
+          <p className="font-sans text-[11px] sm:text-xs font-medium tracking-[0.2em] text-gray-500 uppercase">
+            FOR EVERYDAY LUXURY
+          </p>
         </div>
 
-        {/* Desktop Gradient Scrim (Right side shadow for text) */}
-        <div
-          className="absolute inset-0 z-10 pointer-events-none hidden lg:block"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(22, 7, 10, 0.1) 0%, rgba(22, 7, 10, 0.4) 45%, rgba(22, 7, 10, 0.88) 70%, rgba(22, 7, 10, 0.96) 100%)",
-          }}
-        />
+        {/* Action Buttons: Solid Black Pill [ ⊞ COLLECTIONS ] + Outline Pill [ SHOP ALL → ] */}
+        <div className="flex items-center gap-3 pt-1">
+          <Link
+            href="/collections"
+            className="inline-flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full bg-black text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider hover:bg-gray-800 transition-all active:scale-95 shadow-xs"
+          >
+            <LayoutGrid className="h-3.5 w-3.5" />
+            <span>COLLECTIONS</span>
+          </Link>
+          <Link
+            href="/collections"
+            className="inline-flex items-center gap-1.5 px-5 sm:px-6 py-2.5 rounded-full border border-gray-900 text-gray-900 text-[11px] sm:text-xs font-semibold uppercase tracking-wider hover:bg-gray-50 transition-all active:scale-95"
+          >
+            <span>SHOP ALL &rarr;</span>
+          </Link>
+        </div>
 
-        {/* Tablet Gradient Scrim */}
-        <div
-          className="absolute inset-0 z-10 pointer-events-none hidden sm:block lg:hidden"
-          style={{
-            background:
-              "linear-gradient(to right, rgba(22, 7, 10, 0.25) 0%, rgba(22, 7, 10, 0.7) 50%, rgba(22, 7, 10, 0.94) 100%)",
-          }}
-        />
-
-        {/* Mobile Scrim: Crystal clear on face, rich dark velvet fade at the bottom */}
-        <div
-          className="absolute inset-0 z-10 pointer-events-none sm:hidden"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(22, 7, 10, 0.98) 0%, rgba(22, 7, 10, 0.9) 38%, rgba(22, 7, 10, 0.3) 65%, transparent 85%)",
-          }}
-        />
-
-        {/* =============================================================== */}
-        {/* 2. OVERLAY CONTENT (DESKTOP & MOBILE TAILORED)                  */}
-        {/* =============================================================== */}
-        <div className="relative z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 sm:py-16 w-full text-white">
-          {/* DESKTOP & TABLET CONTENT */}
-          <div className="hidden sm:flex flex-col lg:flex-row lg:items-center lg:justify-end">
-            <div className="w-full lg:max-w-xl xl:max-w-2xl flex flex-col items-start text-left">
-              {/* Brand Logo & Circular Emblem */}
-              <div className="inline-flex items-center gap-3 p-1.5 pr-4 rounded-full liquid-glass-dark border border-amber-400/30 mb-4 sm:mb-6 shadow-xl backdrop-blur-md">
-                <div className="relative h-9 w-9 sm:h-11 sm:w-11 shrink-0 rounded-full overflow-hidden border border-amber-400/40 bg-black/40 p-1">
-                  <Image
-                    src="/nakshatra-logo.png"
-                    alt="Nakshatra Collections Logo"
-                    fill
-                    sizes="44px"
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-serif tracking-[0.22em] text-xs sm:text-sm font-semibold uppercase text-amber-200 leading-none">
-                    NAKSHATRA
-                  </span>
-                  <span className="text-[7.5px] sm:text-[8.5px] tracking-[0.16em] uppercase text-neutral-300 font-medium leading-none mt-1">
-                    FANCY JEWELLERY &bull; COSMETICS &bull; GIFTS
-                  </span>
-                </div>
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-white leading-[1.12] tracking-tight">
-                Your Everyday{" "}
-                <span className="relative inline-block text-amber-200 italic font-serif">
-                  Sparkle
-                  <span className="inline-block ml-1.5 not-italic text-amber-300 animate-pulse text-2xl sm:text-4xl align-top">
-                    ✦
-                  </span>
-                </span>
-              </h1>
-
-              {/* Subheading */}
-              <p className="mt-3 sm:mt-4 text-xs sm:text-base text-neutral-200/90 font-light max-w-lg leading-relaxed">
-                A beautiful collection of anti-tarnish artificial jewellery, 18K gold plated essentials &amp; bridal masterpieces for every moment.
-              </p>
-
-              {/* 4 Brand Benefits Grid */}
-              <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full max-w-lg">
-                <div className="flex flex-col items-start gap-1.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
-                    <Gem className="h-4 w-4" />
-                  </div>
-                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
-                    Trendy Collections
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-start gap-1.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner font-bold text-sm">
-                    ₹
-                  </div>
-                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
-                    Affordable Prices
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-start gap-1.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
-                    <Truck className="h-4 w-4" />
-                  </div>
-                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
-                    All India Shipping
-                  </span>
-                </div>
-
-                <div className="flex flex-col items-start gap-1.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border border-amber-300/40 bg-amber-400/10 text-amber-300 shadow-inner">
-                    <Heart className="h-4 w-4 fill-amber-300/30" />
-                  </div>
-                  <span className="text-[11px] sm:text-xs font-medium text-neutral-200 leading-snug">
-                    Loved by Customers
-                  </span>
-                </div>
-              </div>
-
-              {/* Primary "Shop Now" Action Button */}
-              <div className="mt-8 sm:mt-10 flex items-center gap-4">
-                <Link
-                  href="/collections"
-                  className="group inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105 active:scale-95 shadow-2xl cursor-pointer"
-                  style={{
-                    backgroundColor: "#F3DEC0",
-                    color: "#281206",
-                  }}
-                  aria-label="Shop Now - View All Jewellery Collections"
-                >
-                  <span>Shop Now</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-
-                <Link
-                  href="/collections/bridal-jewellery"
-                  className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-200/90 hover:text-white transition hover:underline"
-                >
-                  <span>Bridal Sets</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* =============================================================== */}
-          {/* MOBILE STREAMLINED EDITORIAL OVERLAY (Fitted & Fully Visible)   */}
-          {/* =============================================================== */}
-          <div className="flex sm:hidden flex-col items-center text-center pb-3">
-            {/* Minimalist Brand Pill */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full liquid-glass-dark border border-amber-400/30 mb-1.5 shadow-md">
-              <Sparkles className="h-2.5 w-2.5 text-amber-300" />
-              <span className="text-[8.5px] font-bold uppercase tracking-[0.2em] text-amber-200">
-                Nakshatra Collections
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="font-serif text-2xl xs:text-3xl font-normal text-white leading-tight drop-shadow-md">
-              Your Everyday{" "}
-              <span className="text-amber-200 italic font-serif">
-                Sparkle ✦
-              </span>
-            </h1>
-
-            {/* Subheading */}
-            <p className="mt-0.5 text-[10.5px] text-neutral-200/90 font-light max-w-xs leading-snug drop-shadow-sm">
-              18K Gold Plated &bull; Anti-Tarnish &bull; Kerala Bridal Jewellery
-            </p>
-
-            {/* Shop Now Button */}
-            <div className="mt-3">
-              <Link
-                href="/collections"
-                className="inline-flex items-center justify-center gap-2 px-7 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all active:scale-95 shadow-2xl cursor-pointer"
-                style={{
-                  backgroundColor: "#F3DEC0",
-                  color: "#281206",
-                }}
-                aria-label="Shop Now"
-              >
-                <span>Shop Now</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </div>
+        {/* Micro-Trust Information */}
+        <div className="pt-2 text-[11px] sm:text-xs text-gray-500 space-y-1 font-light">
+          <p className="flex items-center justify-center gap-2">
+            <span>₹500 min order</span>
+            <span className="opacity-40">&bull;</span>
+            <span>₹60 domestic express shipping</span>
+          </p>
+          <p className="text-[10.5px] sm:text-[11px] text-gray-400">
+            100% waterproof &amp; anti-tarnish stainless steel
+          </p>
+          <p className="text-[10px] text-gray-400">
+            worldwide express delivery
+          </p>
         </div>
       </div>
 
-      {/* ================================================================= */}
-      {/* 3. MOBILE BENEFIT BAR + CATEGORY QUICK STRIP                       */}
-      {/* ================================================================= */}
-      <div
-        className="w-full border-t border-white/10 py-3 sm:py-4"
-        style={{
-          backgroundColor: "var(--bg-primary)",
-        }}
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Mobile Only: 4 Horizontal Quick Trust Badges */}
-          <div className="grid grid-cols-4 gap-2 sm:hidden pb-3 mb-2 border-b border-white/10 text-center">
-            <div className="flex flex-col items-center">
-              <Gem className="h-3.5 w-3.5 text-amber-400 mb-0.5" />
-              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
-                Trendy
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-xs font-bold text-amber-400 leading-none mb-0.5">₹</span>
-              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
-                Affordable
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <Truck className="h-3.5 w-3.5 text-amber-400 mb-0.5" />
-              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
-                All India
-              </span>
-            </div>
-            <div className="flex flex-col items-center">
-              <Heart className="h-3.5 w-3.5 text-amber-400 mb-0.5" />
-              <span className="text-[9px] font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
-                4.9★ Loved
-              </span>
-            </div>
-          </div>
-
-          {/* Quick Category Pills Strip */}
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
-            <span
-              className="text-[10px] sm:text-xs font-bold uppercase tracking-widest shrink-0 flex items-center gap-1.5 pl-1"
-              style={{ color: "var(--accent-gold)" }}
-            >
-              <Sparkles className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Explore:</span>
-            </span>
-
-            <div className="flex items-center gap-2 min-w-max">
-              {quickCategoryPills.map((pill) => {
-                const Icon = pill.icon;
-                return (
-                  <Link
-                    key={pill.label}
-                    href={pill.href}
-                    className="group flex items-center gap-1.5 px-3.5 py-1.5 sm:py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-200 border card-lift active:scale-95 shadow-xs"
-                    style={{
-                      backgroundColor: "var(--bg-surface)",
-                      borderColor: "var(--border-subtle)",
-                      color: "var(--text-primary)",
-                    }}
-                  >
-                    <Icon
-                      className="h-3.5 w-3.5 transition-transform group-hover:scale-110"
-                      style={{ color: "var(--accent-gold)" }}
-                    />
-                    <span>{pill.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+      {/* 2. Lifestyle Photo Column (Bottom on Mobile, Right on Desktop) */}
+      <div className="w-full md:w-1/2 min-h-[38vh] sm:min-h-[45vh] md:min-h-[70vh] relative overflow-hidden bg-white">
+        <Image
+          src="/images/hero/hero-desktop.webp"
+          alt="Nakshatra Anti-Tarnish Jewellery on Model"
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover object-center"
+        />
       </div>
     </section>
   );

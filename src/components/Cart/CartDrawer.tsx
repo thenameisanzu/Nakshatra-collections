@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { X, Trash2, Plus, Minus, ShoppingBag, Loader2, AlertCircle, Lock, Sparkles, ShieldCheck } from "lucide-react";
+import { X, Trash2, Plus, Minus, ShoppingBag, Loader2, AlertCircle, Lock, Sparkles, ShieldCheck, Truck, MessageCircle } from "lucide-react";
 
 function formatPrice(amount: string, currencyCode: string): string {
   const parsed = parseFloat(amount);
@@ -63,6 +63,27 @@ export default function CartDrawer() {
   const lines = cart?.lines.edges.map((edge) => edge.node) || [];
   const subtotal = cart?.cost.subtotalAmount;
 
+  // Dynamic Free Shipping Progress (Threshold: ₹999)
+  const subtotalNum = subtotal ? parseFloat(subtotal.amount) : 0;
+  const freeShippingThreshold = 999;
+  const amountRemaining = Math.max(0, freeShippingThreshold - subtotalNum);
+  const progressPercent = Math.min(100, Math.round((subtotalNum / freeShippingThreshold) * 100));
+  const isFreeShippingUnlocked = subtotalNum >= freeShippingThreshold && subtotalNum > 0;
+
+  // Direct 1-Tap WhatsApp Order link with itemized cart
+  const generateWhatsAppUrl = () => {
+    if (!lines || lines.length === 0) return "https://wa.me/919446000000";
+    const itemsList = lines
+      .map(
+        (l) =>
+          `• ${l.merchandise.product.title}${l.merchandise.title && l.merchandise.title !== "Default Title" ? ` (${l.merchandise.title})` : ""} x${l.quantity} - ${formatPrice(l.cost.totalAmount.amount, l.cost.totalAmount.currencyCode)}`
+      )
+      .join("\n");
+    const totalStr = subtotal ? formatPrice(subtotal.amount, subtotal.currencyCode) : "";
+    const text = `Hi Nakshatra Collections, I would like to order the following jewellery:\n\n${itemsList}\n\n*Subtotal: ${totalStr}*\n\nPlease confirm availability and payment details. Thank you!`;
+    return `https://wa.me/919446000000?text=${encodeURIComponent(text)}`;
+  };
+
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
       {/* Liquid Blur Backdrop */}
@@ -106,23 +127,31 @@ export default function CartDrawer() {
             </button>
           </div>
 
-          {/* Free Express Delivery Progress Strip */}
+          {/* Dynamic Free Express Delivery Progress Strip (₹999) */}
           <div className="px-4 py-2.5 border-b" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-secondary)" }}>
             <div className="flex items-center justify-between text-xs mb-1.5">
-              <span className="font-semibold flex items-center gap-1.5" style={{ color: "var(--text-primary)" }}>
-                <Sparkles className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
-                <span>Free Insured Express Delivery Unlocked!</span>
-              </span>
-              <span className="font-bold text-[10px] uppercase" style={{ color: "var(--accent-cta)" }}>
-                Kerala &amp; India
+              {isFreeShippingUnlocked ? (
+                <span className="font-semibold flex items-center gap-1.5 text-emerald-700">
+                  <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+                  <span>🎉 Free Express Delivery Unlocked!</span>
+                </span>
+              ) : (
+                <span className="font-medium flex items-center gap-1.5 text-gray-700">
+                  <Truck className="h-3.5 w-3.5 text-amber-600" />
+                  <span>
+                    Add <strong className="font-bold text-gray-900">₹{Math.ceil(amountRemaining)}</strong> more for Free Delivery
+                  </span>
+                </span>
+              )}
+              <span className="font-bold text-[10px] uppercase text-gray-500">
+                {isFreeShippingUnlocked ? "FREE" : `${progressPercent}%`}
               </span>
             </div>
             <div className="h-1.5 w-full bg-black/10 rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all duration-500"
+                className={`h-full rounded-full transition-all duration-500 ${isFreeShippingUnlocked ? "bg-emerald-600" : "bg-amber-500"}`}
                 style={{
-                  width: lines.length > 0 ? "100%" : "0%",
-                  backgroundColor: "var(--accent-gold)",
+                  width: `${progressPercent}%`,
                 }}
               />
             </div>
@@ -345,6 +374,17 @@ export default function CartDrawer() {
                   </>
                 )}
               </button>
+
+              {/* 1-Tap Direct WhatsApp Order */}
+              <a
+                href={generateWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-full py-3 px-4 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all active:scale-[0.98]"
+              >
+                <MessageCircle className="h-4 w-4 text-emerald-600" />
+                <span>1-Tap Order via WhatsApp</span>
+              </a>
 
               {/* Supported Payment Options & India Trust */}
               <div className="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 text-[9.5px] font-semibold" style={{ color: "var(--text-secondary)" }}>

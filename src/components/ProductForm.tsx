@@ -689,24 +689,19 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         </div>
       </div>
 
-      {/* Sticky Mobile Add To Bag Floating Footer */}
-      <div
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 p-3 liquid-glass border-t shadow-2xl animate-in slide-in-from-bottom duration-300"
-        style={{
-          borderColor: "var(--border-medium)",
-        }}
-      >
-        <div className="flex items-center justify-between gap-3 max-w-lg mx-auto">
+      {/* Sticky Mobile Floating Pill Add-To-Bag Dock */}
+      <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md rounded-full liquid-glass-pill px-4 py-2.5 shadow-[0_16px_36px_-6px_rgba(0,0,0,0.18)] animate-in slide-in-from-bottom duration-300 pointer-events-auto">
+        <div className="flex items-center justify-between gap-3 w-full">
           <div className="flex flex-col min-w-0">
-            <span className="text-[10px] uppercase font-bold tracking-wider truncate" style={{ color: "var(--accent-gold)" }}>
+            <span className="text-[10px] uppercase font-semibold tracking-wider truncate text-gray-400">
               {product.title}
             </span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-base font-bold" style={{ color: "var(--text-primary)" }}>
+              <span className="text-sm sm:text-base font-bold text-gray-900">
                 {formattedPrice}
               </span>
               {formattedComparePrice && (
-                <span className="text-xs line-through opacity-60" style={{ color: "var(--text-muted)" }}>
+                <span className="text-xs line-through text-gray-400">
                   {formattedComparePrice}
                 </span>
               )}
@@ -718,11 +713,9 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
               type="button"
               onClick={handleAddToCart}
               disabled={isAdding || isBuyingNow}
-              className="flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all cursor-pointer"
-              style={{
-                backgroundColor: isAdded ? "#2D6A4F" : "var(--accent-cta)",
-                color: "var(--accent-cta-text)",
-              }}
+              className={`flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-95 cursor-pointer shadow-xs ${
+                isAdded ? "bg-emerald-600 text-white" : "bg-gray-900 text-white hover:bg-black"
+              }`}
             >
               {isAdding ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -733,23 +726,10 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
                 </>
               ) : (
                 <>
-                  <ShoppingBag className="h-4 w-4" />
+                  <ShoppingBag className="h-3.5 w-3.5" />
                   <span>Add to Bag</span>
                 </>
               )}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleBuyNow}
-              disabled={isAdding || isBuyingNow}
-              className="flex items-center justify-center rounded-full px-3.5 py-2.5 text-xs font-bold uppercase tracking-wider border liquid-glass active:scale-95 transition-all cursor-pointer"
-              style={{
-                color: "var(--text-primary)",
-                borderColor: "var(--accent-gold)",
-              }}
-            >
-              <span>Buy</span>
             </button>
           </div>
         </div>

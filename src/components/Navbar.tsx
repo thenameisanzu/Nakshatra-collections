@@ -1,25 +1,21 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useSearch } from "@/context/SearchContext";
-import ThemeSwitcher from "./ThemeSwitcher";
 import {
   Menu,
   X,
   ShoppingBag,
   Search,
   Heart,
-  User,
-  Sparkles,
   ArrowRight,
-  ChevronDown,
-  Crown,
   Gem,
+  Sparkles,
+  Crown,
   Droplets,
   CircleDot,
   Flame,
@@ -30,40 +26,26 @@ interface CategoryNavItem {
   label: string;
   href: string;
   icon: LucideIcon;
-  desc: string;
 }
 
 const categories: CategoryNavItem[] = [
-  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Gem, desc: "Chokers & Layered Chains" },
-  { label: "Earrings & Drops", href: "/collections/earrings", icon: Sparkles, desc: "Daily Studs & Jhumkas" },
-  { label: "Kerala Bridal Sets", href: "/collections/bridal-jewellery", icon: Crown, desc: "Heritage Temple Jewellery" },
-  { label: "Bangles & Cuffs", href: "/collections/bangles", icon: Droplets, desc: "Waterproof 316L Cuffs" },
-  { label: "Solitaires & Rings", href: "/collections/rings", icon: CircleDot, desc: "American Diamond Solitaires" },
-  { label: "Necklace Sets", href: "/collections/necklace-sets", icon: Crown, desc: "Matching Bridal Sets" },
-  { label: "Daily Payals", href: "/collections/anklets", icon: Sparkles, desc: "Anti-Tarnish Payals" },
-  { label: "New Arrivals 2026", href: "/collections/new-arrivals", icon: Flame, desc: "Fresh 18K Additions" },
+  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Gem },
+  { label: "Earrings & Drops", href: "/collections/earrings", icon: Sparkles },
+  { label: "Bangles & Cuffs", href: "/collections/bangles", icon: Droplets },
+  { label: "Solitaires & Rings", href: "/collections/rings", icon: CircleDot },
+  { label: "Kerala Bridal Sets", href: "/collections/bridal-jewellery", icon: Crown },
+  { label: "Necklace Sets", href: "/collections/necklace-sets", icon: Crown },
+  { label: "Daily Payals", href: "/collections/anklets", icon: Sparkles },
+  { label: "New Arrivals 2026", href: "/collections/new-arrivals", icon: Flame },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const { isOpen: isSearchOpen, toggleSearch, openSearch } = useSearch();
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { toggleSearch } = useSearch();
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
-  const categoryMenuRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
-  // Scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Global Keyboard Shortcut: Cmd+K / Ctrl+K or / to open instant search
+  // Global Keyboard Shortcut: Cmd+K / Ctrl+K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -74,18 +56,6 @@ export default function Navbar() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [toggleSearch]);
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (categoryMenuRef.current && !categoryMenuRef.current.contains(event.target as Node)) {
-        setIsCategoryOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
 
   // Prevent background scroll when mobile menu is open
   useEffect(() => {
@@ -101,364 +71,217 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. Ultra-Slim Announcement Strip */}
-      <div
-        className="relative z-50 w-full py-1.5 px-4 text-center text-[10px] font-semibold tracking-[0.2em] uppercase transition-colors"
-        style={{
-          backgroundColor: "var(--accent-cta)",
-          color: "var(--accent-cta-text)",
-        }}
-      >
-        <span>18K Real Gold Plated &bull; 100% Anti-Tarnish &bull; Express Kerala Delivery</span>
-      </div>
-
-      {/* 2. Symmetrical Luxury Navigation Bar */}
-      <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 border-b ${
-          isScrolled
-            ? "liquid-glass shadow-sm py-2 sm:py-2.5"
-            : "bg-[var(--bg-primary)] py-2.5 sm:py-3.5"
-        }`}
-        style={{
-          borderColor: "var(--border-subtle)",
-        }}
-      >
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 min-h-[52px] sm:min-h-[60px]">
-          {/* Mobile Menu Trigger & Search (Mobile) */}
-          <div className="flex lg:hidden items-center gap-1">
+      {/* Floating Clean Pill Navbar (Desktop & Tablet only - Mobile uses native-like bottom pill nav) */}
+      <header className="hidden md:block sticky top-2 sm:top-3 z-40 mx-auto w-[94%] max-w-6xl transition-all duration-200">
+        <div className="flex items-center justify-between px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-2xl sm:rounded-full bg-white/95 backdrop-blur-md border border-gray-200/90 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06)]">
+          {/* Mobile Left: Menu Drawer Trigger */}
+          <div className="flex lg:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="flex h-9 w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
-              style={{ color: "var(--text-primary)" }}
+              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-800"
               aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
-            <button
-              type="button"
-              onClick={toggleSearch}
-              className="flex h-9 w-9 items-center justify-center rounded-full transition-colors active:scale-90 cursor-pointer"
-              style={{ color: "var(--text-secondary)" }}
-              aria-label="Search"
-            >
-              <Search className="h-4 w-4" />
-            </button>
           </div>
 
-          {/* Left: Minimalist Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7">
-            {/* Collections Dropdown */}
-            <div
-              className="relative"
-              ref={categoryMenuRef}
-              onMouseEnter={() => setIsCategoryOpen(true)}
-              onMouseLeave={() => setIsCategoryOpen(false)}
-            >
-              <button
-                type="button"
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                className="group flex items-center gap-1 text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors cursor-pointer"
-                style={{ color: isCategoryOpen ? "var(--accent-cta)" : "var(--text-secondary)" }}
-                aria-expanded={isCategoryOpen}
-              >
-                <span>Collections</span>
-                <ChevronDown
-                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
-                    isCategoryOpen ? "rotate-180" : ""
-                  }`}
-                  style={{ color: "var(--accent-gold)" }}
-                />
-              </button>
-
-              {/* Mega Dropdown Menu */}
-              {isCategoryOpen && (
-                <div className="absolute top-full left-0 pt-2 z-50 w-[360px] animate-in fade-in slide-in-from-top-2 duration-200">
-                  <div
-                    className="rounded-3xl p-4 shadow-2xl border liquid-glass"
-                    style={{
-                      backgroundColor: "var(--bg-surface-elevated)",
-                      borderColor: "var(--border-medium)",
-                    }}
-                  >
-                    <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b" style={{ borderColor: "var(--border-subtle)" }}>
-                      <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent-gold)" }}>
-                        Shop By Category
-                      </span>
-                      <Link
-                        href="/collections"
-                        onClick={() => setIsCategoryOpen(false)}
-                        className="text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition hover:underline"
-                        style={{ color: "var(--accent-cta)" }}
-                      >
-                        <span>All (8)</span>
-                        <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2">
-                      {categories.map((cat) => (
-                        <Link
-                          key={cat.href}
-                          href={cat.href}
-                          onClick={() => setIsCategoryOpen(false)}
-                          className="flex items-start gap-2.5 p-2 rounded-2xl transition-all hover:bg-black/5 group"
-                        >
-                          <div
-                            className="flex h-7 w-7 items-center justify-center rounded-xl shrink-0 border"
-                            style={{
-                              backgroundColor: "var(--bg-secondary)",
-                              borderColor: "var(--border-subtle)",
-                            }}
-                          >
-                            <cat.icon
-                              className="h-3.5 w-3.5 group-hover:scale-110 transition-transform"
-                              style={{ color: "var(--accent-gold)" }}
-                            />
-                          </div>
-                          <div className="flex flex-col">
-                            <span className="text-xs font-sans font-medium leading-tight" style={{ color: "var(--text-primary)" }}>
-                              {cat.label}
-                            </span>
-                            <span className="text-[9.5px] font-sans line-clamp-1 opacity-70 font-light" style={{ color: "var(--text-muted)" }}>
-                              {cat.desc}
-                            </span>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
+          {/* Brand Logo (Center on Mobile, Left on Desktop) */}
+          <Link
+            href="/"
+            className="flex items-center gap-2 group transition-transform hover:opacity-90"
+            aria-label="Nakshatra Collections"
+          >
+            <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
+              <Image
+                src="/nakshatra-logo.png"
+                alt="NAKSHATRA"
+                fill
+                sizes="32px"
+                className="object-contain"
+                priority
+              />
             </div>
+            <span className="font-serif text-base sm:text-lg font-normal tracking-[0.2em] uppercase text-gray-900 leading-none">
+              NAKSHATRA
+            </span>
+          </Link>
 
+          {/* Desktop Center: Minimal Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
+            <Link
+              href="/collections"
+              className="text-xs font-semibold tracking-wider uppercase text-gray-900 hover:text-amber-700 transition-colors"
+            >
+              All Jewellery
+            </Link>
+            <Link
+              href="/collections/necklaces"
+              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Necklaces
+            </Link>
+            <Link
+              href="/collections/earrings"
+              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Earrings
+            </Link>
+            <Link
+              href="/collections/bangles"
+              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Bangles
+            </Link>
+            <Link
+              href="/collections/rings"
+              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Rings
+            </Link>
             <Link
               href="/collections/bridal-jewellery"
-              className="text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors hover:opacity-70"
-              style={{ color: "var(--text-secondary)" }}
+              className="text-xs font-semibold tracking-wider uppercase text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Bridal Sets
+              Bridal
             </Link>
-
             <Link
-              href="/collections/new-arrivals"
-              className="text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors hover:opacity-70"
-              style={{ color: "var(--accent-cta)" }}
+              href="/collections/rings"
+              className="text-xs font-bold tracking-wider uppercase text-amber-700 hover:text-amber-800 transition-colors"
             >
-              New Arrivals
+              Under ₹299
             </Link>
           </nav>
 
-          {/* Mathematical Dead Center: Brand Logo with Enriched Emblem */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto flex items-center justify-center">
-            <Link
-              href="/"
-              className="group flex flex-col items-center justify-center text-center transition-transform hover:scale-[1.02]"
-              aria-label="NAKSHATRA Collections"
-            >
-              {/* Enriched Prominent Emblem Image Centered on Top */}
-              <div className="relative h-7 w-7 sm:h-9 sm:w-9 md:h-10 md:w-10 shrink-0 mb-1 drop-shadow-xs">
-                <Image
-                  src="/nakshatra-logo.png"
-                  alt="NAKSHATRA Emblem"
-                  fill
-                  sizes="(max-width: 640px) 32px, 40px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-
-              {/* Brand Name */}
-              <span
-                className="font-serif text-base sm:text-lg md:text-xl font-normal tracking-[0.24em] uppercase leading-none"
-                style={{ color: "var(--text-primary)" }}
-              >
-                NAKSHATRA
-              </span>
-
-              {/* Subtitle */}
-              <span
-                className="text-[6.5px] sm:text-[7.5px] font-semibold tracking-[0.36em] uppercase leading-none mt-0.5 opacity-75"
-                style={{ color: "var(--accent-gold)" }}
-              >
-                COLLECTIONS
-              </span>
-            </Link>
-          </div>
-
-          {/* Right: Minimalist Utility Icons */}
+          {/* Right Action Icons: Search, Wishlist, Bag */}
           <div className="flex items-center gap-1 sm:gap-2">
-            {/* Desktop Search */}
+            {/* Search Trigger */}
             <button
               type="button"
               onClick={toggleSearch}
-              className="hidden lg:flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
-              style={{ color: "var(--text-secondary)" }}
-              aria-label="Search catalogue"
+              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-800"
+              aria-label="Search"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-4.5 w-4.5" />
             </button>
 
-            {/* Sleek Theme Palette Switcher */}
-            <ThemeSwitcher />
-
-            {/* Customer Account */}
-            <Link
-              href="/account"
-              className="flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
-              style={{ color: "var(--text-primary)" }}
-              aria-label="Customer Account & Order Tracking"
-            >
-              <User className="h-4 w-4" />
-            </Link>
-
-            {/* Desktop Only: Wishlist */}
+            {/* Wishlist (Desktop) */}
             <Link
               href="/wishlist"
-              className="relative hidden md:flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 shrink-0"
-              style={{ color: "var(--text-primary)" }}
-              aria-label={`Wishlist with ${totalWishlistItems} saved items`}
+              className="hidden sm:flex relative h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-800"
+              aria-label={`Wishlist (${totalWishlistItems} items)`}
             >
-              <Heart
-                className={`h-4 w-4 transition-colors ${
-                  totalWishlistItems > 0 ? "fill-rose-600 text-rose-600" : ""
-                }`}
-              />
+              <Heart className="h-4.5 w-4.5" />
               {totalWishlistItems > 0 && (
-                <span
-                  className="absolute top-0 right-0 flex h-3.5 w-3.5 items-center justify-center rounded-full text-[8px] font-bold text-white shadow-2xs"
-                  style={{ backgroundColor: "var(--accent-cta)" }}
-                >
-                  {totalWishlistItems}
+                <span className="absolute 1 top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-rose-600 px-1 text-[8.5px] font-bold text-white">
+                  {totalWishlistItems > 99 ? "99+" : totalWishlistItems}
                 </span>
               )}
             </Link>
 
-            {/* Desktop Only: Shopping Bag */}
+            {/* Cart Bag Drawer Trigger */}
             <button
               type="button"
               onClick={openCart}
-              className="relative hidden md:flex h-8.5 w-8.5 items-center justify-center rounded-full transition-all hover:bg-black/5 active:scale-95 cursor-pointer shrink-0"
-              style={{ color: "var(--text-primary)" }}
-              aria-label={`Shopping bag with ${totalQuantity} items`}
+              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-800"
+              aria-label={`Shopping bag (${totalQuantity} items)`}
             >
-              <ShoppingBag className="h-4 w-4" />
+              <ShoppingBag className="h-4.5 w-4.5" />
               {totalQuantity > 0 && (
-                <span
-                  className="absolute top-0 right-0 flex h-3.5 w-3.5 items-center justify-center rounded-full text-[8px] font-bold text-white shadow-2xs"
-                  style={{ backgroundColor: "var(--accent-cta)" }}
-                >
-                  {totalQuantity}
+                <span className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-gray-900 px-1 text-[8.5px] font-bold text-white shadow-xs">
+                  {totalQuantity > 99 ? "99+" : totalQuantity}
                 </span>
               )}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Slide-Over Menu */}
         {isOpen && (
-          <div
-            className="fixed inset-0 top-[calc(var(--spacing)*12)] z-50 lg:hidden flex flex-col justify-between p-6 backdrop-blur-xl animate-in fade-in duration-200 overflow-y-auto"
-            style={{
-              backgroundColor: "var(--bg-primary)",
-            }}
-          >
+          <div className="fixed inset-0 top-[60px] z-50 lg:hidden flex flex-col justify-between p-6 bg-white border-t border-gray-100 shadow-2xl overflow-y-auto animate-in fade-in duration-150">
             <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between pb-3 border-b" style={{ borderColor: "var(--border-subtle)" }}>
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: "var(--accent-gold)" }}>
-                  Menu
+              <div className="flex items-center justify-between pb-3 border-b border-gray-100">
+                <span className="text-xs font-bold uppercase tracking-widest text-amber-700">
+                  Nakshatra Menu
                 </span>
-                <ThemeSwitcher />
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="p-1 rounded-md text-gray-500 hover:text-black"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
 
-              {/* Mobile Quick Search Button */}
-              <button
-                type="button"
-                onClick={() => {
-                  setIsOpen(false);
-                  openSearch();
-                }}
-                className="w-full flex items-center justify-between p-3 rounded-2xl border text-xs font-semibold tracking-wider uppercase transition active:scale-98"
-                style={{
-                  backgroundColor: "var(--bg-surface)",
-                  borderColor: "var(--border-subtle)",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                <span className="flex items-center gap-2">
-                  <Search className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
-                  <span>Search Jewellery...</span>
-                </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full border bg-neutral-100" style={{ color: "var(--text-muted)", borderColor: "var(--border-subtle)" }}>
-                  Instant
-                </span>
-              </button>
-
-              {/* Main Links */}
-              <nav className="flex flex-col gap-1">
+              {/* Navigation Links */}
+              <nav className="flex flex-col divide-y divide-gray-100 text-sm font-medium text-gray-900">
                 <Link
                   href="/"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-base font-serif font-normal border-b"
-                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
+                  className="py-3 flex items-center justify-between"
                 >
-                  Home
+                  <span>Home</span>
+                  <ArrowRight className="h-4 w-4 text-gray-400" />
                 </Link>
-
 
                 <Link
                   href="/collections"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-base font-serif font-normal border-b flex items-center justify-between"
-                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
+                  className="py-3 flex items-center justify-between font-semibold"
                 >
-                  <span>All Collections (8)</span>
-                  <ArrowRight className="h-4 w-4 opacity-50" />
+                  <span>All Jewellery Catalogue</span>
+                  <ArrowRight className="h-4 w-4 text-gray-400" />
                 </Link>
 
-                <div className="py-2 pl-3 flex flex-col gap-2 border-b" style={{ borderColor: "var(--border-subtle)" }}>
+                <div className="py-2 pl-2 flex flex-col gap-2.5">
                   {categories.map((cat) => (
                     <Link
                       key={cat.href}
                       href={cat.href}
                       onClick={() => setIsOpen(false)}
-                      className="py-1 text-xs font-semibold tracking-wider uppercase flex items-center gap-2"
-                      style={{ color: "var(--text-secondary)" }}
+                      className="py-1 text-xs font-medium text-gray-600 hover:text-black flex items-center gap-2"
                     >
-                      <cat.icon className="h-3.5 w-3.5" style={{ color: "var(--accent-gold)" }} />
+                      <cat.icon className="h-3.5 w-3.5 text-amber-700" />
                       <span>{cat.label}</span>
                     </Link>
                   ))}
                 </div>
 
                 <Link
-                  href="/our-story"
+                  href="/collections/rings"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-base font-serif font-normal border-b"
-                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
+                  className="py-3 flex items-center justify-between text-amber-700 font-semibold"
                 >
-                  Our Story &amp; Craftsmanship
+                  <span>Shop Under ₹299 (Budget Store)</span>
+                  <ArrowRight className="h-4 w-4 text-amber-700" />
                 </Link>
 
                 <Link
-                  href="/account"
+                  href="/wishlist"
                   onClick={() => setIsOpen(false)}
-                  className="py-3 text-base font-serif font-normal border-b flex items-center justify-between"
-                  style={{ color: "var(--text-primary)", borderColor: "var(--border-subtle)" }}
+                  className="py-3 flex items-center justify-between"
                 >
                   <span className="flex items-center gap-2">
-                    <User className="h-4 w-4" style={{ color: "var(--accent-gold)" }} />
-                    <span>My Account &amp; Track Orders</span>
+                    <Heart className="h-4 w-4 text-rose-600" />
+                    <span>Wishlist ({totalWishlistItems})</span>
                   </span>
-                  <ArrowRight className="h-4 w-4 opacity-50" />
+                  <ArrowRight className="h-4 w-4 text-gray-400" />
+                </Link>
+
+                <Link
+                  href="/our-story"
+                  onClick={() => setIsOpen(false)}
+                  className="py-3 flex items-center justify-between"
+                >
+                  <span>Our Story &amp; Quality Promise</span>
+                  <ArrowRight className="h-4 w-4 text-gray-400" />
                 </Link>
               </nav>
             </div>
 
-            {/* Drawer Footer */}
-            <div className="pt-6 border-t mt-6 text-center" style={{ borderColor: "var(--border-subtle)" }}>
-              <p className="text-[10px] font-semibold tracking-widest uppercase" style={{ color: "var(--accent-gold)" }}>
-                NAKSHATRA COLLECTIONS &bull; KERALA
+            <div className="pt-6 border-t border-gray-100 text-center">
+              <p className="text-[10px] font-semibold tracking-widest uppercase text-gray-400">
+                100% Anti-Tarnish &bull; Express Delivery Across India
               </p>
             </div>
           </div>
@@ -467,4 +290,3 @@ export default function Navbar() {
     </>
   );
 }
-

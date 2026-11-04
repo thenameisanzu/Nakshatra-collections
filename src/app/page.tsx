@@ -1,11 +1,7 @@
 import Hero from "@/components/Hero";
 import CategoryQuickStrip from "@/components/CategoryQuickStrip";
-import CuratedCollections from "@/components/CuratedCollections";
 import FeaturedJewellery from "@/components/FeaturedJewellery";
-import CampaignStatement from "@/components/CampaignStatement";
-import WhyNakshatra from "@/components/WhyNakshatra";
-import CustomerReviews from "@/components/CustomerReviews";
-import { getProducts, getCollectionByHandle, getCollections } from "@/lib/shopify";
+import { getProducts, getCollections } from "@/lib/shopify";
 import type { ShopifyProduct, ShopifyCollection } from "@/types/shopify";
 
 export const revalidate = 3600;
@@ -33,27 +29,15 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex-1 transition-colors" style={{ backgroundColor: "var(--bg-primary)" }}>
-      {/* 01 — Cinematic Editorial Hero Showcase */}
+    <main className="flex-1 bg-white">
+      {/* 01 — Minimal Split Hero Showcase */}
       <Hero />
 
-      {/* 02 — Category Quick Navigation Strip */}
+      {/* 02 — Curated Collections (Circular Stories) */}
       <CategoryQuickStrip collections={collections} />
 
-      {/* 03 — Curated Collections Editorial Mosaic */}
-      <CuratedCollections collections={collections} />
-
-      {/* 04 — Trending Bestsellers with 1-Tap Cart & Ratings */}
+      {/* 03 — Bestsellers Grid (Minimal & Clean) */}
       <FeaturedJewellery products={featuredProducts} />
-
-      {/* 05 — Why Nakshatra Atelier Standards & Anti-Tarnish Promise */}
-      <WhyNakshatra />
-
-      {/* 06 — Verified Customer Photo Reviews Across Kerala */}
-      <CustomerReviews />
-
-      {/* 07 — Campaign Closing Statement */}
-      <CampaignStatement />
     </main>
   );
 }

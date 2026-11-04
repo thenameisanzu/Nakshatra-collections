@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="champagne-luxury"
+      data-theme="minimal-clean"
       suppressHydrationWarning
       className={`${playfair.variable} ${jakarta.variable} h-full scroll-smooth antialiased`}
     >
@@ -60,7 +60,7 @@ export default function RootLayout({
               <QuickViewProvider>
                 <SearchProvider>
                   <Navbar />
-                  <div className="flex-1 pb-16 md:pb-0">{children}</div>
+                  <div className="flex-1 pb-20 md:pb-0">{children}</div>
                   <Footer />
                   <MobileBottomNav />
                   <CartDrawer />

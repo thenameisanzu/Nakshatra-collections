@@ -14,29 +14,20 @@ export default function WhatsAppSupportButton({
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   return (
-    <div className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 flex items-center group">
+    <div className="fixed bottom-20 md:bottom-6 right-3 sm:right-6 z-40 flex items-center group">
       {/* Tooltip on Desktop */}
-      <span
-        className="hidden md:inline-block mr-2.5 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg liquid-glass border transition-all duration-300 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 pointer-events-none whitespace-nowrap"
-        style={{
-          color: "var(--text-primary)",
-          borderColor: "var(--border-medium)",
-        }}
-      >
-        WhatsApp Concierge &bull; Kerala
+      <span className="hidden md:inline-block mr-2.5 px-3 py-1.5 rounded-full text-xs font-medium shadow-md bg-white border border-gray-200 text-gray-800 transition-all duration-200 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
+        WhatsApp Order Support
       </span>
 
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 text-white"
-        style={{
-          backgroundColor: "#25D366",
-        }}
+        className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-white bg-[#25D366]"
         aria-label="Chat with Nakshatra Collections on WhatsApp"
       >
-        <MessageCircle className="h-6 w-6 fill-white" />
+        <MessageCircle className="h-5 w-5 fill-white" />
       </a>
     </div>
   );

@@ -2,13 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-export type ThemeType =
-  | "champagne-luxury"
-  | "soft-blush"
-  | "sage-contemporary"
-  | "royal-sapphire"
-  | "velvet-plum"
-  | "terracotta-gold";
+export type ThemeType = "minimal-clean";
 
 export interface ThemeOption {
   id: ThemeType;
@@ -23,63 +17,13 @@ export interface ThemeOption {
 
 export const THEMES: ThemeOption[] = [
   {
-    id: "champagne-luxury",
-    name: "Champagne Gold & Burgundy",
-    tagline: "Ivory, Gold & Deep Burgundy (Top Choice)",
-    colors: {
-      bg: "#FFF9EF",
-      accent: "#C9A45C",
-      cta: "#6B1E2E",
-    },
-  },
-  {
-    id: "soft-blush",
-    name: "Soft Blush & Gold",
-    tagline: "Blush Pink, Champagne Gold & White",
+    id: "minimal-clean",
+    name: "Minimal Clean (Budget Blings Inspired)",
+    tagline: "Crisp White, Obsidian Black & Warm Gold",
     colors: {
       bg: "#FFFFFF",
-      accent: "#C8A45D",
-      cta: "#8A3D52",
-    },
-  },
-  {
-    id: "sage-contemporary",
-    name: "Sage Green & Gold",
-    tagline: "Sage, Warm Cream & Muted Gold",
-    colors: {
-      bg: "#FAF5EA",
-      accent: "#B8944D",
-      cta: "#2E4633",
-    },
-  },
-  {
-    id: "royal-sapphire",
-    name: "Royal Sapphire & Gold",
-    tagline: "Celestial Navy, Alabaster & Imperial Gold",
-    colors: {
-      bg: "#FAFAFD",
-      accent: "#D4AF37",
-      cta: "#122647",
-    },
-  },
-  {
-    id: "velvet-plum",
-    name: "Velvet Plum & Pearl",
-    tagline: "Warm Pearl, Amethyst Plum & Antique Gold",
-    colors: {
-      bg: "#FCF8F5",
-      accent: "#D4A373",
-      cta: "#5A183C",
-    },
-  },
-  {
-    id: "terracotta-gold",
-    name: "Terracotta & Temple Gold",
-    tagline: "Earthy Rust, Bisque & Kerala Temple Gold",
-    colors: {
-      bg: "#FDF7F2",
-      accent: "#C59B4B",
-      cta: "#8A341E",
+      accent: "#C5A059",
+      cta: "#111827",
     },
   },
 ];
@@ -96,34 +40,22 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeType>("champagne-luxury");
+  const [theme] = useState<ThemeType>("minimal-clean");
 
   useEffect(() => {
     try {
-      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as ThemeType | null;
-      const validTheme = THEMES.find((t) => t.id === savedTheme);
-      if (validTheme) {
-        setThemeState(validTheme.id);
-        document.documentElement.setAttribute("data-theme", validTheme.id);
-      } else {
-        document.documentElement.setAttribute("data-theme", "champagne-luxury");
-      }
+      localStorage.setItem(THEME_STORAGE_KEY, "minimal-clean");
+      document.documentElement.setAttribute("data-theme", "minimal-clean");
     } catch {
-      document.documentElement.setAttribute("data-theme", "champagne-luxury");
+      document.documentElement.setAttribute("data-theme", "minimal-clean");
     }
   }, []);
 
-  const setTheme = (newTheme: ThemeType) => {
-    setThemeState(newTheme);
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, newTheme);
-      document.documentElement.setAttribute("data-theme", newTheme);
-    } catch (e) {
-      console.error(e);
-    }
+  const setTheme = () => {
+    document.documentElement.setAttribute("data-theme", "minimal-clean");
   };
 
-  const currentThemeConfig = THEMES.find((t) => t.id === theme) || THEMES[0];
+  const currentThemeConfig = THEMES[0];
 
   return (
     <ThemeContext.Provider

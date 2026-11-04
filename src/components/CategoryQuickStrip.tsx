@@ -134,12 +134,26 @@ interface CategoryQuickStripProps {
 }
 
 export default function CategoryQuickStrip({ collections }: CategoryQuickStripProps) {
+  // Filter out empty collections (0 products in Shopify) and deduplicate any duplicate names (e.g. Earrings vs Ear Rings)
+  const validCollections = (collections || []).filter((col) => {
+    const realCount = col.products?.edges?.length || 0;
+    return realCount > 0;
+  });
+
+  const seenNormalizedNames = new Set<string>();
+  const uniqueCollections = validCollections.filter((col) => {
+    const normalized = col.title.toLowerCase().replace(/[\s-_]/g, "");
+    if (seenNormalizedNames.has(normalized)) return false;
+    seenNormalizedNames.add(normalized);
+    return true;
+  });
+
   const displayItems: QuickCategoryItem[] =
-    collections && collections.length > 0
-      ? collections.slice(0, 8).map((col) => {
+    uniqueCollections.length > 0
+      ? uniqueCollections.slice(0, 8).map((col) => {
           // Priority 1: Shopify Collection Cover Image
           // Priority 2: First Product Image from this Collection in Shopify
-          // Priority 3: Fallback image if collection is completely empty
+          // Priority 3: Fallback image if collection is empty
           const backendProductImage = col.products?.edges?.[0]?.node?.featuredImage?.url;
           const fallback = fallbackImages[col.handle] || {
             image: fallbackImages.necklaces.image,
@@ -148,13 +162,16 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
           };
 
           const realCount = col.products?.edges?.length || 0;
-          const countText = realCount > 0 ? `${realCount} ${realCount === 1 ? "item" : "items"}` : "Explore";
+          const countText = `${realCount} ${realCount === 1 ? "item" : "items"}`;
+
+          // Format clean title (e.g., if title is "Ear Rings", display as "Earrings")
+          const cleanTitle = col.title.toLowerCase() === "ear rings" ? "Earrings" : col.title;
 
           return {
-            name: col.title,
+            name: cleanTitle,
             href: `/collections/${col.handle}`,
             image: col.image?.url || backendProductImage || fallback.image,
-            label: col.title,
+            label: cleanTitle,
             itemCount: countText,
           };
         })
@@ -246,7 +263,7 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
               borderColor: "var(--border-medium)",
             }}
           >
-            <span>Explore All 8 Collections</span>
+            <span>Explore All {displayItems.length} Collections</span>
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>

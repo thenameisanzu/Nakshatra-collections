@@ -48,39 +48,52 @@ export default function ProductsCatalogView({
   // Compute categories and dynamic counts accurately from Shopify backend
   const categoriesList = useMemo(() => {
     if (initialCollections && initialCollections.length > 0) {
-      return initialCollections.map((col) => {
-        const colProductsCount = col.products?.edges?.length || 0;
-        const catName = col.title.toLowerCase();
-        const catHandle = col.handle.toLowerCase();
+      const seenNames = new Set<string>();
 
-        const matchingCount = initialProducts.filter((product) => {
-          const type = (product.productType || "").toLowerCase();
-          const title = product.title.toLowerCase();
-          const tags = (product.tags || []).map((t) => t.toLowerCase());
+      return initialCollections
+        .map((col) => {
+          const colProductsCount = col.products?.edges?.length || 0;
+          const catName = col.title.toLowerCase();
+          const catHandle = col.handle.toLowerCase();
 
-          if (type.includes(catName) || type.includes(catHandle)) return true;
-          if (title.includes(catName) || title.includes(catHandle)) return true;
-          if (tags.some((t) => t.includes(catName) || t.includes(catHandle))) return true;
+          const matchingCount = initialProducts.filter((product) => {
+            const type = (product.productType || "").toLowerCase();
+            const title = product.title.toLowerCase();
+            const tags = (product.tags || []).map((t) => t.toLowerCase());
 
-          if (catHandle.includes("bangle") && title.includes("bangle")) return true;
-          if (catHandle.includes("ring") && title.includes("ring")) return true;
-          if (catHandle.includes("necklace") && title.includes("necklace")) return true;
-          if (catHandle.includes("bracelet") && title.includes("bracelet")) return true;
-          if (catHandle.includes("anklet") && title.includes("anklet")) return true;
-          if (catHandle.includes("ear") && title.includes("earring")) return true;
+            if (type.includes(catName) || type.includes(catHandle)) return true;
+            if (title.includes(catName) || title.includes(catHandle)) return true;
+            if (tags.some((t) => t.includes(catName) || t.includes(catHandle))) return true;
 
-          return false;
-        }).length;
+            if (catHandle.includes("bangle") && title.includes("bangle")) return true;
+            if (catHandle.includes("ring") && title.includes("ring")) return true;
+            if (catHandle.includes("necklace") && title.includes("necklace")) return true;
+            if (catHandle.includes("bracelet") && title.includes("bracelet")) return true;
+            if (catHandle.includes("anklet") && title.includes("anklet")) return true;
+            if (catHandle.includes("ear") && title.includes("earring")) return true;
 
-        const count = colProductsCount > 0 ? colProductsCount : matchingCount;
+            return false;
+          }).length;
 
-        return {
-          id: col.id || col.handle,
-          handle: col.handle,
-          title: col.title,
-          count,
-        };
-      });
+          const count = colProductsCount > 0 ? colProductsCount : matchingCount;
+          const cleanTitle = col.title.toLowerCase() === "ear rings" ? "Earrings" : col.title;
+
+          return {
+            id: col.id || col.handle,
+            handle: col.handle,
+            title: cleanTitle,
+            count,
+          };
+        })
+        .filter((cat) => {
+          // Hide empty collections with 0 products
+          if (cat.count === 0) return false;
+          // Deduplicate collections with the same normalized name
+          const norm = cat.title.toLowerCase().replace(/[\s-_]/g, "");
+          if (seenNames.has(norm)) return false;
+          seenNames.add(norm);
+          return true;
+        });
     }
     return fallbackCategories;
   }, [initialCollections, initialProducts, fallbackCategories]);

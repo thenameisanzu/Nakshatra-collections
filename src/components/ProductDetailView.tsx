@@ -28,8 +28,24 @@ export default function ProductDetailView({ product: initialProduct }: ProductDe
         });
 
         if (!isMounted) return;
-        if (data.product) {
-          setProduct(data.product);
+        const liveProduct = data?.product;
+        if (liveProduct) {
+          setProduct((prev) => ({
+            ...prev,
+            ...liveProduct,
+            options:
+              liveProduct.options && liveProduct.options.length > 0
+                ? liveProduct.options
+                : prev.options,
+            variants:
+              liveProduct.variants?.edges && liveProduct.variants.edges.length > 0
+                ? liveProduct.variants
+                : prev.variants,
+            images:
+              liveProduct.images?.edges && liveProduct.images.edges.length > 0
+                ? liveProduct.images
+                : prev.images,
+          }));
         }
       } catch (err) {
         console.warn("Client live product sync fallback:", err);

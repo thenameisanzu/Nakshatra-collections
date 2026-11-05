@@ -216,17 +216,35 @@ export const GET_PRODUCT_BY_HANDLE_QUERY = `
       productType
       description
       descriptionHtml
+      collections(first: 5) {
+        edges {
+          node {
+            id
+            handle
+            title
+          }
+        }
+      }
       featuredImage {
         url
         altText
+        width
+        height
       }
-      images(first: 10) {
+      images(first: 20) {
         edges {
           node {
             url
             altText
+            width
+            height
           }
         }
+      }
+      options {
+        id
+        name
+        values
       }
       priceRange {
         minVariantPrice {
@@ -243,13 +261,21 @@ export const GET_PRODUCT_BY_HANDLE_QUERY = `
           amount
           currencyCode
         }
+        maxVariantPrice {
+          amount
+          currencyCode
+        }
       }
-      variants(first: 20) {
+      variants(first: 50) {
         edges {
           node {
             id
             title
             availableForSale
+            selectedOptions {
+              name
+              value
+            }
             price {
               amount
               currencyCode
@@ -257,6 +283,12 @@ export const GET_PRODUCT_BY_HANDLE_QUERY = `
             compareAtPrice {
               amount
               currencyCode
+            }
+            image {
+              url
+              altText
+              width
+              height
             }
           }
         }

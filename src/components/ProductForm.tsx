@@ -56,13 +56,17 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
   const initialSelections = useMemo(() => {
     const defaultState: Record<string, string> = {};
     if (variants.length > 0) {
-      const firstAvailable = variants.find((v) => v.availableForSale) || variants[0];
-      firstAvailable.selectedOptions.forEach((opt) => {
-        defaultState[opt.name] = opt.value;
-      });
-    } else {
+      const firstAvailable = variants.find((v) => v?.availableForSale) || variants[0];
+      if (firstAvailable && Array.isArray(firstAvailable.selectedOptions)) {
+        firstAvailable.selectedOptions.forEach((opt) => {
+          if (opt?.name && opt?.value) {
+            defaultState[opt.name] = opt.value;
+          }
+        });
+      }
+    } else if (Array.isArray(options)) {
       options.forEach((opt) => {
-        if (opt.values.length > 0) {
+        if (opt?.name && Array.isArray(opt.values) && opt.values.length > 0) {
           defaultState[opt.name] = opt.values[0];
         }
       });
@@ -80,11 +84,14 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
   // Find matching active variant based on selected options
   const activeVariant: ShopifyProductVariant | undefined = useMemo(() => {
     if (variants.length === 0) return undefined;
-    return variants.find((variant) =>
+    const match = variants.find((variant) =>
+      Array.isArray(variant?.selectedOptions) &&
+      variant.selectedOptions.length > 0 &&
       variant.selectedOptions.every(
-        (option) => selectedOptions[option.name] === option.value
+        (option) => option?.name && selectedOptions[option.name] === option.value
       )
     );
+    return match || variants[0];
   }, [variants, selectedOptions]);
 
   // Check if active variant or product is available
@@ -124,7 +131,10 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
     // Notify parent if new variant has an image
     if (variants.length > 0) {
       const match = variants.find((variant) =>
-        variant.selectedOptions.every((opt) => updated[opt.name] === opt.value)
+        Array.isArray(variant?.selectedOptions) &&
+        variant.selectedOptions.every(
+          (opt) => opt?.name && updated[opt.name] === opt.value
+        )
       );
       if (match?.image && onVariantChange) {
         onVariantChange(match.image);
@@ -277,7 +287,7 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
           style={{ borderColor: "var(--border-subtle)" }}
         >
           {options.map((option) => {
-            if (option.name === "Title" && option.values.length <= 1) return null;
+            if (option.name === "Title" && (!option.values || option.values.length <= 1)) return null;
 
             return (
               <div key={option.id || option.name} className="flex flex-col gap-2.5">
@@ -291,7 +301,7 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
                 </div>
 
                 <div className="flex flex-wrap gap-2.5">
-                  {option.values.map((val) => {
+                  {(option.values || []).map((val) => {
                     const isSelected = selectedOptions[option.name] === val;
                     return (
                       <button

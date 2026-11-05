@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getCollectionByHandle, getCollections } from "@/lib/shopify";
 import ClientCollectionView from "@/components/ClientCollectionView";
 
-export const dynamicParams = false;
+export const revalidate = 60;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   try {

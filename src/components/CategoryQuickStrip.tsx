@@ -14,41 +14,6 @@ interface QuickCategoryItem {
   isHot?: boolean;
 }
 
-// Curated high-resolution imagery for each category when Shopify collection has no custom poster image uploaded
-function getCategoryCuratedImage(handle: string, title: string): string {
-  const combined = `${handle.toLowerCase()} ${title.toLowerCase()}`;
-  if (combined.includes("neck") || combined.includes("chain") || combined.includes("choker")) {
-    return "/images/hero/slide-gold-necklaces.jpg";
-  }
-  if (combined.includes("ear") || combined.includes("jhumka") || combined.includes("stud")) {
-    return "/images/hero/slide-earrings-luxury.jpg";
-  }
-  if (combined.includes("ring") || combined.includes("solitaire")) {
-    return "/images/hero/slide-solitaire-rings.jpg";
-  }
-  if (combined.includes("bangle") || combined.includes("kada")) {
-    return "/images/hero/slide-bangles-bracelets.jpg";
-  }
-  if (combined.includes("bracelet") || combined.includes("cuff")) {
-    return "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=900&auto=format&fit=crop";
-  }
-  if (combined.includes("anklet") || combined.includes("payal")) {
-    return "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=900&auto=format&fit=crop";
-  }
-  if (combined.includes("men")) {
-    return "https://cdn.shopify.com/s/files/1/1044/1939/3858/files/photo-1611652022419-a9419f74343d.jpg?v=1793808270";
-  }
-  if (
-    combined.includes("bridal") ||
-    combined.includes("traditional") ||
-    combined.includes("festive") ||
-    combined.includes("set")
-  ) {
-    return "/images/hero/festive-necklace.jpg";
-  }
-  return "/images/hero/slide-gold-necklaces.jpg";
-}
-
 const defaultQuickCategories: QuickCategoryItem[] = [
   {
     name: "Necklace",
@@ -83,7 +48,7 @@ const defaultQuickCategories: QuickCategoryItem[] = [
   {
     name: "Bracelets",
     href: "/collections/bracelets",
-    image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=900&auto=format&fit=crop",
+    image: "/images/hero/slide-bangles-bracelets.jpg",
     label: "Waterproof Cuffs",
     itemCount: "3 items",
   },
@@ -97,7 +62,7 @@ const defaultQuickCategories: QuickCategoryItem[] = [
   {
     name: "Anklets",
     href: "/collections/anklets",
-    image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=900&auto=format&fit=crop",
+    image: "/images/hero/slide-bangles-bracelets.jpg",
     label: "Daily Payals",
     itemCount: "2 items",
   },
@@ -127,18 +92,13 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
   const displayItems: QuickCategoryItem[] =
     uniqueCollections.length > 0
       ? uniqueCollections.slice(0, 8).map((col) => {
-          // Priority 1: Shopify Collection Poster Image (if uploaded in Shopify Admin -> Collections)
-          const shopifyCover = col.image?.url;
-
-          // Priority 2: Product Image IF unique and not the generic repeated placeholder
-          const productImg = col.products?.edges?.[0]?.node?.featuredImage?.url;
-          const isGenericSample = productImg?.includes("276d3cfab638");
-
-          // Priority 3: Curated category-specific luxury jewelry photo
-          const curatedFallback = getCategoryCuratedImage(col.handle, col.title);
-
+          // Priority 1: Shopify Collection image (set in Shopify Admin -> Collections)
+          // Priority 2: Product image from this collection in Shopify
+          // Priority 3: Fallback only if no product image exists
+          const shopifyCollectionImage = col.image?.url;
+          const shopifyProductImage = col.products?.edges?.[0]?.node?.featuredImage?.url;
           const finalImage =
-            shopifyCover || (!isGenericSample && productImg ? productImg : curatedFallback);
+            shopifyCollectionImage || shopifyProductImage || "/nakshatra-logo.png";
 
           const realCount = col.products?.edges?.length || 0;
           const countText = `${realCount} ${realCount === 1 ? "item" : "items"}`;

@@ -235,14 +235,15 @@ export default function InstantSearchModal({
           <button
             type="button"
             onClick={onClose}
-            className="flex items-center justify-center h-8 px-3 rounded-full text-xs font-semibold uppercase tracking-wider transition hover:bg-black/5"
+            className="flex items-center justify-center h-8 w-8 sm:h-9 sm:w-9 rounded-full transition-all duration-200 active:scale-90 hover:bg-black/5 cursor-pointer shrink-0"
             style={{
               backgroundColor: "var(--bg-secondary)",
-              color: "var(--text-secondary)",
+              color: "var(--text-primary)",
               border: "1px solid var(--border-subtle)",
             }}
+            aria-label="Close search"
           >
-            Esc
+            <X className="h-4.5 w-4.5" />
           </button>
         </div>
 

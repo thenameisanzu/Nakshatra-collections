@@ -76,80 +76,82 @@ export default function Navbar() {
       {/* Floating Clean Pill Navbar (Budget Blings Inspired - Desktop & Mobile) */}
       <header className="sticky top-2 sm:top-3 z-40 mx-auto w-[94%] max-w-6xl transition-all duration-200">
         <div 
-          className="relative flex items-center justify-between px-4 sm:px-8 py-2.5 rounded-full backdrop-blur-md transition-all duration-200"
+          className="relative flex items-center justify-between px-3.5 sm:px-6 lg:px-8 py-2 sm:py-2.5 rounded-full backdrop-blur-md transition-all duration-200"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.94)",
             border: "1px solid var(--border-subtle)",
             boxShadow: "0 8px 30px rgba(31, 26, 24, 0.06)",
           }}
         >
-          {/* Left: 3 Clean Minimal Navigation Links (Desktop) */}
-          <nav className="hidden md:flex items-center gap-6 sm:gap-8">
+          {/* Left: 3 Clean Minimal Navigation Links (Tablet & Desktop) */}
+          <nav className="hidden md:flex md:flex-1 items-center justify-start gap-3.5 lg:gap-6 xl:gap-8">
             <Link
               href="/"
-              className="text-xs sm:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors"
+              className="text-xs lg:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors shrink-0"
             >
               Home
             </Link>
             <Link
               href="/products"
-              className="text-xs sm:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors"
+              className="text-xs lg:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors shrink-0"
             >
               Collections
             </Link>
             <Link
               href="/contact"
-              className="text-xs sm:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors"
+              className="text-xs lg:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors shrink-0"
             >
               Contact
             </Link>
           </nav>
 
-          {/* Brand Logo & Title (Desktop: Centered, Mobile: Left) */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 group transition-transform hover:opacity-90 md:absolute md:left-1/2 md:-translate-x-1/2"
-            aria-label="Nakshatra Collections"
-          >
-            <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
-              <Image
-                src="/nakshatra-logo.png"
-                alt="Nakshatra Collections"
-                fill
-                sizes="32px"
-                className="object-contain"
-                priority
-              />
-            </div>
-            <span 
-              className="text-xs sm:text-base font-medium tracking-[0.16em] uppercase leading-none"
-              style={{ color: "var(--text-primary)" }}
+          {/* Brand Logo & Title (Desktop & iPad: Centered, Mobile: Left) */}
+          <div className="flex md:shrink-0 items-center justify-start md:justify-center">
+            <Link
+              href="/"
+              className="flex items-center gap-1.5 sm:gap-2 group transition-transform hover:opacity-90 shrink-0"
+              aria-label="Nakshatra Collections"
             >
-              Nakshatra Collections
-            </span>
-          </Link>
+              <div className="relative h-6 w-6 sm:h-7 sm:w-7 shrink-0">
+                <Image
+                  src="/nakshatra-logo.png"
+                  alt="Nakshatra Collections"
+                  fill
+                  sizes="32px"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span 
+                className="text-xs sm:text-sm lg:text-base font-medium tracking-[0.14em] sm:tracking-[0.16em] uppercase leading-none whitespace-nowrap"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Nakshatra Collections
+              </span>
+            </Link>
+          </div>
 
           {/* Right Action Icons: Search, Wishlist, Bag, Account */}
-          <div className="flex items-center gap-1 sm:gap-2">
+          <div className="flex md:flex-1 items-center justify-end gap-1 sm:gap-1.5 lg:gap-2">
             {/* Search Trigger */}
             <button
               type="button"
               onClick={toggleSearch}
-              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-700"
+              className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-700"
               aria-label="Search"
             >
-              <Search className="h-4.5 w-4.5" />
+              <Search className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
             </button>
 
             {/* Wishlist */}
             <Link
               href="/wishlist"
-              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
+              className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
               aria-label={`Wishlist (${totalWishlistItems} items)`}
             >
-              <Heart className="h-4.5 w-4.5" />
+              <Heart className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
               {totalWishlistItems > 0 && (
-                <span className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-rose-600 px-1 text-[8.5px] font-bold text-white">
+                <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-rose-600 px-1 text-[8.5px] font-bold text-white">
                   {totalWishlistItems > 99 ? "99+" : totalWishlistItems}
                 </span>
               )}
@@ -159,13 +161,13 @@ export default function Navbar() {
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-9 w-9 items-center justify-center rounded-full hover:bg-stone-100 active:scale-95 transition-colors cursor-pointer text-stone-700"
+              className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-stone-100 active:scale-95 transition-colors cursor-pointer text-stone-700"
               aria-label={`Shopping bag (${totalQuantity} items)`}
             >
-              <ShoppingBag className="h-4.5 w-4.5" />
+              <ShoppingBag className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
               {totalQuantity > 0 && (
                 <span 
-                  className="absolute top-1 right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-bold text-white shadow-xs"
+                  className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-bold text-white shadow-xs"
                   style={{ backgroundColor: "var(--accent-cta)" }}
                 >
                   {totalQuantity > 99 ? "99+" : totalQuantity}
@@ -176,10 +178,10 @@ export default function Navbar() {
             {/* Account Profile */}
             <Link
               href="/account"
-              className="flex h-9 w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
+              className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
               aria-label="Customer Account"
             >
-              <User className="h-4.5 w-4.5" />
+              <User className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
             </Link>
           </div>
         </div>

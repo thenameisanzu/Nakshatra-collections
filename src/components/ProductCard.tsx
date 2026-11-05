@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ShopifyProduct } from "@/types/shopify";
@@ -67,6 +67,38 @@ export default function ProductCard({
   const formattedComparePrice = hasComparePrice
     ? formatPrice(comparePrice.amount, comparePrice.currencyCode)
     : null;
+
+  // Extract primary sub-category tag (e.g. Kundan, Antique, Bridal, AD Stones)
+  const styleTag = useMemo(() => {
+    const ignored = new Set([
+      "necklace",
+      "necklaces",
+      "ring",
+      "rings",
+      "bangle",
+      "bangles",
+      "bracelet",
+      "bracelets",
+      "earring",
+      "earrings",
+      "ear rings",
+      "anklet",
+      "anklets",
+      "general",
+      "all",
+      "nakshatra",
+      "men's accessories",
+    ]);
+    const found = (product.tags || []).find(
+      (t) => !ignored.has(t.trim().toLowerCase())
+    );
+    if (!found) return null;
+    return found
+      .trim()
+      .split(" ")
+      .map((w) => (w.toLowerCase() === "ad" ? "AD" : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()))
+      .join(" ");
+  }, [product.tags]);
 
   const handleWishlistClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -224,13 +256,20 @@ export default function ProductCard({
 
       {/* Details Container (Minimal & Clean) */}
       <div className="flex flex-1 flex-col p-3 sm:p-3.5 bg-white">
-        {/* Category Label */}
-        <span
-          className="text-[9.5px] font-bold uppercase tracking-[0.14em] block line-clamp-1 mb-1"
-          style={{ color: "var(--accent-gold)" }}
-        >
-          {product.productType || "18K Gold Plated"}
-        </span>
+        {/* Style Tag & Category Label */}
+        <div className="flex items-center gap-1.5 flex-wrap mb-1">
+          {styleTag && (
+            <span className="text-[9px] font-bold uppercase tracking-wider text-[#936A22] bg-[#FAF2E2] px-2 py-0.5 rounded-full border border-[#E9D6AF]">
+              {styleTag}
+            </span>
+          )}
+          <span
+            className="text-[9.5px] font-bold uppercase tracking-[0.14em] line-clamp-1"
+            style={{ color: "var(--accent-gold)" }}
+          >
+            {product.productType || "18K Gold Plated"}
+          </span>
+        </div>
 
         {/* Title */}
         <Link href={`/products/${product.handle}`} className="group/title block">

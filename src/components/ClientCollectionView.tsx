@@ -74,27 +74,46 @@ export default function ClientCollectionView({
 
   // Extract unique sub-category tags from products (filtering out collection name & common tags)
   const availableTags = useMemo(() => {
-    const tagsSet = new Set<string>();
-    const lowerHandle = handle.toLowerCase();
-    const lowerTitle = (collectionTitle || "").toLowerCase();
+    const ignored = new Set([
+      "necklace",
+      "necklaces",
+      "ring",
+      "rings",
+      "bangle",
+      "bangles",
+      "bracelet",
+      "bracelets",
+      "earring",
+      "earrings",
+      "ear rings",
+      "anklet",
+      "anklets",
+      "general",
+      "all",
+      "nakshatra",
+      "men's accessories",
+      "mens accessories",
+      handle.toLowerCase(),
+      (collectionTitle || "").toLowerCase(),
+    ]);
+
+    const tagsMap = new Map<string, number>();
 
     products.forEach((product) => {
       (product.tags || []).forEach((rawTag) => {
-        const tag = rawTag.trim();
-        const lower = tag.toLowerCase();
-        if (
-          lower &&
-          lower !== "all" &&
-          lower !== "nakshatra" &&
-          lower !== lowerHandle &&
-          lower !== lowerTitle
-        ) {
-          tagsSet.add(tag);
+        const clean = rawTag.trim();
+        const lower = clean.toLowerCase();
+        if (lower && !ignored.has(lower)) {
+          const formatted = clean
+            .split(" ")
+            .map((w) => (w.toLowerCase() === "ad" ? "AD" : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()))
+            .join(" ");
+          tagsMap.set(formatted, (tagsMap.get(formatted) || 0) + 1);
         }
       });
     });
 
-    return Array.from(tagsSet);
+    return Array.from(tagsMap.entries()).map(([name, count]) => ({ name, count }));
   }, [products, handle, collectionTitle]);
 
   // Instant client-side tag filtering without additional API calls or page reloads
@@ -105,7 +124,7 @@ export default function ClientCollectionView({
     return products.filter((product) => {
       const tags = (product.tags || []).map((t) => t.toLowerCase());
       const title = product.title.toLowerCase();
-      return tags.includes(lowerSelected) || title.includes(lowerSelected);
+      return tags.some((t) => t.includes(lowerSelected) || lowerSelected.includes(t)) || title.includes(lowerSelected);
     });
   }, [products, selectedTag]);
 
@@ -172,35 +191,45 @@ export default function ClientCollectionView({
             <div className="flex items-center gap-2 mb-2">
               <Filter className="h-3.5 w-3.5 text-[#C59B4E]" />
               <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-600">
-                Filter by Style:
+                Filter by Style Tag:
               </span>
             </div>
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
               <button
                 type="button"
                 onClick={() => setSelectedTag("All")}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
                   selectedTag === "All"
-                    ? "bg-[#241815] text-white shadow-xs"
+                    ? "bg-[#C59B4E] text-white shadow-xs"
                     : "bg-white hover:bg-stone-50 text-stone-700 border border-stone-200"
                 }`}
               >
                 All
               </button>
-              {availableTags.map((tag) => (
-                <button
-                  key={tag}
-                  type="button"
-                  onClick={() => setSelectedTag(tag)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-medium tracking-wide capitalize transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
-                    selectedTag === tag
-                      ? "bg-[#241815] text-white shadow-xs"
-                      : "bg-white hover:bg-stone-50 text-stone-700 border border-stone-200"
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
+              {availableTags.map(({ name, count }) => {
+                const isSelected = selectedTag.toLowerCase() === name.toLowerCase();
+                return (
+                  <button
+                    key={name}
+                    type="button"
+                    onClick={() => setSelectedTag(isSelected ? "All" : name)}
+                    className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all whitespace-nowrap active:scale-95 cursor-pointer ${
+                      isSelected
+                        ? "bg-[#241815] text-white shadow-xs font-semibold"
+                        : "bg-white hover:bg-stone-50 text-stone-700 border border-stone-200"
+                    }`}
+                  >
+                    <span>{name}</span>
+                    <span
+                      className={`text-[9.5px] px-1.5 py-0.2 rounded-full ${
+                        isSelected ? "bg-white/20 text-white" : "bg-stone-100 text-stone-500"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}

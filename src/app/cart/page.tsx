@@ -22,16 +22,20 @@ function formatPrice(amount: string, currencyCode: string): string {
 }
 
 export default function CartPage() {
-  const { cart, isLoading, isUpdating, updateItem, removeItem, error, totalQuantity } = useCart();
+  const { cart, isLoading, isUpdating, updateItem, removeItem, checkout, error, totalQuantity } = useCart();
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   const lines = cart?.lines.edges.map((edge) => edge.node) || [];
   const subtotal = cart?.cost.subtotalAmount;
 
-  const handleCheckout = () => {
-    if (!cart?.checkoutUrl) return;
-    setIsRedirecting(true);
-    window.location.href = cart.checkoutUrl;
+  const handleCheckout = async () => {
+    try {
+      setIsRedirecting(true);
+      await checkout();
+    } catch (err) {
+      console.error("Checkout failed:", err);
+      setIsRedirecting(false);
+    }
   };
 
   if (isLoading) {
@@ -300,7 +304,7 @@ export default function CartPage() {
 
                 <button
                   type="button"
-                  disabled={isUpdating || isRedirecting || !cart?.checkoutUrl}
+                  disabled={isUpdating || isRedirecting || lines.length === 0}
                   onClick={handleCheckout}
                   className="mt-2 flex w-full items-center justify-center gap-2 rounded-full py-4 px-4 text-xs font-bold uppercase tracking-widest shadow-md transition-all active:scale-[0.98] disabled:opacity-50 cursor-pointer hover:scale-[1.01]"
                   style={{

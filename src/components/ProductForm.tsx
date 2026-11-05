@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import type { ShopifyProduct, ShopifyProductVariant, ShopifyImage } from "@/types/shopify";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
+import { createCheckoutSession } from "@/lib/shopify";
 import {
   ShoppingBag,
   Check,
@@ -157,21 +158,11 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
 
     try {
       setIsBuyingNow(true);
-      // Create or update cart specifically for direct checkout
-      const res = await fetch("/api/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "create",
-          lines: [{ merchandiseId: variantIdToUse, quantity }],
-        }),
-      });
-
-      const data = await res.json();
-      if (data.cart?.checkoutUrl) {
-        window.location.href = data.cart.checkoutUrl;
-      } else if (cart?.checkoutUrl) {
-        window.location.href = cart.checkoutUrl;
+      const session = await createCheckoutSession([
+        { merchandiseId: variantIdToUse, quantity },
+      ]);
+      if (session?.checkoutUrl) {
+        window.location.href = session.checkoutUrl;
       } else {
         // Fallback to normal add item and drawer
         await addItem(variantIdToUse, quantity);

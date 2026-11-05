@@ -20,11 +20,20 @@ export const TAGS = {
   cart: "cart",
 } as const;
 
-const rawDomain = process.env.SHOPIFY_STORE_DOMAIN;
+const rawDomain =
+  process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
+  process.env.SHOPIFY_STORE_DOMAIN ||
+  "ymrvy4-70.myshopify.com";
 const privateToken =
+  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_PRIVATE_TOKEN ||
   process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN ||
-  process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-const apiVersion = process.env.SHOPIFY_API_VERSION || "2025-01";
+  process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+  "fa90ced10dd41f7d8fafc9993dcf25e3";
+const apiVersion =
+  process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION ||
+  process.env.SHOPIFY_API_VERSION ||
+  "2024-01";
 
 // Normalize domain by stripping protocol and trailing slashes
 const domain = rawDomain

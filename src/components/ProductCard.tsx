@@ -122,17 +122,10 @@ export default function ProductCard({
 
   return (
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-md ${className}`}
-      style={{
-        backgroundColor: "var(--bg-surface)",
-        borderColor: "var(--border-subtle)",
-      }}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-stone-200/70 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(36,24,21,0.08)] hover:border-[#C59B4E]/40 transition-all duration-300 ${className}`}
     >
-      {/* Product Image Stage with Secondary Image Hover Transition */}
-      <div
-        className="relative aspect-square w-full overflow-hidden block"
-        style={{ backgroundColor: "var(--bg-secondary)" }}
-      >
+      {/* Product Image Stage: Full edge-to-edge fit without awkward letterboxing or inner borders */}
+      <div className="relative aspect-square w-full overflow-hidden bg-[#FAF8F5] block">
         <Link
           href={`/products/${product.handle}`}
           className="relative h-full w-full block"
@@ -147,7 +140,7 @@ export default function ProductCard({
                 priority={priority}
                 loading={priority ? undefined : "lazy"}
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                className={`object-contain object-center p-3 sm:p-5 transition-all duration-500 ${
+                className={`object-cover object-center transition-transform duration-700 ease-out ${
                   secondaryImage ? "group-hover:opacity-0" : "group-hover:scale-105"
                 }`}
               />
@@ -158,7 +151,7 @@ export default function ProductCard({
                   fill
                   loading="lazy"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-contain object-center p-3 sm:p-5 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-100 group-hover:scale-105"
+                  className="object-cover object-center opacity-0 group-hover:opacity-100 transition-all duration-700 ease-out scale-100 group-hover:scale-105"
                 />
               )}
             </>
@@ -179,20 +172,19 @@ export default function ProductCard({
             </div>
           )}
 
-          {/* E-Commerce Badge: Sold Out only */}
-          {!product.availableForSale && (
-            <div className="absolute top-2 left-2 z-10 pointer-events-none">
-              <span
-                className="rounded-md px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider backdrop-blur-xs shadow-xs"
-                style={{
-                  backgroundColor: "var(--badge-soldout-bg)",
-                  color: "var(--badge-soldout-text)",
-                }}
-              >
+          {/* Badges: Discount or Sold Out */}
+          <div className="absolute top-2.5 left-2.5 z-10 flex flex-col gap-1 pointer-events-none">
+            {!product.availableForSale && (
+              <span className="rounded-full px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-stone-900/80 text-white backdrop-blur-xs shadow-xs">
                 Sold Out
               </span>
-            </div>
-          )}
+            )}
+            {product.availableForSale && discountPercent && discountPercent > 0 && (
+              <span className="rounded-full px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-wider bg-[#80222F] text-white shadow-xs">
+                {discountPercent}% OFF
+              </span>
+            )}
+          </div>
         </Link>
 
         {/* Quick View Button (Reveals on hover) */}
@@ -204,14 +196,9 @@ export default function ProductCard({
               e.stopPropagation();
               openQuickView(product);
             }}
-            className="w-full flex items-center justify-center gap-1.5 rounded-lg py-2 px-3 text-[11px] font-semibold uppercase tracking-wider shadow-md transition-all active:scale-95 cursor-pointer border"
-            style={{
-              backgroundColor: "var(--bg-surface)",
-              color: "var(--text-primary)",
-              borderColor: "var(--border-subtle)",
-            }}
+            className="w-full flex items-center justify-center gap-1.5 rounded-full py-2 px-3 text-[11px] font-semibold uppercase tracking-wider shadow-md transition-all active:scale-95 cursor-pointer bg-white/95 backdrop-blur-xs text-[#241815] hover:bg-white hover:text-black border border-stone-200"
           >
-            <Eye className="h-3.5 w-3.5" />
+            <Eye className="h-3.5 w-3.5 text-[#C59B4E]" />
             <span>Quick Preview</span>
           </button>
         </div>
@@ -221,10 +208,10 @@ export default function ProductCard({
       <button
         type="button"
         onClick={handleWishlistClick}
-        className={`absolute top-2 right-2 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/80 backdrop-blur-xs hover:bg-white active:scale-75 transition-all duration-200 cursor-pointer ${
+        className={`absolute top-2.5 right-2.5 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 backdrop-blur-md shadow-xs hover:bg-white hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer ${
           isWishlisted
             ? "text-rose-600 scale-105"
-            : "text-gray-400 hover:text-rose-600"
+            : "text-stone-400 hover:text-rose-600"
         }`}
         aria-label={isWishlisted ? `Remove ${product.title} from wishlist` : `Save ${product.title} to wishlist`}
       >
@@ -235,11 +222,8 @@ export default function ProductCard({
         />
       </button>
 
-      {/* Details Container (Minimal & Clean - Budget Blings Style) */}
-      <div
-        className="flex flex-1 flex-col p-3 sm:p-3.5"
-        style={{ backgroundColor: "var(--bg-surface)" }}
-      >
+      {/* Details Container (Minimal & Clean) */}
+      <div className="flex flex-1 flex-col p-3 sm:p-3.5 bg-white">
         {/* Category Label */}
         <span
           className="text-[9.5px] font-bold uppercase tracking-[0.14em] block line-clamp-1 mb-1"
@@ -249,9 +233,9 @@ export default function ProductCard({
         </span>
 
         {/* Title */}
-        <Link href={`/products/${product.handle}`} className="group/title">
+        <Link href={`/products/${product.handle}`} className="group/title block">
           <h3
-            className="text-xs sm:text-sm font-medium transition-colors line-clamp-1 hover:opacity-85"
+            className="text-xs sm:text-[13.5px] font-medium transition-colors line-clamp-1 group-hover/title:text-[#C59B4E]"
             style={{ color: "var(--text-primary)" }}
           >
             {product.title}
@@ -259,30 +243,17 @@ export default function ProductCard({
         </Link>
 
         {/* Pricing Stack */}
-        <div className="mt-2 flex items-baseline gap-1.5 flex-wrap">
+        <div className="mt-1.5 flex items-baseline gap-1.5 flex-wrap">
           <span
-            className="text-sm sm:text-base font-bold tracking-tight"
-            style={{ color: "var(--text-primary)" }}
+            className="text-sm sm:text-base font-bold tracking-tight text-stone-950"
           >
             {isPriceRange ? `From ${formattedPrice}` : formattedPrice}
           </span>
           {formattedComparePrice && (
             <span
-              className="text-xs line-through font-normal"
-              style={{ color: "var(--text-muted)" }}
+              className="text-xs line-through font-normal text-stone-400"
             >
               {formattedComparePrice}
-            </span>
-          )}
-          {discountPercent && discountPercent > 0 && (
-            <span
-              className="text-[10px] font-semibold px-1 py-0.2 rounded"
-              style={{
-                backgroundColor: "var(--bg-secondary)",
-                color: "var(--badge-sale-bg)",
-              }}
-            >
-              {discountPercent}% off
             </span>
           )}
         </div>
@@ -292,11 +263,11 @@ export default function ProductCard({
           type="button"
           onClick={handleAddToCart}
           disabled={!product.availableForSale || isAdding}
-          className="mt-3 w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] cursor-pointer hover:opacity-90 shadow-xs"
-          style={{
-            backgroundColor: isAdded ? "#2D6A4F" : "var(--accent-cta)",
-            color: "var(--accent-cta-text)",
-          }}
+          className={`mt-3 w-full flex items-center justify-center gap-2 py-2 sm:py-2.5 px-3 rounded-xl text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-200 active:scale-[0.98] cursor-pointer shadow-xs ${
+            isAdded
+              ? "bg-emerald-700 text-white"
+              : "bg-[#241815] text-white hover:bg-black"
+          }`}
           aria-label={`Add ${product.title} to bag`}
         >
           {isAdded ? (

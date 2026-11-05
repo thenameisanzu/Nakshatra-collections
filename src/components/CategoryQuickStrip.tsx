@@ -204,39 +204,29 @@ export default function CategoryQuickStrip({ collections }: CategoryQuickStripPr
           </h2>
         </div>
 
-        {/* Responsive Collection Cards Grid with Rounded Corner Images */}
+        {/* Responsive Collection Cards Grid with Seamless Full-Fit Images */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {displayItems.map((item, idx) => (
             <Link
               key={item.name}
               href={item.href}
-              className={`group relative flex flex-col p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border transition-all duration-300 hover:shadow-md hover:-translate-y-1 active:scale-[0.98] cursor-pointer reveal-on-scroll-scale stagger-${(idx % 12) + 1}`}
-              style={{
-                backgroundColor: "var(--bg-surface)",
-                borderColor: "var(--border-subtle)",
-              }}
+              className={`group relative flex flex-col p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl bg-white border border-stone-200/70 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(36,24,21,0.08)] hover:border-[#C59B4E]/40 hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 cursor-pointer reveal-on-scroll-scale stagger-${(idx % 12) + 1}`}
             >
-              {/* Product Showcase Image Container with Prominent Rounded Corners */}
-              <div
-                className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden border"
-                style={{
-                  backgroundColor: "var(--bg-secondary)",
-                  borderColor: "var(--border-subtle)",
-                }}
-              >
+              {/* Product Showcase Image Container: Full Fit without inner boxes or padding */}
+              <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#FAF8F5]">
                 <Image
                   src={item.image}
                   alt={item.name}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-contain p-3 sm:p-5 rounded-xl sm:rounded-2xl transition-transform duration-500 group-hover:scale-108"
+                  className="object-cover rounded-xl sm:rounded-2xl transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               </div>
 
               {/* Category Details at Bottom of Card */}
               <div className="pt-2.5 pb-1 sm:pt-3 text-center flex flex-col items-center">
                 <h3
-                  className="text-xs sm:text-sm font-medium line-clamp-1 transition-colors"
+                  className="text-xs sm:text-sm font-medium line-clamp-1 transition-colors group-hover:text-[#C59B4E]"
                   style={{ color: "var(--text-primary)" }}
                 >
                   {item.name}

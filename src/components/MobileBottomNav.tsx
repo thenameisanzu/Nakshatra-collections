@@ -62,7 +62,7 @@ export default function MobileBottomNav() {
           )}
         </Link>
 
-        {/* 2. Categories Tab */}
+        {/* 2. Collections Tab */}
         <Link
           href="/collections"
           className={`relative flex flex-1 flex-col items-center justify-center py-1 px-1 rounded-full transition-all duration-200 active:scale-90 ${
@@ -70,7 +70,7 @@ export default function MobileBottomNav() {
               ? "text-gray-950"
               : "text-gray-500 hover:text-gray-900"
           }`}
-          aria-label="Categories"
+          aria-label="Collections"
         >
           <div className="relative flex items-center justify-center h-6 w-6">
             <LayoutGrid
@@ -87,7 +87,7 @@ export default function MobileBottomNav() {
               isCategoriesActive ? "font-bold text-gray-950" : "font-medium text-gray-500"
             }`}
           >
-            Categories
+            Collections
           </span>
           {isCategoriesActive && (
             <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.8)]" />

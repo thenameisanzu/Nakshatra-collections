@@ -67,3 +67,4 @@ export default function ScrollRevealProvider({ children }: { children: React.Rea
 
   return <>{children}</>;
 }
+

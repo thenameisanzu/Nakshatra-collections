@@ -133,20 +133,20 @@ export default function Navbar() {
 
           {/* Right Action Icons: Search, Wishlist, Bag, Account */}
           <div className="flex md:flex-1 items-center justify-end gap-1 sm:gap-1.5 lg:gap-2">
-            {/* Search Trigger */}
+            {/* Search Trigger (Desktop & Tablet only - Mobile has it in bottom nav) */}
             <button
               type="button"
               onClick={toggleSearch}
-              className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-700"
+              className="hidden md:flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors cursor-pointer text-gray-700"
               aria-label="Search"
             >
               <Search className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
             </button>
 
-            {/* Wishlist */}
+            {/* Wishlist (Desktop & Tablet only - Mobile has it in bottom nav) */}
             <Link
               href="/wishlist"
-              className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
+              className="hidden md:flex relative h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
               aria-label={`Wishlist (${totalWishlistItems} items)`}
             >
               <Heart className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
@@ -157,11 +157,11 @@ export default function Navbar() {
               )}
             </Link>
 
-            {/* Shopping Bag */}
+            {/* Shopping Bag (Desktop & Tablet only - Mobile has it in bottom nav) */}
             <button
               type="button"
               onClick={openCart}
-              className="relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-stone-100 active:scale-95 transition-colors cursor-pointer text-stone-700"
+              className="hidden md:flex relative h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-stone-100 active:scale-95 transition-colors cursor-pointer text-stone-700"
               aria-label={`Shopping bag (${totalQuantity} items)`}
             >
               <ShoppingBag className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
@@ -175,7 +175,7 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Account Profile */}
+            {/* Account Profile (Always visible on Mobile, Tablet & Desktop) */}
             <Link
               href="/account"
               className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"

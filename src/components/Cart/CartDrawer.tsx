@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { X, Trash2, Plus, Minus, ShoppingBag, Loader2, AlertCircle, Lock, Sparkles, ShieldCheck, Truck, MessageCircle } from "lucide-react";
+import { X, Trash2, Plus, Minus, ShoppingBag, Loader2, AlertCircle, Lock, Sparkles, ShieldCheck, Truck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/SocialIcons";
 
 function formatPrice(amount: string, currencyCode: string): string {
   const parsed = parseFloat(amount);
@@ -77,7 +78,7 @@ export default function CartDrawer() {
 
   // Direct 1-Tap WhatsApp Order link with itemized cart
   const generateWhatsAppUrl = () => {
-    if (!lines || lines.length === 0) return "https://wa.me/919446000000";
+    if (!lines || lines.length === 0) return "https://wa.me/919447003584";
     const itemsList = lines
       .map(
         (l) =>
@@ -86,7 +87,7 @@ export default function CartDrawer() {
       .join("\n");
     const totalStr = subtotal ? formatPrice(subtotal.amount, subtotal.currencyCode) : "";
     const text = `Hi Nakshatra Collections, I would like to order the following jewellery:\n\n${itemsList}\n\n*Subtotal: ${totalStr}*\n\nPlease confirm availability and payment details. Thank you!`;
-    return `https://wa.me/919446000000?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/919447003584?text=${encodeURIComponent(text)}`;
   };
 
   return (
@@ -385,9 +386,9 @@ export default function CartDrawer() {
                 href={generateWhatsAppUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-full py-3 px-4 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all active:scale-[0.98]"
+                className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-full py-3 px-4 text-xs font-semibold text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all active:scale-[0.98]"
               >
-                <MessageCircle className="h-4 w-4 text-emerald-600" />
+                <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
                 <span>1-Tap Order via WhatsApp</span>
               </a>
 

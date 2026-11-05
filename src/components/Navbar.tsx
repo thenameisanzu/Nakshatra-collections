@@ -22,6 +22,7 @@ import {
   Flame,
   type LucideIcon,
 } from "lucide-react";
+import { WhatsAppIcon, InstagramIcon } from "@/components/icons/SocialIcons";
 
 interface CategoryNavItem {
   label: string;
@@ -258,9 +259,29 @@ export default function Navbar() {
               </nav>
             </div>
 
-            <div className="pt-6 border-t border-gray-100 text-center">
-              <p className="text-[10px] font-semibold tracking-widest uppercase text-gray-400">
-                100% Anti-Tarnish &bull; Express Delivery Across India
+            <div className="pt-6 border-t border-gray-100 flex flex-col gap-3">
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <a
+                  href="https://wa.me/919447003584"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold"
+                >
+                  <WhatsAppIcon className="h-3.5 w-3.5 text-[#25D366]" />
+                  <span>+91 94470 03584</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/nakshatra.collections.kply/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-rose-50 text-rose-800 border border-rose-200 text-xs font-semibold"
+                >
+                  <InstagramIcon className="h-3.5 w-3.5 text-[#E4405F]" />
+                  <span>Instagram</span>
+                </a>
+              </div>
+              <p className="text-[10px] font-semibold tracking-widest uppercase text-gray-400 text-center">
+                100% Anti-Tarnish &bull; Kanjirappally, Kerala
               </p>
             </div>
           </div>

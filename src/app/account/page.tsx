@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { User, Package, Heart, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, Sparkles } from "lucide-react";
+import { User, Package, Heart, ShieldCheck, ArrowRight, ExternalLink, Sparkles } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/SocialIcons";
 import { useWishlist } from "@/context/WishlistContext";
 
 export default function AccountPage() {
@@ -236,7 +237,7 @@ export default function AccountPage() {
           </Link>
 
           <a
-            href="https://wa.me/919446000000?text=Hi%20Nakshatra%20Collections!%20I%20have%20a%20question%20regarding%20my%20order."
+            href="https://wa.me/919447003584?text=Hi%20Nakshatra%20Collections!%20I%20have%20a%20question%20regarding%20my%20order."
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between p-4 sm:p-5 rounded-2xl border transition-all hover:shadow-md group"
@@ -246,8 +247,8 @@ export default function AccountPage() {
             }}
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
-                <MessageCircle className="h-5 w-5" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-[#25D366]">
+                <WhatsAppIcon className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>

@@ -97,7 +97,7 @@ export default function PrivacyPolicyPage() {
               4. Contact Us Regarding Your Privacy
             </h2>
             <p>
-              For any questions regarding our privacy practices or to request deletion of your account data, please contact our privacy desk at <strong>care@nakshatracollections.com</strong>.
+              For any questions regarding our privacy practices or to request deletion of your account data, please contact our privacy desk at <strong>store.nakshatracollections@gmail.com</strong> or via WhatsApp at <strong>+91 94470 03584</strong>.
             </p>
           </section>
         </div>

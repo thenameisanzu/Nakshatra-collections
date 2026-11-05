@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/SocialIcons";
 
 interface WhatsAppSupportButtonProps {
   phoneNumber?: string;
@@ -8,7 +8,7 @@ interface WhatsAppSupportButtonProps {
 }
 
 export default function WhatsAppSupportButton({
-  phoneNumber = "919446000000",
+  phoneNumber = "919447003584",
   defaultMessage = "Hi Nakshatra Collections! I would like to know more about your 18K gold plated anti-tarnish jewellery.",
 }: WhatsAppSupportButtonProps) {
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
@@ -24,10 +24,10 @@ export default function WhatsAppSupportButton({
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full shadow-lg transition-all duration-200 hover:scale-105 active:scale-95 text-white bg-[#25D366]"
+        className="flex h-12 w-12 sm:h-13 sm:w-13 items-center justify-center rounded-full shadow-xl transition-all duration-300 hover:scale-110 active:scale-95 text-white bg-[#25D366] hover:bg-[#20bd5a]"
         aria-label="Chat with Nakshatra Collections on WhatsApp"
       >
-        <MessageCircle className="h-5 w-5 fill-white" />
+        <WhatsAppIcon className="h-6 w-6 text-white" />
       </a>
     </div>
   );

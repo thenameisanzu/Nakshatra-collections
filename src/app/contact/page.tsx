@@ -15,6 +15,7 @@ import {
   ChevronDown,
   ArrowRight,
 } from "lucide-react";
+import { WhatsAppIcon, InstagramIcon } from "@/components/icons/SocialIcons";
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
@@ -105,88 +106,130 @@ export default function ContactUsPage() {
         </div>
 
         {/* Direct Contact Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-12">
-          {/* WhatsApp Direct */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-12">
+          {/* 1. Official WhatsApp Direct */}
           <a
-            href="https://wa.me/918075000000?text=Hello%20Nakshatra%20Collections,%20I%20have%20an%20inquiry."
+            href="https://wa.me/919447003584?text=Hello%20Nakshatra%20Collections,%20I%20have%20an%20inquiry."
             target="_blank"
             rel="noopener noreferrer"
-            className="p-6 rounded-3xl border shadow-xs card-lift flex flex-col justify-between transition-all group"
-            style={{ backgroundColor: "var(--bg-surface)", borderColor: "var(--border-medium)" }}
+            className="p-5 sm:p-6 rounded-3xl border shadow-xs card-lift flex flex-col justify-between transition-all group bg-white hover:border-[#25D366]"
+            style={{ borderColor: "var(--border-medium)" }}
           >
             <div>
               <div className="flex items-center justify-between mb-4">
-                <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
-                  <MessageCircle className="h-5 w-5" />
+                <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-emerald-50 text-[#25D366] border border-emerald-200/60">
+                  <WhatsAppIcon className="h-5 w-5" />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-full border border-emerald-200">
-                  Instant Reply
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                  Instant
                 </span>
               </div>
               <h3 className="font-serif text-base font-semibold" style={{ color: "var(--text-primary)" }}>
-                WhatsApp Concierge
+                WhatsApp
               </h3>
-              <p className="mt-1 text-xs font-light" style={{ color: "var(--text-muted)" }}>
-                Chat directly with our Kerala jewellery stylists.
+              <p className="mt-1 text-xs font-medium text-stone-900">
+                +91 94470 03584
+              </p>
+              <p className="text-[11px] font-light mt-0.5" style={{ color: "var(--text-muted)" }}>
+                Direct concierge for orders &amp; bridal styling.
               </p>
             </div>
-            <div className="mt-4 pt-4 border-t flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-emerald-600 group-hover:underline" style={{ borderColor: "var(--border-subtle)" }}>
+            <div className="mt-4 pt-3 border-t flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#25D366] group-hover:underline" style={{ borderColor: "var(--border-subtle)" }}>
               <span>Chat on WhatsApp</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </div>
           </a>
 
-          {/* Email Support */}
+          {/* 2. Official Email Support */}
           <a
-            href="mailto:care@nakshatracollections.com"
-            className="p-6 rounded-3xl border shadow-xs card-lift flex flex-col justify-between transition-all group"
-            style={{ backgroundColor: "var(--bg-surface)", borderColor: "var(--border-medium)" }}
+            href="mailto:store.nakshatracollections@gmail.com"
+            className="p-5 sm:p-6 rounded-3xl border shadow-xs card-lift flex flex-col justify-between transition-all group bg-white hover:border-amber-400"
+            style={{ borderColor: "var(--border-medium)" }}
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-amber-500/10 text-amber-600 border border-amber-500/20">
                   <Mail className="h-5 w-5" />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 dark:bg-amber-950/50 px-2 py-0.5 rounded-full border border-amber-200">
-                  2&ndash;4 Hours
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                  24h Desk
                 </span>
               </div>
               <h3 className="font-serif text-base font-semibold" style={{ color: "var(--text-primary)" }}>
-                Email Support
+                Email
               </h3>
-              <p className="mt-1 text-xs font-light" style={{ color: "var(--text-muted)" }}>
-                care@nakshatracollections.com
+              <p className="mt-1 text-xs font-medium text-stone-900 break-all">
+                store.nakshatracollections@gmail.com
+              </p>
+              <p className="text-[11px] font-light mt-0.5" style={{ color: "var(--text-muted)" }}>
+                Customer care &amp; wholesale inquiries.
               </p>
             </div>
-            <div className="mt-4 pt-4 border-t flex items-center gap-1 text-xs font-bold uppercase tracking-wider group-hover:underline" style={{ color: "var(--accent-cta)", borderColor: "var(--border-subtle)" }}>
-              <span>Send Email</span>
+            <div className="mt-4 pt-3 border-t flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-stone-800 group-hover:underline" style={{ borderColor: "var(--border-subtle)" }}>
+              <span>Send Mail</span>
               <ArrowRight className="h-3.5 w-3.5" />
             </div>
           </a>
 
-          {/* Working Hours */}
+          {/* 3. Official Instagram Profile */}
+          <a
+            href="https://www.instagram.com/nakshatra.collections.kply/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-5 sm:p-6 rounded-3xl border shadow-xs card-lift flex flex-col justify-between transition-all group bg-white hover:border-[#E4405F]"
+            style={{ borderColor: "var(--border-medium)" }}
+          >
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-rose-50 text-[#E4405F] border border-rose-200/60">
+                  <InstagramIcon className="h-5 w-5" />
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+                  Follow Us
+                </span>
+              </div>
+              <h3 className="font-serif text-base font-semibold" style={{ color: "var(--text-primary)" }}>
+                Instagram
+              </h3>
+              <p className="mt-1 text-xs font-medium text-stone-900">
+                @nakshatra.collections.kply
+              </p>
+              <p className="text-[11px] font-light mt-0.5" style={{ color: "var(--text-muted)" }}>
+                Daily new arrivals, reels &amp; styling tips.
+              </p>
+            </div>
+            <div className="mt-4 pt-3 border-t flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#E4405F] group-hover:underline" style={{ borderColor: "var(--border-subtle)" }}>
+              <span>View Profile</span>
+              <ArrowRight className="h-3.5 w-3.5" />
+            </div>
+          </a>
+
+          {/* 4. Studio Working Hours */}
           <div
-            className="p-6 rounded-3xl border shadow-xs flex flex-col justify-between"
-            style={{ backgroundColor: "var(--bg-surface)", borderColor: "var(--border-medium)" }}
+            className="p-5 sm:p-6 rounded-3xl border shadow-xs flex flex-col justify-between bg-white"
+            style={{ borderColor: "var(--border-medium)" }}
           >
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-purple-500/10 text-purple-600 border border-purple-500/20">
                   <Clock className="h-5 w-5" />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600 bg-purple-50 dark:bg-purple-950/50 px-2 py-0.5 rounded-full border border-purple-200">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full border border-purple-200">
                   Mon &ndash; Sat
                 </span>
               </div>
               <h3 className="font-serif text-base font-semibold" style={{ color: "var(--text-primary)" }}>
                 Studio Hours
               </h3>
-              <p className="mt-1 text-xs font-light" style={{ color: "var(--text-muted)" }}>
-                9:30 AM &ndash; 7:30 PM IST (Kerala, India)
+              <p className="mt-1 text-xs font-medium text-stone-900">
+                9:30 AM &ndash; 7:30 PM IST
+              </p>
+              <p className="text-[11px] font-light mt-0.5" style={{ color: "var(--text-muted)" }}>
+                Sunday Closed &bull; Online Store Open 24/7
               </p>
             </div>
-            <div className="mt-4 pt-4 border-t text-[11px] font-light" style={{ color: "var(--text-secondary)", borderColor: "var(--border-subtle)" }}>
-              Sunday Closed &bull; Online Store Open 24/7
+            <div className="mt-4 pt-3 border-t text-[11px] font-light text-stone-500" style={{ borderColor: "var(--border-subtle)" }}>
+              Kanjirappally, Kerala
             </div>
           </div>
         </div>
@@ -230,15 +273,14 @@ export default function ContactUsPage() {
                 </p>
                 <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
                   <a
-                    href={`https://wa.me/918075000000?text=${encodeURIComponent(
+                    href={`https://wa.me/919447003584?text=${encodeURIComponent(
                       `Hello Nakshatra Collections, my name is ${formData.name}. Regarding: ${formData.message || "Order Inquiry"}`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white shadow-md"
-                    style={{ backgroundColor: "#25D366" }}
+                    className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-wider text-white shadow-md bg-[#25D366] hover:bg-[#20bd5a] transition-colors"
                   >
-                    <MessageCircle className="h-4 w-4" />
+                    <WhatsAppIcon className="h-4 w-4" />
                     <span>Open in WhatsApp</span>
                   </a>
                   <button
@@ -410,16 +452,32 @@ export default function ContactUsPage() {
               </div>
 
               <div className="space-y-3 text-xs font-light" style={{ color: "var(--text-secondary)" }}>
-                <p className="font-medium" style={{ color: "var(--text-primary)" }}>
+                <p className="font-semibold text-stone-900">
                   Nakshatra Collections
                 </p>
-                <p>
-                  Near Temple Road, Thrissur &bull; Kochi<br />
-                  Kerala, India &ndash; 680001
+                <p className="leading-relaxed">
+                  Theatre road, Kurishinkal, Kanjirappally,<br />
+                  Keralam, India &ndash; 686507
                 </p>
-                <div className="pt-2 border-t space-y-1.5" style={{ borderColor: "var(--border-subtle)" }}>
-                  <p><strong>Direct Helpline:</strong> +91 80750 00000</p>
-                  <p><strong>Support Email:</strong> care@nakshatracollections.com</p>
+                <div className="pt-2 border-t space-y-2 text-stone-700" style={{ borderColor: "var(--border-subtle)" }}>
+                  <p>
+                    <strong className="text-stone-900">WhatsApp Helpline:</strong>{" "}
+                    <a href="https://wa.me/919447003584" className="text-emerald-700 hover:underline">
+                      +91 94470 03584
+                    </a>
+                  </p>
+                  <p>
+                    <strong className="text-stone-900">Support Email:</strong>{" "}
+                    <a href="mailto:store.nakshatracollections@gmail.com" className="hover:underline">
+                      store.nakshatracollections@gmail.com
+                    </a>
+                  </p>
+                  <p>
+                    <strong className="text-stone-900">Instagram:</strong>{" "}
+                    <a href="https://www.instagram.com/nakshatra.collections.kply/" target="_blank" rel="noopener noreferrer" className="text-[#E4405F] hover:underline">
+                      @nakshatra.collections.kply
+                    </a>
+                  </p>
                   <p><strong>GST Registered:</strong> Verified Artificial Jewellery Brand</p>
                 </div>
               </div>

@@ -11,7 +11,7 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   try {
-    const products = await getProducts(50);
+    const products = await getProducts(100);
     return products.map((product) => ({
       handle: product.handle,
     }));

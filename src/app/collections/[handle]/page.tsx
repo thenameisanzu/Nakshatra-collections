@@ -6,7 +6,7 @@ export const dynamicParams = false;
 
 export async function generateStaticParams() {
   try {
-    const collections = await getCollections(50);
+    const collections = await getCollections(100);
     return collections.map((collection) => ({
       handle: collection.handle,
     }));

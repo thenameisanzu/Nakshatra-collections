@@ -52,6 +52,7 @@ const heroSlides: HeroSlide[] = [
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const goToNext = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -70,17 +71,45 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [isPaused, goToNext]);
 
+  // Progressive cinematic scroll blur and fade on scroll down
+  useEffect(() => {
+    let ticking = false;
+    const maxScroll = 500;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY;
+          const progress = Math.min(1, Math.max(0, currentY / maxScroll));
+          setScrollProgress(progress);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section
       className="w-full px-3 sm:px-6 lg:px-8 pt-3 pb-8 sm:pb-12"
       aria-label="Nakshatra Collections Hero Showcase"
     >
-      {/* Framed Luxury Editorial Viewport */}
+      {/* Framed Luxury Editorial Viewport with Scroll Blur */}
       <div
         className="relative w-full max-w-7xl mx-auto min-h-[72vh] sm:min-h-[78vh] md:min-h-[84vh] rounded-3xl sm:rounded-[2.25rem] overflow-hidden border shadow-[0_20px_50px_rgba(31,26,24,0.12)] select-none group"
         style={{
           borderColor: "var(--border-medium)",
           backgroundColor: "var(--bg-secondary)",
+          filter: scrollProgress > 0 ? `blur(${scrollProgress * 10}px)` : undefined,
+          opacity: 1 - scrollProgress * 0.4,
+          transform: scrollProgress > 0 ? `scale(${1 - scrollProgress * 0.03}) translateY(${scrollProgress * 20}px)` : undefined,
+          willChange: "filter, opacity, transform",
+          transition: "filter 0.15s ease-out, opacity 0.15s ease-out, transform 0.15s ease-out",
         }}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}

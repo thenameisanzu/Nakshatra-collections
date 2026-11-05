@@ -113,7 +113,10 @@ export default function ProductsCatalogView({
           }).length;
 
           const count = colProductsCount > 0 ? colProductsCount : matchingCount;
-          const cleanTitle = col.title.toLowerCase() === "ear rings" ? "Earrings" : col.title;
+          const isEarrings =
+            col.title.toLowerCase().replace(/[\s-_]/g, "").includes("earring") ||
+            col.handle.toLowerCase().includes("ear");
+          const cleanTitle = isEarrings ? "Earrings" : col.title;
 
           return {
             id: col.id || col.handle,
@@ -126,9 +129,10 @@ export default function ProductsCatalogView({
           // Hide empty collections with 0 products
           if (cat.count === 0) return false;
           // Deduplicate collections with the same normalized name
-          const norm = cat.title.toLowerCase().replace(/[\s-_]/g, "");
-          if (seenNames.has(norm)) return false;
-          seenNames.add(norm);
+          const raw = cat.title.toLowerCase().replace(/[\s-_]/g, "").replace(/s$/, "");
+          const canonicalKey = raw.includes("ear") ? "earring" : raw;
+          if (seenNames.has(canonicalKey)) return false;
+          seenNames.add(canonicalKey);
           return true;
         });
     }

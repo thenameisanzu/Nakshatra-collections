@@ -1,9 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Sparkles, ArrowRight } from "lucide-react";
 import type { ShopifyCollection } from "@/types/shopify";
+import { shopifyFetch, GET_ALL_COLLECTIONS_QUERY } from "@/lib/shopify";
 
 interface QuickCategoryItem {
   name: string;
@@ -72,7 +74,39 @@ interface CategoryQuickStripProps {
   collections?: ShopifyCollection[];
 }
 
-export default function CategoryQuickStrip({ collections }: CategoryQuickStripProps) {
+export default function CategoryQuickStrip({ collections: initialCollections = [] }: CategoryQuickStripProps) {
+  const [collections, setCollections] = useState<ShopifyCollection[]>(initialCollections);
+
+  // Client-Side Live Fetch: Instantly sync latest collection cover images from Shopify
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchLiveCollections() {
+      try {
+        const data = await shopifyFetch<{
+          collections: {
+            edges: Array<{ node: ShopifyCollection }>;
+          };
+        }>({
+          query: GET_ALL_COLLECTIONS_QUERY,
+          variables: { first: 20 },
+        });
+
+        if (!isMounted) return;
+        const live = data.collections?.edges?.map((e) => e.node) || [];
+        if (live.length > 0) {
+          setCollections(live);
+        }
+      } catch (err) {
+        console.warn("Client live collections fetch fallback to initial data:", err);
+      }
+    }
+
+    fetchLiveCollections();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // 1. Filter out empty collections (0 products in Shopify)
   const validCollections = (collections || []).filter((col) => {
     const realCount = col.products?.edges?.length || 0;

@@ -1,15 +1,49 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { ShopifyProduct } from "@/types/shopify";
 import ProductCard from "./ProductCard";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { shopifyFetch, GET_ALL_PRODUCTS_QUERY } from "@/lib/shopify";
 
 interface FeaturedJewelleryProps {
   products: ShopifyProduct[];
 }
 
-export default function FeaturedJewellery({ products }: FeaturedJewelleryProps) {
+export default function FeaturedJewellery({ products: initialProducts = [] }: FeaturedJewelleryProps) {
+  const [products, setProducts] = useState<ShopifyProduct[]>(initialProducts);
+
+  // Client-Side Live Sync for Bestsellers
+  useEffect(() => {
+    let isMounted = true;
+    async function syncLiveBestsellers() {
+      try {
+        const data = await shopifyFetch<{
+          products: {
+            edges: Array<{ node: ShopifyProduct }>;
+          };
+        }>({
+          query: GET_ALL_PRODUCTS_QUERY,
+          variables: { first: 20 },
+        });
+
+        if (!isMounted) return;
+        const live = data.products?.edges?.map((e) => e.node) || [];
+        if (live.length > 0) {
+          setProducts(live);
+        }
+      } catch (err) {
+        console.warn("Client live bestsellers sync fallback to initial data:", err);
+      }
+    }
+
+    syncLiveBestsellers();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   if (!products || products.length === 0) return null;
 
   const displayProducts = products.slice(0, 8);

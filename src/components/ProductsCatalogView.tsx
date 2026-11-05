@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import type { ShopifyProduct, ShopifyCollection } from "@/types/shopify";
 import ProductCard from "./ProductCard";
-import { shopifyFetch, GET_ALL_PRODUCTS_QUERY } from "@/lib/shopify";
+import { shopifyFetch, GET_ALL_PRODUCTS_QUERY, GET_ALL_COLLECTIONS_QUERY } from "@/lib/shopify";
 
 interface ProductsCatalogViewProps {
   initialProducts: ShopifyProduct[];
@@ -62,6 +62,7 @@ export default function ProductsCatalogView({
   pageSubtitle = "Discover our curated collection of premium anti-tarnish jewellery",
 }: ProductsCatalogViewProps) {
   const [products, setProducts] = useState<ShopifyProduct[]>(initialProducts);
+  const [collections, setCollections] = useState<ShopifyCollection[]>(initialCollections);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [selectedTag, setSelectedTag] = useState<string>("All");
@@ -69,31 +70,47 @@ export default function ProductsCatalogView({
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [, startTransition] = useTransition();
 
-  // Client-Side Live Sync: Fetch real-time prices, discounts, and inventory from Shopify Storefront API
+  // Client-Side Live Sync: Fetch real-time products and collections from Shopify Storefront API
   useEffect(() => {
     let isMounted = true;
-    async function syncLiveProducts() {
+    async function syncLiveData() {
       try {
-        const data = await shopifyFetch<{
-          products: {
-            edges: Array<{ node: ShopifyProduct }>;
-          };
-        }>({
-          query: GET_ALL_PRODUCTS_QUERY,
-          variables: { first: 100 },
-        });
+        const [productsData, collectionsData] = await Promise.all([
+          shopifyFetch<{
+            products: {
+              edges: Array<{ node: ShopifyProduct }>;
+            };
+          }>({
+            query: GET_ALL_PRODUCTS_QUERY,
+            variables: { first: 100 },
+          }).catch(() => null),
+          shopifyFetch<{
+            collections: {
+              edges: Array<{ node: ShopifyCollection }>;
+            };
+          }>({
+            query: GET_ALL_COLLECTIONS_QUERY,
+            variables: { first: 30 },
+          }).catch(() => null),
+        ]);
 
         if (!isMounted) return;
-        const live = data.products?.edges?.map((e) => e.node) || [];
-        if (live.length > 0) {
-          setProducts(live);
+
+        if (productsData?.products?.edges) {
+          const liveProducts = productsData.products.edges.map((e) => e.node);
+          if (liveProducts.length > 0) setProducts(liveProducts);
+        }
+
+        if (collectionsData?.collections?.edges) {
+          const liveCollections = collectionsData.collections.edges.map((e) => e.node);
+          if (liveCollections.length > 0) setCollections(liveCollections);
         }
       } catch (err) {
-        console.warn("Client live products sync fallback to initial data:", err);
+        console.warn("Client live catalogue sync fallback to initial data:", err);
       }
     }
 
-    syncLiveProducts();
+    syncLiveData();
     return () => {
       isMounted = false;
     };
@@ -116,10 +133,10 @@ export default function ProductsCatalogView({
 
   // Compute categories and dynamic counts accurately from Shopify backend
   const categoriesList = useMemo(() => {
-    if (initialCollections && initialCollections.length > 0) {
+    if (collections && collections.length > 0) {
       const seenNames = new Set<string>();
 
-      return initialCollections
+      return collections
         .map((col) => {
           const colProductsCount = col.products?.edges?.length || 0;
           const catName = col.title.toLowerCase();
@@ -169,7 +186,7 @@ export default function ProductsCatalogView({
         });
     }
     return fallbackCategories;
-  }, [initialCollections, products, fallbackCategories]);
+  }, [collections, products, fallbackCategories]);
 
   // Extract unique sub-category style tags (e.g. Kundan, Antique, Bridal, AD Stones, Imitation, Fancy)
   const availableTags = useMemo(() => {

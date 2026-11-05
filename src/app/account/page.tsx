@@ -20,7 +20,7 @@ export default function AccountPage() {
     );
   };
 
-  const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "nakshatra-collections-ttrghptp.myshopify.com";
+  const storeDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "ymrvy4-70.myshopify.com";
   const shopifyLoginUrl = `https://${storeDomain.replace(/^https?:\/\//, "")}/account/login`;
 
   return (

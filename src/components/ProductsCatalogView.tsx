@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useTransition } from "react";
+import { useState, useMemo, useTransition, useEffect } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import type { ShopifyProduct, ShopifyCollection } from "@/types/shopify";
 import ProductCard from "./ProductCard";
+import { shopifyFetch, GET_ALL_PRODUCTS_QUERY } from "@/lib/shopify";
 
 interface ProductsCatalogViewProps {
   initialProducts: ShopifyProduct[];
@@ -60,12 +61,43 @@ export default function ProductsCatalogView({
   pageTitle = "Products",
   pageSubtitle = "Discover our curated collection of premium anti-tarnish jewellery",
 }: ProductsCatalogViewProps) {
+  const [products, setProducts] = useState<ShopifyProduct[]>(initialProducts);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
   const [selectedTag, setSelectedTag] = useState<string>("All");
   const [sortBy, setSortBy] = useState<SortOption>("featured");
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [, startTransition] = useTransition();
+
+  // Client-Side Live Sync: Fetch real-time prices, discounts, and inventory from Shopify Storefront API
+  useEffect(() => {
+    let isMounted = true;
+    async function syncLiveProducts() {
+      try {
+        const data = await shopifyFetch<{
+          products: {
+            edges: Array<{ node: ShopifyProduct }>;
+          };
+        }>({
+          query: GET_ALL_PRODUCTS_QUERY,
+          variables: { first: 100 },
+        });
+
+        if (!isMounted) return;
+        const live = data.products?.edges?.map((e) => e.node) || [];
+        if (live.length > 0) {
+          setProducts(live);
+        }
+      } catch (err) {
+        console.warn("Client live products sync fallback to initial data:", err);
+      }
+    }
+
+    syncLiveProducts();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Pre-calculated default categories if collections are empty or loading
   const fallbackCategories = useMemo(
@@ -93,7 +125,7 @@ export default function ProductsCatalogView({
           const catName = col.title.toLowerCase();
           const catHandle = col.handle.toLowerCase();
 
-          const matchingCount = initialProducts.filter((product) => {
+          const matchingCount = products.filter((product) => {
             const type = (product.productType || "").toLowerCase();
             const title = product.title.toLowerCase();
             const tags = (product.tags || []).map((t) => t.toLowerCase());
@@ -137,14 +169,14 @@ export default function ProductsCatalogView({
         });
     }
     return fallbackCategories;
-  }, [initialCollections, initialProducts, fallbackCategories]);
+  }, [initialCollections, products, fallbackCategories]);
 
   // Extract unique sub-category style tags (e.g. Kundan, Antique, Bridal, AD Stones, Imitation, Fancy)
   const availableTags = useMemo(() => {
     const tagsMap = new Map<string, number>();
 
     // Scan products relevant to the current category (or all if all)
-    const baseProducts = initialProducts.filter((product) => {
+    const baseProducts = products.filter((product) => {
       if (selectedCategory === "all") return true;
       const type = (product.productType || "").toLowerCase();
       const title = product.title.toLowerCase();
@@ -169,11 +201,11 @@ export default function ProductsCatalogView({
     });
 
     return Array.from(tagsMap.entries()).map(([name, count]) => ({ name, count }));
-  }, [initialProducts, selectedCategory]);
+  }, [products, selectedCategory]);
 
   // Filtered products list
   const filteredProducts = useMemo(() => {
-    return initialProducts.filter((product) => {
+    return products.filter((product) => {
       // 1. Search Query Filter
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase().trim();
@@ -241,7 +273,7 @@ export default function ProductsCatalogView({
 
       return true;
     });
-  }, [initialProducts, searchQuery, selectedCategory, selectedTag, categoriesList]);
+  }, [products, searchQuery, selectedCategory, selectedTag, categoriesList]);
 
   // Sort filtered products
   const sortedProducts = useMemo(() => {
@@ -361,7 +393,7 @@ export default function ProductsCatalogView({
                   selectedCategory === "all" ? "bg-white/20 text-white" : "bg-stone-100 text-stone-500"
                 }`}
               >
-                {initialProducts.length}
+                {products.length}
               </span>
             </button>
 
@@ -588,7 +620,7 @@ export default function ProductsCatalogView({
                       selectedCategory === "all" ? "bg-white/20 text-white" : "text-stone-400"
                     }`}
                   >
-                    {initialProducts.length}
+                    {products.length}
                   </span>
                 </button>
 
@@ -685,7 +717,7 @@ export default function ProductsCatalogView({
             <div className="mb-4 flex items-center justify-between text-xs text-stone-500 font-light">
               <span>
                 Showing <strong className="font-semibold text-stone-900">{sortedProducts.length}</strong> of{" "}
-                <strong className="font-semibold text-stone-900">{initialProducts.length}</strong> items
+                <strong className="font-semibold text-stone-900">{products.length}</strong> items
               </span>
             </div>
 
@@ -843,7 +875,7 @@ export default function ProductsCatalogView({
                         selectedCategory === "all" ? "bg-white/20 text-white" : "bg-stone-200 text-stone-600"
                       }`}
                     >
-                      {initialProducts.length}
+                      {products.length}
                     </span>
                   </button>
                   {categoriesList.map((cat) => {

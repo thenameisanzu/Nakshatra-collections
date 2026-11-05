@@ -1,17 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ShopifyProduct, ShopifyImage } from "@/types/shopify";
 import ProductGallery from "@/components/ProductGallery";
 import ProductForm from "@/components/ProductForm";
 import { Gem, Sparkles } from "lucide-react";
+import { shopifyFetch, GET_PRODUCT_BY_HANDLE_QUERY } from "@/lib/shopify";
 
 interface ProductDetailViewProps {
   product: ShopifyProduct;
 }
 
-export default function ProductDetailView({ product }: ProductDetailViewProps) {
+export default function ProductDetailView({ product: initialProduct }: ProductDetailViewProps) {
+  const [product, setProduct] = useState<ShopifyProduct>(initialProduct);
   const [selectedVariantImage, setSelectedVariantImage] = useState<ShopifyImage | null>(null);
+
+  // Client-Side Live Sync: Fetch real-time price, discount, and availability directly from Shopify
+  useEffect(() => {
+    let isMounted = true;
+    async function syncLiveProduct() {
+      try {
+        const data = await shopifyFetch<{
+          product: ShopifyProduct | null;
+        }>({
+          query: GET_PRODUCT_BY_HANDLE_QUERY,
+          variables: { handle: initialProduct.handle },
+        });
+
+        if (!isMounted) return;
+        if (data.product) {
+          setProduct(data.product);
+        }
+      } catch (err) {
+        console.warn("Client live product sync fallback:", err);
+      }
+    }
+
+    syncLiveProduct();
+    return () => {
+      isMounted = false;
+    };
+  }, [initialProduct.handle]);
 
   // Extract all images from edges or fallback to featuredImage
   const images: ShopifyImage[] =

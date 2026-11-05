@@ -72,8 +72,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   // Determine primary collection for breadcrumb and related recommendations
   const primaryCollection =
-    product.collections && product.collections.edges.length > 0
-      ? product.collections.edges[0].node
+    product.collections?.edges &&
+    Array.isArray(product.collections.edges) &&
+    product.collections.edges.length > 0
+      ? product.collections.edges[0]?.node
       : null;
 
   const collectionTitle = primaryCollection?.title || product.productType || "Creations";

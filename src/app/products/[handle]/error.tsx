@@ -26,14 +26,25 @@ export default function ProductError({
       <p className="mt-2 max-w-md text-sm text-zinc-600 dark:text-zinc-400">
         We encountered an error while loading this product from Shopify.
       </p>
+
+      {error?.message && (
+        <div className="mt-4 max-w-md rounded-xl bg-red-50 p-3 text-left text-xs font-mono text-red-700 border border-red-200 overflow-x-auto">
+          <p className="font-semibold">Reason:</p>
+          <p className="mt-1">{error.message}</p>
+          {error.digest && <p className="mt-1 text-red-400 text-[10px]">Digest: {error.digest}</p>}
+        </div>
+      )}
+
       <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
         <button
           type="button"
-          onClick={() => reset()}
-          className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 active:scale-[0.98]"
+          onClick={() => {
+            window.location.reload();
+          }}
+          className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 active:scale-[0.98] cursor-pointer"
         >
           <RotateCcw className="h-4 w-4" />
-          <span>Try Again</span>
+          <span>Refresh Page</span>
         </button>
         <Link
           href="/#products"

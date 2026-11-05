@@ -58,11 +58,11 @@ export default function ProductDetailView({ product: initialProduct }: ProductDe
     };
   }, [initialProduct.handle]);
 
-  // Extract all images from edges or fallback to featuredImage
+  // Extract all images from edges or fallback to featuredImage safely
   const images: ShopifyImage[] =
-    product.images && product.images.edges.length > 0
-      ? product.images.edges.map((edge) => edge.node)
-      : product.featuredImage
+    product?.images?.edges && Array.isArray(product.images.edges) && product.images.edges.length > 0
+      ? (product.images.edges.map((edge) => edge?.node).filter(Boolean) as ShopifyImage[])
+      : product?.featuredImage
       ? [product.featuredImage]
       : [];
 

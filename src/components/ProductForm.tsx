@@ -47,10 +47,16 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
   const { isInWishlist, toggleWishlist } = useWishlist();
   const isWishlisted = isInWishlist(product.id);
   const variants = useMemo(
-    () => product.variants?.edges.map((e) => e.node) || [],
-    [product.variants]
+    () =>
+      product?.variants?.edges && Array.isArray(product.variants.edges)
+        ? product.variants.edges.map((e) => e?.node).filter(Boolean)
+        : [],
+    [product?.variants]
   );
-  const options = useMemo(() => product.options || [], [product.options]);
+  const options = useMemo(
+    () => (Array.isArray(product?.options) ? product.options : []),
+    [product?.options]
+  );
 
   // Initial selected state
   const initialSelections = useMemo(() => {
@@ -97,17 +103,26 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
   // Check if active variant or product is available
   const isAvailable = activeVariant ? activeVariant.availableForSale : product.availableForSale;
 
-  const currentPrice = activeVariant
-    ? activeVariant.price
-    : product.priceRange.minVariantPrice;
+  const currentPrice =
+    activeVariant?.price ||
+    product?.priceRange?.minVariantPrice || {
+      amount: "0",
+      currencyCode: "INR",
+    };
 
-  const compareAtPrice = activeVariant?.compareAtPrice || product.compareAtPriceRange?.minVariantPrice;
-  const hasDiscount =
-    compareAtPrice &&
-    parseFloat(compareAtPrice.amount) > parseFloat(currentPrice.amount);
+  const compareAtPrice =
+    activeVariant?.compareAtPrice ||
+    product?.compareAtPriceRange?.minVariantPrice ||
+    null;
+
+  const hasDiscount = Boolean(
+    compareAtPrice?.amount &&
+    currentPrice?.amount &&
+    parseFloat(compareAtPrice.amount) > parseFloat(currentPrice.amount)
+  );
 
   const discountPercent =
-    hasDiscount && compareAtPrice
+    hasDiscount && compareAtPrice?.amount && currentPrice?.amount
       ? Math.round(
           ((parseFloat(compareAtPrice.amount) - parseFloat(currentPrice.amount)) /
             parseFloat(compareAtPrice.amount)) *
@@ -115,10 +130,13 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         )
       : null;
 
-  const formattedPrice = formatPrice(currentPrice.amount, currentPrice.currencyCode);
+  const formattedPrice = formatPrice(
+    currentPrice?.amount || "0",
+    currentPrice?.currencyCode || "INR"
+  );
   const formattedComparePrice =
-    hasDiscount && compareAtPrice
-      ? formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode)
+    hasDiscount && compareAtPrice?.amount
+      ? formatPrice(compareAtPrice.amount, compareAtPrice.currencyCode || "INR")
       : null;
 
   const handleOptionChange = (optionName: string, value: string) => {
@@ -193,13 +211,13 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
       handle: product.handle,
       title: product.title,
       price: {
-        amount: currentPrice.amount,
-        currencyCode: currentPrice.currencyCode,
+        amount: currentPrice?.amount || "0",
+        currencyCode: currentPrice?.currencyCode || "INR",
       },
       compareAtPrice: compareAtPrice
         ? {
             amount: compareAtPrice.amount,
-            currencyCode: compareAtPrice.currencyCode,
+            currencyCode: compareAtPrice.currencyCode || currentPrice?.currencyCode || "INR",
           }
         : null,
       imageUrl: product.featuredImage?.url || null,

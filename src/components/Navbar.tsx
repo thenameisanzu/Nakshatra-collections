@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useSearch } from "@/context/SearchContext";
@@ -31,21 +32,30 @@ interface CategoryNavItem {
 }
 
 const categories: CategoryNavItem[] = [
-  { label: "Necklaces & Pendants", href: "/collections/necklaces", icon: Gem },
-  { label: "Earrings & Drops", href: "/collections/earrings", icon: Sparkles },
-  { label: "Bangles & Cuffs", href: "/collections/bangles", icon: Droplets },
-  { label: "Solitaires & Rings", href: "/collections/rings", icon: CircleDot },
-  { label: "Kerala Bridal Sets", href: "/collections/bridal-jewellery", icon: Crown },
-  { label: "Necklace Sets", href: "/collections/necklace-sets", icon: Crown },
-  { label: "Daily Payals", href: "/collections/anklets", icon: Sparkles },
-  { label: "New Arrivals 2026", href: "/collections/new-arrivals", icon: Flame },
+  { label: "Necklace", href: "/collections/necklace", icon: Gem },
+  { label: "Earrings", href: "/collections/ear-rings", icon: Sparkles },
+  { label: "Bangles", href: "/collections/bangles", icon: Droplets },
+  { label: "Bracelets", href: "/collections/bracelets", icon: Droplets },
+  { label: "Rings", href: "/collections/rings", icon: CircleDot },
+  { label: "Men's Accessories", href: "/collections/mens-accessories", icon: Crown },
+  { label: "Anklets", href: "/collections/anklets", icon: Sparkles },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname() || "";
   const { toggleSearch } = useSearch();
   const { totalQuantity, openCart } = useCart();
   const { totalWishlistItems } = useWishlist();
+
+  // Active state calculations for top navigation
+  const isHomeActive = pathname === "/";
+  const isCollectionsActive =
+    pathname === "/products" ||
+    pathname === "/collections" ||
+    pathname.startsWith("/collections/") ||
+    pathname.startsWith("/products/");
+  const isContactActive = pathname === "/contact";
 
   // Global Keyboard Shortcut: Cmd+K / Ctrl+K
   useEffect(() => {
@@ -83,25 +93,46 @@ export default function Navbar() {
             boxShadow: "0 8px 30px rgba(31, 26, 24, 0.06)",
           }}
         >
-          {/* Left: 3 Clean Minimal Navigation Links (Tablet & Desktop) */}
-          <nav className="hidden md:flex md:flex-1 items-center justify-start gap-3.5 lg:gap-6 xl:gap-8">
+          {/* Left: 3 Clean Minimal Navigation Links (Tablet & Desktop) with Active Selection Highlight */}
+          <nav className="hidden md:flex md:flex-1 items-center justify-start gap-1 sm:gap-1.5 lg:gap-2">
             <Link
               href="/"
-              className="text-xs lg:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors shrink-0"
+              className={`relative text-xs lg:text-[13px] tracking-wide transition-all duration-200 shrink-0 px-3 py-1.5 rounded-full flex items-center gap-1.5 ${
+                isHomeActive
+                  ? "text-[#6C080C] font-semibold bg-[#FAF2F2] border border-[#E8D2D4]/80 shadow-2xs"
+                  : "text-stone-600 hover:text-stone-950 font-normal hover:bg-stone-100/70"
+              }`}
             >
-              Home
+              {isHomeActive && (
+                <span className="h-1.5 w-1.5 rounded-full bg-[#6C080C] shadow-[0_0_6px_rgba(108,8,12,0.6)]" />
+              )}
+              <span>Home</span>
             </Link>
             <Link
               href="/products"
-              className="text-xs lg:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors shrink-0"
+              className={`relative text-xs lg:text-[13px] tracking-wide transition-all duration-200 shrink-0 px-3 py-1.5 rounded-full flex items-center gap-1.5 ${
+                isCollectionsActive
+                  ? "text-[#6C080C] font-semibold bg-[#FAF2F2] border border-[#E8D2D4]/80 shadow-2xs"
+                  : "text-stone-600 hover:text-stone-950 font-normal hover:bg-stone-100/70"
+              }`}
             >
-              Collections
+              {isCollectionsActive && (
+                <span className="h-1.5 w-1.5 rounded-full bg-[#6C080C] shadow-[0_0_6px_rgba(108,8,12,0.6)]" />
+              )}
+              <span>Collections</span>
             </Link>
             <Link
               href="/contact"
-              className="text-xs lg:text-sm font-normal text-stone-600 hover:text-stone-950 transition-colors shrink-0"
+              className={`relative text-xs lg:text-[13px] tracking-wide transition-all duration-200 shrink-0 px-3 py-1.5 rounded-full flex items-center gap-1.5 ${
+                isContactActive
+                  ? "text-[#6C080C] font-semibold bg-[#FAF2F2] border border-[#E8D2D4]/80 shadow-2xs"
+                  : "text-stone-600 hover:text-stone-950 font-normal hover:bg-stone-100/70"
+              }`}
             >
-              Contact
+              {isContactActive && (
+                <span className="h-1.5 w-1.5 rounded-full bg-[#6C080C] shadow-[0_0_6px_rgba(108,8,12,0.6)]" />
+              )}
+              <span>Contact</span>
             </Link>
           </nav>
 
@@ -146,10 +177,14 @@ export default function Navbar() {
             {/* Wishlist (Desktop & Tablet only - Mobile has it in bottom nav) */}
             <Link
               href="/wishlist"
-              className="hidden md:flex relative h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full hover:bg-gray-100 active:scale-95 transition-colors text-gray-700"
+              className={`hidden md:flex relative h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full active:scale-95 transition-all ${
+                pathname === "/wishlist"
+                  ? "text-[#6C080C] bg-[#FAF2F2] border border-[#E8D2D4]/70"
+                  : "hover:bg-gray-100 text-gray-700"
+              }`}
               aria-label={`Wishlist (${totalWishlistItems} items)`}
             >
-              <Heart className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+              <Heart className={`h-4 w-4 sm:h-4.5 sm:w-4.5 ${pathname === "/wishlist" ? "fill-[#6C080C] stroke-[#6C080C]" : ""}`} />
               {totalWishlistItems > 0 && (
                 <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-[#6C080C] px-1 text-[8.5px] font-bold text-white shadow-xs">
                   {totalWishlistItems > 99 ? "99+" : totalWishlistItems}

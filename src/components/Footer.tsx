@@ -1,11 +1,61 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { WhatsAppIcon, InstagramIcon } from "@/components/icons/SocialIcons";
+import { shopifyFetch, GET_ALL_COLLECTIONS_QUERY } from "@/lib/shopify";
+import type { ShopifyCollection } from "@/types/shopify";
+
+// Verified collections matching live Shopify store
+const initialCollections = [
+  { title: "Necklace", handle: "necklace" },
+  { title: "Earrings", handle: "ear-rings" },
+  { title: "Bangles", handle: "bangles" },
+  { title: "Bracelets", handle: "bracelets" },
+  { title: "Rings", handle: "rings" },
+  { title: "Men's Accessories", handle: "mens-accessories" },
+  { title: "Anklets", handle: "anklets" },
+];
 
 export default function Footer() {
+  const [collections, setCollections] = useState<Array<{ title: string; handle: string }>>(initialCollections);
+
+  // Sync latest collections dynamically from Shopify Storefront
+  useEffect(() => {
+    let isMounted = true;
+    async function syncCollections() {
+      try {
+        const data = await shopifyFetch<{
+          collections: {
+            edges: Array<{ node: ShopifyCollection }>;
+          };
+        }>({
+          query: GET_ALL_COLLECTIONS_QUERY,
+          variables: { first: 20 },
+        });
+
+        if (!isMounted) return;
+        const live = data.collections?.edges?.map((e) => ({
+          title: e.node.title,
+          handle: e.node.handle,
+        })) || [];
+
+        if (live.length > 0) {
+          setCollections(live);
+        }
+      } catch (err) {
+        console.warn("Footer live collections fallback:", err);
+      }
+    }
+
+    syncCollections();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <footer
       className="mt-auto border-t transition-colors duration-300"
@@ -34,7 +84,7 @@ export default function Footer() {
                 <span className="text-base sm:text-lg font-medium tracking-[0.16em] uppercase leading-none text-gray-900">
                   Nakshatra Collections
                 </span>
-                <span className="text-[8px] font-semibold tracking-[0.28em] uppercase leading-none mt-1 text-amber-700">
+                <span className="text-[8px] font-semibold tracking-[0.28em] uppercase leading-none mt-1 text-[#6C080C]">
                   ANTI-TARNISH JEWELLERY
                 </span>
               </div>
@@ -46,7 +96,7 @@ export default function Footer() {
 
             {/* Address */}
             <div className="mt-4 flex items-start gap-2 text-xs text-gray-600 leading-relaxed font-light">
-              <MapPin className="h-4 w-4 text-[#C59B4E] shrink-0 mt-0.5" />
+              <MapPin className="h-4 w-4 text-[#6C080C] shrink-0 mt-0.5" />
               <span>
                 Theatre road, Kurishinkal, Kanjirappally,<br />
                 Keralam &ndash; 686507
@@ -85,33 +135,27 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links (Span 2) */}
+          {/* Collections Column (Span 2) */}
           <div className="lg:col-span-2 reveal-on-scroll stagger-2">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-3 text-gray-900">
               Collections
             </h4>
             <ul className="flex flex-col gap-2 text-xs text-gray-600 font-light">
               <li>
-                <Link href="/collections" className="hover:text-black transition-colors">All Jewellery</Link>
+                <Link href="/products" className="hover:text-[#6C080C] transition-colors">
+                  All Jewellery
+                </Link>
               </li>
-              <li>
-                <Link href="/collections/necklace" className="hover:text-black transition-colors">Necklaces &amp; Sets</Link>
-              </li>
-              <li>
-                <Link href="/collections/earrings" className="hover:text-black transition-colors">Earrings &amp; Studs</Link>
-              </li>
-              <li>
-                <Link href="/collections/bangles" className="hover:text-black transition-colors">Bangles &amp; Kadas</Link>
-              </li>
-              <li>
-                <Link href="/collections/rings" className="hover:text-black transition-colors">Solitaires &amp; Rings</Link>
-              </li>
-              <li>
-                <Link href="/collections/bracelets" className="hover:text-black transition-colors">Bracelets</Link>
-              </li>
-              <li>
-                <Link href="/collections/anklets" className="hover:text-black transition-colors">Payals &amp; Anklets</Link>
-              </li>
+              {collections.map((col) => (
+                <li key={col.handle}>
+                  <Link
+                    href={`/collections/${col.handle}`}
+                    className="hover:text-[#6C080C] transition-colors"
+                  >
+                    {col.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -122,22 +166,22 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-2 text-xs text-gray-600 font-light">
               <li>
-                <Link href="/account" className="hover:text-black transition-colors">Track Your Order</Link>
+                <Link href="/account" className="hover:text-[#6C080C] transition-colors">Track Your Order</Link>
               </li>
               <li>
-                <Link href="/shipping-policy" className="hover:text-black transition-colors">Shipping &amp; Delivery Policy</Link>
+                <Link href="/shipping-policy" className="hover:text-[#6C080C] transition-colors">Shipping &amp; Delivery Policy</Link>
               </li>
               <li>
-                <Link href="/refund-policy" className="hover:text-black transition-colors">Returns &amp; Exchanges</Link>
+                <Link href="/refund-policy" className="hover:text-[#6C080C] transition-colors">Returns &amp; Exchanges</Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-black transition-colors">Contact Us</Link>
+                <Link href="/contact" className="hover:text-[#6C080C] transition-colors">Contact Us</Link>
               </li>
               <li>
-                <Link href="/privacy-policy" className="hover:text-black transition-colors">Privacy Policy</Link>
+                <Link href="/privacy-policy" className="hover:text-[#6C080C] transition-colors">Privacy Policy</Link>
               </li>
               <li>
-                <Link href="/terms-of-service" className="hover:text-black transition-colors">Terms of Service</Link>
+                <Link href="/terms-of-service" className="hover:text-[#6C080C] transition-colors">Terms of Service</Link>
               </li>
             </ul>
           </div>

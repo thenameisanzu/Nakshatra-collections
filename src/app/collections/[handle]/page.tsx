@@ -35,11 +35,24 @@ export async function generateMetadata({
     };
   }
 
+  const ogImage = collection.image?.url || "/og-image.jpg";
+
   return {
     title: `${collection.title} | NAKSHATRA COLLECTIONS - Artificial Jewellery Store`,
     description:
       collection.description ||
       `Shop the ${collection.title} artificial jewellery collection from Nakshatra Collections. Fast delivery across Kerala and India.`,
+    openGraph: {
+      title: `${collection.title} | NAKSHATRA COLLECTIONS`,
+      description: collection.description || `Shop the ${collection.title} collection from Nakshatra.`,
+      images: [{ url: ogImage }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${collection.title} | NAKSHATRA COLLECTIONS`,
+      description: collection.description || `Shop the ${collection.title} collection from Nakshatra.`,
+      images: [ogImage],
+    },
   };
 }
 

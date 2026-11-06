@@ -28,10 +28,62 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? (process.env.NEXT_PUBLIC_SITE_URL.startsWith("http")
+      ? process.env.NEXT_PUBLIC_SITE_URL
+      : `https://${process.env.NEXT_PUBLIC_SITE_URL}`)
+  : process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "https://nakshatra-collections.vercel.app";
+
 export const metadata: Metadata = {
-  title: "NAKSHATRA COLLECTIONS | Artificial Jewellery Store",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "NAKSHATRA COLLECTIONS | 18K Real Gold Plated Anti-Tarnish Jewellery",
+    template: "%s | NAKSHATRA COLLECTIONS",
+  },
   description:
-    "Discover Nakshatra Collections - anti-tarnish artificial jewellery, 18K gold plated daily wear, wedding jewellery sets, and solitaire rings with fast delivery in Kerala & India.",
+    "Discover Nakshatra Collections - 100% waterproof, sweatproof, 18K real gold plated anti-tarnish jewellery. Handcrafted necklaces, earrings, bangles, and rings for everyday luxury.",
+  applicationName: "Nakshatra Collections",
+  keywords: [
+    "Nakshatra Collections",
+    "Anti-tarnish jewellery",
+    "18K gold plated jewellery",
+    "Artificial jewellery Kerala",
+    "Waterproof jewellery",
+    "Kanjirappally jewellery",
+    "Online Jewellery Destination",
+  ],
+  authors: [{ name: "Nakshatra Collections" }],
+  creator: "Nakshatra Collections",
+  publisher: "Nakshatra Collections",
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: "/",
+    siteName: "Nakshatra Collections",
+    title: "NAKSHATRA COLLECTIONS | Your Online Jewellery Destination",
+    description:
+      "100% waterproof, sweatproof, 18K real gold plated anti-tarnish jewellery. Pan-India delivery with signature luxury packaging.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1024,
+        height: 576,
+        alt: "Nakshatra Collections - Your Online Jewellery Destination",
+        type: "image/jpeg",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "NAKSHATRA COLLECTIONS | Your Online Jewellery Destination",
+    description:
+      "100% waterproof, sweatproof, 18K real gold plated anti-tarnish jewellery. Pan-India delivery with signature luxury packaging.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({

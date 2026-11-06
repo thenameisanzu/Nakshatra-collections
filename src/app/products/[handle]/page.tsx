@@ -52,12 +52,13 @@ export async function generateMetadata({
       description,
       images: product.featuredImage
         ? [{ url: product.featuredImage.url, alt: product.featuredImage.altText || product.title }]
-        : [],
+        : [{ url: "/og-image.jpg", width: 1024, height: 576, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: product.featuredImage ? [product.featuredImage.url] : ["/og-image.jpg"],
     },
   };
 }

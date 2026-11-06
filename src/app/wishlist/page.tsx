@@ -100,7 +100,7 @@ export default function WishlistPage() {
             <button
               type="button"
               onClick={clearWishlist}
-              className="text-xs font-semibold uppercase tracking-wider text-rose-700 hover:underline flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
+              className="text-xs font-semibold uppercase tracking-wider text-[#6C080C] hover:underline flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
             >
               <Trash2 className="h-3.5 w-3.5" />
               <span>Clear Wishlist</span>
@@ -120,7 +120,7 @@ export default function WishlistPage() {
             <div
               className="flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full mb-4 shadow-inner liquid-glass"
             >
-              <Heart className="h-8 w-8 sm:h-9 sm:w-9 text-rose-600" />
+              <Heart className="h-8 w-8 sm:h-9 sm:w-9 text-[#6C080C]" />
             </div>
 
             <h2
@@ -205,11 +205,11 @@ export default function WishlistPage() {
                   <button
                     type="button"
                     onClick={() => removeFromWishlist(item.id)}
-                    className="absolute top-3 right-3 z-10 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full liquid-glass liquid-glass-hover text-rose-600 shadow-xs active:scale-90 cursor-pointer"
+                    className="absolute top-3 right-3 z-10 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full liquid-glass liquid-glass-hover text-[#6C080C] shadow-xs active:scale-90 cursor-pointer"
                     aria-label={`Remove ${item.title} from wishlist`}
                     title="Remove from Wishlist"
                   >
-                    <Heart className="h-4 w-4 sm:h-4.5 sm:w-4.5 fill-current stroke-rose-600" />
+                    <Heart className="h-4 w-4 sm:h-4.5 sm:w-4.5 fill-current stroke-[#6C080C]" />
                   </button>
 
                   {/* Details */}

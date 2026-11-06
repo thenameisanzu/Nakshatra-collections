@@ -154,7 +154,7 @@ export default function ProductCard({
 
   return (
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-stone-200/70 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(36,24,21,0.08)] hover:border-[#C59B4E]/40 transition-all duration-300 ${className}`}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-stone-200/70 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(36,24,21,0.08)] hover:border-[#6C080C]/35 transition-all duration-300 ${className}`}
     >
       {/* Product Image Stage: Full edge-to-edge fit without awkward letterboxing or inner borders */}
       <div className="relative aspect-square w-full overflow-hidden bg-[#FAF8F5] block">
@@ -212,7 +212,7 @@ export default function ProductCard({
               </span>
             )}
             {product.availableForSale && discountPercent && discountPercent > 0 && (
-              <span className="rounded-full px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-wider bg-[#80222F] text-white shadow-xs">
+              <span className="rounded-full px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-wider bg-[#6C080C] text-white shadow-xs">
                 {discountPercent}% OFF
               </span>
             )}
@@ -230,7 +230,7 @@ export default function ProductCard({
             }}
             className="w-full flex items-center justify-center gap-1.5 rounded-full py-2 px-3 text-[11px] font-semibold uppercase tracking-wider shadow-md transition-all active:scale-95 cursor-pointer bg-white/95 backdrop-blur-xs text-[#241815] hover:bg-white hover:text-black border border-stone-200"
           >
-            <Eye className="h-3.5 w-3.5 text-[#C59B4E]" />
+            <Eye className="h-3.5 w-3.5 text-[#6C080C]" />
             <span>Quick Preview</span>
           </button>
         </div>
@@ -242,14 +242,14 @@ export default function ProductCard({
         onClick={handleWishlistClick}
         className={`absolute top-2.5 right-2.5 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 backdrop-blur-md shadow-xs hover:bg-white hover:scale-110 active:scale-90 transition-all duration-200 cursor-pointer ${
           isWishlisted
-            ? "text-rose-600 scale-105"
-            : "text-stone-400 hover:text-rose-600"
+            ? "text-[#6C080C] scale-105"
+            : "text-stone-400 hover:text-[#6C080C]"
         }`}
         aria-label={isWishlisted ? `Remove ${product.title} from wishlist` : `Save ${product.title} to wishlist`}
       >
         <Heart
           className={`h-4 w-4 transition-transform duration-200 ${
-            isWishlisted ? "fill-rose-600 stroke-rose-600" : ""
+            isWishlisted ? "fill-[#6C080C] stroke-[#6C080C]" : ""
           }`}
         />
       </button>
@@ -274,7 +274,7 @@ export default function ProductCard({
         {/* Title */}
         <Link href={`/products/${product.handle}`} className="group/title block">
           <h3
-            className="text-xs sm:text-[13.5px] font-medium transition-colors line-clamp-1 group-hover/title:text-[#C59B4E]"
+            className="text-xs sm:text-[13.5px] font-medium transition-colors line-clamp-1 group-hover/title:text-[#6C080C]"
             style={{ color: "var(--text-primary)" }}
           >
             {product.title}

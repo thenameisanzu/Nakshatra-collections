@@ -186,7 +186,7 @@ export default function CategoryQuickStrip({ collections: initialCollections = [
             <Link
               key={item.name}
               href={item.href}
-              className={`group relative flex flex-col p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl bg-white border border-stone-200/70 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(36,24,21,0.08)] hover:border-[#C59B4E]/40 hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 cursor-pointer reveal-on-scroll-scale stagger-${(idx % 12) + 1}`}
+              className={`group relative flex flex-col p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl bg-white border border-stone-200/70 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(36,24,21,0.08)] hover:border-[#6C080C]/35 hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 cursor-pointer reveal-on-scroll-scale stagger-${(idx % 12) + 1}`}
             >
               {/* Product Showcase Image Container: Full Fit edge-to-edge without letterboxing or inner borders */}
               <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-[#FAF8F5]">
@@ -202,7 +202,7 @@ export default function CategoryQuickStrip({ collections: initialCollections = [
               {/* Category Details at Bottom of Card */}
               <div className="pt-2.5 pb-1 sm:pt-3 text-center flex flex-col items-center">
                 <h3
-                  className="text-xs sm:text-sm font-medium line-clamp-1 transition-colors group-hover:text-[#C59B4E]"
+                  className="text-xs sm:text-sm font-medium line-clamp-1 transition-colors group-hover:text-[#6C080C]"
                   style={{ color: "var(--text-primary)" }}
                 >
                   {item.name}

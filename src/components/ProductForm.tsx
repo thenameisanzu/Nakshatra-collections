@@ -431,15 +431,15 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
             onClick={handleWishlistToggle}
             className={`flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl border transition-all duration-200 hover:scale-105 active:scale-90 cursor-pointer ${
               isWishlisted
-                ? "text-rose-600 border-rose-300 bg-rose-50/60"
-                : "border-[var(--border-medium)] bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:text-rose-600"
+                ? "text-[#6C080C] border-[#E8D2D4] bg-[#FAF2F2]"
+                : "border-[var(--border-medium)] bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:text-[#6C080C]"
             }`}
             aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
             title={isWishlisted ? "In Wishlist" : "Save to Wishlist"}
           >
             <Heart
               className={`h-5 w-5 transition-transform duration-200 ${
-                isWishlisted ? "fill-rose-600 stroke-rose-600 scale-110" : ""
+                isWishlisted ? "fill-[#6C080C] stroke-[#6C080C] scale-110" : ""
               }`}
             />
           </button>

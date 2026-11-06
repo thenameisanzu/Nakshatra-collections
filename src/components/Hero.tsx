@@ -182,7 +182,7 @@ export default function Hero() {
             <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
               <Link
                 href="/products"
-                className="inline-flex items-center gap-2 px-7 sm:px-8 py-3.5 rounded-full bg-[#FAF7F2] text-[#1F1A18] hover:bg-[#E8C27A] hover:text-[#1F1A18] text-xs sm:text-sm font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 group"
+                className="inline-flex items-center gap-2 px-7 sm:px-8 py-3.5 rounded-full bg-[#FAF7F2] text-[#1F1A18] hover:bg-[#6C080C] hover:text-white text-xs sm:text-sm font-semibold uppercase tracking-[0.14em] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 group"
               >
                 <span>Explore Collections</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

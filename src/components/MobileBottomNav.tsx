@@ -53,7 +53,7 @@ export default function MobileBottomNav() {
           prefetch={true}
           className={`relative flex flex-1 flex-col items-center justify-center py-1 px-1 rounded-full transition-all duration-200 active:scale-95 cursor-pointer touch-manipulation ${
             isHomeActive
-              ? "text-stone-950"
+              ? "text-[#6C080C]"
               : "text-stone-500 hover:text-stone-900"
           }`}
           aria-label="Home"
@@ -65,19 +65,19 @@ export default function MobileBottomNav() {
           >
             <Home
               className={`h-[18px] w-[18px] transition-all duration-200 ${
-                isHomeActive ? "stroke-amber-600 stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
+                isHomeActive ? "stroke-[#6C080C] stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
               }`}
             />
           </div>
           <span
             className={`text-[9.5px] tracking-tight uppercase leading-none mt-1 transition-all duration-200 ${
-              isHomeActive ? "font-bold text-amber-700" : "font-medium text-stone-500"
+              isHomeActive ? "font-bold text-[#6C080C]" : "font-medium text-stone-500"
             }`}
           >
             Home
           </span>
           {isHomeActive && (
-            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.9)] animate-in fade-in duration-200" />
+            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-[#6C080C] shadow-[0_0_8px_rgba(108,8,12,0.7)] animate-in fade-in duration-200" />
           )}
         </Link>
 
@@ -88,7 +88,7 @@ export default function MobileBottomNav() {
           prefetch={true}
           className={`relative flex flex-1 flex-col items-center justify-center py-1 px-1 rounded-full transition-all duration-200 active:scale-95 cursor-pointer touch-manipulation ${
             isCollectionsActive
-              ? "text-stone-950"
+              ? "text-[#6C080C]"
               : "text-stone-500 hover:text-stone-900"
           }`}
           aria-label="Collections"
@@ -100,19 +100,19 @@ export default function MobileBottomNav() {
           >
             <LayoutGrid
               className={`h-[18px] w-[18px] transition-all duration-200 ${
-                isCollectionsActive ? "stroke-amber-600 stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
+                isCollectionsActive ? "stroke-[#6C080C] stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
               }`}
             />
           </div>
           <span
             className={`text-[9.5px] tracking-tight uppercase leading-none mt-1 transition-all duration-200 ${
-              isCollectionsActive ? "font-bold text-amber-700" : "font-medium text-stone-500"
+              isCollectionsActive ? "font-bold text-[#6C080C]" : "font-medium text-stone-500"
             }`}
           >
             Collections
           </span>
           {isCollectionsActive && (
-            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.9)] animate-in fade-in duration-200" />
+            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-[#6C080C] shadow-[0_0_8px_rgba(108,8,12,0.7)] animate-in fade-in duration-200" />
           )}
         </Link>
 
@@ -122,7 +122,7 @@ export default function MobileBottomNav() {
           onClick={openSearch}
           className={`relative flex flex-1 flex-col items-center justify-center py-1 px-1 rounded-full transition-all duration-200 active:scale-95 cursor-pointer touch-manipulation ${
             isSearchOpen
-              ? "text-stone-950"
+              ? "text-[#6C080C]"
               : "text-stone-500 hover:text-stone-900"
           }`}
           aria-label="Search Jewellery"
@@ -134,19 +134,19 @@ export default function MobileBottomNav() {
           >
             <Search
               className={`h-[18px] w-[18px] transition-all duration-200 ${
-                isSearchOpen ? "stroke-amber-600 stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
+                isSearchOpen ? "stroke-[#6C080C] stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
               }`}
             />
           </div>
           <span
             className={`text-[9.5px] tracking-tight uppercase leading-none mt-1 transition-all duration-200 ${
-              isSearchOpen ? "font-bold text-amber-700" : "font-medium text-stone-500"
+              isSearchOpen ? "font-bold text-[#6C080C]" : "font-medium text-stone-500"
             }`}
           >
             Search
           </span>
           {isSearchOpen && (
-            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.9)] animate-in fade-in duration-200" />
+            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-[#6C080C] shadow-[0_0_8px_rgba(108,8,12,0.7)] animate-in fade-in duration-200" />
           )}
         </button>
 
@@ -156,7 +156,7 @@ export default function MobileBottomNav() {
           prefetch={true}
           className={`relative flex flex-1 flex-col items-center justify-center py-1 px-1 rounded-full transition-all duration-200 active:scale-95 cursor-pointer touch-manipulation ${
             isWishlistActive
-              ? "text-rose-600"
+              ? "text-[#6C080C]"
               : "text-stone-500 hover:text-stone-900"
           }`}
           aria-label={`Wishlist (${totalWishlistItems} items)`}
@@ -169,25 +169,25 @@ export default function MobileBottomNav() {
             <Heart
               className={`h-[18px] w-[18px] transition-all duration-200 ${
                 isWishlistActive
-                  ? "fill-rose-600 stroke-rose-600 stroke-[2.2]"
+                  ? "fill-[#6C080C] stroke-[#6C080C] stroke-[2.2]"
                   : "stroke-stone-500 stroke-[1.8]"
               }`}
             />
             {totalWishlistItems > 0 && (
-              <span className="absolute -top-1 -right-2 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-extrabold leading-none bg-rose-600 text-white shadow-xs">
+              <span className="absolute -top-1 -right-2 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-extrabold leading-none bg-[#6C080C] text-white shadow-xs">
                 {totalWishlistItems > 99 ? "99+" : totalWishlistItems}
               </span>
             )}
           </div>
           <span
             className={`text-[9.5px] tracking-tight uppercase leading-none mt-1 transition-all duration-200 ${
-              isWishlistActive ? "font-bold text-rose-600" : "font-medium text-stone-500"
+              isWishlistActive ? "font-bold text-[#6C080C]" : "font-medium text-stone-500"
             }`}
           >
             Wishlist
           </span>
           {isWishlistActive && (
-            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-rose-600 shadow-[0_0_6px_rgba(225,29,72,0.9)] animate-in fade-in duration-200" />
+            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-[#6C080C] shadow-[0_0_8px_rgba(108,8,12,0.7)] animate-in fade-in duration-200" />
           )}
         </Link>
 
@@ -197,7 +197,7 @@ export default function MobileBottomNav() {
           onClick={openCart}
           className={`relative flex flex-1 flex-col items-center justify-center py-1 px-1 rounded-full transition-all duration-200 active:scale-95 cursor-pointer touch-manipulation ${
             isCartActive || totalQuantity > 0
-              ? "text-stone-950"
+              ? "text-[#6C080C]"
               : "text-stone-500 hover:text-stone-900"
           }`}
           aria-label={`Shopping Bag (${totalQuantity} items)`}
@@ -209,13 +209,12 @@ export default function MobileBottomNav() {
           >
             <ShoppingBag
               className={`h-[18px] w-[18px] transition-all duration-200 ${
-                totalQuantity > 0 ? "stroke-amber-600 stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
+                totalQuantity > 0 || isCartActive ? "stroke-[#6C080C] stroke-[2.3]" : "stroke-stone-500 stroke-[1.8]"
               }`}
             />
             {totalQuantity > 0 && (
               <span 
-                className="absolute -top-1 -right-2 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-extrabold leading-none text-white shadow-xs"
-                style={{ backgroundColor: "var(--accent-cta)" }}
+                className="absolute -top-1 -right-2 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-extrabold leading-none text-white shadow-xs bg-[#6C080C]"
               >
                 {totalQuantity > 99 ? "99+" : totalQuantity}
               </span>
@@ -223,13 +222,13 @@ export default function MobileBottomNav() {
           </div>
           <span
             className={`text-[9.5px] tracking-tight uppercase leading-none mt-1 transition-all duration-200 ${
-              totalQuantity > 0 ? "font-bold text-amber-700" : "font-medium text-stone-500"
+              totalQuantity > 0 || isCartActive ? "font-bold text-[#6C080C]" : "font-medium text-stone-500"
             }`}
           >
             Bag
           </span>
           {(isCartActive || totalQuantity > 0) && (
-            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.9)] animate-in fade-in duration-200" />
+            <span className="absolute -bottom-0.5 h-1 w-1 rounded-full bg-[#6C080C] shadow-[0_0_8px_rgba(108,8,12,0.7)] animate-in fade-in duration-200" />
           )}
         </button>
       </div>

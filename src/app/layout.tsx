@@ -46,7 +46,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${outfit.variable} font-sans h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans selection:bg-[#C9A45C]/30 selection:text-[#261C14]">
+      <body className="min-h-full flex flex-col font-sans selection:bg-[#6C080C]/20 selection:text-[#6C080C]">
         <ThemeProvider>
           <CartProvider>
             <WishlistProvider>

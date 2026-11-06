@@ -506,7 +506,7 @@ export default function InstantSearchModal({
 
                             <Heart
                               className={`h-3.5 w-3.5 ${
-                                isSaved ? "fill-rose-600 text-rose-600" : "text-neutral-400"
+                                isSaved ? "fill-[#6C080C] text-[#6C080C]" : "text-neutral-400"
                               }`}
                             />
                           </button>

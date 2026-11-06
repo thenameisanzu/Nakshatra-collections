@@ -383,15 +383,15 @@ export default function QuickViewModal() {
                   type="button"
                   onClick={handleWishlistClick}
                   className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border transition hover:scale-105 active:scale-90 cursor-pointer ${
-                    isWishlisted ? "text-rose-600 border-rose-300" : "hover:text-rose-600"
+                    isWishlisted ? "text-[#6C080C] border-[#E8D2D4] bg-[#FAF2F2]" : "hover:text-[#6C080C]"
                   }`}
                   style={{
-                    backgroundColor: "var(--bg-primary)",
-                    borderColor: "var(--border-medium)",
+                    backgroundColor: isWishlisted ? "#FAF2F2" : "var(--bg-primary)",
+                    borderColor: isWishlisted ? "#E8D2D4" : "var(--border-medium)",
                   }}
                   aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
                 >
-                  <Heart className={`h-4 w-4 ${isWishlisted ? "fill-rose-600 stroke-rose-600" : ""}`} />
+                  <Heart className={`h-4 w-4 ${isWishlisted ? "fill-[#6C080C] stroke-[#6C080C]" : ""}`} />
                 </button>
               </div>
 

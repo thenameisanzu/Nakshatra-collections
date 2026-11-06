@@ -151,7 +151,7 @@ export default function Navbar() {
             >
               <Heart className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
               {totalWishlistItems > 0 && (
-                <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-rose-600 px-1 text-[8.5px] font-bold text-white">
+                <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full bg-[#6C080C] px-1 text-[8.5px] font-bold text-white shadow-xs">
                   {totalWishlistItems > 99 ? "99+" : totalWishlistItems}
                 </span>
               )}
@@ -167,8 +167,7 @@ export default function Navbar() {
               <ShoppingBag className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
               {totalQuantity > 0 && (
                 <span 
-                  className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-bold text-white shadow-xs"
-                  style={{ backgroundColor: "var(--accent-cta)" }}
+                  className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 flex h-3.5 min-w-[14px] items-center justify-center rounded-full px-1 text-[8.5px] font-bold text-white shadow-xs bg-[#6C080C]"
                 >
                   {totalQuantity > 99 ? "99+" : totalQuantity}
                 </span>

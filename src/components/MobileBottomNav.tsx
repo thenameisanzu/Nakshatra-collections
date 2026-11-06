@@ -35,13 +35,13 @@ export default function MobileBottomNav() {
 
   return (
     <nav
-      className="fixed bottom-3.5 left-1/2 -translate-x-1/2 z-50 md:hidden w-[92%] max-w-[380px] pointer-events-none transition-all duration-300 select-none"
-      style={{ willChange: "transform", WebkitTapHighlightColor: "transparent" }}
+      className="fixed inset-x-0 bottom-[calc(0.75rem+env(safe-area-inset-bottom,0px))] mx-auto z-50 md:hidden w-[92%] max-w-[380px] pointer-events-none select-none"
+      style={{ WebkitTapHighlightColor: "transparent" }}
       aria-label="Mobile Bottom Navigation"
     >
       {/* Floating Liquid Glass Pill Dock */}
       <div
-        className="pointer-events-auto relative w-full rounded-full liquid-glass-pill px-2 py-1.5 flex items-center justify-between shadow-[0_12px_32px_rgba(36,24,21,0.12)] border border-stone-200/80 backdrop-blur-xl bg-white/92 transition-all duration-200"
+        className="pointer-events-auto relative w-full rounded-full liquid-glass-pill px-2 py-1.5 flex items-center justify-between shadow-[0_12px_32px_rgba(36,24,21,0.12)] border border-stone-200/80 backdrop-blur-xl bg-white/95"
       >
         {/* Specular Liquid Glass Top Sheen */}
         <div className="absolute inset-x-8 top-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent pointer-events-none opacity-90 rounded-full" />

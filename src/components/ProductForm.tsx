@@ -708,8 +708,8 @@ export default function ProductForm({ product, onVariantChange }: ProductFormPro
         </div>
       </div>
 
-      {/* Sticky Mobile Floating Pill Add-To-Bag Dock */}
-      <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-md rounded-full liquid-glass-pill px-4 py-2.5 shadow-[0_16px_36px_-6px_rgba(0,0,0,0.18)] animate-in slide-in-from-bottom duration-300 pointer-events-auto">
+      {/* Sticky Mobile Floating Pill Add-To-Bag Dock (Floats above mobile bottom nav) */}
+      <div className="lg:hidden fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom,0px))] inset-x-0 mx-auto z-40 w-[92%] max-w-md rounded-full liquid-glass-pill px-4 py-2.5 shadow-[0_16px_36px_-6px_rgba(0,0,0,0.18)] animate-in slide-in-from-bottom duration-300 pointer-events-auto">
         <div className="flex items-center justify-between gap-3 w-full">
           <div className="flex flex-col min-w-0">
             <span className="text-[10px] uppercase font-semibold tracking-wider truncate text-gray-400">

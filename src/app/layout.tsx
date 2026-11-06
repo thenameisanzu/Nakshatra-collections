@@ -54,7 +54,7 @@ export default function RootLayout({
                 <SearchProvider>
                   <ScrollRevealProvider>
                     <Navbar />
-                    <div className="flex-1 pb-20 md:pb-0">{children}</div>
+                    <div className="flex-1 pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">{children}</div>
                     <Footer />
                     <MobileBottomNav />
                     <CartDrawer />

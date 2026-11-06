@@ -14,7 +14,7 @@ export default function WhatsAppSupportButton({
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   return (
-    <div className="fixed bottom-20 md:bottom-6 right-3 sm:right-6 z-40 flex items-center group">
+    <div className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] md:bottom-6 right-3.5 sm:right-6 z-40 flex items-center group">
       {/* Tooltip on Desktop */}
       <span className="hidden md:inline-block mr-2.5 px-3 py-1.5 rounded-full text-xs font-medium shadow-md bg-white border border-gray-200 text-gray-800 transition-all duration-200 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
         WhatsApp Order Support
